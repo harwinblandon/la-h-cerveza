@@ -56,7 +56,7 @@ export default function App() {
         <div className="sidebar-foot">
           {profile && (
             <Link to="/ajustes" className="profile-chip" title="Perfil y sesión">
-              @{profile.username}
+              {profile.guest ? 'Sin registro' : `@${profile.username}`}
             </Link>
           )}
           <Signature />
@@ -85,8 +85,7 @@ export default function App() {
           <Route path="/ajustes" element={<SettingsPage />} />
         </Routes>
         <footer className="main-foot">
-          <span className="coords">4° N · 75° W</span>
-          <Signature />
+          <Signature size="lg" />
         </footer>
       </main>
       <nav className="bottom-nav">

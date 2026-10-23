@@ -45,19 +45,38 @@ export function ProfileCard() {
           Cambiar de perfil
         </button>
       </div>
+      {profile.guest ? (
+        <p style={{ margin: 0 }}>
+          Estás usando La H <strong>sin registro</strong>. Tus datos quedan solo en este navegador; para no perderlos descarga una copia de seguridad, o crea un perfil y
+          restáurala allí.
+        </p>
+      ) : (
       <p style={{ margin: 0 }}>
         <strong>{profile.displayName}</strong> <span className="faint mono">@{profile.username}</span>
         <span className="faint"> · {profile.passHash ? 'con clave' : 'sin clave'}</span>
       </p>
+      )}
       {msg && <p className="muted" style={{ fontSize: '0.88rem', margin: '0.5rem 0 0' }}>{msg}</p>}
       {mode === 'ver' && (
         <div className="row" style={{ marginTop: '0.8rem' }}>
-          <button className="btn btn-sm" onClick={() => (setMsg(''), setMode('clave'))}>
-            {profile.passHash ? 'Cambiar o quitar la clave' : 'Poner clave'}
-          </button>
+          {profile.guest ? (
+            <button
+              className="btn btn-sm"
+              onClick={() => {
+                endSession();
+                reloadApp('#/');
+              }}
+            >
+              Crear un perfil
+            </button>
+          ) : (
+            <button className="btn btn-sm" onClick={() => (setMsg(''), setMode('clave'))}>
+              {profile.passHash ? 'Cambiar o quitar la clave' : 'Poner clave'}
+            </button>
+          )}
           <span className="spacer" />
           <button className="btn btn-sm btn-danger" onClick={() => (setMsg(''), setMode('borrar'))}>
-            Eliminar este perfil
+            {profile.guest ? 'Borrar los datos sin registro' : 'Eliminar este perfil'}
           </button>
         </div>
       )}

@@ -1,6 +1,6 @@
 import { useLiveQuery } from 'dexie-react-hooks';
 import { Link } from 'react-router-dom';
-import { LogoLaH, NetCanvas } from '../components/Brand';
+import { LogoLaH, NetCanvas, Signature } from '../components/Brand';
 import { db } from '../db';
 import { fermentationSchedule } from '../domain/batch';
 import { useSettings } from '../hooks';
@@ -26,7 +26,7 @@ export default function Home() {
         <NetCanvas />
         <div className="hero-inner">
           <LogoLaH className="hero-logo" />
-          <p className="hero-tag">Intención · Diseño · Cocción · Fermentación · Aprendizaje</p>
+          <Signature size="lg" />
           <p className="muted" style={{ maxWidth: '40rem', margin: 0 }}>
             {settings.brewerName ? `Hola, ${settings.brewerName}. ` : ''}Recetas fieles al estilo o a tu intención, con los insumos que consigues y tu agua, y el acompañamiento de cada lote hasta la botella.
           </p>

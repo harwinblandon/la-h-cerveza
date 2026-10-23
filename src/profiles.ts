@@ -19,6 +19,8 @@ export interface Profile {
   salt?: string;
   createdAt: number;
   lastLoginAt?: number;
+  /** Espacio de uso sin registro: sin nombre ni clave. */
+  guest?: boolean;
 }
 
 class RegistryDb extends Dexie {
@@ -133,6 +135,18 @@ export async function createProfile(opts: { username: string; displayName: strin
   };
   await registry.profiles.add(profile);
   return profile;
+}
+
+export const GUEST_USERNAME = 'sin-registro';
+
+/** Espacio para usar la app sin registrarse. Se crea la primera vez y se reutiliza. */
+export async function guestProfile(): Promise<{ profile: Profile; created: boolean }> {
+  const existing = await registry.profiles.where('username').equals(GUEST_USERNAME).first();
+  if (existing) return { profile: existing, created: false };
+  const id = `${Date.now().toString(36)}${Math.random().toString(36).slice(2, 7)}`;
+  const profile: Profile = { id, username: GUEST_USERNAME, displayName: 'Sin registro', dbName: `la-h-cerveceria-${id}`, createdAt: Date.now(), guest: true };
+  await registry.profiles.add(profile);
+  return { profile, created: true };
 }
 
 export async function setPassword(profileId: string, password?: string) {

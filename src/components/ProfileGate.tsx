@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { DISTRINES } from '../data/distrines';
 import { DEFAULT_EQUIPMENT, EQUIPMENT_TYPE_LABEL } from '../data/equipment';
 import { initProfileDb } from '../db';
-import { checkPassword, createProfile, legacyDataExists, normalizeUsername, registry, reloadApp, startSession, touchLogin, type Profile } from '../profiles';
+import { checkPassword, createProfile, guestProfile, legacyDataExists, normalizeUsername, registry, reloadApp, startSession, touchLogin, type Profile } from '../profiles';
 import { LogoLaH, NetCanvas, Signature } from './Brand';
 import { Field } from './ui';
 
@@ -14,6 +14,12 @@ const WATER_CHOICES: [string, string, string][] = [
   ['propia', 'Otra (mi ciudad, embotellada o de laboratorio)', 'La cargas después en Agua con los datos del informe o la etiqueta.'],
 ];
 
+async function enterAsGuest() {
+  const { profile, created } = await guestProfile();
+  if (created) await initProfileDb(profile.dbName, {});
+  await enter(profile, true);
+}
+
 async function enter(p: Profile, remember: boolean) {
   startSession(p, remember);
   await touchLogin(p.id);
@@ -21,7 +27,8 @@ async function enter(p: Profile, remember: boolean) {
 }
 
 export function ProfileGate() {
-  const profiles = useLiveQuery(() => registry.profiles.orderBy('lastLoginAt').reverse().toArray(), []);
+  // El espacio sin registro tiene su propio botón: no se lista como perfil.
+  const profiles = useLiveQuery(() => registry.profiles.orderBy('lastLoginAt').reverse().filter((p) => !p.guest).toArray(), []);
   const [legacy, setLegacy] = useState(false);
   const [view, setView] = useState<'lista' | 'crear'>('lista');
   const [selected, setSelected] = useState<Profile | null>(null);
@@ -38,7 +45,6 @@ export function ProfileGate() {
       <NetCanvas />
       <div className="gate-inner">
         <LogoLaH className="gate-logo" />
-        <p className="hero-tag">Intención · Diseño · Cocción · Fermentación · Aprendizaje</p>
         <div className="gate-card">
           {view === 'lista' && profiles && profiles.length > 0 && !selected && (
             <>
@@ -63,11 +69,15 @@ export function ProfileGate() {
           {selected && <Login profile={selected} onBack={() => setSelected(null)} />}
           {view === 'crear' && <CreateProfile legacy={legacy} canCancel={!!profiles?.length} onCancel={() => setView('lista')} />}
         </div>
+        {!selected && (
+          <button className="btn gate-guest" onClick={enterAsGuest}>
+            Usar sin registro →
+          </button>
+        )}
         <p className="faint" style={{ fontSize: '0.78rem', maxWidth: 440, textAlign: 'center' }}>
-          Los perfiles viven en este navegador, cada uno con sus recetas, lotes, agua e historial. La clave evita que otra persona entre a tu perfil desde la app, pero no
-          cifra los datos: para respaldo o para pasar a otro equipo usa Ajustes → Copia de seguridad.
+          Sin registro, tus datos quedan solo en este navegador. Puedes crear un perfil cuando quieras.
         </p>
-        <Signature />
+        <Signature size="lg" />
       </div>
     </div>
   );

@@ -14,10 +14,11 @@ export function HMark({ className }: { className?: string }) {
 }
 
 /** Firma personal: "by H", enlazada a Red HB. */
-export function Signature() {
+export function Signature({ size = 'md' }: { size?: 'md' | 'lg' }) {
   return (
-    <a className="signature" href="https://redhb.com" target="_blank" rel="noreferrer" title="Red HB">
-      by <HMark />
+    <a className={`signature signature-${size}`} href="https://redhb.com" target="_blank" rel="noreferrer" title="by H · Red HB">
+      <span className="signature-by">by</span>
+      <HMark />
     </a>
   );
 }
