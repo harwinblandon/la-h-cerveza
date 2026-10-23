@@ -1,0 +1,11 @@
+{
+  "name": "La H · Cerveza Artesanal",
+  "short_name": "La H",
+  "description": "Diseño, elaboración y seguimiento de cerveza artesanal. Red HB.",
+  "lang": "es",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#0e0e0e",
+  "theme_color": "#0e0e0e",
+  "icons": [{ "src": "icono.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
+}

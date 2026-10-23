@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="es" data-theme="oscuro">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0e0e0e" />
+    <meta name="description" content="La H · Cerveza Artesanal: diseño, elaboración y seguimiento de cerveza. Red HB." />
+    <link rel="icon" href="/icono.svg" type="image/svg+xml" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+    <title>La H · Cerveza Artesanal</title>
+    <script>
+      // Tema guardado en este dispositivo, aplicado antes de pintar para evitar parpadeo.
+      try {
+        var t = localStorage.getItem('la-h-tema');
+        if (t === 'claro') document.documentElement.dataset.theme = 'light';
+        else if (t === 'sistema') document.documentElement.dataset.theme = 'sistema';
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

@@ -1,0 +1,6335 @@
+{
+ "app": "la-h",
+ "version": 1,
+ "kind": "historial",
+ "title": "Historial inicial de La H Cerveza Artesanal",
+ "exportedAt": "2026-10-23T15:00:00.000Z",
+ "data": {
+  "recipes": [
+   {
+    "id": "hist-hazy-ipa-colab",
+    "name": "Hazy IPA — Colab IPA Day",
+    "equipment": {
+     "batchSizeL": 30,
+     "boilTimeMin": 60,
+     "kettleVolumeL": 40,
+     "boilOffLph": 3.5,
+     "kettleLossL": 2,
+     "fermenterLossL": 1,
+     "mashTunDeadspaceL": 0,
+     "grainAbsorptionLpkg": 0.6,
+     "hopAbsorptionLp100g": 0.7,
+     "coolingShrinkPct": 4,
+     "efficiencyPct": 70,
+     "mashRatioLpkg": 3,
+     "spargeL": 0,
+     "id": "eq-biab",
+     "name": "BIAB 40 L",
+     "type": "biab"
+    },
+    "equipmentId": "eq-biab",
+    "batchSizeL": 30,
+    "boilTimeMin": 90,
+    "efficiencyPct": 68.1,
+    "fermentables": [
+     {
+      "uid": "hist-f-1",
+      "ingredientId": "best-pale-ale",
+      "name": "Pale Ale",
+      "type": "base",
+      "colorEBC": 6.5,
+      "ppg": 37,
+      "amountKg": 6,
+      "use": "macerado",
+      "source": "referencia",
+      "sourceNote": "Cantidad registrada. Color y rendimiento: EBC típico de la ficha de BestMalz; Distrines no lo publica. Confírmalo en el saco.."
+     },
+     {
+      "uid": "hist-f-2",
+      "ingredientId": "wheat-wey",
+      "name": "Trigo malteado claro",
+      "type": "base",
+      "colorEBC": 4,
+      "ppg": 38,
+      "amountKg": 2,
+      "use": "macerado",
+      "source": "referencia",
+      "sourceNote": "Cantidad registrada; malta de trigo: marca no registrada. Color y rendimiento: Valor típico de la ficha técnica de Weyermann; cada lote varía."
+     },
+     {
+      "uid": "hist-f-3",
+      "ingredientId": "oats-flaked",
+      "name": "Avena en hojuelas",
+      "type": "adjunto",
+      "colorEBC": 2,
+      "ppg": 33,
+      "amountKg": 1.2,
+      "use": "macerado",
+      "source": "referencia",
+      "sourceNote": "Cantidad registrada; avena: tipo (hojuelas o malteada) no registrado. Color y rendimiento: Valor típico de literatura."
+     }
+    ],
+    "hops": [
+     {
+      "uid": "hist-h-5",
+      "ingredientId": "citra",
+      "name": "Citra",
+      "alpha": 12.5,
+      "source": "referencia",
+      "sourceNote": "Cantidad y momento registrados. % AA no registrado: se usa el típico (12.5 %) solo para calcular IBU",
+      "form": "pellet",
+      "amountG": 20,
+      "use": "hervor",
+      "time": 30
+     },
+     {
+      "uid": "hist-h-6",
+      "ingredientId": "el-dorado",
+      "name": "El Dorado",
+      "alpha": 15,
+      "source": "referencia",
+      "sourceNote": "Cantidad y momento registrados. % AA no registrado: se usa el típico (15 %) solo para calcular IBU",
+      "form": "pellet",
+      "amountG": 25,
+      "use": "hervor",
+      "time": 10
+     },
+     {
+      "uid": "hist-h-7",
+      "ingredientId": "mosaic",
+      "name": "Mosaic",
+      "alpha": 12,
+      "source": "referencia",
+      "sourceNote": "Cantidad y momento registrados. % AA no registrado: se usa el típico (12 %) solo para calcular IBU. Hopstand a 71 °C; tiempo de contacto no registrado (no se calcula su IBU)",
+      "form": "pellet",
+      "amountG": 50,
+      "use": "whirlpool",
+      "time": 0,
+      "tempC": 71
+     },
+     {
+      "uid": "hist-h-8",
+      "ingredientId": "el-dorado",
+      "name": "El Dorado",
+      "alpha": 15,
+      "source": "estimacion",
+      "sourceNote": "Rango registrado 40–48 g; el punto medio solo se usa para calcular. % AA no registrado: se usa el típico (15 %) solo para calcular IBU. Hopstand a 71 °C; tiempo no registrado",
+      "form": "pellet",
+      "amountG": 44,
+      "use": "whirlpool",
+      "time": 0,
+      "tempC": 71
+     },
+     {
+      "uid": "hist-h-9",
+      "ingredientId": "citra",
+      "name": "Citra",
+      "alpha": 12.5,
+      "source": "referencia",
+      "sourceNote": "Cantidad y momento registrados. % AA no registrado: se usa el típico (12.5 %) solo para calcular IBU. Hopstand a 71 °C; tiempo no registrado",
+      "form": "pellet",
+      "amountG": 20,
+      "use": "whirlpool",
+      "time": 0,
+      "tempC": 71
+     },
+     {
+      "uid": "hist-h-a",
+      "ingredientId": "mosaic",
+      "name": "Mosaic",
+      "alpha": 12,
+      "source": "registro",
+      "sourceNote": "Cantidad PLANIFICADA (~150 g de Mosaic). La cantidad final ejecutada no se recuperó; días de contacto no registrados.",
+      "form": "pellet",
+      "amountG": 150,
+      "use": "dry-hop",
+      "time": 0
+     }
+    ],
+    "yeasts": [],
+    "miscs": [
+     {
+      "uid": "hist-m-b",
+      "name": "Servomyces",
+      "use": "hervor",
+      "amount": 3,
+      "unit": "g",
+      "notes": "Registrado en una versión de la receta"
+     }
+    ],
+    "mashSteps": [
+     {
+      "uid": "hist-s-4",
+      "name": "Sacarificación",
+      "tempC": 67,
+      "timeMin": 60
+     }
+    ],
+    "fermentation": [
+     {
+      "uid": "hist-t-c",
+      "name": "Primaria",
+      "tempC": 18,
+      "days": 7
+     },
+     {
+      "uid": "hist-t-d",
+      "name": "Final de fermentación",
+      "tempC": 20,
+      "days": 3
+     }
+    ],
+    "water": {
+     "sourceProfileId": "custom-hist-armenia",
+     "dilution": 0,
+     "mashSalts": {
+      "cloruroCalcio": 14,
+      "epsom": 3.5,
+      "yeso": 3.2
+     },
+     "spargeSalts": {},
+     "lacticMl": 0,
+     "phosphoricMl": 0,
+     "lacticPct": 88,
+     "phosphoricPct": 10,
+     "targetProfileId": "custom-hist-hazy-oro"
+    },
+    "carbonation": {
+     "volumes": 2.4,
+     "method": "priming",
+     "primingSugar": "sacarosa"
+    },
+    "versionCount": 1,
+    "origin": {
+     "kind": "importacion",
+     "detail": "Historial inicial de La H"
+    },
+    "createdAt": 1792767600000,
+    "updatedAt": 1792767600000,
+    "styleId": "hazy-ipa",
+    "author": "La H Cerveza Artesanal",
+    "intent": {
+     "mode": "moderna",
+     "text": "Hazy IPA aromática, tropical, jugosa, de cuerpo suave, amargor moderado y alta tomabilidad.",
+     "target": {}
+    },
+    "notes": "Una de las recetas históricas exitosas de La H (Oro, Copa Raíces). Debe poder evolucionar: no es una receta \"perfecta\" congelada.",
+    "historical": {
+     "status": "elaborada",
+     "origin": "Historial inicial de La H Cerveza Artesanal (importado el 23 de octubre de 2026)",
+     "importedAt": 1792767600000,
+     "values": [
+      {
+       "label": "OG objetivo",
+       "value": "1.064",
+       "kind": "planificado"
+      },
+      {
+       "label": "FG objetivo",
+       "value": "1.013",
+       "kind": "planificado"
+      },
+      {
+       "label": "ABV objetivo",
+       "value": "≈ 6,7 %",
+       "kind": "planificado"
+      },
+      {
+       "label": "IBU",
+       "value": "≈ 32",
+       "kind": "planificado"
+      },
+      {
+       "label": "Color",
+       "value": "≈ 5,5 SRM",
+       "kind": "estimacion"
+      },
+      {
+       "label": "Carbonatación",
+       "value": "2,4 vol",
+       "kind": "planificado"
+      },
+      {
+       "label": "Grano total",
+       "value": "≈ 9,2 kg (Pale Ale 65,2 % · trigo 21,7 % · avena 13,0 %)",
+       "kind": "ejecucion"
+      },
+      {
+       "label": "Hopstand",
+       "value": "71 °C: Mosaic 50 g, El Dorado ~40–48 g, Citra 20 g",
+       "kind": "ejecucion",
+       "note": "Tiempo de contacto no registrado"
+      },
+      {
+       "label": "Dry hop",
+       "value": "~150 g de Mosaic planificados; también Citra, El Dorado y/o Galaxy según la versión",
+       "kind": "planificado",
+       "note": "Cantidad final exacta pendiente del registro original"
+      },
+      {
+       "label": "Perfil de agua",
+       "value": "Ca 127 · Mg 9 · Na ~0 · Cl 172–178 · SO₄ 90–92 ppm",
+       "kind": "ejecucion"
+      },
+      {
+       "label": "Sales",
+       "value": "CaCl₂ 14 g · MgSO₄ 3,5 g · CaSO₄ 3,2 g",
+       "kind": "ejecucion",
+       "note": "Reparto entre macerado y lavado no registrado"
+      },
+      {
+       "label": "Levadura",
+       "value": "London ESB y/o US-05; otro registro indica 2 sobres de US-05",
+       "kind": "ejecucion",
+       "note": "PENDIENTE DE RECONCILIAR con la ficha definitiva del lote ganador"
+      },
+      {
+       "label": "Eficiencia de sala",
+       "value": "68,1 %",
+       "kind": "calculo",
+       "note": "Calculada para reproducir la OG objetivo (1.064) con el grano registrado. No fue medida."
+      }
+     ],
+     "missing": [
+      "Levadura definitiva del lote ganador",
+      "Cantidad final de dry hop y variedades",
+      "Tiempo de hopstand",
+      "Días de dry hop",
+      "Agua de origen",
+      "% AA real de cada lúpulo"
+     ],
+     "warnings": [
+      "La levadura no se carga en la receta hasta reconciliar London ESB / US-05.",
+      "Agua de origen no registrada en la ficha: para calcular se usa el perfil histórico de Armenia de La H."
+     ],
+     "notes": [
+      "RECETA_PREMIADA = TRUE · PREMIO = ORO · COMPETENCIA = COPA RAÍCES"
+     ]
+    }
+   },
+   {
+    "id": "hist-barleywine-mosaic-kveik",
+    "name": "American Barleywine — Mosaic + Voss Kveik",
+    "equipment": {
+     "batchSizeL": 30,
+     "boilTimeMin": 60,
+     "kettleVolumeL": 40,
+     "boilOffLph": 3.5,
+     "kettleLossL": 2,
+     "fermenterLossL": 1,
+     "mashTunDeadspaceL": 0,
+     "grainAbsorptionLpkg": 0.6,
+     "hopAbsorptionLp100g": 0.7,
+     "coolingShrinkPct": 4,
+     "efficiencyPct": 70,
+     "mashRatioLpkg": 3,
+     "spargeL": 0,
+     "id": "eq-biab",
+     "name": "BIAB 40 L",
+     "type": "biab"
+    },
+    "equipmentId": "eq-biab",
+    "batchSizeL": 30,
+    "boilTimeMin": 60,
+    "efficiencyPct": 55.6,
+    "fermentables": [
+     {
+      "uid": "hist-f-g",
+      "ingredientId": "maris-otter",
+      "name": "Maris Otter",
+      "type": "base",
+      "colorEBC": 6,
+      "ppg": 38,
+      "amountKg": 13,
+      "use": "macerado",
+      "source": "referencia",
+      "sourceNote": "Cantidad registrada; marca no registrada. Color y rendimiento: Valor típico de la ficha técnica de Crisp / Simpsons; cada lote varía."
+     },
+     {
+      "uid": "hist-f-h",
+      "ingredientId": "munich-1-wey",
+      "name": "Munich Tipo I",
+      "type": "base",
+      "colorEBC": 15,
+      "ppg": 37,
+      "amountKg": 1.73,
+      "use": "macerado",
+      "source": "referencia",
+      "sourceNote": "Cantidad registrada; Munich I: marca no registrada. Color y rendimiento: Valor típico de la ficha técnica de Weyermann; cada lote varía."
+     },
+     {
+      "uid": "hist-f-i",
+      "ingredientId": "munich-2-wey",
+      "name": "Munich Tipo II",
+      "type": "base",
+      "colorEBC": 22,
+      "ppg": 37,
+      "amountKg": 0.34,
+      "use": "macerado",
+      "source": "referencia",
+      "sourceNote": "Cantidad registrada; Munich II: marca no registrada. Color y rendimiento: Valor típico de la ficha técnica de Weyermann; cada lote varía."
+     },
+     {
+      "uid": "hist-f-f",
+      "name": "Amber Malt",
+      "type": "especial",
+      "colorEBC": 60,
+      "ppg": 32,
+      "amountKg": 0.26,
+      "use": "macerado",
+      "source": "referencia",
+      "sourceNote": "Cantidad registrada. Amber Malt no está en el catálogo: color (~60 EBC) y rendimiento típicos solo para calcular."
+     },
+     {
+      "uid": "hist-f-j",
+      "ingredientId": "dextrose",
+      "name": "Dextrosa",
+      "type": "azucar",
+      "colorEBC": 0,
+      "ppg": 42,
+      "amountKg": 0.9,
+      "use": "fermentador",
+      "source": "referencia",
+      "sourceNote": "Cantidad registrada; glucosa/dextrosa añadida de forma DIFERIDA, después de iniciada la fermentación. Color y rendimiento: Valor típico de literatura."
+     }
+    ],
+    "hops": [
+     {
+      "uid": "hist-h-k",
+      "ingredientId": "mosaic",
+      "name": "Mosaic",
+      "alpha": 13.6,
+      "source": "registro",
+      "sourceNote": "Cantidad y momento registrados. % AA registrado (13.6 %)",
+      "form": "pellet",
+      "amountG": 55,
+      "use": "hervor",
+      "time": 60
+     },
+     {
+      "uid": "hist-h-l",
+      "ingredientId": "mosaic",
+      "name": "Mosaic",
+      "alpha": 13.6,
+      "source": "registro",
+      "sourceNote": "Cantidad y momento registrados. % AA registrado (13.6 %)",
+      "form": "pellet",
+      "amountG": 20,
+      "use": "hervor",
+      "time": 10
+     },
+     {
+      "uid": "hist-h-m",
+      "ingredientId": "mosaic",
+      "name": "Mosaic",
+      "alpha": 13.6,
+      "source": "registro",
+      "sourceNote": "Cantidad y momento registrados. % AA registrado (13.6 %)",
+      "form": "pellet",
+      "amountG": 50,
+      "use": "whirlpool",
+      "time": 20,
+      "tempC": 80
+     },
+     {
+      "uid": "hist-h-n",
+      "ingredientId": "mosaic",
+      "name": "Mosaic",
+      "alpha": 13.6,
+      "source": "registro",
+      "sourceNote": "Cantidad y momento registrados. % AA registrado (13.6 %). Contacto aproximado 48 horas",
+      "form": "pellet",
+      "amountG": 85,
+      "use": "dry-hop",
+      "time": 2
+     }
+    ],
+    "yeasts": [
+     {
+      "uid": "hist-y-o",
+      "ingredientId": "voss",
+      "name": "LalBrew Voss Kveik",
+      "lab": "Lallemand",
+      "code": "Voss",
+      "type": "kveik",
+      "form": "seca",
+      "attenuation": 79,
+      "tempRange": [
+       25,
+       40
+      ],
+      "family": "kveik",
+      "amount": 2,
+      "source": "registro",
+      "sourceNote": "Levadura y cantidad registradas"
+     }
+    ],
+    "miscs": [],
+    "mashSteps": [],
+    "fermentation": [
+     {
+      "uid": "hist-t-p",
+      "name": "Inicio",
+      "tempC": 35,
+      "days": 0
+     },
+     {
+      "uid": "hist-t-q",
+      "name": "Continuación",
+      "tempC": 32,
+      "days": 0
+     },
+     {
+      "uid": "hist-t-r",
+      "name": "Cold crash",
+      "tempC": 2,
+      "days": 0
+     }
+    ],
+    "water": {
+     "sourceProfileId": "custom-hist-armenia",
+     "dilution": 0,
+     "mashSalts": {},
+     "spargeSalts": {},
+     "lacticMl": 0,
+     "phosphoricMl": 0,
+     "lacticPct": 88,
+     "phosphoricPct": 10
+    },
+    "carbonation": {
+     "volumes": 2.2,
+     "method": "priming",
+     "primingSugar": "sacarosa"
+    },
+    "versionCount": 1,
+    "origin": {
+     "kind": "importacion",
+     "detail": "Historial inicial de La H"
+    },
+    "createdAt": 1792767600000,
+    "updatedAt": 1792767600000,
+    "styleId": "american-barleywine",
+    "author": "La H Cerveza Artesanal",
+    "intent": {
+     "mode": "moderna",
+     "text": "American Barleywine moderno: muy maltoso, alcohol alto, complejo y lupulado; Mosaic como único lúpulo; alcohol perceptible pero no áspero; buena integración; bebible para su graduación.",
+     "target": {}
+    },
+    "historical": {
+     "status": "elaborada",
+     "origin": "Historial inicial de La H Cerveza Artesanal (importado el 23 de octubre de 2026)",
+     "importedAt": 1792767600000,
+     "values": [
+      {
+       "label": "OG del mosto",
+       "value": "≈ 1.100",
+       "kind": "medicion",
+       "note": "Antes de considerar la glucosa diferida"
+      },
+      {
+       "label": "OG equivalente total",
+       "value": "≈ 1.107–1.108",
+       "kind": "estimacion",
+       "note": "Incluyendo la glucosa diferida"
+      },
+      {
+       "label": "ABV",
+       "value": "≈ 10,8 %",
+       "kind": "estimacion",
+       "note": "Posible 11,0–11,2 % si la densidad siguió bajando"
+      },
+      {
+       "label": "Carbonatación objetivo",
+       "value": "2,1–2,3 vol",
+       "kind": "planificado"
+      },
+      {
+       "label": "Maduración",
+       "value": "Mejora de integración esperada a las 4–12 semanas",
+       "kind": "planificado"
+      },
+      {
+       "label": "Eficiencia de sala",
+       "value": "55,6 %",
+       "kind": "calculo",
+       "note": "Calculada para reproducir la OG del mosto registrada (≈ 1.100, sin la glucosa diferida, que se calcula aparte) con el grano registrado. No fue medida."
+      }
+     ],
+     "missing": [
+      "Temperatura y tiempo de macerado",
+      "Tiempo de hervor",
+      "Duración de cada etapa de fermentación",
+      "Agua y sales",
+      "Eficiencia medida"
+     ],
+     "warnings": [
+      "No registrar como ganador mientras no exista resultado de competencia confirmado.",
+      "Agua de origen no registrada en la ficha: para calcular se usa el perfil histórico de Armenia de La H."
+     ],
+     "notes": [
+      "Parte de las botellas se destinó a experimentación con Brettanomyces bruxellensis: no mezclar esas botellas con el perfil de la cerveza base."
+     ]
+    }
+   },
+   {
+    "id": "hist-vienna-lager-cafe",
+    "name": "Vienna Lager con café",
+    "equipment": {
+     "batchSizeL": 40,
+     "boilTimeMin": 60,
+     "kettleVolumeL": 40,
+     "boilOffLph": 3.5,
+     "kettleLossL": 2,
+     "fermenterLossL": 1,
+     "mashTunDeadspaceL": 0,
+     "grainAbsorptionLpkg": 0.6,
+     "hopAbsorptionLp100g": 0.7,
+     "coolingShrinkPct": 4,
+     "efficiencyPct": 70,
+     "mashRatioLpkg": 3,
+     "spargeL": 0,
+     "id": "eq-biab",
+     "name": "BIAB 40 L",
+     "type": "biab"
+    },
+    "equipmentId": "eq-biab",
+    "batchSizeL": 40,
+    "boilTimeMin": 60,
+    "efficiencyPct": 68.1,
+    "fermentables": [
+     {
+      "uid": "hist-f-z",
+      "ingredientId": "vienna-wey",
+      "name": "Vienna",
+      "type": "base",
+      "colorEBC": 8,
+      "ppg": 37,
+      "amountKg": 7.9,
+      "use": "macerado",
+      "source": "referencia",
+      "sourceNote": "Cantidad registrada; marca no registrada. Color y rendimiento: Valor típico de la ficha técnica de Weyermann; cada lote varía."
+     },
+     {
+      "uid": "hist-f-10",
+      "ingredientId": "munich-1-wey",
+      "name": "Munich Tipo I",
+      "type": "base",
+      "colorEBC": 15,
+      "ppg": 37,
+      "amountKg": 1,
+      "use": "macerado",
+      "source": "referencia",
+      "sourceNote": "Cantidad registrada. Color y rendimiento: Valor típico de la ficha técnica de Weyermann; cada lote varía."
+     },
+     {
+      "uid": "hist-f-11",
+      "ingredientId": "pilsner-wey",
+      "name": "Pilsner",
+      "type": "base",
+      "colorEBC": 3.5,
+      "ppg": 37,
+      "amountKg": 0.9,
+      "use": "macerado",
+      "source": "referencia",
+      "sourceNote": "Cantidad registrada; marca no registrada. Color y rendimiento: Valor típico de la ficha técnica de Weyermann; cada lote varía."
+     },
+     {
+      "uid": "hist-f-12",
+      "ingredientId": "caramunich-2",
+      "name": "Caramunich Tipo II",
+      "type": "caramelo",
+      "colorEBC": 120,
+      "ppg": 34,
+      "amountKg": 0.1,
+      "use": "macerado",
+      "source": "referencia",
+      "sourceNote": "Cantidad registrada. Color y rendimiento: Valor típico de la ficha técnica de Weyermann; cada lote varía."
+     }
+    ],
+    "hops": [
+     {
+      "uid": "hist-h-13",
+      "ingredientId": "magnum",
+      "name": "Hallertau Magnum",
+      "alpha": 13,
+      "source": "referencia",
+      "sourceNote": "Cantidad y momento registrados. % AA no registrado: se usa el típico (13 %) solo para calcular IBU",
+      "form": "pellet",
+      "amountG": 38,
+      "use": "hervor",
+      "time": 60
+     },
+     {
+      "uid": "hist-h-14",
+      "ingredientId": "hallertau-mittelfruh",
+      "name": "Hallertau (variedad no especificada)",
+      "alpha": 4,
+      "source": "referencia",
+      "sourceNote": "Cantidad y momento registrados. Variedad exacta de Hallertau no registrada; % AA típico solo para calcular.",
+      "form": "pellet",
+      "amountG": 35,
+      "use": "hervor",
+      "time": 15
+     }
+    ],
+    "yeasts": [
+     {
+      "uid": "hist-y-15",
+      "ingredientId": "w-34-70",
+      "name": "SafLager W-34/70",
+      "lab": "Fermentis",
+      "code": "W-34/70",
+      "type": "lager",
+      "form": "seca",
+      "attenuation": 82,
+      "tempRange": [
+       10,
+       15
+      ],
+      "family": "lager-alemana",
+      "amount": 3,
+      "source": "registro",
+      "sourceNote": "Levadura y cantidad registradas"
+     }
+    ],
+    "miscs": [
+     {
+      "uid": "hist-m-17",
+      "name": "Café especial Sidra Natural (grano entero)",
+      "use": "fermentador",
+      "amount": 200,
+      "unit": "g",
+      "notes": "Solo en la porción de ≈ 18 L, directo en barril Cornelius. Planeado 16–18 h; límite considerado 24 h."
+     },
+     {
+      "uid": "hist-m-18",
+      "name": "Cloruro de calcio (porción con café)",
+      "use": "fermentador",
+      "amount": 0.8,
+      "unit": "g",
+      "notes": "Ajuste mineral solo para ≈ 18 L con café"
+     },
+     {
+      "uid": "hist-m-19",
+      "name": "Sal (NaCl) (porción con café)",
+      "use": "fermentador",
+      "amount": 0.4,
+      "unit": "g",
+      "notes": "Ajuste mineral solo para ≈ 18 L con café; sin sulfato ni bicarbonato adicional"
+     }
+    ],
+    "mashSteps": [],
+    "fermentation": [
+     {
+      "uid": "hist-t-16",
+      "name": "Primaria presurizada",
+      "tempC": 15.5,
+      "days": 0
+     }
+    ],
+    "water": {
+     "sourceProfileId": "custom-hist-armenia",
+     "dilution": 0,
+     "mashSalts": {},
+     "spargeSalts": {},
+     "lacticMl": 0,
+     "phosphoricMl": 0,
+     "lacticPct": 88,
+     "phosphoricPct": 10
+    },
+    "carbonation": {
+     "volumes": 2.4,
+     "method": "priming",
+     "primingSugar": "sacarosa"
+    },
+    "versionCount": 1,
+    "origin": {
+     "kind": "importacion",
+     "detail": "Historial inicial de La H"
+    },
+    "createdAt": 1792767600000,
+    "updatedAt": 1792767600000,
+    "styleId": "vienna-lager",
+    "author": "La H Cerveza Artesanal",
+    "historical": {
+     "status": "elaborada",
+     "origin": "Historial inicial de La H Cerveza Artesanal (importado el 23 de octubre de 2026)",
+     "importedAt": 1792767600000,
+     "values": [
+      {
+       "label": "OG objetivo",
+       "value": "1.052",
+       "kind": "planificado"
+      },
+      {
+       "label": "FG objetivo",
+       "value": "1.011–1.012",
+       "kind": "planificado"
+      },
+      {
+       "label": "ABV",
+       "value": "≈ 5,3 %",
+       "kind": "estimacion"
+      },
+      {
+       "label": "Grano total",
+       "value": "≈ 9,9 kg",
+       "kind": "ejecucion"
+      },
+      {
+       "label": "Fermentación",
+       "value": "≈ 15,5 °C, presurizada",
+       "kind": "ejecucion"
+      },
+      {
+       "label": "Eficiencia de sala",
+       "value": "68,1 %",
+       "kind": "calculo",
+       "note": "Calculada para reproducir la OG objetivo (1.052) con el grano registrado. No fue medida."
+      }
+     ],
+     "missing": [
+      "Macerado",
+      "Tiempo de hervor",
+      "Duración de la fermentación",
+      "Agua y sales de la base",
+      "Carbonatación"
+     ],
+     "warnings": [
+      "Agua de origen no registrada en la ficha: para calcular se usa el perfil histórico de Armenia de La H."
+     ],
+     "notes": [
+      "Decisión histórica: se evaluó que para competencia podía ser más defendible declarar una base tipo Märzen que Vienna Lager por la percepción final. No se cambia retrospectivamente el estilo original del lote."
+     ]
+    }
+   },
+   {
+    "id": "hist-scottish-cafe",
+    "name": "Scottish con café",
+    "equipment": {
+     "batchSizeL": 20,
+     "boilTimeMin": 60,
+     "kettleVolumeL": 40,
+     "boilOffLph": 3.5,
+     "kettleLossL": 2,
+     "fermenterLossL": 1,
+     "mashTunDeadspaceL": 0,
+     "grainAbsorptionLpkg": 0.6,
+     "hopAbsorptionLp100g": 0.7,
+     "coolingShrinkPct": 4,
+     "efficiencyPct": 70,
+     "mashRatioLpkg": 3,
+     "spargeL": 0,
+     "id": "eq-biab",
+     "name": "BIAB 40 L",
+     "type": "biab"
+    },
+    "equipmentId": "eq-biab",
+    "batchSizeL": 20,
+    "boilTimeMin": 60,
+    "efficiencyPct": 70,
+    "fermentables": [],
+    "hops": [],
+    "yeasts": [],
+    "miscs": [
+     {
+      "uid": "hist-m-1d",
+      "name": "Café especial Wush Wush Natural",
+      "use": "fermentador",
+      "amount": 0,
+      "unit": "g",
+      "notes": "Cantidad, método y tiempo: dato_no_recuperado"
+     }
+    ],
+    "mashSteps": [],
+    "fermentation": [],
+    "water": {
+     "sourceProfileId": "custom-hist-armenia",
+     "dilution": 0,
+     "mashSalts": {},
+     "spargeSalts": {},
+     "lacticMl": 0,
+     "phosphoricMl": 0,
+     "lacticPct": 88,
+     "phosphoricPct": 10
+    },
+    "carbonation": {
+     "volumes": 2.15,
+     "method": "priming",
+     "primingSugar": "sacarosa"
+    },
+    "versionCount": 1,
+    "origin": {
+     "kind": "importacion",
+     "detail": "Historial inicial de La H"
+    },
+    "createdAt": 1792767600000,
+    "updatedAt": 1792767600000,
+    "styleId": "scottish-export",
+    "author": "La H Cerveza Artesanal",
+    "historical": {
+     "status": "elaborada",
+     "origin": "Historial inicial de La H Cerveza Artesanal (importado el 23 de octubre de 2026)",
+     "importedAt": 1792767600000,
+     "values": [
+      {
+       "label": "Estilo",
+       "value": "Scottish; manejada después como Scottish Export / Scottish con café",
+       "kind": "ejecucion"
+      },
+      {
+       "label": "Maltas conocidas",
+       "value": "BestMalz Pilsen, Munich y Caramunich II, entre otras",
+       "kind": "ejecucion",
+       "note": "Cantidades exactas: dato_no_recuperado"
+      },
+      {
+       "label": "Macerado",
+       "value": "≈ 72 °C → 68 °C",
+       "kind": "medicion"
+      },
+      {
+       "label": "pH de macerado",
+       "value": "≈ 5,3",
+       "kind": "medicion"
+      },
+      {
+       "label": "FG",
+       "value": "≈ 1.018",
+       "kind": "medicion"
+      },
+      {
+       "label": "Carbonatación objetivo",
+       "value": "2,1–2,2 vol",
+       "kind": "planificado"
+      },
+      {
+       "label": "Carbonatación en barril",
+       "value": "0,95 bar a 4 °C",
+       "kind": "ejecucion"
+      },
+      {
+       "label": "Café",
+       "value": "Wush Wush Natural, elegido buscando integración (evitar cafés quemados)",
+       "kind": "ejecucion"
+      }
+     ],
+     "missing": [
+      "OG",
+      "ABV",
+      "Cantidades de malta",
+      "Lúpulos",
+      "Levadura",
+      "Agua y sales",
+      "Volumen",
+      "Dosis y método del café"
+     ],
+     "warnings": [],
+     "notes": [
+      "RECETA_PREMIADA = TRUE · PREMIO_CONFIRMADO = BRONCE",
+      "Aprendizaje: en café especial, evitar perfiles excesivamente tostados, evitar que el café se perciba separado, priorizar la integración y evaluar variedad, proceso y perfil sensorial del café.",
+      "El café se percibió integrado y no como una adición artificial separada (atributo positivo)."
+     ],
+     "incomplete": true
+    }
+   },
+   {
+    "id": "hist-imperial-stout-cafe",
+    "name": "Imperial Stout de La H (con café)",
+    "equipment": {
+     "batchSizeL": 30,
+     "boilTimeMin": 60,
+     "kettleVolumeL": 40,
+     "boilOffLph": 3.5,
+     "kettleLossL": 2,
+     "fermenterLossL": 1,
+     "mashTunDeadspaceL": 0,
+     "grainAbsorptionLpkg": 0.6,
+     "hopAbsorptionLp100g": 0.7,
+     "coolingShrinkPct": 4,
+     "efficiencyPct": 70,
+     "mashRatioLpkg": 3,
+     "spargeL": 0,
+     "id": "eq-biab",
+     "name": "BIAB 40 L",
+     "type": "biab"
+    },
+    "equipmentId": "eq-biab",
+    "batchSizeL": 30,
+    "boilTimeMin": 60,
+    "efficiencyPct": 83.2,
+    "fermentables": [
+     {
+      "uid": "hist-f-1p",
+      "ingredientId": "best-pale-ale",
+      "name": "Pale Ale",
+      "type": "base",
+      "colorEBC": 6.5,
+      "ppg": 37,
+      "amountKg": 7,
+      "use": "macerado",
+      "source": "referencia",
+      "sourceNote": "Cantidad registrada; Pale Ale: marca no registrada. Color y rendimiento: EBC típico de la ficha de BestMalz; Distrines no lo publica. Confírmalo en el saco.."
+     },
+     {
+      "uid": "hist-f-1q",
+      "ingredientId": "carafoam",
+      "name": "Carafoam / Carapils",
+      "type": "caramelo",
+      "colorEBC": 4,
+      "ppg": 33,
+      "amountKg": 0.5,
+      "use": "macerado",
+      "source": "referencia",
+      "sourceNote": "Cantidad registrada; Carapils. Color y rendimiento: Valor típico de la ficha técnica de Weyermann; cada lote varía."
+     },
+     {
+      "uid": "hist-f-1r",
+      "ingredientId": "caramunich-2",
+      "name": "Caramunich Tipo II",
+      "type": "caramelo",
+      "colorEBC": 120,
+      "ppg": 34,
+      "amountKg": 0.6,
+      "use": "macerado",
+      "source": "referencia",
+      "sourceNote": "Cantidad registrada. Color y rendimiento: Valor típico de la ficha técnica de Weyermann; cada lote varía."
+     },
+     {
+      "uid": "hist-f-1s",
+      "ingredientId": "oats-flaked",
+      "name": "Avena en hojuelas",
+      "type": "adjunto",
+      "colorEBC": 2,
+      "ppg": 33,
+      "amountKg": 1,
+      "use": "macerado",
+      "source": "referencia",
+      "sourceNote": "Cantidad registrada; avena: tipo no registrado. Color y rendimiento: Valor típico de literatura."
+     },
+     {
+      "uid": "hist-f-1t",
+      "ingredientId": "lactose",
+      "name": "Lactosa",
+      "type": "no-fermentable",
+      "colorEBC": 0,
+      "ppg": 43,
+      "amountKg": 0.75,
+      "use": "hervor",
+      "source": "referencia",
+      "sourceNote": "Cantidad registrada. Color y rendimiento: Valor típico de literatura."
+     },
+     {
+      "uid": "hist-f-1u",
+      "ingredientId": "chocolate",
+      "name": "Chocolate",
+      "type": "tostada",
+      "colorEBC": 900,
+      "ppg": 28,
+      "amountKg": 0.6,
+      "use": "macerado",
+      "source": "referencia",
+      "sourceNote": "Cantidad registrada; marca no registrada. Color y rendimiento: Valor típico de la ficha técnica de Castle Malting; cada lote varía."
+     },
+     {
+      "uid": "hist-f-1v",
+      "ingredientId": "black-malt",
+      "name": "Black Patent",
+      "type": "tostada",
+      "colorEBC": 1300,
+      "ppg": 25,
+      "amountKg": 0.3,
+      "use": "macerado",
+      "source": "referencia",
+      "sourceNote": "Cantidad registrada; malta negra: marca no registrada. Color y rendimiento: Valor típico de la ficha técnica de Briess / genérica; cada lote varía."
+     }
+    ],
+    "hops": [
+     {
+      "uid": "hist-h-1w",
+      "ingredientId": "ekg",
+      "name": "East Kent Goldings",
+      "alpha": 5.5,
+      "source": "referencia",
+      "sourceNote": "Cantidad y momento registrados. % AA no registrado: se usa el típico (5.5 %) solo para calcular IBU",
+      "form": "pellet",
+      "amountG": 40,
+      "use": "hervor",
+      "time": 60
+     },
+     {
+      "uid": "hist-h-1x",
+      "ingredientId": "ekg",
+      "name": "East Kent Goldings",
+      "alpha": 5.5,
+      "source": "referencia",
+      "sourceNote": "Cantidad y momento registrados. % AA no registrado: se usa el típico (5.5 %) solo para calcular IBU",
+      "form": "pellet",
+      "amountG": 20,
+      "use": "hervor",
+      "time": 15
+     }
+    ],
+    "yeasts": [
+     {
+      "uid": "hist-y-1y",
+      "ingredientId": "us-05",
+      "name": "SafAle US-05",
+      "lab": "Fermentis",
+      "code": "US-05",
+      "type": "ale",
+      "form": "seca",
+      "attenuation": 80,
+      "tempRange": [
+       18,
+       22
+      ],
+      "family": "americana-limpia",
+      "amount": 1,
+      "source": "registro",
+      "sourceNote": "Levadura y cantidad registradas; cantidad de sobres de esta versión no registrada; se muestra 1 solo como referencia"
+     }
+    ],
+    "miscs": [
+     {
+      "uid": "hist-m-1z",
+      "name": "Café Bourbon Rosado Natural (molienda gruesa)",
+      "use": "fermentador",
+      "amount": 175,
+      "unit": "g",
+      "notes": "Registrado 150–200 g (punto medio solo para calcular); contacto 12–24 h."
+     }
+    ],
+    "mashSteps": [],
+    "fermentation": [],
+    "water": {
+     "sourceProfileId": "custom-hist-armenia",
+     "dilution": 0,
+     "mashSalts": {
+      "cloruroCalcio": 4,
+      "yeso": 1.5,
+      "bicarbonato": 3,
+      "sal": 1,
+      "epsom": 0.5
+     },
+     "spargeSalts": {},
+     "lacticMl": 0,
+     "phosphoricMl": 0,
+     "lacticPct": 88,
+     "phosphoricPct": 10
+    },
+    "carbonation": {
+     "volumes": 2.4,
+     "method": "priming",
+     "primingSugar": "sacarosa"
+    },
+    "versionCount": 2,
+    "origin": {
+     "kind": "importacion",
+     "detail": "Historial inicial de La H"
+    },
+    "createdAt": 1792767600000,
+    "updatedAt": 1792767600000,
+    "styleId": "imperial-stout",
+    "author": "La H Cerveza Artesanal",
+    "historical": {
+     "status": "asociada",
+     "origin": "Historial inicial de La H Cerveza Artesanal (importado el 23 de octubre de 2026)",
+     "importedAt": 1792767600000,
+     "values": [
+      {
+       "label": "OG",
+       "value": "≈ 1.090",
+       "kind": "estimacion"
+      },
+      {
+       "label": "FG",
+       "value": "≈ 1.030",
+       "kind": "estimacion"
+      },
+      {
+       "label": "ABV",
+       "value": "≈ 8 %",
+       "kind": "estimacion"
+      },
+      {
+       "label": "Sales documentadas",
+       "value": "CaCl₂ 4 g · CaSO₄ 1,5 g · NaHCO₃ 3 g · NaCl 1 g · MgSO₄ 0,5 g",
+       "kind": "planificado"
+      },
+      {
+       "label": "Eficiencia de sala",
+       "value": "83,2 %",
+       "kind": "calculo",
+       "note": "Calculada para reproducir la OG estimada de la segunda versión (≈ 1.090) con el grano registrado. No fue medida."
+      }
+     ],
+     "missing": [
+      "Volumen de esta versión",
+      "Sobres de US-05 en esta versión",
+      "Macerado",
+      "Fermentación"
+     ],
+     "warnings": [
+      "RECETA_ASOCIADA_HISTORICA; confirmar si corresponde exactamente al lote ganador",
+      "Agua de origen no registrada en la ficha: para calcular se usa el perfil histórico de Armenia de La H."
+     ],
+     "notes": [
+      "Segunda formulación histórica (versión posterior). No se fusiona con la primera.",
+      "RECETA_PREMIADA = TRUE · MEDALLAS_PLATA = 2",
+      "La versión premiada original fue la cerveza SIN Brett. En algunas botellas o versiones posteriores se experimentó con Brettanomyces bruxellensis: no es parte de la base premiada.",
+      "En otra competencia se inscribió como Tropical Stout porque sensorialmente se percibía más ligera que una Imperial Stout tradicional."
+     ]
+    }
+   },
+   {
+    "id": "hist-weizenbock-tres-tristes-tigres",
+    "name": "Tres Tristes Tigres toman Cerveza en un Trigal",
+    "equipment": {
+     "batchSizeL": 25,
+     "boilTimeMin": 60,
+     "kettleVolumeL": 40,
+     "boilOffLph": 3.5,
+     "kettleLossL": 2,
+     "fermenterLossL": 1,
+     "mashTunDeadspaceL": 0,
+     "grainAbsorptionLpkg": 0.6,
+     "hopAbsorptionLp100g": 0.7,
+     "coolingShrinkPct": 4,
+     "efficiencyPct": 70,
+     "mashRatioLpkg": 3,
+     "spargeL": 0,
+     "id": "eq-biab",
+     "name": "BIAB 40 L",
+     "type": "biab"
+    },
+    "equipmentId": "eq-biab",
+    "batchSizeL": 25,
+    "boilTimeMin": 90,
+    "efficiencyPct": 73,
+    "fermentables": [
+     {
+      "uid": "hist-f-20",
+      "ingredientId": "wheat-wey",
+      "name": "Trigo malteado claro",
+      "type": "base",
+      "colorEBC": 4,
+      "ppg": 38,
+      "amountKg": 4.8,
+      "use": "macerado",
+      "source": "referencia",
+      "sourceNote": "Cantidad registrada; malta de trigo: marca no registrada. Color y rendimiento: Valor típico de la ficha técnica de Weyermann; cada lote varía."
+     },
+     {
+      "uid": "hist-f-21",
+      "ingredientId": "munich-1-wey",
+      "name": "Munich Tipo I",
+      "type": "base",
+      "colorEBC": 15,
+      "ppg": 37,
+      "amountKg": 2.2,
+      "use": "macerado",
+      "source": "referencia",
+      "sourceNote": "Cantidad registrada. Color y rendimiento: Valor típico de la ficha técnica de Weyermann; cada lote varía."
+     },
+     {
+      "uid": "hist-f-22",
+      "ingredientId": "vienna-wey",
+      "name": "Vienna",
+      "type": "base",
+      "colorEBC": 8,
+      "ppg": 37,
+      "amountKg": 0.8,
+      "use": "macerado",
+      "source": "referencia",
+      "sourceNote": "Cantidad registrada. Color y rendimiento: Valor típico de la ficha técnica de Weyermann; cada lote varía."
+     },
+     {
+      "uid": "hist-f-23",
+      "ingredientId": "munich-2-wey",
+      "name": "Munich Tipo II",
+      "type": "base",
+      "colorEBC": 22,
+      "ppg": 37,
+      "amountKg": 0.4,
+      "use": "macerado",
+      "source": "referencia",
+      "sourceNote": "Cantidad registrada. Color y rendimiento: Valor típico de la ficha técnica de Weyermann; cada lote varía."
+     },
+     {
+      "uid": "hist-f-24",
+      "ingredientId": "caramunich-2",
+      "name": "Caramunich Tipo II",
+      "type": "caramelo",
+      "colorEBC": 120,
+      "ppg": 34,
+      "amountKg": 0.35,
+      "use": "macerado",
+      "source": "referencia",
+      "sourceNote": "Cantidad registrada. Color y rendimiento: Valor típico de la ficha técnica de Weyermann; cada lote varía."
+     },
+     {
+      "uid": "hist-f-25",
+      "ingredientId": "caraaroma",
+      "name": "Caraaroma",
+      "type": "caramelo",
+      "colorEBC": 400,
+      "ppg": 33,
+      "amountKg": 0.25,
+      "use": "macerado",
+      "source": "referencia",
+      "sourceNote": "Cantidad registrada. Color y rendimiento: Valor típico de la ficha técnica de Weyermann; cada lote varía."
+     }
+    ],
+    "hops": [
+     {
+      "uid": "hist-h-26",
+      "ingredientId": "hallertau-mittelfruh",
+      "name": "Hallertau (variedad no especificada)",
+      "alpha": 4,
+      "source": "referencia",
+      "sourceNote": "Cantidad y momento registrados. Variedad de Hallertau y % AA no registrados; alfa típico solo para calcular.",
+      "form": "pellet",
+      "amountG": 55,
+      "use": "hervor",
+      "time": 60
+     }
+    ],
+    "yeasts": [
+     {
+      "uid": "hist-y-27",
+      "ingredientId": "w-68",
+      "name": "SafAle W-68",
+      "lab": "Fermentis",
+      "code": "W-68",
+      "type": "trigo",
+      "form": "seca",
+      "attenuation": 80,
+      "tempRange": [
+       18,
+       26
+      ],
+      "family": "weizen",
+      "amount": 2,
+      "source": "registro",
+      "sourceNote": "Levadura y cantidad registradas; 2 sobres como mínimo en la formulación documentada"
+     }
+    ],
+    "miscs": [],
+    "mashSteps": [
+     {
+      "uid": "hist-s-28",
+      "name": "Descanso proteico",
+      "tempC": 52,
+      "timeMin": 15
+     },
+     {
+      "uid": "hist-s-29",
+      "name": "Beta-amilasa",
+      "tempC": 63,
+      "timeMin": 25
+     },
+     {
+      "uid": "hist-s-2a",
+      "name": "Decocción (30–35 % espeso): 65 °C 10 min, 72 °C 10 min, hervir 20–25 min; retornar",
+      "tempC": 67.5,
+      "timeMin": 30
+     },
+     {
+      "uid": "hist-s-2b",
+      "name": "Mash out",
+      "tempC": 76,
+      "timeMin": 10
+     }
+    ],
+    "fermentation": [],
+    "water": {
+     "sourceProfileId": "custom-hist-armenia",
+     "dilution": 0,
+     "mashSalts": {},
+     "spargeSalts": {},
+     "lacticMl": 0,
+     "phosphoricMl": 0,
+     "lacticPct": 88,
+     "phosphoricPct": 10
+    },
+    "carbonation": {
+     "volumes": 2.4,
+     "method": "priming",
+     "primingSugar": "sacarosa"
+    },
+    "versionCount": 1,
+    "origin": {
+     "kind": "importacion",
+     "detail": "Historial inicial de La H"
+    },
+    "createdAt": 1792767600000,
+    "updatedAt": 1792767600000,
+    "styleId": "weizenbock",
+    "author": "La H Cerveza Artesanal",
+    "historical": {
+     "status": "asociada",
+     "origin": "Historial inicial de La H Cerveza Artesanal (importado el 23 de octubre de 2026)",
+     "importedAt": 1792767600000,
+     "values": [
+      {
+       "label": "OG",
+       "value": "≈ 1.080",
+       "kind": "estimacion"
+      },
+      {
+       "label": "FG",
+       "value": "≈ 1.018",
+       "kind": "estimacion"
+      },
+      {
+       "label": "ABV",
+       "value": "≈ 8 %",
+       "kind": "estimacion"
+      },
+      {
+       "label": "IBU",
+       "value": "≈ 20",
+       "kind": "estimacion"
+      },
+      {
+       "label": "Grano total",
+       "value": "≈ 8,8 kg",
+       "kind": "planificado"
+      },
+      {
+       "label": "Decocción",
+       "value": "Retirar 30–35 % espeso; 65 °C 10 min → 72 °C 10 min → hervir 20–25 min → retornar hasta 67–68 °C y mantener ~30 min",
+       "kind": "planificado",
+       "note": "La temperatura de retorno (67–68 °C) se carga con su punto medio solo para calcular"
+      },
+      {
+       "label": "Eficiencia de sala",
+       "value": "73 %",
+       "kind": "calculo",
+       "note": "Calculada para reproducir la OG documentada (≈ 1.080) con el grano registrado. No fue medida."
+      }
+     ],
+     "missing": [
+      "Fermentación (temperatura y días)",
+      "Agua y sales",
+      "Carbonatación"
+     ],
+     "warnings": [
+      "RECETA_HISTORICA_ASOCIADA: no asumir que es idéntica al lote ganador.",
+      "Agua de origen no registrada en la ficha: para calcular se usa el perfil histórico de Armenia de La H."
+     ],
+     "notes": [
+      "RECETA_PREMIADA = TRUE (familia Weizenbock): Bronce y Primer puesto en Maestros del Trigo 2026. No atribuir ambos premios al mismo lote sin confirmación."
+     ]
+    }
+   },
+   {
+    "id": "hist-dubbel",
+    "name": "Belgian Dubbel",
+    "equipment": {
+     "batchSizeL": 20,
+     "boilTimeMin": 60,
+     "kettleVolumeL": 40,
+     "boilOffLph": 3.5,
+     "kettleLossL": 2,
+     "fermenterLossL": 1,
+     "mashTunDeadspaceL": 0,
+     "grainAbsorptionLpkg": 0.6,
+     "hopAbsorptionLp100g": 0.7,
+     "coolingShrinkPct": 4,
+     "efficiencyPct": 70,
+     "mashRatioLpkg": 3,
+     "spargeL": 0,
+     "id": "eq-biab",
+     "name": "BIAB 40 L",
+     "type": "biab"
+    },
+    "equipmentId": "eq-biab",
+    "batchSizeL": 20,
+    "boilTimeMin": 60,
+    "efficiencyPct": 70,
+    "fermentables": [],
+    "hops": [],
+    "yeasts": [],
+    "miscs": [],
+    "mashSteps": [],
+    "fermentation": [],
+    "water": {
+     "sourceProfileId": "custom-hist-armenia",
+     "dilution": 0,
+     "mashSalts": {},
+     "spargeSalts": {},
+     "lacticMl": 0,
+     "phosphoricMl": 0,
+     "lacticPct": 88,
+     "phosphoricPct": 10
+    },
+    "carbonation": {
+     "volumes": 2.4,
+     "method": "priming",
+     "primingSugar": "sacarosa"
+    },
+    "versionCount": 1,
+    "origin": {
+     "kind": "importacion",
+     "detail": "Historial inicial de La H"
+    },
+    "createdAt": 1792767600000,
+    "updatedAt": 1792767600000,
+    "styleId": "dubbel",
+    "author": "La H Cerveza Artesanal",
+    "historical": {
+     "status": "elaborada",
+     "origin": "Historial inicial de La H Cerveza Artesanal (importado el 23 de octubre de 2026)",
+     "importedAt": 1792767600000,
+     "values": [
+      {
+       "label": "Resultado general",
+       "value": "Considerado muy bueno; inscrito en competencia",
+       "kind": "ejecucion"
+      }
+     ],
+     "missing": [
+      "Maltas",
+      "Azúcar",
+      "Lúpulos",
+      "Levadura",
+      "Perfil de agua",
+      "Volumen",
+      "Macerado",
+      "Fermentación"
+     ],
+     "warnings": [],
+     "notes": [
+      "Sin premio confirmado en el historial recuperado."
+     ],
+     "incomplete": true
+    }
+   },
+   {
+    "id": "hist-tripel-reto",
+    "name": "Belgian Tripel — reto Fermentis",
+    "equipment": {
+     "batchSizeL": 20,
+     "boilTimeMin": 60,
+     "kettleVolumeL": 40,
+     "boilOffLph": 3.5,
+     "kettleLossL": 2,
+     "fermenterLossL": 1,
+     "mashTunDeadspaceL": 0,
+     "grainAbsorptionLpkg": 0.6,
+     "hopAbsorptionLp100g": 0.7,
+     "coolingShrinkPct": 4,
+     "efficiencyPct": 70,
+     "mashRatioLpkg": 3,
+     "spargeL": 0,
+     "id": "eq-biab",
+     "name": "BIAB 40 L",
+     "type": "biab"
+    },
+    "equipmentId": "eq-biab",
+    "batchSizeL": 20,
+    "boilTimeMin": 60,
+    "efficiencyPct": 70,
+    "fermentables": [],
+    "hops": [],
+    "yeasts": [],
+    "miscs": [],
+    "mashSteps": [],
+    "fermentation": [],
+    "water": {
+     "sourceProfileId": "custom-hist-armenia",
+     "dilution": 0,
+     "mashSalts": {},
+     "spargeSalts": {},
+     "lacticMl": 0,
+     "phosphoricMl": 0,
+     "lacticPct": 88,
+     "phosphoricPct": 10
+    },
+    "carbonation": {
+     "volumes": 2.4,
+     "method": "priming",
+     "primingSugar": "sacarosa"
+    },
+    "versionCount": 1,
+    "origin": {
+     "kind": "importacion",
+     "detail": "Historial inicial de La H"
+    },
+    "createdAt": 1792767600000,
+    "updatedAt": 1792767600000,
+    "styleId": "tripel",
+    "author": "La H Cerveza Artesanal",
+    "intent": {
+     "mode": "moderna",
+     "text": "Tripel compleja, muy bebible y de alta tomabilidad; interpretación moderna pero claramente belga; seca; alcohol elevado pero integrado.",
+     "target": {}
+    },
+    "historical": {
+     "status": "planificada",
+     "origin": "Historial inicial de La H Cerveza Artesanal (importado el 23 de octubre de 2026)",
+     "importedAt": 1792767600000,
+     "values": [
+      {
+       "label": "Volumen objetivo",
+       "value": "20 L finales en barril",
+       "kind": "planificado"
+      },
+      {
+       "label": "Restricción de levadura del reto",
+       "value": "Fermentis: BE-256 / referencia del reto \"BE-156\" según el registro original; BE-134; T-58",
+       "kind": "planificado",
+       "note": "Se conserva la referencia original \"BE-156\" sin sustituirla"
+      }
+     ],
+     "missing": [
+      "Receta detallada definitiva"
+     ],
+     "warnings": [],
+     "notes": [
+      "RECETA_PLANIFICADA = TRUE. No registrar como elaborada ni premiada."
+     ],
+     "incomplete": true
+    }
+   },
+   {
+    "id": "hist-catharina-50l",
+    "name": "Catharina Sour — formulación 50 L",
+    "equipment": {
+     "batchSizeL": 50,
+     "boilTimeMin": 60,
+     "kettleVolumeL": 40,
+     "boilOffLph": 3.5,
+     "kettleLossL": 2,
+     "fermenterLossL": 1,
+     "mashTunDeadspaceL": 0,
+     "grainAbsorptionLpkg": 0.6,
+     "hopAbsorptionLp100g": 0.7,
+     "coolingShrinkPct": 4,
+     "efficiencyPct": 70,
+     "mashRatioLpkg": 3,
+     "spargeL": 0,
+     "id": "eq-biab",
+     "name": "BIAB 40 L",
+     "type": "biab"
+    },
+    "equipmentId": "eq-biab",
+    "batchSizeL": 50,
+    "boilTimeMin": 60,
+    "efficiencyPct": 70,
+    "fermentables": [
+     {
+      "uid": "hist-f-2d",
+      "ingredientId": "pilsner-wey",
+      "name": "Pilsner",
+      "type": "base",
+      "colorEBC": 3.5,
+      "ppg": 37,
+      "amountKg": 5,
+      "use": "macerado",
+      "source": "referencia",
+      "sourceNote": "Cantidad registrada; marca no registrada. Color y rendimiento: Valor típico de la ficha técnica de Weyermann; cada lote varía."
+     },
+     {
+      "uid": "hist-f-2e",
+      "ingredientId": "wheat-wey",
+      "name": "Trigo malteado claro",
+      "type": "base",
+      "colorEBC": 4,
+      "ppg": 38,
+      "amountKg": 5,
+      "use": "macerado",
+      "source": "referencia",
+      "sourceNote": "Cantidad registrada; trigo: marca no registrada. Color y rendimiento: Valor típico de la ficha técnica de Weyermann; cada lote varía."
+     },
+     {
+      "uid": "hist-f-2f",
+      "ingredientId": "oats-flaked",
+      "name": "Avena en hojuelas",
+      "type": "adjunto",
+      "colorEBC": 2,
+      "ppg": 33,
+      "amountKg": 0.5,
+      "use": "macerado",
+      "source": "referencia",
+      "sourceNote": "Cantidad registrada; avena: tipo no registrado. Color y rendimiento: Valor típico de literatura."
+     },
+     {
+      "uid": "hist-f-2g",
+      "ingredientId": "carafoam",
+      "name": "Carafoam / Carapils",
+      "type": "caramelo",
+      "colorEBC": 4,
+      "ppg": 33,
+      "amountKg": 0.35,
+      "use": "macerado",
+      "source": "referencia",
+      "sourceNote": "Cantidad registrada; Carapils. Color y rendimiento: Valor típico de la ficha técnica de Weyermann; cada lote varía."
+     }
+    ],
+    "hops": [
+     {
+      "uid": "hist-h-2j",
+      "ingredientId": "el-dorado",
+      "name": "El Dorado",
+      "alpha": 15,
+      "source": "estimacion",
+      "sourceNote": "Rango registrado 5–10 g; el punto medio solo se usa para calcular. % AA no registrado: se usa el típico (15 %) solo para calcular IBU. Momento exacto no registrado",
+      "form": "pellet",
+      "amountG": 7.5,
+      "use": "hervor",
+      "time": 15
+     }
+    ],
+    "yeasts": [
+     {
+      "uid": "hist-y-2k",
+      "ingredientId": "voss",
+      "name": "LalBrew Voss Kveik",
+      "lab": "Lallemand",
+      "code": "Voss",
+      "type": "kveik",
+      "form": "seca",
+      "attenuation": 79,
+      "tempRange": [
+       25,
+       40
+      ],
+      "family": "kveik",
+      "amount": 2,
+      "source": "registro",
+      "sourceNote": "Levadura y cantidad registradas; ≈ 22 g registrados"
+     }
+    ],
+    "miscs": [
+     {
+      "uid": "hist-m-2l",
+      "name": "Cultivo de yogur (kettle sour)",
+      "use": "hervor",
+      "amount": 500,
+      "unit": "g",
+      "notes": "Registrado 400–600 g (punto medio solo para calcular). Agriar en la olla a 36–40 °C hasta pH 3,4–3,6, antes del hervor."
+     }
+    ],
+    "mashSteps": [
+     {
+      "uid": "hist-s-2h",
+      "name": "Sacarificación",
+      "tempC": 65,
+      "timeMin": 60
+     },
+     {
+      "uid": "hist-s-2i",
+      "name": "Mash out",
+      "tempC": 75,
+      "timeMin": 10
+     }
+    ],
+    "fermentation": [
+     {
+      "uid": "hist-t-2m",
+      "name": "Cold crash",
+      "tempC": 1,
+      "days": 0
+     }
+    ],
+    "water": {
+     "sourceProfileId": "custom-hist-armenia",
+     "dilution": 0,
+     "mashSalts": {},
+     "spargeSalts": {},
+     "lacticMl": 0,
+     "phosphoricMl": 0,
+     "lacticPct": 88,
+     "phosphoricPct": 10
+    },
+    "carbonation": {
+     "volumes": 2.9,
+     "method": "priming",
+     "primingSugar": "sacarosa"
+    },
+    "versionCount": 1,
+    "origin": {
+     "kind": "importacion",
+     "detail": "Historial inicial de La H"
+    },
+    "createdAt": 1792767600000,
+    "updatedAt": 1792767600000,
+    "styleId": "catharina-sour",
+    "author": "La H Cerveza Artesanal",
+    "historical": {
+     "status": "planificada",
+     "origin": "Historial inicial de La H Cerveza Artesanal (importado el 23 de octubre de 2026)",
+     "importedAt": 1792767600000,
+     "values": [
+      {
+       "label": "Agua de macerado",
+       "value": "≈ 43 L",
+       "kind": "planificado"
+      },
+      {
+       "label": "Reserva / lavado",
+       "value": "≈ 19 L",
+       "kind": "planificado"
+      },
+      {
+       "label": "Whirlpool opcional",
+       "value": "El Dorado 10–15 g",
+       "kind": "planificado"
+      },
+      {
+       "label": "pH objetivo del agriado",
+       "value": "3,4–3,6",
+       "kind": "planificado"
+      },
+      {
+       "label": "FG objetivo",
+       "value": "1.006–1.008",
+       "kind": "planificado"
+      },
+      {
+       "label": "Cold crash",
+       "value": "0–2 °C",
+       "kind": "planificado"
+      },
+      {
+       "label": "Carbonatación",
+       "value": "2,8–3,0 vol",
+       "kind": "planificado"
+      },
+      {
+       "label": "Perfil mineral sugerido",
+       "value": "Ca 50–70 · Cl 80–120 · SO₄ < 50 ppm · Mg bajo",
+       "kind": "planificado"
+      }
+     ],
+     "missing": [
+      "OG (la formulación no la registra: los cálculos usan la eficiencia de referencia del equipo)"
+     ],
+     "warnings": [
+      "Esta formulación NO se etiqueta como la Catharina Sour premiada: la receta del lote premiado no se recuperó.",
+      "Agua de origen no registrada en la ficha: para calcular se usa el perfil histórico de Armenia de La H."
+     ],
+     "notes": [
+      "Historial de sours de La H: Catharina Sour con mora, Berliner Weisse con lulo y desarrollos posteriores con banano."
+     ]
+    }
+   },
+   {
+    "id": "hist-smoothie-banano",
+    "name": "Sour Smoothie de banano — Philly Sour",
+    "equipment": {
+     "batchSizeL": 40,
+     "boilTimeMin": 60,
+     "kettleVolumeL": 40,
+     "boilOffLph": 3.5,
+     "kettleLossL": 2,
+     "fermenterLossL": 1,
+     "mashTunDeadspaceL": 0,
+     "grainAbsorptionLpkg": 0.6,
+     "hopAbsorptionLp100g": 0.7,
+     "coolingShrinkPct": 4,
+     "efficiencyPct": 70,
+     "mashRatioLpkg": 3,
+     "spargeL": 0,
+     "id": "eq-biab",
+     "name": "BIAB 40 L",
+     "type": "biab"
+    },
+    "equipmentId": "eq-biab",
+    "batchSizeL": 40,
+    "boilTimeMin": 60,
+    "efficiencyPct": 70,
+    "fermentables": [
+     {
+      "uid": "hist-f-2n",
+      "ingredientId": "pilsner-wey",
+      "name": "Pilsner",
+      "type": "base",
+      "colorEBC": 3.5,
+      "ppg": 37,
+      "amountKg": 9,
+      "use": "macerado",
+      "source": "referencia",
+      "sourceNote": "Cantidad registrada; aproximado; marca no registrada. Color y rendimiento: Valor típico de la ficha técnica de Weyermann; cada lote varía."
+     },
+     {
+      "uid": "hist-f-2o",
+      "ingredientId": "wheat-wey",
+      "name": "Trigo malteado claro",
+      "type": "base",
+      "colorEBC": 4,
+      "ppg": 38,
+      "amountKg": 4.5,
+      "use": "macerado",
+      "source": "referencia",
+      "sourceNote": "Cantidad registrada; aproximado. Color y rendimiento: Valor típico de la ficha técnica de Weyermann; cada lote varía."
+     },
+     {
+      "uid": "hist-f-2p",
+      "ingredientId": "oats-flaked",
+      "name": "Avena en hojuelas",
+      "type": "adjunto",
+      "colorEBC": 2,
+      "ppg": 33,
+      "amountKg": 2.7,
+      "use": "macerado",
+      "source": "referencia",
+      "sourceNote": "Cantidad registrada; aproximado; tipo de avena no registrado. Color y rendimiento: Valor típico de literatura."
+     },
+     {
+      "uid": "hist-f-2q",
+      "ingredientId": "carafoam",
+      "name": "Carafoam / Carapils",
+      "type": "caramelo",
+      "colorEBC": 4,
+      "ppg": 33,
+      "amountKg": 0.9,
+      "use": "macerado",
+      "source": "referencia",
+      "sourceNote": "Cantidad registrada; Carapils, aproximado. Color y rendimiento: Valor típico de la ficha técnica de Weyermann; cada lote varía."
+     },
+     {
+      "uid": "hist-f-2r",
+      "ingredientId": "munich-1-wey",
+      "name": "Munich Tipo I",
+      "type": "base",
+      "colorEBC": 15,
+      "ppg": 37,
+      "amountKg": 0.9,
+      "use": "macerado",
+      "source": "referencia",
+      "sourceNote": "Cantidad registrada; aproximado. Color y rendimiento: Valor típico de la ficha técnica de Weyermann; cada lote varía."
+     },
+     {
+      "uid": "hist-f-2s",
+      "ingredientId": "dextrose",
+      "name": "Dextrosa",
+      "type": "azucar",
+      "colorEBC": 0,
+      "ppg": 42,
+      "amountKg": 0.7,
+      "use": "hervor",
+      "source": "referencia",
+      "sourceNote": "Cantidad registrada; aproximado; momento de adición no registrado. Color y rendimiento: Valor típico de literatura."
+     }
+    ],
+    "hops": [],
+    "yeasts": [
+     {
+      "uid": "hist-y-2t",
+      "ingredientId": "philly-sour",
+      "name": "WildBrew Philly Sour",
+      "lab": "Lallemand",
+      "code": "Philly Sour",
+      "type": "acida",
+      "form": "seca",
+      "attenuation": 78,
+      "tempRange": [
+       20,
+       25
+      ],
+      "family": "acida",
+      "amount": 0,
+      "source": "registro",
+      "sourceNote": "Levadura registrada. Cantidad de sobres: se evaluó por costo, dato_no_recuperado (se muestra 0)."
+     }
+    ],
+    "miscs": [
+     {
+      "uid": "hist-m-2u",
+      "name": "Banano",
+      "use": "fermentador",
+      "amount": 9,
+      "unit": "kg",
+      "notes": "Aproximado. El azúcar de la fruta aún no se modela en la densidad (fase de adjuntos)."
+     },
+     {
+      "uid": "hist-m-2v",
+      "name": "Nibs de cacao",
+      "use": "fermentador",
+      "amount": 200,
+      "unit": "g",
+      "notes": "Aproximado"
+     }
+    ],
+    "mashSteps": [],
+    "fermentation": [],
+    "water": {
+     "sourceProfileId": "custom-hist-armenia",
+     "dilution": 0,
+     "mashSalts": {},
+     "spargeSalts": {},
+     "lacticMl": 0,
+     "phosphoricMl": 0,
+     "lacticPct": 88,
+     "phosphoricPct": 10
+    },
+    "carbonation": {
+     "volumes": 2.4,
+     "method": "priming",
+     "primingSugar": "sacarosa"
+    },
+    "versionCount": 1,
+    "origin": {
+     "kind": "importacion",
+     "detail": "Historial inicial de La H"
+    },
+    "createdAt": 1792767600000,
+    "updatedAt": 1792767600000,
+    "author": "La H Cerveza Artesanal",
+    "intent": {
+     "mode": "libre",
+     "text": "Sour intensa con banano, perfil moderno tipo fruited / pastry / smoothie.",
+     "target": {}
+    },
+    "historical": {
+     "status": "experimental",
+     "origin": "Historial inicial de La H Cerveza Artesanal (importado el 23 de octubre de 2026)",
+     "importedAt": 1792767600000,
+     "values": [
+      {
+       "label": "Volumen previsto",
+       "value": "≈ 40 L; rendimiento final esperado 30–35 L por la carga de fruta",
+       "kind": "planificado"
+      },
+      {
+       "label": "Grano total",
+       "value": "≈ 18 kg",
+       "kind": "planificado"
+      }
+     ],
+     "missing": [
+      "Sobres de Philly Sour",
+      "Lúpulos",
+      "Macerado",
+      "Agua y sales",
+      "Momento de la fruta y del cacao"
+     ],
+     "warnings": [
+      "DESARROLLO_EXPERIMENTAL: no registrar como premiado.",
+      "Agua de origen no registrada en la ficha: para calcular se usa el perfil histórico de Armenia de La H."
+     ],
+     "notes": [
+      "Se comparó conceptualmente Philly Sour frente a Kveik."
+     ]
+    }
+   },
+   {
+    "id": "hist-west-coast-ipa",
+    "name": "West Coast IPA",
+    "equipment": {
+     "batchSizeL": 40,
+     "boilTimeMin": 60,
+     "kettleVolumeL": 40,
+     "boilOffLph": 3.5,
+     "kettleLossL": 2,
+     "fermenterLossL": 1,
+     "mashTunDeadspaceL": 0,
+     "grainAbsorptionLpkg": 0.6,
+     "hopAbsorptionLp100g": 0.7,
+     "coolingShrinkPct": 4,
+     "efficiencyPct": 70,
+     "mashRatioLpkg": 3,
+     "spargeL": 0,
+     "id": "eq-biab",
+     "name": "BIAB 40 L",
+     "type": "biab"
+    },
+    "equipmentId": "eq-biab",
+    "batchSizeL": 40,
+    "boilTimeMin": 60,
+    "efficiencyPct": 61.7,
+    "fermentables": [
+     {
+      "uid": "hist-f-2w",
+      "ingredientId": "best-pale-ale",
+      "name": "Pale Ale",
+      "type": "base",
+      "colorEBC": 6.5,
+      "ppg": 37,
+      "amountKg": 12,
+      "use": "macerado",
+      "source": "referencia",
+      "sourceNote": "Cantidad registrada; Pale Ale: marca no registrada. Color y rendimiento: EBC típico de la ficha de BestMalz; Distrines no lo publica. Confírmalo en el saco.."
+     },
+     {
+      "uid": "hist-f-2x",
+      "ingredientId": "best-munich",
+      "name": "Munich",
+      "type": "base",
+      "colorEBC": 15,
+      "ppg": 37,
+      "amountKg": 1,
+      "use": "macerado",
+      "source": "referencia",
+      "sourceNote": "Cantidad registrada; Munich: marca y tipo no registrados. Color y rendimiento: EBC típico de la ficha de BestMalz; Distrines no lo publica. Confírmalo en el saco.."
+     },
+     {
+      "uid": "hist-f-2y",
+      "ingredientId": "carafoam",
+      "name": "Carafoam / Carapils",
+      "type": "caramelo",
+      "colorEBC": 4,
+      "ppg": 33,
+      "amountKg": 0.5,
+      "use": "macerado",
+      "source": "referencia",
+      "sourceNote": "Cantidad registrada; Carapils. Color y rendimiento: Valor típico de la ficha técnica de Weyermann; cada lote varía."
+     }
+    ],
+    "hops": [
+     {
+      "uid": "hist-h-2z",
+      "ingredientId": "bravo",
+      "name": "Bravo",
+      "alpha": 15.5,
+      "source": "referencia",
+      "sourceNote": "Cantidad y momento registrados. % AA no registrado: se usa el típico (15.5 %) solo para calcular IBU",
+      "form": "pellet",
+      "amountG": 30,
+      "use": "hervor",
+      "time": 60
+     },
+     {
+      "uid": "hist-h-30",
+      "name": "Solaris",
+      "alpha": 0,
+      "form": "pellet",
+      "amountG": 140,
+      "use": "whirlpool",
+      "time": 0,
+      "source": "estimacion",
+      "sourceNote": "Rango registrado 120–160 g; punto medio solo para calcular. Variedad fuera del catálogo y % AA no registrado: no se calcula su aporte de IBU."
+     },
+     {
+      "uid": "hist-h-31",
+      "ingredientId": "simcoe",
+      "name": "Simcoe",
+      "alpha": 13,
+      "source": "referencia",
+      "sourceNote": "Cantidad y momento registrados. % AA no registrado: se usa el típico (13 %) solo para calcular IBU. Simcoe Cryo: el alfa típico del catálogo es del pellet (el Cryo tiene más); tiempo de whirlpool no registrado",
+      "form": "cryo",
+      "amountG": 15,
+      "use": "whirlpool",
+      "time": 0,
+      "tempC": 80
+     },
+     {
+      "uid": "hist-h-32",
+      "ingredientId": "simcoe",
+      "name": "Simcoe",
+      "alpha": 13,
+      "source": "referencia",
+      "sourceNote": "Cantidad y momento registrados. % AA no registrado: se usa el típico (13 %) solo para calcular IBU. Simcoe Cryo; días de contacto no registrados",
+      "form": "cryo",
+      "amountG": 75,
+      "use": "dry-hop",
+      "time": 0
+     }
+    ],
+    "yeasts": [
+     {
+      "uid": "hist-y-33",
+      "ingredientId": "bry-97",
+      "name": "LalBrew BRY-97",
+      "lab": "Lallemand",
+      "code": "BRY-97",
+      "type": "ale",
+      "form": "seca",
+      "attenuation": 81,
+      "tempRange": [
+       15,
+       22
+      ],
+      "family": "americana-limpia",
+      "amount": 3,
+      "source": "registro",
+      "sourceNote": "Levadura y cantidad registradas"
+     }
+    ],
+    "miscs": [],
+    "mashSteps": [],
+    "fermentation": [
+     {
+      "uid": "hist-t-34",
+      "name": "Primaria",
+      "tempC": 18.5,
+      "days": 0
+     },
+     {
+      "uid": "hist-t-35",
+      "name": "Final",
+      "tempC": 20.5,
+      "days": 0
+     }
+    ],
+    "water": {
+     "sourceProfileId": "custom-hist-armenia",
+     "dilution": 0,
+     "mashSalts": {},
+     "spargeSalts": {},
+     "lacticMl": 0,
+     "phosphoricMl": 0,
+     "lacticPct": 88,
+     "phosphoricPct": 10,
+     "targetProfileId": "custom-hist-wcipa"
+    },
+    "carbonation": {
+     "volumes": 2.4,
+     "method": "priming",
+     "primingSugar": "sacarosa"
+    },
+    "versionCount": 1,
+    "origin": {
+     "kind": "importacion",
+     "detail": "Historial inicial de La H"
+    },
+    "createdAt": 1792767600000,
+    "updatedAt": 1792767600000,
+    "styleId": "american-ipa",
+    "author": "La H Cerveza Artesanal",
+    "historical": {
+     "status": "elaborada",
+     "origin": "Historial inicial de La H Cerveza Artesanal (importado el 23 de octubre de 2026)",
+     "importedAt": 1792767600000,
+     "values": [
+      {
+       "label": "OG",
+       "value": "≈ 1.064",
+       "kind": "estimacion"
+      },
+      {
+       "label": "FG",
+       "value": "≈ 1.010",
+       "kind": "estimacion"
+      },
+      {
+       "label": "ABV",
+       "value": "≈ 7 %",
+       "kind": "estimacion"
+      },
+      {
+       "label": "Fermentación",
+       "value": "18–19 °C al inicio; luego 20–21 °C",
+       "kind": "ejecucion",
+       "note": "Puntos medios solo para calcular"
+      },
+      {
+       "label": "Agua objetivo",
+       "value": "Ca 110 · Mg 6 · Na 8 · Cl 65 · SO₄ 190 · HCO₃ 30 ppm",
+       "kind": "planificado"
+      },
+      {
+       "label": "pH de macerado objetivo",
+       "value": "≈ 5,35",
+       "kind": "planificado"
+      },
+      {
+       "label": "Eficiencia de sala",
+       "value": "61,7 %",
+       "kind": "calculo",
+       "note": "Calculada para reproducir la OG registrada (≈ 1.064) con el grano registrado. No fue medida."
+      }
+     ],
+     "missing": [
+      "Macerado",
+      "Tiempo de hervor",
+      "Tiempo de whirlpool",
+      "Días de dry hop",
+      "% AA de Bravo, Solaris y Simcoe Cryo",
+      "Sales usadas"
+     ],
+     "warnings": [
+      "Agua de origen no registrada en la ficha: para calcular se usa el perfil histórico de Armenia de La H."
+     ],
+     "notes": [
+      "Receta desarrollada; sin premio confirmado en el historial."
+     ]
+    }
+   }
+  ],
+  "recipeVersions": [
+   {
+    "id": "hist-hazy-ipa-colab-v1",
+    "recipeId": "hist-hazy-ipa-colab",
+    "number": 1,
+    "label": "Histórico · Oro Copa Raíces",
+    "note": "Receta del lote premiado según el historial; levadura y dry hop finales por reconciliar.",
+    "reason": "importacion",
+    "snapshot": {
+     "id": "hist-hazy-ipa-colab",
+     "name": "Hazy IPA — Colab IPA Day",
+     "equipment": {
+      "batchSizeL": 30,
+      "boilTimeMin": 60,
+      "kettleVolumeL": 40,
+      "boilOffLph": 3.5,
+      "kettleLossL": 2,
+      "fermenterLossL": 1,
+      "mashTunDeadspaceL": 0,
+      "grainAbsorptionLpkg": 0.6,
+      "hopAbsorptionLp100g": 0.7,
+      "coolingShrinkPct": 4,
+      "efficiencyPct": 70,
+      "mashRatioLpkg": 3,
+      "spargeL": 0,
+      "id": "eq-biab",
+      "name": "BIAB 40 L",
+      "type": "biab"
+     },
+     "equipmentId": "eq-biab",
+     "batchSizeL": 30,
+     "boilTimeMin": 90,
+     "efficiencyPct": 68.1,
+     "fermentables": [
+      {
+       "uid": "hist-f-1",
+       "ingredientId": "best-pale-ale",
+       "name": "Pale Ale",
+       "type": "base",
+       "colorEBC": 6.5,
+       "ppg": 37,
+       "amountKg": 6,
+       "use": "macerado",
+       "source": "referencia",
+       "sourceNote": "Cantidad registrada. Color y rendimiento: EBC típico de la ficha de BestMalz; Distrines no lo publica. Confírmalo en el saco.."
+      },
+      {
+       "uid": "hist-f-2",
+       "ingredientId": "wheat-wey",
+       "name": "Trigo malteado claro",
+       "type": "base",
+       "colorEBC": 4,
+       "ppg": 38,
+       "amountKg": 2,
+       "use": "macerado",
+       "source": "referencia",
+       "sourceNote": "Cantidad registrada; malta de trigo: marca no registrada. Color y rendimiento: Valor típico de la ficha técnica de Weyermann; cada lote varía."
+      },
+      {
+       "uid": "hist-f-3",
+       "ingredientId": "oats-flaked",
+       "name": "Avena en hojuelas",
+       "type": "adjunto",
+       "colorEBC": 2,
+       "ppg": 33,
+       "amountKg": 1.2,
+       "use": "macerado",
+       "source": "referencia",
+       "sourceNote": "Cantidad registrada; avena: tipo (hojuelas o malteada) no registrado. Color y rendimiento: Valor típico de literatura."
+      }
+     ],
+     "hops": [
+      {
+       "uid": "hist-h-5",
+       "ingredientId": "citra",
+       "name": "Citra",
+       "alpha": 12.5,
+       "source": "referencia",
+       "sourceNote": "Cantidad y momento registrados. % AA no registrado: se usa el típico (12.5 %) solo para calcular IBU",
+       "form": "pellet",
+       "amountG": 20,
+       "use": "hervor",
+       "time": 30
+      },
+      {
+       "uid": "hist-h-6",
+       "ingredientId": "el-dorado",
+       "name": "El Dorado",
+       "alpha": 15,
+       "source": "referencia",
+       "sourceNote": "Cantidad y momento registrados. % AA no registrado: se usa el típico (15 %) solo para calcular IBU",
+       "form": "pellet",
+       "amountG": 25,
+       "use": "hervor",
+       "time": 10
+      },
+      {
+       "uid": "hist-h-7",
+       "ingredientId": "mosaic",
+       "name": "Mosaic",
+       "alpha": 12,
+       "source": "referencia",
+       "sourceNote": "Cantidad y momento registrados. % AA no registrado: se usa el típico (12 %) solo para calcular IBU. Hopstand a 71 °C; tiempo de contacto no registrado (no se calcula su IBU)",
+       "form": "pellet",
+       "amountG": 50,
+       "use": "whirlpool",
+       "time": 0,
+       "tempC": 71
+      },
+      {
+       "uid": "hist-h-8",
+       "ingredientId": "el-dorado",
+       "name": "El Dorado",
+       "alpha": 15,
+       "source": "estimacion",
+       "sourceNote": "Rango registrado 40–48 g; el punto medio solo se usa para calcular. % AA no registrado: se usa el típico (15 %) solo para calcular IBU. Hopstand a 71 °C; tiempo no registrado",
+       "form": "pellet",
+       "amountG": 44,
+       "use": "whirlpool",
+       "time": 0,
+       "tempC": 71
+      },
+      {
+       "uid": "hist-h-9",
+       "ingredientId": "citra",
+       "name": "Citra",
+       "alpha": 12.5,
+       "source": "referencia",
+       "sourceNote": "Cantidad y momento registrados. % AA no registrado: se usa el típico (12.5 %) solo para calcular IBU. Hopstand a 71 °C; tiempo no registrado",
+       "form": "pellet",
+       "amountG": 20,
+       "use": "whirlpool",
+       "time": 0,
+       "tempC": 71
+      },
+      {
+       "uid": "hist-h-a",
+       "ingredientId": "mosaic",
+       "name": "Mosaic",
+       "alpha": 12,
+       "source": "registro",
+       "sourceNote": "Cantidad PLANIFICADA (~150 g de Mosaic). La cantidad final ejecutada no se recuperó; días de contacto no registrados.",
+       "form": "pellet",
+       "amountG": 150,
+       "use": "dry-hop",
+       "time": 0
+      }
+     ],
+     "yeasts": [],
+     "miscs": [
+      {
+       "uid": "hist-m-b",
+       "name": "Servomyces",
+       "use": "hervor",
+       "amount": 3,
+       "unit": "g",
+       "notes": "Registrado en una versión de la receta"
+      }
+     ],
+     "mashSteps": [
+      {
+       "uid": "hist-s-4",
+       "name": "Sacarificación",
+       "tempC": 67,
+       "timeMin": 60
+      }
+     ],
+     "fermentation": [
+      {
+       "uid": "hist-t-c",
+       "name": "Primaria",
+       "tempC": 18,
+       "days": 7
+      },
+      {
+       "uid": "hist-t-d",
+       "name": "Final de fermentación",
+       "tempC": 20,
+       "days": 3
+      }
+     ],
+     "water": {
+      "sourceProfileId": "custom-hist-armenia",
+      "dilution": 0,
+      "mashSalts": {
+       "cloruroCalcio": 14,
+       "epsom": 3.5,
+       "yeso": 3.2
+      },
+      "spargeSalts": {},
+      "lacticMl": 0,
+      "phosphoricMl": 0,
+      "lacticPct": 88,
+      "phosphoricPct": 10,
+      "targetProfileId": "custom-hist-hazy-oro"
+     },
+     "carbonation": {
+      "volumes": 2.4,
+      "method": "priming",
+      "primingSugar": "sacarosa"
+     },
+     "versionCount": 1,
+     "origin": {
+      "kind": "importacion",
+      "detail": "Historial inicial de La H"
+     },
+     "createdAt": 1792767600000,
+     "updatedAt": 1792767600000,
+     "styleId": "hazy-ipa",
+     "author": "La H Cerveza Artesanal",
+     "intent": {
+      "mode": "moderna",
+      "text": "Hazy IPA aromática, tropical, jugosa, de cuerpo suave, amargor moderado y alta tomabilidad.",
+      "target": {}
+     },
+     "notes": "Una de las recetas históricas exitosas de La H (Oro, Copa Raíces). Debe poder evolucionar: no es una receta \"perfecta\" congelada.",
+     "historical": {
+      "status": "elaborada",
+      "origin": "Historial inicial de La H Cerveza Artesanal (importado el 23 de octubre de 2026)",
+      "importedAt": 1792767600000,
+      "values": [
+       {
+        "label": "OG objetivo",
+        "value": "1.064",
+        "kind": "planificado"
+       },
+       {
+        "label": "FG objetivo",
+        "value": "1.013",
+        "kind": "planificado"
+       },
+       {
+        "label": "ABV objetivo",
+        "value": "≈ 6,7 %",
+        "kind": "planificado"
+       },
+       {
+        "label": "IBU",
+        "value": "≈ 32",
+        "kind": "planificado"
+       },
+       {
+        "label": "Color",
+        "value": "≈ 5,5 SRM",
+        "kind": "estimacion"
+       },
+       {
+        "label": "Carbonatación",
+        "value": "2,4 vol",
+        "kind": "planificado"
+       },
+       {
+        "label": "Grano total",
+        "value": "≈ 9,2 kg (Pale Ale 65,2 % · trigo 21,7 % · avena 13,0 %)",
+        "kind": "ejecucion"
+       },
+       {
+        "label": "Hopstand",
+        "value": "71 °C: Mosaic 50 g, El Dorado ~40–48 g, Citra 20 g",
+        "kind": "ejecucion",
+        "note": "Tiempo de contacto no registrado"
+       },
+       {
+        "label": "Dry hop",
+        "value": "~150 g de Mosaic planificados; también Citra, El Dorado y/o Galaxy según la versión",
+        "kind": "planificado",
+        "note": "Cantidad final exacta pendiente del registro original"
+       },
+       {
+        "label": "Perfil de agua",
+        "value": "Ca 127 · Mg 9 · Na ~0 · Cl 172–178 · SO₄ 90–92 ppm",
+        "kind": "ejecucion"
+       },
+       {
+        "label": "Sales",
+        "value": "CaCl₂ 14 g · MgSO₄ 3,5 g · CaSO₄ 3,2 g",
+        "kind": "ejecucion",
+        "note": "Reparto entre macerado y lavado no registrado"
+       },
+       {
+        "label": "Levadura",
+        "value": "London ESB y/o US-05; otro registro indica 2 sobres de US-05",
+        "kind": "ejecucion",
+        "note": "PENDIENTE DE RECONCILIAR con la ficha definitiva del lote ganador"
+       },
+       {
+        "label": "Eficiencia de sala",
+        "value": "68,1 %",
+        "kind": "calculo",
+        "note": "Calculada para reproducir la OG objetivo (1.064) con el grano registrado. No fue medida."
+       }
+      ],
+      "missing": [
+       "Levadura definitiva del lote ganador",
+       "Cantidad final de dry hop y variedades",
+       "Tiempo de hopstand",
+       "Días de dry hop",
+       "Agua de origen",
+       "% AA real de cada lúpulo"
+      ],
+      "warnings": [
+       "La levadura no se carga en la receta hasta reconciliar London ESB / US-05.",
+       "Agua de origen no registrada en la ficha: para calcular se usa el perfil histórico de Armenia de La H."
+      ],
+      "notes": [
+       "RECETA_PREMIADA = TRUE · PREMIO = ORO · COMPETENCIA = COPA RAÍCES"
+      ]
+     }
+    },
+    "createdAt": 1792767600000
+   },
+   {
+    "id": "hist-barleywine-mosaic-kveik-v1",
+    "recipeId": "hist-barleywine-mosaic-kveik",
+    "number": 1,
+    "label": "Histórico",
+    "reason": "importacion",
+    "snapshot": {
+     "id": "hist-barleywine-mosaic-kveik",
+     "name": "American Barleywine — Mosaic + Voss Kveik",
+     "equipment": {
+      "batchSizeL": 30,
+      "boilTimeMin": 60,
+      "kettleVolumeL": 40,
+      "boilOffLph": 3.5,
+      "kettleLossL": 2,
+      "fermenterLossL": 1,
+      "mashTunDeadspaceL": 0,
+      "grainAbsorptionLpkg": 0.6,
+      "hopAbsorptionLp100g": 0.7,
+      "coolingShrinkPct": 4,
+      "efficiencyPct": 70,
+      "mashRatioLpkg": 3,
+      "spargeL": 0,
+      "id": "eq-biab",
+      "name": "BIAB 40 L",
+      "type": "biab"
+     },
+     "equipmentId": "eq-biab",
+     "batchSizeL": 30,
+     "boilTimeMin": 60,
+     "efficiencyPct": 55.6,
+     "fermentables": [
+      {
+       "uid": "hist-f-g",
+       "ingredientId": "maris-otter",
+       "name": "Maris Otter",
+       "type": "base",
+       "colorEBC": 6,
+       "ppg": 38,
+       "amountKg": 13,
+       "use": "macerado",
+       "source": "referencia",
+       "sourceNote": "Cantidad registrada; marca no registrada. Color y rendimiento: Valor típico de la ficha técnica de Crisp / Simpsons; cada lote varía."
+      },
+      {
+       "uid": "hist-f-h",
+       "ingredientId": "munich-1-wey",
+       "name": "Munich Tipo I",
+       "type": "base",
+       "colorEBC": 15,
+       "ppg": 37,
+       "amountKg": 1.73,
+       "use": "macerado",
+       "source": "referencia",
+       "sourceNote": "Cantidad registrada; Munich I: marca no registrada. Color y rendimiento: Valor típico de la ficha técnica de Weyermann; cada lote varía."
+      },
+      {
+       "uid": "hist-f-i",
+       "ingredientId": "munich-2-wey",
+       "name": "Munich Tipo II",
+       "type": "base",
+       "colorEBC": 22,
+       "ppg": 37,
+       "amountKg": 0.34,
+       "use": "macerado",
+       "source": "referencia",
+       "sourceNote": "Cantidad registrada; Munich II: marca no registrada. Color y rendimiento: Valor típico de la ficha técnica de Weyermann; cada lote varía."
+      },
+      {
+       "uid": "hist-f-f",
+       "name": "Amber Malt",
+       "type": "especial",
+       "colorEBC": 60,
+       "ppg": 32,
+       "amountKg": 0.26,
+       "use": "macerado",
+       "source": "referencia",
+       "sourceNote": "Cantidad registrada. Amber Malt no está en el catálogo: color (~60 EBC) y rendimiento típicos solo para calcular."
+      },
+      {
+       "uid": "hist-f-j",
+       "ingredientId": "dextrose",
+       "name": "Dextrosa",
+       "type": "azucar",
+       "colorEBC": 0,
+       "ppg": 42,
+       "amountKg": 0.9,
+       "use": "fermentador",
+       "source": "referencia",
+       "sourceNote": "Cantidad registrada; glucosa/dextrosa añadida de forma DIFERIDA, después de iniciada la fermentación. Color y rendimiento: Valor típico de literatura."
+      }
+     ],
+     "hops": [
+      {
+       "uid": "hist-h-k",
+       "ingredientId": "mosaic",
+       "name": "Mosaic",
+       "alpha": 13.6,
+       "source": "registro",
+       "sourceNote": "Cantidad y momento registrados. % AA registrado (13.6 %)",
+       "form": "pellet",
+       "amountG": 55,
+       "use": "hervor",
+       "time": 60
+      },
+      {
+       "uid": "hist-h-l",
+       "ingredientId": "mosaic",
+       "name": "Mosaic",
+       "alpha": 13.6,
+       "source": "registro",
+       "sourceNote": "Cantidad y momento registrados. % AA registrado (13.6 %)",
+       "form": "pellet",
+       "amountG": 20,
+       "use": "hervor",
+       "time": 10
+      },
+      {
+       "uid": "hist-h-m",
+       "ingredientId": "mosaic",
+       "name": "Mosaic",
+       "alpha": 13.6,
+       "source": "registro",
+       "sourceNote": "Cantidad y momento registrados. % AA registrado (13.6 %)",
+       "form": "pellet",
+       "amountG": 50,
+       "use": "whirlpool",
+       "time": 20,
+       "tempC": 80
+      },
+      {
+       "uid": "hist-h-n",
+       "ingredientId": "mosaic",
+       "name": "Mosaic",
+       "alpha": 13.6,
+       "source": "registro",
+       "sourceNote": "Cantidad y momento registrados. % AA registrado (13.6 %). Contacto aproximado 48 horas",
+       "form": "pellet",
+       "amountG": 85,
+       "use": "dry-hop",
+       "time": 2
+      }
+     ],
+     "yeasts": [
+      {
+       "uid": "hist-y-o",
+       "ingredientId": "voss",
+       "name": "LalBrew Voss Kveik",
+       "lab": "Lallemand",
+       "code": "Voss",
+       "type": "kveik",
+       "form": "seca",
+       "attenuation": 79,
+       "tempRange": [
+        25,
+        40
+       ],
+       "family": "kveik",
+       "amount": 2,
+       "source": "registro",
+       "sourceNote": "Levadura y cantidad registradas"
+      }
+     ],
+     "miscs": [],
+     "mashSteps": [],
+     "fermentation": [
+      {
+       "uid": "hist-t-p",
+       "name": "Inicio",
+       "tempC": 35,
+       "days": 0
+      },
+      {
+       "uid": "hist-t-q",
+       "name": "Continuación",
+       "tempC": 32,
+       "days": 0
+      },
+      {
+       "uid": "hist-t-r",
+       "name": "Cold crash",
+       "tempC": 2,
+       "days": 0
+      }
+     ],
+     "water": {
+      "sourceProfileId": "custom-hist-armenia",
+      "dilution": 0,
+      "mashSalts": {},
+      "spargeSalts": {},
+      "lacticMl": 0,
+      "phosphoricMl": 0,
+      "lacticPct": 88,
+      "phosphoricPct": 10
+     },
+     "carbonation": {
+      "volumes": 2.2,
+      "method": "priming",
+      "primingSugar": "sacarosa"
+     },
+     "versionCount": 1,
+     "origin": {
+      "kind": "importacion",
+      "detail": "Historial inicial de La H"
+     },
+     "createdAt": 1792767600000,
+     "updatedAt": 1792767600000,
+     "styleId": "american-barleywine",
+     "author": "La H Cerveza Artesanal",
+     "intent": {
+      "mode": "moderna",
+      "text": "American Barleywine moderno: muy maltoso, alcohol alto, complejo y lupulado; Mosaic como único lúpulo; alcohol perceptible pero no áspero; buena integración; bebible para su graduación.",
+      "target": {}
+     },
+     "historical": {
+      "status": "elaborada",
+      "origin": "Historial inicial de La H Cerveza Artesanal (importado el 23 de octubre de 2026)",
+      "importedAt": 1792767600000,
+      "values": [
+       {
+        "label": "OG del mosto",
+        "value": "≈ 1.100",
+        "kind": "medicion",
+        "note": "Antes de considerar la glucosa diferida"
+       },
+       {
+        "label": "OG equivalente total",
+        "value": "≈ 1.107–1.108",
+        "kind": "estimacion",
+        "note": "Incluyendo la glucosa diferida"
+       },
+       {
+        "label": "ABV",
+        "value": "≈ 10,8 %",
+        "kind": "estimacion",
+        "note": "Posible 11,0–11,2 % si la densidad siguió bajando"
+       },
+       {
+        "label": "Carbonatación objetivo",
+        "value": "2,1–2,3 vol",
+        "kind": "planificado"
+       },
+       {
+        "label": "Maduración",
+        "value": "Mejora de integración esperada a las 4–12 semanas",
+        "kind": "planificado"
+       },
+       {
+        "label": "Eficiencia de sala",
+        "value": "55,6 %",
+        "kind": "calculo",
+        "note": "Calculada para reproducir la OG del mosto registrada (≈ 1.100, sin la glucosa diferida, que se calcula aparte) con el grano registrado. No fue medida."
+       }
+      ],
+      "missing": [
+       "Temperatura y tiempo de macerado",
+       "Tiempo de hervor",
+       "Duración de cada etapa de fermentación",
+       "Agua y sales",
+       "Eficiencia medida"
+      ],
+      "warnings": [
+       "No registrar como ganador mientras no exista resultado de competencia confirmado.",
+       "Agua de origen no registrada en la ficha: para calcular se usa el perfil histórico de Armenia de La H."
+      ],
+      "notes": [
+       "Parte de las botellas se destinó a experimentación con Brettanomyces bruxellensis: no mezclar esas botellas con el perfil de la cerveza base."
+      ]
+     }
+    },
+    "createdAt": 1792767600000
+   },
+   {
+    "id": "hist-vienna-lager-cafe-v1",
+    "recipeId": "hist-vienna-lager-cafe",
+    "number": 1,
+    "label": "Histórico",
+    "reason": "importacion",
+    "snapshot": {
+     "id": "hist-vienna-lager-cafe",
+     "name": "Vienna Lager con café",
+     "equipment": {
+      "batchSizeL": 40,
+      "boilTimeMin": 60,
+      "kettleVolumeL": 40,
+      "boilOffLph": 3.5,
+      "kettleLossL": 2,
+      "fermenterLossL": 1,
+      "mashTunDeadspaceL": 0,
+      "grainAbsorptionLpkg": 0.6,
+      "hopAbsorptionLp100g": 0.7,
+      "coolingShrinkPct": 4,
+      "efficiencyPct": 70,
+      "mashRatioLpkg": 3,
+      "spargeL": 0,
+      "id": "eq-biab",
+      "name": "BIAB 40 L",
+      "type": "biab"
+     },
+     "equipmentId": "eq-biab",
+     "batchSizeL": 40,
+     "boilTimeMin": 60,
+     "efficiencyPct": 68.1,
+     "fermentables": [
+      {
+       "uid": "hist-f-z",
+       "ingredientId": "vienna-wey",
+       "name": "Vienna",
+       "type": "base",
+       "colorEBC": 8,
+       "ppg": 37,
+       "amountKg": 7.9,
+       "use": "macerado",
+       "source": "referencia",
+       "sourceNote": "Cantidad registrada; marca no registrada. Color y rendimiento: Valor típico de la ficha técnica de Weyermann; cada lote varía."
+      },
+      {
+       "uid": "hist-f-10",
+       "ingredientId": "munich-1-wey",
+       "name": "Munich Tipo I",
+       "type": "base",
+       "colorEBC": 15,
+       "ppg": 37,
+       "amountKg": 1,
+       "use": "macerado",
+       "source": "referencia",
+       "sourceNote": "Cantidad registrada. Color y rendimiento: Valor típico de la ficha técnica de Weyermann; cada lote varía."
+      },
+      {
+       "uid": "hist-f-11",
+       "ingredientId": "pilsner-wey",
+       "name": "Pilsner",
+       "type": "base",
+       "colorEBC": 3.5,
+       "ppg": 37,
+       "amountKg": 0.9,
+       "use": "macerado",
+       "source": "referencia",
+       "sourceNote": "Cantidad registrada; marca no registrada. Color y rendimiento: Valor típico de la ficha técnica de Weyermann; cada lote varía."
+      },
+      {
+       "uid": "hist-f-12",
+       "ingredientId": "caramunich-2",
+       "name": "Caramunich Tipo II",
+       "type": "caramelo",
+       "colorEBC": 120,
+       "ppg": 34,
+       "amountKg": 0.1,
+       "use": "macerado",
+       "source": "referencia",
+       "sourceNote": "Cantidad registrada. Color y rendimiento: Valor típico de la ficha técnica de Weyermann; cada lote varía."
+      }
+     ],
+     "hops": [
+      {
+       "uid": "hist-h-13",
+       "ingredientId": "magnum",
+       "name": "Hallertau Magnum",
+       "alpha": 13,
+       "source": "referencia",
+       "sourceNote": "Cantidad y momento registrados. % AA no registrado: se usa el típico (13 %) solo para calcular IBU",
+       "form": "pellet",
+       "amountG": 38,
+       "use": "hervor",
+       "time": 60
+      },
+      {
+       "uid": "hist-h-14",
+       "ingredientId": "hallertau-mittelfruh",
+       "name": "Hallertau (variedad no especificada)",
+       "alpha": 4,
+       "source": "referencia",
+       "sourceNote": "Cantidad y momento registrados. Variedad exacta de Hallertau no registrada; % AA típico solo para calcular.",
+       "form": "pellet",
+       "amountG": 35,
+       "use": "hervor",
+       "time": 15
+      }
+     ],
+     "yeasts": [
+      {
+       "uid": "hist-y-15",
+       "ingredientId": "w-34-70",
+       "name": "SafLager W-34/70",
+       "lab": "Fermentis",
+       "code": "W-34/70",
+       "type": "lager",
+       "form": "seca",
+       "attenuation": 82,
+       "tempRange": [
+        10,
+        15
+       ],
+       "family": "lager-alemana",
+       "amount": 3,
+       "source": "registro",
+       "sourceNote": "Levadura y cantidad registradas"
+      }
+     ],
+     "miscs": [
+      {
+       "uid": "hist-m-17",
+       "name": "Café especial Sidra Natural (grano entero)",
+       "use": "fermentador",
+       "amount": 200,
+       "unit": "g",
+       "notes": "Solo en la porción de ≈ 18 L, directo en barril Cornelius. Planeado 16–18 h; límite considerado 24 h."
+      },
+      {
+       "uid": "hist-m-18",
+       "name": "Cloruro de calcio (porción con café)",
+       "use": "fermentador",
+       "amount": 0.8,
+       "unit": "g",
+       "notes": "Ajuste mineral solo para ≈ 18 L con café"
+      },
+      {
+       "uid": "hist-m-19",
+       "name": "Sal (NaCl) (porción con café)",
+       "use": "fermentador",
+       "amount": 0.4,
+       "unit": "g",
+       "notes": "Ajuste mineral solo para ≈ 18 L con café; sin sulfato ni bicarbonato adicional"
+      }
+     ],
+     "mashSteps": [],
+     "fermentation": [
+      {
+       "uid": "hist-t-16",
+       "name": "Primaria presurizada",
+       "tempC": 15.5,
+       "days": 0
+      }
+     ],
+     "water": {
+      "sourceProfileId": "custom-hist-armenia",
+      "dilution": 0,
+      "mashSalts": {},
+      "spargeSalts": {},
+      "lacticMl": 0,
+      "phosphoricMl": 0,
+      "lacticPct": 88,
+      "phosphoricPct": 10
+     },
+     "carbonation": {
+      "volumes": 2.4,
+      "method": "priming",
+      "primingSugar": "sacarosa"
+     },
+     "versionCount": 1,
+     "origin": {
+      "kind": "importacion",
+      "detail": "Historial inicial de La H"
+     },
+     "createdAt": 1792767600000,
+     "updatedAt": 1792767600000,
+     "styleId": "vienna-lager",
+     "author": "La H Cerveza Artesanal",
+     "historical": {
+      "status": "elaborada",
+      "origin": "Historial inicial de La H Cerveza Artesanal (importado el 23 de octubre de 2026)",
+      "importedAt": 1792767600000,
+      "values": [
+       {
+        "label": "OG objetivo",
+        "value": "1.052",
+        "kind": "planificado"
+       },
+       {
+        "label": "FG objetivo",
+        "value": "1.011–1.012",
+        "kind": "planificado"
+       },
+       {
+        "label": "ABV",
+        "value": "≈ 5,3 %",
+        "kind": "estimacion"
+       },
+       {
+        "label": "Grano total",
+        "value": "≈ 9,9 kg",
+        "kind": "ejecucion"
+       },
+       {
+        "label": "Fermentación",
+        "value": "≈ 15,5 °C, presurizada",
+        "kind": "ejecucion"
+       },
+       {
+        "label": "Eficiencia de sala",
+        "value": "68,1 %",
+        "kind": "calculo",
+        "note": "Calculada para reproducir la OG objetivo (1.052) con el grano registrado. No fue medida."
+       }
+      ],
+      "missing": [
+       "Macerado",
+       "Tiempo de hervor",
+       "Duración de la fermentación",
+       "Agua y sales de la base",
+       "Carbonatación"
+      ],
+      "warnings": [
+       "Agua de origen no registrada en la ficha: para calcular se usa el perfil histórico de Armenia de La H."
+      ],
+      "notes": [
+       "Decisión histórica: se evaluó que para competencia podía ser más defendible declarar una base tipo Märzen que Vienna Lager por la percepción final. No se cambia retrospectivamente el estilo original del lote."
+      ]
+     }
+    },
+    "createdAt": 1792767600000
+   },
+   {
+    "id": "hist-scottish-cafe-v1",
+    "recipeId": "hist-scottish-cafe",
+    "number": 1,
+    "label": "Histórico · Bronce",
+    "note": "Receta incompleta: solo se conocen algunas maltas y datos de proceso.",
+    "reason": "importacion",
+    "snapshot": {
+     "id": "hist-scottish-cafe",
+     "name": "Scottish con café",
+     "equipment": {
+      "batchSizeL": 20,
+      "boilTimeMin": 60,
+      "kettleVolumeL": 40,
+      "boilOffLph": 3.5,
+      "kettleLossL": 2,
+      "fermenterLossL": 1,
+      "mashTunDeadspaceL": 0,
+      "grainAbsorptionLpkg": 0.6,
+      "hopAbsorptionLp100g": 0.7,
+      "coolingShrinkPct": 4,
+      "efficiencyPct": 70,
+      "mashRatioLpkg": 3,
+      "spargeL": 0,
+      "id": "eq-biab",
+      "name": "BIAB 40 L",
+      "type": "biab"
+     },
+     "equipmentId": "eq-biab",
+     "batchSizeL": 20,
+     "boilTimeMin": 60,
+     "efficiencyPct": 70,
+     "fermentables": [],
+     "hops": [],
+     "yeasts": [],
+     "miscs": [
+      {
+       "uid": "hist-m-1d",
+       "name": "Café especial Wush Wush Natural",
+       "use": "fermentador",
+       "amount": 0,
+       "unit": "g",
+       "notes": "Cantidad, método y tiempo: dato_no_recuperado"
+      }
+     ],
+     "mashSteps": [],
+     "fermentation": [],
+     "water": {
+      "sourceProfileId": "custom-hist-armenia",
+      "dilution": 0,
+      "mashSalts": {},
+      "spargeSalts": {},
+      "lacticMl": 0,
+      "phosphoricMl": 0,
+      "lacticPct": 88,
+      "phosphoricPct": 10
+     },
+     "carbonation": {
+      "volumes": 2.15,
+      "method": "priming",
+      "primingSugar": "sacarosa"
+     },
+     "versionCount": 1,
+     "origin": {
+      "kind": "importacion",
+      "detail": "Historial inicial de La H"
+     },
+     "createdAt": 1792767600000,
+     "updatedAt": 1792767600000,
+     "styleId": "scottish-export",
+     "author": "La H Cerveza Artesanal",
+     "historical": {
+      "status": "elaborada",
+      "origin": "Historial inicial de La H Cerveza Artesanal (importado el 23 de octubre de 2026)",
+      "importedAt": 1792767600000,
+      "values": [
+       {
+        "label": "Estilo",
+        "value": "Scottish; manejada después como Scottish Export / Scottish con café",
+        "kind": "ejecucion"
+       },
+       {
+        "label": "Maltas conocidas",
+        "value": "BestMalz Pilsen, Munich y Caramunich II, entre otras",
+        "kind": "ejecucion",
+        "note": "Cantidades exactas: dato_no_recuperado"
+       },
+       {
+        "label": "Macerado",
+        "value": "≈ 72 °C → 68 °C",
+        "kind": "medicion"
+       },
+       {
+        "label": "pH de macerado",
+        "value": "≈ 5,3",
+        "kind": "medicion"
+       },
+       {
+        "label": "FG",
+        "value": "≈ 1.018",
+        "kind": "medicion"
+       },
+       {
+        "label": "Carbonatación objetivo",
+        "value": "2,1–2,2 vol",
+        "kind": "planificado"
+       },
+       {
+        "label": "Carbonatación en barril",
+        "value": "0,95 bar a 4 °C",
+        "kind": "ejecucion"
+       },
+       {
+        "label": "Café",
+        "value": "Wush Wush Natural, elegido buscando integración (evitar cafés quemados)",
+        "kind": "ejecucion"
+       }
+      ],
+      "missing": [
+       "OG",
+       "ABV",
+       "Cantidades de malta",
+       "Lúpulos",
+       "Levadura",
+       "Agua y sales",
+       "Volumen",
+       "Dosis y método del café"
+      ],
+      "warnings": [],
+      "notes": [
+       "RECETA_PREMIADA = TRUE · PREMIO_CONFIRMADO = BRONCE",
+       "Aprendizaje: en café especial, evitar perfiles excesivamente tostados, evitar que el café se perciba separado, priorizar la integración y evaluar variedad, proceso y perfil sensorial del café.",
+       "El café se percibió integrado y no como una adición artificial separada (atributo positivo)."
+      ],
+      "incomplete": true
+     }
+    },
+    "createdAt": 1792767600000
+   },
+   {
+    "id": "hist-imperial-stout-cafe-v1",
+    "recipeId": "hist-imperial-stout-cafe",
+    "number": 1,
+    "label": "Histórica 1 · versión documentada",
+    "note": "RECETA_ASOCIADA_HISTORICA; confirmar si corresponde exactamente al lote ganador",
+    "reason": "importacion",
+    "snapshot": {
+     "id": "hist-imperial-stout-cafe",
+     "name": "Imperial Stout de La H (con café)",
+     "equipment": {
+      "batchSizeL": 30,
+      "boilTimeMin": 60,
+      "kettleVolumeL": 40,
+      "boilOffLph": 3.5,
+      "kettleLossL": 2,
+      "fermenterLossL": 1,
+      "mashTunDeadspaceL": 0,
+      "grainAbsorptionLpkg": 0.6,
+      "hopAbsorptionLp100g": 0.7,
+      "coolingShrinkPct": 4,
+      "efficiencyPct": 70,
+      "mashRatioLpkg": 3,
+      "spargeL": 0,
+      "id": "eq-biab",
+      "name": "BIAB 40 L",
+      "type": "biab"
+     },
+     "equipmentId": "eq-biab",
+     "batchSizeL": 30,
+     "boilTimeMin": 60,
+     "efficiencyPct": 89.4,
+     "fermentables": [
+      {
+       "uid": "hist-f-1g",
+       "ingredientId": "best-pale-ale",
+       "name": "Pale Ale",
+       "type": "base",
+       "colorEBC": 6.5,
+       "ppg": 37,
+       "amountKg": 6,
+       "use": "macerado",
+       "source": "referencia",
+       "sourceNote": "Cantidad registrada; Pale Ale: marca no registrada. Color y rendimiento: EBC típico de la ficha de BestMalz; Distrines no lo publica. Confírmalo en el saco.."
+      },
+      {
+       "uid": "hist-f-1h",
+       "ingredientId": "caramunich-2",
+       "name": "Caramunich Tipo II",
+       "type": "caramelo",
+       "colorEBC": 120,
+       "ppg": 34,
+       "amountKg": 1.2,
+       "use": "macerado",
+       "source": "referencia",
+       "sourceNote": "Cantidad registrada. Color y rendimiento: Valor típico de la ficha técnica de Weyermann; cada lote varía."
+      },
+      {
+       "uid": "hist-f-1i",
+       "ingredientId": "carafoam",
+       "name": "Carafoam / Carapils",
+       "type": "caramelo",
+       "colorEBC": 4,
+       "ppg": 33,
+       "amountKg": 0.5,
+       "use": "macerado",
+       "source": "referencia",
+       "sourceNote": "Cantidad registrada; Carapils. Color y rendimiento: Valor típico de la ficha técnica de Weyermann; cada lote varía."
+      },
+      {
+       "uid": "hist-f-1j",
+       "ingredientId": "black-malt",
+       "name": "Black Patent",
+       "type": "tostada",
+       "colorEBC": 1300,
+       "ppg": 25,
+       "amountKg": 0.8,
+       "use": "macerado",
+       "source": "referencia",
+       "sourceNote": "Cantidad registrada; malta negra: marca no registrada. Color y rendimiento: Valor típico de la ficha técnica de Briess / genérica; cada lote varía."
+      },
+      {
+       "uid": "hist-f-1k",
+       "ingredientId": "chocolate",
+       "name": "Chocolate",
+       "type": "tostada",
+       "colorEBC": 900,
+       "ppg": 28,
+       "amountKg": 0.8,
+       "use": "macerado",
+       "source": "referencia",
+       "sourceNote": "Cantidad registrada; marca no registrada. Color y rendimiento: Valor típico de la ficha técnica de Castle Malting; cada lote varía."
+      }
+     ],
+     "hops": [
+      {
+       "uid": "hist-h-1l",
+       "ingredientId": "ekg",
+       "name": "East Kent Goldings",
+       "alpha": 5.5,
+       "source": "referencia",
+       "sourceNote": "Cantidad y momento registrados. % AA no registrado: se usa el típico (5.5 %) solo para calcular IBU",
+       "form": "pellet",
+       "amountG": 50,
+       "use": "hervor",
+       "time": 60
+      },
+      {
+       "uid": "hist-h-1m",
+       "ingredientId": "ekg",
+       "name": "East Kent Goldings",
+       "alpha": 5.5,
+       "source": "referencia",
+       "sourceNote": "Cantidad y momento registrados. % AA no registrado: se usa el típico (5.5 %) solo para calcular IBU",
+       "form": "pellet",
+       "amountG": 25,
+       "use": "hervor",
+       "time": 15
+      }
+     ],
+     "yeasts": [
+      {
+       "uid": "hist-y-1n",
+       "ingredientId": "us-05",
+       "name": "SafAle US-05",
+       "lab": "Fermentis",
+       "code": "US-05",
+       "type": "ale",
+       "form": "seca",
+       "attenuation": 80,
+       "tempRange": [
+        18,
+        22
+       ],
+       "family": "americana-limpia",
+       "amount": 2,
+       "source": "registro",
+       "sourceNote": "Levadura y cantidad registradas"
+      }
+     ],
+     "miscs": [
+      {
+       "uid": "hist-m-1o",
+       "name": "Café Bourbon Rosado Natural (cold brew)",
+       "use": "fermentador",
+       "amount": 300,
+       "unit": "g",
+       "notes": "Método propuesto: cold brew con ≈ 1,5 L de agua, 12–16 h; adición durante la maduración."
+      }
+     ],
+     "mashSteps": [],
+     "fermentation": [],
+     "water": {
+      "sourceProfileId": "custom-hist-armenia",
+      "dilution": 0,
+      "mashSalts": {},
+      "spargeSalts": {},
+      "lacticMl": 0,
+      "phosphoricMl": 0,
+      "lacticPct": 88,
+      "phosphoricPct": 10
+     },
+     "carbonation": {
+      "volumes": 2.4,
+      "method": "priming",
+      "primingSugar": "sacarosa"
+     },
+     "versionCount": 1,
+     "origin": {
+      "kind": "importacion",
+      "detail": "Historial inicial de La H"
+     },
+     "createdAt": 1792767600000,
+     "updatedAt": 1792767600000,
+     "styleId": "imperial-stout",
+     "author": "La H Cerveza Artesanal",
+     "historical": {
+      "status": "asociada",
+      "origin": "Historial inicial de La H Cerveza Artesanal (importado el 23 de octubre de 2026)",
+      "importedAt": 1792767600000,
+      "values": [
+       {
+        "label": "OG",
+        "value": "≈ 1.080",
+        "kind": "estimacion"
+       },
+       {
+        "label": "FG",
+        "value": "≈ 1.020",
+        "kind": "estimacion"
+       },
+       {
+        "label": "ABV",
+        "value": "≈ 7,5–8,0 %",
+        "kind": "estimacion"
+       },
+       {
+        "label": "Volumen",
+        "value": "≈ 30 L",
+        "kind": "planificado"
+       },
+       {
+        "label": "Eficiencia de sala",
+        "value": "89,4 %",
+        "kind": "calculo",
+        "note": "Calculada para reproducir la OG estimada de la primera versión (≈ 1.080) con el grano registrado. No fue medida."
+       }
+      ],
+      "missing": [
+       "Macerado",
+       "Fermentación",
+       "Agua y sales"
+      ],
+      "warnings": [
+       "RECETA_ASOCIADA_HISTORICA; confirmar si corresponde exactamente al lote ganador",
+       "Agua de origen no registrada en la ficha: para calcular se usa el perfil histórico de Armenia de La H."
+      ],
+      "notes": [
+       "Primera versión documentada (Imperial Sweet/Oatmeal Stout).",
+       "RECETA_PREMIADA = TRUE · MEDALLAS_PLATA = 2",
+       "La versión premiada original fue la cerveza SIN Brett. En algunas botellas o versiones posteriores se experimentó con Brettanomyces bruxellensis: no es parte de la base premiada.",
+       "En otra competencia se inscribió como Tropical Stout porque sensorialmente se percibía más ligera que una Imperial Stout tradicional."
+      ]
+     }
+    },
+    "createdAt": 1792767600000
+   },
+   {
+    "id": "hist-imperial-stout-cafe-v2",
+    "recipeId": "hist-imperial-stout-cafe",
+    "number": 2,
+    "label": "Histórica 2 · versión posterior",
+    "note": "RECETA_ASOCIADA_HISTORICA; confirmar si corresponde exactamente al lote ganador",
+    "reason": "importacion",
+    "snapshot": {
+     "id": "hist-imperial-stout-cafe",
+     "name": "Imperial Stout de La H (con café)",
+     "equipment": {
+      "batchSizeL": 30,
+      "boilTimeMin": 60,
+      "kettleVolumeL": 40,
+      "boilOffLph": 3.5,
+      "kettleLossL": 2,
+      "fermenterLossL": 1,
+      "mashTunDeadspaceL": 0,
+      "grainAbsorptionLpkg": 0.6,
+      "hopAbsorptionLp100g": 0.7,
+      "coolingShrinkPct": 4,
+      "efficiencyPct": 70,
+      "mashRatioLpkg": 3,
+      "spargeL": 0,
+      "id": "eq-biab",
+      "name": "BIAB 40 L",
+      "type": "biab"
+     },
+     "equipmentId": "eq-biab",
+     "batchSizeL": 30,
+     "boilTimeMin": 60,
+     "efficiencyPct": 83.2,
+     "fermentables": [
+      {
+       "uid": "hist-f-1p",
+       "ingredientId": "best-pale-ale",
+       "name": "Pale Ale",
+       "type": "base",
+       "colorEBC": 6.5,
+       "ppg": 37,
+       "amountKg": 7,
+       "use": "macerado",
+       "source": "referencia",
+       "sourceNote": "Cantidad registrada; Pale Ale: marca no registrada. Color y rendimiento: EBC típico de la ficha de BestMalz; Distrines no lo publica. Confírmalo en el saco.."
+      },
+      {
+       "uid": "hist-f-1q",
+       "ingredientId": "carafoam",
+       "name": "Carafoam / Carapils",
+       "type": "caramelo",
+       "colorEBC": 4,
+       "ppg": 33,
+       "amountKg": 0.5,
+       "use": "macerado",
+       "source": "referencia",
+       "sourceNote": "Cantidad registrada; Carapils. Color y rendimiento: Valor típico de la ficha técnica de Weyermann; cada lote varía."
+      },
+      {
+       "uid": "hist-f-1r",
+       "ingredientId": "caramunich-2",
+       "name": "Caramunich Tipo II",
+       "type": "caramelo",
+       "colorEBC": 120,
+       "ppg": 34,
+       "amountKg": 0.6,
+       "use": "macerado",
+       "source": "referencia",
+       "sourceNote": "Cantidad registrada. Color y rendimiento: Valor típico de la ficha técnica de Weyermann; cada lote varía."
+      },
+      {
+       "uid": "hist-f-1s",
+       "ingredientId": "oats-flaked",
+       "name": "Avena en hojuelas",
+       "type": "adjunto",
+       "colorEBC": 2,
+       "ppg": 33,
+       "amountKg": 1,
+       "use": "macerado",
+       "source": "referencia",
+       "sourceNote": "Cantidad registrada; avena: tipo no registrado. Color y rendimiento: Valor típico de literatura."
+      },
+      {
+       "uid": "hist-f-1t",
+       "ingredientId": "lactose",
+       "name": "Lactosa",
+       "type": "no-fermentable",
+       "colorEBC": 0,
+       "ppg": 43,
+       "amountKg": 0.75,
+       "use": "hervor",
+       "source": "referencia",
+       "sourceNote": "Cantidad registrada. Color y rendimiento: Valor típico de literatura."
+      },
+      {
+       "uid": "hist-f-1u",
+       "ingredientId": "chocolate",
+       "name": "Chocolate",
+       "type": "tostada",
+       "colorEBC": 900,
+       "ppg": 28,
+       "amountKg": 0.6,
+       "use": "macerado",
+       "source": "referencia",
+       "sourceNote": "Cantidad registrada; marca no registrada. Color y rendimiento: Valor típico de la ficha técnica de Castle Malting; cada lote varía."
+      },
+      {
+       "uid": "hist-f-1v",
+       "ingredientId": "black-malt",
+       "name": "Black Patent",
+       "type": "tostada",
+       "colorEBC": 1300,
+       "ppg": 25,
+       "amountKg": 0.3,
+       "use": "macerado",
+       "source": "referencia",
+       "sourceNote": "Cantidad registrada; malta negra: marca no registrada. Color y rendimiento: Valor típico de la ficha técnica de Briess / genérica; cada lote varía."
+      }
+     ],
+     "hops": [
+      {
+       "uid": "hist-h-1w",
+       "ingredientId": "ekg",
+       "name": "East Kent Goldings",
+       "alpha": 5.5,
+       "source": "referencia",
+       "sourceNote": "Cantidad y momento registrados. % AA no registrado: se usa el típico (5.5 %) solo para calcular IBU",
+       "form": "pellet",
+       "amountG": 40,
+       "use": "hervor",
+       "time": 60
+      },
+      {
+       "uid": "hist-h-1x",
+       "ingredientId": "ekg",
+       "name": "East Kent Goldings",
+       "alpha": 5.5,
+       "source": "referencia",
+       "sourceNote": "Cantidad y momento registrados. % AA no registrado: se usa el típico (5.5 %) solo para calcular IBU",
+       "form": "pellet",
+       "amountG": 20,
+       "use": "hervor",
+       "time": 15
+      }
+     ],
+     "yeasts": [
+      {
+       "uid": "hist-y-1y",
+       "ingredientId": "us-05",
+       "name": "SafAle US-05",
+       "lab": "Fermentis",
+       "code": "US-05",
+       "type": "ale",
+       "form": "seca",
+       "attenuation": 80,
+       "tempRange": [
+        18,
+        22
+       ],
+       "family": "americana-limpia",
+       "amount": 1,
+       "source": "registro",
+       "sourceNote": "Levadura y cantidad registradas; cantidad de sobres de esta versión no registrada; se muestra 1 solo como referencia"
+      }
+     ],
+     "miscs": [
+      {
+       "uid": "hist-m-1z",
+       "name": "Café Bourbon Rosado Natural (molienda gruesa)",
+       "use": "fermentador",
+       "amount": 175,
+       "unit": "g",
+       "notes": "Registrado 150–200 g (punto medio solo para calcular); contacto 12–24 h."
+      }
+     ],
+     "mashSteps": [],
+     "fermentation": [],
+     "water": {
+      "sourceProfileId": "custom-hist-armenia",
+      "dilution": 0,
+      "mashSalts": {
+       "cloruroCalcio": 4,
+       "yeso": 1.5,
+       "bicarbonato": 3,
+       "sal": 1,
+       "epsom": 0.5
+      },
+      "spargeSalts": {},
+      "lacticMl": 0,
+      "phosphoricMl": 0,
+      "lacticPct": 88,
+      "phosphoricPct": 10
+     },
+     "carbonation": {
+      "volumes": 2.4,
+      "method": "priming",
+      "primingSugar": "sacarosa"
+     },
+     "versionCount": 2,
+     "origin": {
+      "kind": "importacion",
+      "detail": "Historial inicial de La H"
+     },
+     "createdAt": 1792767600000,
+     "updatedAt": 1792767600000,
+     "styleId": "imperial-stout",
+     "author": "La H Cerveza Artesanal",
+     "historical": {
+      "status": "asociada",
+      "origin": "Historial inicial de La H Cerveza Artesanal (importado el 23 de octubre de 2026)",
+      "importedAt": 1792767600000,
+      "values": [
+       {
+        "label": "OG",
+        "value": "≈ 1.090",
+        "kind": "estimacion"
+       },
+       {
+        "label": "FG",
+        "value": "≈ 1.030",
+        "kind": "estimacion"
+       },
+       {
+        "label": "ABV",
+        "value": "≈ 8 %",
+        "kind": "estimacion"
+       },
+       {
+        "label": "Sales documentadas",
+        "value": "CaCl₂ 4 g · CaSO₄ 1,5 g · NaHCO₃ 3 g · NaCl 1 g · MgSO₄ 0,5 g",
+        "kind": "planificado"
+       },
+       {
+        "label": "Eficiencia de sala",
+        "value": "83,2 %",
+        "kind": "calculo",
+        "note": "Calculada para reproducir la OG estimada de la segunda versión (≈ 1.090) con el grano registrado. No fue medida."
+       }
+      ],
+      "missing": [
+       "Volumen de esta versión",
+       "Sobres de US-05 en esta versión",
+       "Macerado",
+       "Fermentación"
+      ],
+      "warnings": [
+       "RECETA_ASOCIADA_HISTORICA; confirmar si corresponde exactamente al lote ganador",
+       "Agua de origen no registrada en la ficha: para calcular se usa el perfil histórico de Armenia de La H."
+      ],
+      "notes": [
+       "Segunda formulación histórica (versión posterior). No se fusiona con la primera.",
+       "RECETA_PREMIADA = TRUE · MEDALLAS_PLATA = 2",
+       "La versión premiada original fue la cerveza SIN Brett. En algunas botellas o versiones posteriores se experimentó con Brettanomyces bruxellensis: no es parte de la base premiada.",
+       "En otra competencia se inscribió como Tropical Stout porque sensorialmente se percibía más ligera que una Imperial Stout tradicional."
+      ]
+     }
+    },
+    "createdAt": 1792767600001
+   },
+   {
+    "id": "hist-weizenbock-tres-tristes-tigres-v1",
+    "recipeId": "hist-weizenbock-tres-tristes-tigres",
+    "number": 1,
+    "label": "Histórica asociada · 25 L",
+    "reason": "importacion",
+    "snapshot": {
+     "id": "hist-weizenbock-tres-tristes-tigres",
+     "name": "Tres Tristes Tigres toman Cerveza en un Trigal",
+     "equipment": {
+      "batchSizeL": 25,
+      "boilTimeMin": 60,
+      "kettleVolumeL": 40,
+      "boilOffLph": 3.5,
+      "kettleLossL": 2,
+      "fermenterLossL": 1,
+      "mashTunDeadspaceL": 0,
+      "grainAbsorptionLpkg": 0.6,
+      "hopAbsorptionLp100g": 0.7,
+      "coolingShrinkPct": 4,
+      "efficiencyPct": 70,
+      "mashRatioLpkg": 3,
+      "spargeL": 0,
+      "id": "eq-biab",
+      "name": "BIAB 40 L",
+      "type": "biab"
+     },
+     "equipmentId": "eq-biab",
+     "batchSizeL": 25,
+     "boilTimeMin": 90,
+     "efficiencyPct": 73,
+     "fermentables": [
+      {
+       "uid": "hist-f-20",
+       "ingredientId": "wheat-wey",
+       "name": "Trigo malteado claro",
+       "type": "base",
+       "colorEBC": 4,
+       "ppg": 38,
+       "amountKg": 4.8,
+       "use": "macerado",
+       "source": "referencia",
+       "sourceNote": "Cantidad registrada; malta de trigo: marca no registrada. Color y rendimiento: Valor típico de la ficha técnica de Weyermann; cada lote varía."
+      },
+      {
+       "uid": "hist-f-21",
+       "ingredientId": "munich-1-wey",
+       "name": "Munich Tipo I",
+       "type": "base",
+       "colorEBC": 15,
+       "ppg": 37,
+       "amountKg": 2.2,
+       "use": "macerado",
+       "source": "referencia",
+       "sourceNote": "Cantidad registrada. Color y rendimiento: Valor típico de la ficha técnica de Weyermann; cada lote varía."
+      },
+      {
+       "uid": "hist-f-22",
+       "ingredientId": "vienna-wey",
+       "name": "Vienna",
+       "type": "base",
+       "colorEBC": 8,
+       "ppg": 37,
+       "amountKg": 0.8,
+       "use": "macerado",
+       "source": "referencia",
+       "sourceNote": "Cantidad registrada. Color y rendimiento: Valor típico de la ficha técnica de Weyermann; cada lote varía."
+      },
+      {
+       "uid": "hist-f-23",
+       "ingredientId": "munich-2-wey",
+       "name": "Munich Tipo II",
+       "type": "base",
+       "colorEBC": 22,
+       "ppg": 37,
+       "amountKg": 0.4,
+       "use": "macerado",
+       "source": "referencia",
+       "sourceNote": "Cantidad registrada. Color y rendimiento: Valor típico de la ficha técnica de Weyermann; cada lote varía."
+      },
+      {
+       "uid": "hist-f-24",
+       "ingredientId": "caramunich-2",
+       "name": "Caramunich Tipo II",
+       "type": "caramelo",
+       "colorEBC": 120,
+       "ppg": 34,
+       "amountKg": 0.35,
+       "use": "macerado",
+       "source": "referencia",
+       "sourceNote": "Cantidad registrada. Color y rendimiento: Valor típico de la ficha técnica de Weyermann; cada lote varía."
+      },
+      {
+       "uid": "hist-f-25",
+       "ingredientId": "caraaroma",
+       "name": "Caraaroma",
+       "type": "caramelo",
+       "colorEBC": 400,
+       "ppg": 33,
+       "amountKg": 0.25,
+       "use": "macerado",
+       "source": "referencia",
+       "sourceNote": "Cantidad registrada. Color y rendimiento: Valor típico de la ficha técnica de Weyermann; cada lote varía."
+      }
+     ],
+     "hops": [
+      {
+       "uid": "hist-h-26",
+       "ingredientId": "hallertau-mittelfruh",
+       "name": "Hallertau (variedad no especificada)",
+       "alpha": 4,
+       "source": "referencia",
+       "sourceNote": "Cantidad y momento registrados. Variedad de Hallertau y % AA no registrados; alfa típico solo para calcular.",
+       "form": "pellet",
+       "amountG": 55,
+       "use": "hervor",
+       "time": 60
+      }
+     ],
+     "yeasts": [
+      {
+       "uid": "hist-y-27",
+       "ingredientId": "w-68",
+       "name": "SafAle W-68",
+       "lab": "Fermentis",
+       "code": "W-68",
+       "type": "trigo",
+       "form": "seca",
+       "attenuation": 80,
+       "tempRange": [
+        18,
+        26
+       ],
+       "family": "weizen",
+       "amount": 2,
+       "source": "registro",
+       "sourceNote": "Levadura y cantidad registradas; 2 sobres como mínimo en la formulación documentada"
+      }
+     ],
+     "miscs": [],
+     "mashSteps": [
+      {
+       "uid": "hist-s-28",
+       "name": "Descanso proteico",
+       "tempC": 52,
+       "timeMin": 15
+      },
+      {
+       "uid": "hist-s-29",
+       "name": "Beta-amilasa",
+       "tempC": 63,
+       "timeMin": 25
+      },
+      {
+       "uid": "hist-s-2a",
+       "name": "Decocción (30–35 % espeso): 65 °C 10 min, 72 °C 10 min, hervir 20–25 min; retornar",
+       "tempC": 67.5,
+       "timeMin": 30
+      },
+      {
+       "uid": "hist-s-2b",
+       "name": "Mash out",
+       "tempC": 76,
+       "timeMin": 10
+      }
+     ],
+     "fermentation": [],
+     "water": {
+      "sourceProfileId": "custom-hist-armenia",
+      "dilution": 0,
+      "mashSalts": {},
+      "spargeSalts": {},
+      "lacticMl": 0,
+      "phosphoricMl": 0,
+      "lacticPct": 88,
+      "phosphoricPct": 10
+     },
+     "carbonation": {
+      "volumes": 2.4,
+      "method": "priming",
+      "primingSugar": "sacarosa"
+     },
+     "versionCount": 1,
+     "origin": {
+      "kind": "importacion",
+      "detail": "Historial inicial de La H"
+     },
+     "createdAt": 1792767600000,
+     "updatedAt": 1792767600000,
+     "styleId": "weizenbock",
+     "author": "La H Cerveza Artesanal",
+     "historical": {
+      "status": "asociada",
+      "origin": "Historial inicial de La H Cerveza Artesanal (importado el 23 de octubre de 2026)",
+      "importedAt": 1792767600000,
+      "values": [
+       {
+        "label": "OG",
+        "value": "≈ 1.080",
+        "kind": "estimacion"
+       },
+       {
+        "label": "FG",
+        "value": "≈ 1.018",
+        "kind": "estimacion"
+       },
+       {
+        "label": "ABV",
+        "value": "≈ 8 %",
+        "kind": "estimacion"
+       },
+       {
+        "label": "IBU",
+        "value": "≈ 20",
+        "kind": "estimacion"
+       },
+       {
+        "label": "Grano total",
+        "value": "≈ 8,8 kg",
+        "kind": "planificado"
+       },
+       {
+        "label": "Decocción",
+        "value": "Retirar 30–35 % espeso; 65 °C 10 min → 72 °C 10 min → hervir 20–25 min → retornar hasta 67–68 °C y mantener ~30 min",
+        "kind": "planificado",
+        "note": "La temperatura de retorno (67–68 °C) se carga con su punto medio solo para calcular"
+       },
+       {
+        "label": "Eficiencia de sala",
+        "value": "73 %",
+        "kind": "calculo",
+        "note": "Calculada para reproducir la OG documentada (≈ 1.080) con el grano registrado. No fue medida."
+       }
+      ],
+      "missing": [
+       "Fermentación (temperatura y días)",
+       "Agua y sales",
+       "Carbonatación"
+      ],
+      "warnings": [
+       "RECETA_HISTORICA_ASOCIADA: no asumir que es idéntica al lote ganador.",
+       "Agua de origen no registrada en la ficha: para calcular se usa el perfil histórico de Armenia de La H."
+      ],
+      "notes": [
+       "RECETA_PREMIADA = TRUE (familia Weizenbock): Bronce y Primer puesto en Maestros del Trigo 2026. No atribuir ambos premios al mismo lote sin confirmación."
+      ]
+     }
+    },
+    "createdAt": 1792767600000
+   },
+   {
+    "id": "hist-dubbel-v1",
+    "recipeId": "hist-dubbel",
+    "number": 1,
+    "label": "Histórico · receta no recuperada",
+    "reason": "importacion",
+    "snapshot": {
+     "id": "hist-dubbel",
+     "name": "Belgian Dubbel",
+     "equipment": {
+      "batchSizeL": 20,
+      "boilTimeMin": 60,
+      "kettleVolumeL": 40,
+      "boilOffLph": 3.5,
+      "kettleLossL": 2,
+      "fermenterLossL": 1,
+      "mashTunDeadspaceL": 0,
+      "grainAbsorptionLpkg": 0.6,
+      "hopAbsorptionLp100g": 0.7,
+      "coolingShrinkPct": 4,
+      "efficiencyPct": 70,
+      "mashRatioLpkg": 3,
+      "spargeL": 0,
+      "id": "eq-biab",
+      "name": "BIAB 40 L",
+      "type": "biab"
+     },
+     "equipmentId": "eq-biab",
+     "batchSizeL": 20,
+     "boilTimeMin": 60,
+     "efficiencyPct": 70,
+     "fermentables": [],
+     "hops": [],
+     "yeasts": [],
+     "miscs": [],
+     "mashSteps": [],
+     "fermentation": [],
+     "water": {
+      "sourceProfileId": "custom-hist-armenia",
+      "dilution": 0,
+      "mashSalts": {},
+      "spargeSalts": {},
+      "lacticMl": 0,
+      "phosphoricMl": 0,
+      "lacticPct": 88,
+      "phosphoricPct": 10
+     },
+     "carbonation": {
+      "volumes": 2.4,
+      "method": "priming",
+      "primingSugar": "sacarosa"
+     },
+     "versionCount": 1,
+     "origin": {
+      "kind": "importacion",
+      "detail": "Historial inicial de La H"
+     },
+     "createdAt": 1792767600000,
+     "updatedAt": 1792767600000,
+     "styleId": "dubbel",
+     "author": "La H Cerveza Artesanal",
+     "historical": {
+      "status": "elaborada",
+      "origin": "Historial inicial de La H Cerveza Artesanal (importado el 23 de octubre de 2026)",
+      "importedAt": 1792767600000,
+      "values": [
+       {
+        "label": "Resultado general",
+        "value": "Considerado muy bueno; inscrito en competencia",
+        "kind": "ejecucion"
+       }
+      ],
+      "missing": [
+       "Maltas",
+       "Azúcar",
+       "Lúpulos",
+       "Levadura",
+       "Perfil de agua",
+       "Volumen",
+       "Macerado",
+       "Fermentación"
+      ],
+      "warnings": [],
+      "notes": [
+       "Sin premio confirmado en el historial recuperado."
+      ],
+      "incomplete": true
+     }
+    },
+    "createdAt": 1792767600000
+   },
+   {
+    "id": "hist-tripel-reto-v1",
+    "recipeId": "hist-tripel-reto",
+    "number": 1,
+    "label": "Planificación inicial",
+    "reason": "importacion",
+    "snapshot": {
+     "id": "hist-tripel-reto",
+     "name": "Belgian Tripel — reto Fermentis",
+     "equipment": {
+      "batchSizeL": 20,
+      "boilTimeMin": 60,
+      "kettleVolumeL": 40,
+      "boilOffLph": 3.5,
+      "kettleLossL": 2,
+      "fermenterLossL": 1,
+      "mashTunDeadspaceL": 0,
+      "grainAbsorptionLpkg": 0.6,
+      "hopAbsorptionLp100g": 0.7,
+      "coolingShrinkPct": 4,
+      "efficiencyPct": 70,
+      "mashRatioLpkg": 3,
+      "spargeL": 0,
+      "id": "eq-biab",
+      "name": "BIAB 40 L",
+      "type": "biab"
+     },
+     "equipmentId": "eq-biab",
+     "batchSizeL": 20,
+     "boilTimeMin": 60,
+     "efficiencyPct": 70,
+     "fermentables": [],
+     "hops": [],
+     "yeasts": [],
+     "miscs": [],
+     "mashSteps": [],
+     "fermentation": [],
+     "water": {
+      "sourceProfileId": "custom-hist-armenia",
+      "dilution": 0,
+      "mashSalts": {},
+      "spargeSalts": {},
+      "lacticMl": 0,
+      "phosphoricMl": 0,
+      "lacticPct": 88,
+      "phosphoricPct": 10
+     },
+     "carbonation": {
+      "volumes": 2.4,
+      "method": "priming",
+      "primingSugar": "sacarosa"
+     },
+     "versionCount": 1,
+     "origin": {
+      "kind": "importacion",
+      "detail": "Historial inicial de La H"
+     },
+     "createdAt": 1792767600000,
+     "updatedAt": 1792767600000,
+     "styleId": "tripel",
+     "author": "La H Cerveza Artesanal",
+     "intent": {
+      "mode": "moderna",
+      "text": "Tripel compleja, muy bebible y de alta tomabilidad; interpretación moderna pero claramente belga; seca; alcohol elevado pero integrado.",
+      "target": {}
+     },
+     "historical": {
+      "status": "planificada",
+      "origin": "Historial inicial de La H Cerveza Artesanal (importado el 23 de octubre de 2026)",
+      "importedAt": 1792767600000,
+      "values": [
+       {
+        "label": "Volumen objetivo",
+        "value": "20 L finales en barril",
+        "kind": "planificado"
+       },
+       {
+        "label": "Restricción de levadura del reto",
+        "value": "Fermentis: BE-256 / referencia del reto \"BE-156\" según el registro original; BE-134; T-58",
+        "kind": "planificado",
+        "note": "Se conserva la referencia original \"BE-156\" sin sustituirla"
+       }
+      ],
+      "missing": [
+       "Receta detallada definitiva"
+      ],
+      "warnings": [],
+      "notes": [
+       "RECETA_PLANIFICADA = TRUE. No registrar como elaborada ni premiada."
+      ],
+      "incomplete": true
+     }
+    },
+    "createdAt": 1792767600000
+   },
+   {
+    "id": "hist-catharina-50l-v1",
+    "recipeId": "hist-catharina-50l",
+    "number": 1,
+    "label": "Formulación técnica 50 L",
+    "reason": "importacion",
+    "snapshot": {
+     "id": "hist-catharina-50l",
+     "name": "Catharina Sour — formulación 50 L",
+     "equipment": {
+      "batchSizeL": 50,
+      "boilTimeMin": 60,
+      "kettleVolumeL": 40,
+      "boilOffLph": 3.5,
+      "kettleLossL": 2,
+      "fermenterLossL": 1,
+      "mashTunDeadspaceL": 0,
+      "grainAbsorptionLpkg": 0.6,
+      "hopAbsorptionLp100g": 0.7,
+      "coolingShrinkPct": 4,
+      "efficiencyPct": 70,
+      "mashRatioLpkg": 3,
+      "spargeL": 0,
+      "id": "eq-biab",
+      "name": "BIAB 40 L",
+      "type": "biab"
+     },
+     "equipmentId": "eq-biab",
+     "batchSizeL": 50,
+     "boilTimeMin": 60,
+     "efficiencyPct": 70,
+     "fermentables": [
+      {
+       "uid": "hist-f-2d",
+       "ingredientId": "pilsner-wey",
+       "name": "Pilsner",
+       "type": "base",
+       "colorEBC": 3.5,
+       "ppg": 37,
+       "amountKg": 5,
+       "use": "macerado",
+       "source": "referencia",
+       "sourceNote": "Cantidad registrada; marca no registrada. Color y rendimiento: Valor típico de la ficha técnica de Weyermann; cada lote varía."
+      },
+      {
+       "uid": "hist-f-2e",
+       "ingredientId": "wheat-wey",
+       "name": "Trigo malteado claro",
+       "type": "base",
+       "colorEBC": 4,
+       "ppg": 38,
+       "amountKg": 5,
+       "use": "macerado",
+       "source": "referencia",
+       "sourceNote": "Cantidad registrada; trigo: marca no registrada. Color y rendimiento: Valor típico de la ficha técnica de Weyermann; cada lote varía."
+      },
+      {
+       "uid": "hist-f-2f",
+       "ingredientId": "oats-flaked",
+       "name": "Avena en hojuelas",
+       "type": "adjunto",
+       "colorEBC": 2,
+       "ppg": 33,
+       "amountKg": 0.5,
+       "use": "macerado",
+       "source": "referencia",
+       "sourceNote": "Cantidad registrada; avena: tipo no registrado. Color y rendimiento: Valor típico de literatura."
+      },
+      {
+       "uid": "hist-f-2g",
+       "ingredientId": "carafoam",
+       "name": "Carafoam / Carapils",
+       "type": "caramelo",
+       "colorEBC": 4,
+       "ppg": 33,
+       "amountKg": 0.35,
+       "use": "macerado",
+       "source": "referencia",
+       "sourceNote": "Cantidad registrada; Carapils. Color y rendimiento: Valor típico de la ficha técnica de Weyermann; cada lote varía."
+      }
+     ],
+     "hops": [
+      {
+       "uid": "hist-h-2j",
+       "ingredientId": "el-dorado",
+       "name": "El Dorado",
+       "alpha": 15,
+       "source": "estimacion",
+       "sourceNote": "Rango registrado 5–10 g; el punto medio solo se usa para calcular. % AA no registrado: se usa el típico (15 %) solo para calcular IBU. Momento exacto no registrado",
+       "form": "pellet",
+       "amountG": 7.5,
+       "use": "hervor",
+       "time": 15
+      }
+     ],
+     "yeasts": [
+      {
+       "uid": "hist-y-2k",
+       "ingredientId": "voss",
+       "name": "LalBrew Voss Kveik",
+       "lab": "Lallemand",
+       "code": "Voss",
+       "type": "kveik",
+       "form": "seca",
+       "attenuation": 79,
+       "tempRange": [
+        25,
+        40
+       ],
+       "family": "kveik",
+       "amount": 2,
+       "source": "registro",
+       "sourceNote": "Levadura y cantidad registradas; ≈ 22 g registrados"
+      }
+     ],
+     "miscs": [
+      {
+       "uid": "hist-m-2l",
+       "name": "Cultivo de yogur (kettle sour)",
+       "use": "hervor",
+       "amount": 500,
+       "unit": "g",
+       "notes": "Registrado 400–600 g (punto medio solo para calcular). Agriar en la olla a 36–40 °C hasta pH 3,4–3,6, antes del hervor."
+      }
+     ],
+     "mashSteps": [
+      {
+       "uid": "hist-s-2h",
+       "name": "Sacarificación",
+       "tempC": 65,
+       "timeMin": 60
+      },
+      {
+       "uid": "hist-s-2i",
+       "name": "Mash out",
+       "tempC": 75,
+       "timeMin": 10
+      }
+     ],
+     "fermentation": [
+      {
+       "uid": "hist-t-2m",
+       "name": "Cold crash",
+       "tempC": 1,
+       "days": 0
+      }
+     ],
+     "water": {
+      "sourceProfileId": "custom-hist-armenia",
+      "dilution": 0,
+      "mashSalts": {},
+      "spargeSalts": {},
+      "lacticMl": 0,
+      "phosphoricMl": 0,
+      "lacticPct": 88,
+      "phosphoricPct": 10
+     },
+     "carbonation": {
+      "volumes": 2.9,
+      "method": "priming",
+      "primingSugar": "sacarosa"
+     },
+     "versionCount": 1,
+     "origin": {
+      "kind": "importacion",
+      "detail": "Historial inicial de La H"
+     },
+     "createdAt": 1792767600000,
+     "updatedAt": 1792767600000,
+     "styleId": "catharina-sour",
+     "author": "La H Cerveza Artesanal",
+     "historical": {
+      "status": "planificada",
+      "origin": "Historial inicial de La H Cerveza Artesanal (importado el 23 de octubre de 2026)",
+      "importedAt": 1792767600000,
+      "values": [
+       {
+        "label": "Agua de macerado",
+        "value": "≈ 43 L",
+        "kind": "planificado"
+       },
+       {
+        "label": "Reserva / lavado",
+        "value": "≈ 19 L",
+        "kind": "planificado"
+       },
+       {
+        "label": "Whirlpool opcional",
+        "value": "El Dorado 10–15 g",
+        "kind": "planificado"
+       },
+       {
+        "label": "pH objetivo del agriado",
+        "value": "3,4–3,6",
+        "kind": "planificado"
+       },
+       {
+        "label": "FG objetivo",
+        "value": "1.006–1.008",
+        "kind": "planificado"
+       },
+       {
+        "label": "Cold crash",
+        "value": "0–2 °C",
+        "kind": "planificado"
+       },
+       {
+        "label": "Carbonatación",
+        "value": "2,8–3,0 vol",
+        "kind": "planificado"
+       },
+       {
+        "label": "Perfil mineral sugerido",
+        "value": "Ca 50–70 · Cl 80–120 · SO₄ < 50 ppm · Mg bajo",
+        "kind": "planificado"
+       }
+      ],
+      "missing": [
+       "OG (la formulación no la registra: los cálculos usan la eficiencia de referencia del equipo)"
+      ],
+      "warnings": [
+       "Esta formulación NO se etiqueta como la Catharina Sour premiada: la receta del lote premiado no se recuperó.",
+       "Agua de origen no registrada en la ficha: para calcular se usa el perfil histórico de Armenia de La H."
+      ],
+      "notes": [
+       "Historial de sours de La H: Catharina Sour con mora, Berliner Weisse con lulo y desarrollos posteriores con banano."
+      ]
+     }
+    },
+    "createdAt": 1792767600000
+   },
+   {
+    "id": "hist-smoothie-banano-v1",
+    "recipeId": "hist-smoothie-banano",
+    "number": 1,
+    "label": "Desarrollo experimental",
+    "reason": "importacion",
+    "snapshot": {
+     "id": "hist-smoothie-banano",
+     "name": "Sour Smoothie de banano — Philly Sour",
+     "equipment": {
+      "batchSizeL": 40,
+      "boilTimeMin": 60,
+      "kettleVolumeL": 40,
+      "boilOffLph": 3.5,
+      "kettleLossL": 2,
+      "fermenterLossL": 1,
+      "mashTunDeadspaceL": 0,
+      "grainAbsorptionLpkg": 0.6,
+      "hopAbsorptionLp100g": 0.7,
+      "coolingShrinkPct": 4,
+      "efficiencyPct": 70,
+      "mashRatioLpkg": 3,
+      "spargeL": 0,
+      "id": "eq-biab",
+      "name": "BIAB 40 L",
+      "type": "biab"
+     },
+     "equipmentId": "eq-biab",
+     "batchSizeL": 40,
+     "boilTimeMin": 60,
+     "efficiencyPct": 70,
+     "fermentables": [
+      {
+       "uid": "hist-f-2n",
+       "ingredientId": "pilsner-wey",
+       "name": "Pilsner",
+       "type": "base",
+       "colorEBC": 3.5,
+       "ppg": 37,
+       "amountKg": 9,
+       "use": "macerado",
+       "source": "referencia",
+       "sourceNote": "Cantidad registrada; aproximado; marca no registrada. Color y rendimiento: Valor típico de la ficha técnica de Weyermann; cada lote varía."
+      },
+      {
+       "uid": "hist-f-2o",
+       "ingredientId": "wheat-wey",
+       "name": "Trigo malteado claro",
+       "type": "base",
+       "colorEBC": 4,
+       "ppg": 38,
+       "amountKg": 4.5,
+       "use": "macerado",
+       "source": "referencia",
+       "sourceNote": "Cantidad registrada; aproximado. Color y rendimiento: Valor típico de la ficha técnica de Weyermann; cada lote varía."
+      },
+      {
+       "uid": "hist-f-2p",
+       "ingredientId": "oats-flaked",
+       "name": "Avena en hojuelas",
+       "type": "adjunto",
+       "colorEBC": 2,
+       "ppg": 33,
+       "amountKg": 2.7,
+       "use": "macerado",
+       "source": "referencia",
+       "sourceNote": "Cantidad registrada; aproximado; tipo de avena no registrado. Color y rendimiento: Valor típico de literatura."
+      },
+      {
+       "uid": "hist-f-2q",
+       "ingredientId": "carafoam",
+       "name": "Carafoam / Carapils",
+       "type": "caramelo",
+       "colorEBC": 4,
+       "ppg": 33,
+       "amountKg": 0.9,
+       "use": "macerado",
+       "source": "referencia",
+       "sourceNote": "Cantidad registrada; Carapils, aproximado. Color y rendimiento: Valor típico de la ficha técnica de Weyermann; cada lote varía."
+      },
+      {
+       "uid": "hist-f-2r",
+       "ingredientId": "munich-1-wey",
+       "name": "Munich Tipo I",
+       "type": "base",
+       "colorEBC": 15,
+       "ppg": 37,
+       "amountKg": 0.9,
+       "use": "macerado",
+       "source": "referencia",
+       "sourceNote": "Cantidad registrada; aproximado. Color y rendimiento: Valor típico de la ficha técnica de Weyermann; cada lote varía."
+      },
+      {
+       "uid": "hist-f-2s",
+       "ingredientId": "dextrose",
+       "name": "Dextrosa",
+       "type": "azucar",
+       "colorEBC": 0,
+       "ppg": 42,
+       "amountKg": 0.7,
+       "use": "hervor",
+       "source": "referencia",
+       "sourceNote": "Cantidad registrada; aproximado; momento de adición no registrado. Color y rendimiento: Valor típico de literatura."
+      }
+     ],
+     "hops": [],
+     "yeasts": [
+      {
+       "uid": "hist-y-2t",
+       "ingredientId": "philly-sour",
+       "name": "WildBrew Philly Sour",
+       "lab": "Lallemand",
+       "code": "Philly Sour",
+       "type": "acida",
+       "form": "seca",
+       "attenuation": 78,
+       "tempRange": [
+        20,
+        25
+       ],
+       "family": "acida",
+       "amount": 0,
+       "source": "registro",
+       "sourceNote": "Levadura registrada. Cantidad de sobres: se evaluó por costo, dato_no_recuperado (se muestra 0)."
+      }
+     ],
+     "miscs": [
+      {
+       "uid": "hist-m-2u",
+       "name": "Banano",
+       "use": "fermentador",
+       "amount": 9,
+       "unit": "kg",
+       "notes": "Aproximado. El azúcar de la fruta aún no se modela en la densidad (fase de adjuntos)."
+      },
+      {
+       "uid": "hist-m-2v",
+       "name": "Nibs de cacao",
+       "use": "fermentador",
+       "amount": 200,
+       "unit": "g",
+       "notes": "Aproximado"
+      }
+     ],
+     "mashSteps": [],
+     "fermentation": [],
+     "water": {
+      "sourceProfileId": "custom-hist-armenia",
+      "dilution": 0,
+      "mashSalts": {},
+      "spargeSalts": {},
+      "lacticMl": 0,
+      "phosphoricMl": 0,
+      "lacticPct": 88,
+      "phosphoricPct": 10
+     },
+     "carbonation": {
+      "volumes": 2.4,
+      "method": "priming",
+      "primingSugar": "sacarosa"
+     },
+     "versionCount": 1,
+     "origin": {
+      "kind": "importacion",
+      "detail": "Historial inicial de La H"
+     },
+     "createdAt": 1792767600000,
+     "updatedAt": 1792767600000,
+     "author": "La H Cerveza Artesanal",
+     "intent": {
+      "mode": "libre",
+      "text": "Sour intensa con banano, perfil moderno tipo fruited / pastry / smoothie.",
+      "target": {}
+     },
+     "historical": {
+      "status": "experimental",
+      "origin": "Historial inicial de La H Cerveza Artesanal (importado el 23 de octubre de 2026)",
+      "importedAt": 1792767600000,
+      "values": [
+       {
+        "label": "Volumen previsto",
+        "value": "≈ 40 L; rendimiento final esperado 30–35 L por la carga de fruta",
+        "kind": "planificado"
+       },
+       {
+        "label": "Grano total",
+        "value": "≈ 18 kg",
+        "kind": "planificado"
+       }
+      ],
+      "missing": [
+       "Sobres de Philly Sour",
+       "Lúpulos",
+       "Macerado",
+       "Agua y sales",
+       "Momento de la fruta y del cacao"
+      ],
+      "warnings": [
+       "DESARROLLO_EXPERIMENTAL: no registrar como premiado.",
+       "Agua de origen no registrada en la ficha: para calcular se usa el perfil histórico de Armenia de La H."
+      ],
+      "notes": [
+       "Se comparó conceptualmente Philly Sour frente a Kveik."
+      ]
+     }
+    },
+    "createdAt": 1792767600000
+   },
+   {
+    "id": "hist-west-coast-ipa-v1",
+    "recipeId": "hist-west-coast-ipa",
+    "number": 1,
+    "label": "Histórico",
+    "reason": "importacion",
+    "snapshot": {
+     "id": "hist-west-coast-ipa",
+     "name": "West Coast IPA",
+     "equipment": {
+      "batchSizeL": 40,
+      "boilTimeMin": 60,
+      "kettleVolumeL": 40,
+      "boilOffLph": 3.5,
+      "kettleLossL": 2,
+      "fermenterLossL": 1,
+      "mashTunDeadspaceL": 0,
+      "grainAbsorptionLpkg": 0.6,
+      "hopAbsorptionLp100g": 0.7,
+      "coolingShrinkPct": 4,
+      "efficiencyPct": 70,
+      "mashRatioLpkg": 3,
+      "spargeL": 0,
+      "id": "eq-biab",
+      "name": "BIAB 40 L",
+      "type": "biab"
+     },
+     "equipmentId": "eq-biab",
+     "batchSizeL": 40,
+     "boilTimeMin": 60,
+     "efficiencyPct": 61.7,
+     "fermentables": [
+      {
+       "uid": "hist-f-2w",
+       "ingredientId": "best-pale-ale",
+       "name": "Pale Ale",
+       "type": "base",
+       "colorEBC": 6.5,
+       "ppg": 37,
+       "amountKg": 12,
+       "use": "macerado",
+       "source": "referencia",
+       "sourceNote": "Cantidad registrada; Pale Ale: marca no registrada. Color y rendimiento: EBC típico de la ficha de BestMalz; Distrines no lo publica. Confírmalo en el saco.."
+      },
+      {
+       "uid": "hist-f-2x",
+       "ingredientId": "best-munich",
+       "name": "Munich",
+       "type": "base",
+       "colorEBC": 15,
+       "ppg": 37,
+       "amountKg": 1,
+       "use": "macerado",
+       "source": "referencia",
+       "sourceNote": "Cantidad registrada; Munich: marca y tipo no registrados. Color y rendimiento: EBC típico de la ficha de BestMalz; Distrines no lo publica. Confírmalo en el saco.."
+      },
+      {
+       "uid": "hist-f-2y",
+       "ingredientId": "carafoam",
+       "name": "Carafoam / Carapils",
+       "type": "caramelo",
+       "colorEBC": 4,
+       "ppg": 33,
+       "amountKg": 0.5,
+       "use": "macerado",
+       "source": "referencia",
+       "sourceNote": "Cantidad registrada; Carapils. Color y rendimiento: Valor típico de la ficha técnica de Weyermann; cada lote varía."
+      }
+     ],
+     "hops": [
+      {
+       "uid": "hist-h-2z",
+       "ingredientId": "bravo",
+       "name": "Bravo",
+       "alpha": 15.5,
+       "source": "referencia",
+       "sourceNote": "Cantidad y momento registrados. % AA no registrado: se usa el típico (15.5 %) solo para calcular IBU",
+       "form": "pellet",
+       "amountG": 30,
+       "use": "hervor",
+       "time": 60
+      },
+      {
+       "uid": "hist-h-30",
+       "name": "Solaris",
+       "alpha": 0,
+       "form": "pellet",
+       "amountG": 140,
+       "use": "whirlpool",
+       "time": 0,
+       "source": "estimacion",
+       "sourceNote": "Rango registrado 120–160 g; punto medio solo para calcular. Variedad fuera del catálogo y % AA no registrado: no se calcula su aporte de IBU."
+      },
+      {
+       "uid": "hist-h-31",
+       "ingredientId": "simcoe",
+       "name": "Simcoe",
+       "alpha": 13,
+       "source": "referencia",
+       "sourceNote": "Cantidad y momento registrados. % AA no registrado: se usa el típico (13 %) solo para calcular IBU. Simcoe Cryo: el alfa típico del catálogo es del pellet (el Cryo tiene más); tiempo de whirlpool no registrado",
+       "form": "cryo",
+       "amountG": 15,
+       "use": "whirlpool",
+       "time": 0,
+       "tempC": 80
+      },
+      {
+       "uid": "hist-h-32",
+       "ingredientId": "simcoe",
+       "name": "Simcoe",
+       "alpha": 13,
+       "source": "referencia",
+       "sourceNote": "Cantidad y momento registrados. % AA no registrado: se usa el típico (13 %) solo para calcular IBU. Simcoe Cryo; días de contacto no registrados",
+       "form": "cryo",
+       "amountG": 75,
+       "use": "dry-hop",
+       "time": 0
+      }
+     ],
+     "yeasts": [
+      {
+       "uid": "hist-y-33",
+       "ingredientId": "bry-97",
+       "name": "LalBrew BRY-97",
+       "lab": "Lallemand",
+       "code": "BRY-97",
+       "type": "ale",
+       "form": "seca",
+       "attenuation": 81,
+       "tempRange": [
+        15,
+        22
+       ],
+       "family": "americana-limpia",
+       "amount": 3,
+       "source": "registro",
+       "sourceNote": "Levadura y cantidad registradas"
+      }
+     ],
+     "miscs": [],
+     "mashSteps": [],
+     "fermentation": [
+      {
+       "uid": "hist-t-34",
+       "name": "Primaria",
+       "tempC": 18.5,
+       "days": 0
+      },
+      {
+       "uid": "hist-t-35",
+       "name": "Final",
+       "tempC": 20.5,
+       "days": 0
+      }
+     ],
+     "water": {
+      "sourceProfileId": "custom-hist-armenia",
+      "dilution": 0,
+      "mashSalts": {},
+      "spargeSalts": {},
+      "lacticMl": 0,
+      "phosphoricMl": 0,
+      "lacticPct": 88,
+      "phosphoricPct": 10,
+      "targetProfileId": "custom-hist-wcipa"
+     },
+     "carbonation": {
+      "volumes": 2.4,
+      "method": "priming",
+      "primingSugar": "sacarosa"
+     },
+     "versionCount": 1,
+     "origin": {
+      "kind": "importacion",
+      "detail": "Historial inicial de La H"
+     },
+     "createdAt": 1792767600000,
+     "updatedAt": 1792767600000,
+     "styleId": "american-ipa",
+     "author": "La H Cerveza Artesanal",
+     "historical": {
+      "status": "elaborada",
+      "origin": "Historial inicial de La H Cerveza Artesanal (importado el 23 de octubre de 2026)",
+      "importedAt": 1792767600000,
+      "values": [
+       {
+        "label": "OG",
+        "value": "≈ 1.064",
+        "kind": "estimacion"
+       },
+       {
+        "label": "FG",
+        "value": "≈ 1.010",
+        "kind": "estimacion"
+       },
+       {
+        "label": "ABV",
+        "value": "≈ 7 %",
+        "kind": "estimacion"
+       },
+       {
+        "label": "Fermentación",
+        "value": "18–19 °C al inicio; luego 20–21 °C",
+        "kind": "ejecucion",
+        "note": "Puntos medios solo para calcular"
+       },
+       {
+        "label": "Agua objetivo",
+        "value": "Ca 110 · Mg 6 · Na 8 · Cl 65 · SO₄ 190 · HCO₃ 30 ppm",
+        "kind": "planificado"
+       },
+       {
+        "label": "pH de macerado objetivo",
+        "value": "≈ 5,35",
+        "kind": "planificado"
+       },
+       {
+        "label": "Eficiencia de sala",
+        "value": "61,7 %",
+        "kind": "calculo",
+        "note": "Calculada para reproducir la OG registrada (≈ 1.064) con el grano registrado. No fue medida."
+       }
+      ],
+      "missing": [
+       "Macerado",
+       "Tiempo de hervor",
+       "Tiempo de whirlpool",
+       "Días de dry hop",
+       "% AA de Bravo, Solaris y Simcoe Cryo",
+       "Sales usadas"
+      ],
+      "warnings": [
+       "Agua de origen no registrada en la ficha: para calcular se usa el perfil histórico de Armenia de La H."
+      ],
+      "notes": [
+       "Receta desarrollada; sin premio confirmado en el historial."
+      ]
+     }
+    },
+    "createdAt": 1792767600000
+   }
+  ],
+  "batches": [
+   {
+    "id": "hist-lote-h-01",
+    "number": 9001,
+    "name": "Hazy IPA — Colab IPA Day",
+    "recipeId": "hist-hazy-ipa-colab",
+    "recipeVersionId": "hist-hazy-ipa-colab-v1",
+    "recipeVersionNumber": 1,
+    "events": [
+     {
+      "uid": "hist-e-e",
+      "at": 1792767600000,
+      "kind": "correccion",
+      "text": "Desviación real de proceso: hubo más agua de la prevista y el hervor duró cerca de 2 horas (planeado ~90 min). Más concentración y posiblemente más caramelización y color.",
+      "source": "registro"
+     }
+    ],
+    "recipe": {
+     "id": "hist-hazy-ipa-colab",
+     "name": "Hazy IPA — Colab IPA Day",
+     "equipment": {
+      "batchSizeL": 30,
+      "boilTimeMin": 60,
+      "kettleVolumeL": 40,
+      "boilOffLph": 3.5,
+      "kettleLossL": 2,
+      "fermenterLossL": 1,
+      "mashTunDeadspaceL": 0,
+      "grainAbsorptionLpkg": 0.6,
+      "hopAbsorptionLp100g": 0.7,
+      "coolingShrinkPct": 4,
+      "efficiencyPct": 70,
+      "mashRatioLpkg": 3,
+      "spargeL": 0,
+      "id": "eq-biab",
+      "name": "BIAB 40 L",
+      "type": "biab"
+     },
+     "equipmentId": "eq-biab",
+     "batchSizeL": 30,
+     "boilTimeMin": 90,
+     "efficiencyPct": 68.1,
+     "fermentables": [
+      {
+       "uid": "hist-f-1",
+       "ingredientId": "best-pale-ale",
+       "name": "Pale Ale",
+       "type": "base",
+       "colorEBC": 6.5,
+       "ppg": 37,
+       "amountKg": 6,
+       "use": "macerado",
+       "source": "referencia",
+       "sourceNote": "Cantidad registrada. Color y rendimiento: EBC típico de la ficha de BestMalz; Distrines no lo publica. Confírmalo en el saco.."
+      },
+      {
+       "uid": "hist-f-2",
+       "ingredientId": "wheat-wey",
+       "name": "Trigo malteado claro",
+       "type": "base",
+       "colorEBC": 4,
+       "ppg": 38,
+       "amountKg": 2,
+       "use": "macerado",
+       "source": "referencia",
+       "sourceNote": "Cantidad registrada; malta de trigo: marca no registrada. Color y rendimiento: Valor típico de la ficha técnica de Weyermann; cada lote varía."
+      },
+      {
+       "uid": "hist-f-3",
+       "ingredientId": "oats-flaked",
+       "name": "Avena en hojuelas",
+       "type": "adjunto",
+       "colorEBC": 2,
+       "ppg": 33,
+       "amountKg": 1.2,
+       "use": "macerado",
+       "source": "referencia",
+       "sourceNote": "Cantidad registrada; avena: tipo (hojuelas o malteada) no registrado. Color y rendimiento: Valor típico de literatura."
+      }
+     ],
+     "hops": [
+      {
+       "uid": "hist-h-5",
+       "ingredientId": "citra",
+       "name": "Citra",
+       "alpha": 12.5,
+       "source": "referencia",
+       "sourceNote": "Cantidad y momento registrados. % AA no registrado: se usa el típico (12.5 %) solo para calcular IBU",
+       "form": "pellet",
+       "amountG": 20,
+       "use": "hervor",
+       "time": 30
+      },
+      {
+       "uid": "hist-h-6",
+       "ingredientId": "el-dorado",
+       "name": "El Dorado",
+       "alpha": 15,
+       "source": "referencia",
+       "sourceNote": "Cantidad y momento registrados. % AA no registrado: se usa el típico (15 %) solo para calcular IBU",
+       "form": "pellet",
+       "amountG": 25,
+       "use": "hervor",
+       "time": 10
+      },
+      {
+       "uid": "hist-h-7",
+       "ingredientId": "mosaic",
+       "name": "Mosaic",
+       "alpha": 12,
+       "source": "referencia",
+       "sourceNote": "Cantidad y momento registrados. % AA no registrado: se usa el típico (12 %) solo para calcular IBU. Hopstand a 71 °C; tiempo de contacto no registrado (no se calcula su IBU)",
+       "form": "pellet",
+       "amountG": 50,
+       "use": "whirlpool",
+       "time": 0,
+       "tempC": 71
+      },
+      {
+       "uid": "hist-h-8",
+       "ingredientId": "el-dorado",
+       "name": "El Dorado",
+       "alpha": 15,
+       "source": "estimacion",
+       "sourceNote": "Rango registrado 40–48 g; el punto medio solo se usa para calcular. % AA no registrado: se usa el típico (15 %) solo para calcular IBU. Hopstand a 71 °C; tiempo no registrado",
+       "form": "pellet",
+       "amountG": 44,
+       "use": "whirlpool",
+       "time": 0,
+       "tempC": 71
+      },
+      {
+       "uid": "hist-h-9",
+       "ingredientId": "citra",
+       "name": "Citra",
+       "alpha": 12.5,
+       "source": "referencia",
+       "sourceNote": "Cantidad y momento registrados. % AA no registrado: se usa el típico (12.5 %) solo para calcular IBU. Hopstand a 71 °C; tiempo no registrado",
+       "form": "pellet",
+       "amountG": 20,
+       "use": "whirlpool",
+       "time": 0,
+       "tempC": 71
+      },
+      {
+       "uid": "hist-h-a",
+       "ingredientId": "mosaic",
+       "name": "Mosaic",
+       "alpha": 12,
+       "source": "registro",
+       "sourceNote": "Cantidad PLANIFICADA (~150 g de Mosaic). La cantidad final ejecutada no se recuperó; días de contacto no registrados.",
+       "form": "pellet",
+       "amountG": 150,
+       "use": "dry-hop",
+       "time": 0
+      }
+     ],
+     "yeasts": [],
+     "miscs": [
+      {
+       "uid": "hist-m-b",
+       "name": "Servomyces",
+       "use": "hervor",
+       "amount": 3,
+       "unit": "g",
+       "notes": "Registrado en una versión de la receta"
+      }
+     ],
+     "mashSteps": [
+      {
+       "uid": "hist-s-4",
+       "name": "Sacarificación",
+       "tempC": 67,
+       "timeMin": 60
+      }
+     ],
+     "fermentation": [
+      {
+       "uid": "hist-t-c",
+       "name": "Primaria",
+       "tempC": 18,
+       "days": 7
+      },
+      {
+       "uid": "hist-t-d",
+       "name": "Final de fermentación",
+       "tempC": 20,
+       "days": 3
+      }
+     ],
+     "water": {
+      "sourceProfileId": "custom-hist-armenia",
+      "dilution": 0,
+      "mashSalts": {
+       "cloruroCalcio": 14,
+       "epsom": 3.5,
+       "yeso": 3.2
+      },
+      "spargeSalts": {},
+      "lacticMl": 0,
+      "phosphoricMl": 0,
+      "lacticPct": 88,
+      "phosphoricPct": 10,
+      "targetProfileId": "custom-hist-hazy-oro"
+     },
+     "carbonation": {
+      "volumes": 2.4,
+      "method": "priming",
+      "primingSugar": "sacarosa"
+     },
+     "versionCount": 1,
+     "origin": {
+      "kind": "importacion",
+      "detail": "Historial inicial de La H"
+     },
+     "createdAt": 1792767600000,
+     "updatedAt": 1792767600000,
+     "styleId": "hazy-ipa",
+     "author": "La H Cerveza Artesanal",
+     "intent": {
+      "mode": "moderna",
+      "text": "Hazy IPA aromática, tropical, jugosa, de cuerpo suave, amargor moderado y alta tomabilidad.",
+      "target": {}
+     },
+     "notes": "Una de las recetas históricas exitosas de La H (Oro, Copa Raíces). Debe poder evolucionar: no es una receta \"perfecta\" congelada.",
+     "historical": {
+      "status": "elaborada",
+      "origin": "Historial inicial de La H Cerveza Artesanal (importado el 23 de octubre de 2026)",
+      "importedAt": 1792767600000,
+      "values": [
+       {
+        "label": "OG objetivo",
+        "value": "1.064",
+        "kind": "planificado"
+       },
+       {
+        "label": "FG objetivo",
+        "value": "1.013",
+        "kind": "planificado"
+       },
+       {
+        "label": "ABV objetivo",
+        "value": "≈ 6,7 %",
+        "kind": "planificado"
+       },
+       {
+        "label": "IBU",
+        "value": "≈ 32",
+        "kind": "planificado"
+       },
+       {
+        "label": "Color",
+        "value": "≈ 5,5 SRM",
+        "kind": "estimacion"
+       },
+       {
+        "label": "Carbonatación",
+        "value": "2,4 vol",
+        "kind": "planificado"
+       },
+       {
+        "label": "Grano total",
+        "value": "≈ 9,2 kg (Pale Ale 65,2 % · trigo 21,7 % · avena 13,0 %)",
+        "kind": "ejecucion"
+       },
+       {
+        "label": "Hopstand",
+        "value": "71 °C: Mosaic 50 g, El Dorado ~40–48 g, Citra 20 g",
+        "kind": "ejecucion",
+        "note": "Tiempo de contacto no registrado"
+       },
+       {
+        "label": "Dry hop",
+        "value": "~150 g de Mosaic planificados; también Citra, El Dorado y/o Galaxy según la versión",
+        "kind": "planificado",
+        "note": "Cantidad final exacta pendiente del registro original"
+       },
+       {
+        "label": "Perfil de agua",
+        "value": "Ca 127 · Mg 9 · Na ~0 · Cl 172–178 · SO₄ 90–92 ppm",
+        "kind": "ejecucion"
+       },
+       {
+        "label": "Sales",
+        "value": "CaCl₂ 14 g · MgSO₄ 3,5 g · CaSO₄ 3,2 g",
+        "kind": "ejecucion",
+        "note": "Reparto entre macerado y lavado no registrado"
+       },
+       {
+        "label": "Levadura",
+        "value": "London ESB y/o US-05; otro registro indica 2 sobres de US-05",
+        "kind": "ejecucion",
+        "note": "PENDIENTE DE RECONCILIAR con la ficha definitiva del lote ganador"
+       },
+       {
+        "label": "Eficiencia de sala",
+        "value": "68,1 %",
+        "kind": "calculo",
+        "note": "Calculada para reproducir la OG objetivo (1.064) con el grano registrado. No fue medida."
+       }
+      ],
+      "missing": [
+       "Levadura definitiva del lote ganador",
+       "Cantidad final de dry hop y variedades",
+       "Tiempo de hopstand",
+       "Días de dry hop",
+       "Agua de origen",
+       "% AA real de cada lúpulo"
+      ],
+      "warnings": [
+       "La levadura no se carga en la receta hasta reconciliar London ESB / US-05.",
+       "Agua de origen no registrada en la ficha: para calcular se usa el perfil histórico de Armenia de La H."
+      ],
+      "notes": [
+       "RECETA_PREMIADA = TRUE · PREMIO = ORO · COMPETENCIA = COPA RAÍCES"
+      ]
+     }
+    },
+    "status": "historico",
+    "brewDate": 1792767600000,
+    "brewDay": {
+     "done": {},
+     "ogMeasured": 1.065,
+     "fermenterVolumeL": 30
+    },
+    "readings": [],
+    "createdAt": 1792767600000,
+    "updatedAt": 1792767600000,
+    "code": "H-01",
+    "brewDateUnknown": true,
+    "historical": {
+     "status": "elaborada",
+     "origin": "Historial inicial de La H Cerveza Artesanal (importado el 23 de octubre de 2026)",
+     "importedAt": 1792767600000,
+     "values": [
+      {
+       "label": "OG real",
+       "value": "≈ 1.065",
+       "kind": "medicion",
+       "note": "Registrada como aproximada"
+      },
+      {
+       "label": "Volumen",
+       "value": "30 L",
+       "kind": "ejecucion"
+      },
+      {
+       "label": "Hervor real",
+       "value": "≈ 2 h",
+       "kind": "ejecucion"
+      }
+     ],
+     "missing": [
+      "Fecha de cocción",
+      "FG real",
+      "Volumen envasado"
+     ],
+     "warnings": [],
+     "notes": []
+    }
+   },
+   {
+    "id": "hist-lote-h-02",
+    "number": 9002,
+    "name": "American Barleywine — Mosaic + Voss Kveik",
+    "recipeId": "hist-barleywine-mosaic-kveik",
+    "recipeVersionId": "hist-barleywine-mosaic-kveik-v1",
+    "recipeVersionNumber": 1,
+    "events": [
+     {
+      "uid": "hist-e-u",
+      "at": 1792771200000,
+      "kind": "estado",
+      "text": "Inicio de fermentación con Voss Kveik (2 sobres) a ≈ 35 °C; luego ≈ 32 °C.",
+      "source": "registro",
+      "tempC": 35
+     },
+     {
+      "uid": "hist-e-v",
+      "at": 1792875600000,
+      "kind": "adicion",
+      "text": "Adición diferida de 900 g de glucosa/dextrosa, después de iniciada la fermentación.",
+      "source": "registro"
+     },
+     {
+      "uid": "hist-e-w",
+      "at": 1793113200000,
+      "kind": "nota",
+      "text": "FG corregida aproximada ≈ 1.028 (cálculo/corrección; la lectura medida fue ≈ 1.026).",
+      "source": "calculo"
+     },
+     {
+      "uid": "hist-e-x",
+      "at": 1793127600000,
+      "kind": "nota",
+      "text": "Cold crash a ≈ 2 °C.",
+      "source": "registro",
+      "tempC": 2
+     },
+     {
+      "uid": "hist-e-y",
+      "at": 1793199600000,
+      "kind": "nota",
+      "text": "Parte de las botellas se destinó a experimentación con Brettanomyces bruxellensis (no mezclar con la cerveza base).",
+      "source": "registro"
+     }
+    ],
+    "recipe": {
+     "id": "hist-barleywine-mosaic-kveik",
+     "name": "American Barleywine — Mosaic + Voss Kveik",
+     "equipment": {
+      "batchSizeL": 30,
+      "boilTimeMin": 60,
+      "kettleVolumeL": 40,
+      "boilOffLph": 3.5,
+      "kettleLossL": 2,
+      "fermenterLossL": 1,
+      "mashTunDeadspaceL": 0,
+      "grainAbsorptionLpkg": 0.6,
+      "hopAbsorptionLp100g": 0.7,
+      "coolingShrinkPct": 4,
+      "efficiencyPct": 70,
+      "mashRatioLpkg": 3,
+      "spargeL": 0,
+      "id": "eq-biab",
+      "name": "BIAB 40 L",
+      "type": "biab"
+     },
+     "equipmentId": "eq-biab",
+     "batchSizeL": 30,
+     "boilTimeMin": 60,
+     "efficiencyPct": 55.6,
+     "fermentables": [
+      {
+       "uid": "hist-f-g",
+       "ingredientId": "maris-otter",
+       "name": "Maris Otter",
+       "type": "base",
+       "colorEBC": 6,
+       "ppg": 38,
+       "amountKg": 13,
+       "use": "macerado",
+       "source": "referencia",
+       "sourceNote": "Cantidad registrada; marca no registrada. Color y rendimiento: Valor típico de la ficha técnica de Crisp / Simpsons; cada lote varía."
+      },
+      {
+       "uid": "hist-f-h",
+       "ingredientId": "munich-1-wey",
+       "name": "Munich Tipo I",
+       "type": "base",
+       "colorEBC": 15,
+       "ppg": 37,
+       "amountKg": 1.73,
+       "use": "macerado",
+       "source": "referencia",
+       "sourceNote": "Cantidad registrada; Munich I: marca no registrada. Color y rendimiento: Valor típico de la ficha técnica de Weyermann; cada lote varía."
+      },
+      {
+       "uid": "hist-f-i",
+       "ingredientId": "munich-2-wey",
+       "name": "Munich Tipo II",
+       "type": "base",
+       "colorEBC": 22,
+       "ppg": 37,
+       "amountKg": 0.34,
+       "use": "macerado",
+       "source": "referencia",
+       "sourceNote": "Cantidad registrada; Munich II: marca no registrada. Color y rendimiento: Valor típico de la ficha técnica de Weyermann; cada lote varía."
+      },
+      {
+       "uid": "hist-f-f",
+       "name": "Amber Malt",
+       "type": "especial",
+       "colorEBC": 60,
+       "ppg": 32,
+       "amountKg": 0.26,
+       "use": "macerado",
+       "source": "referencia",
+       "sourceNote": "Cantidad registrada. Amber Malt no está en el catálogo: color (~60 EBC) y rendimiento típicos solo para calcular."
+      },
+      {
+       "uid": "hist-f-j",
+       "ingredientId": "dextrose",
+       "name": "Dextrosa",
+       "type": "azucar",
+       "colorEBC": 0,
+       "ppg": 42,
+       "amountKg": 0.9,
+       "use": "fermentador",
+       "source": "referencia",
+       "sourceNote": "Cantidad registrada; glucosa/dextrosa añadida de forma DIFERIDA, después de iniciada la fermentación. Color y rendimiento: Valor típico de literatura."
+      }
+     ],
+     "hops": [
+      {
+       "uid": "hist-h-k",
+       "ingredientId": "mosaic",
+       "name": "Mosaic",
+       "alpha": 13.6,
+       "source": "registro",
+       "sourceNote": "Cantidad y momento registrados. % AA registrado (13.6 %)",
+       "form": "pellet",
+       "amountG": 55,
+       "use": "hervor",
+       "time": 60
+      },
+      {
+       "uid": "hist-h-l",
+       "ingredientId": "mosaic",
+       "name": "Mosaic",
+       "alpha": 13.6,
+       "source": "registro",
+       "sourceNote": "Cantidad y momento registrados. % AA registrado (13.6 %)",
+       "form": "pellet",
+       "amountG": 20,
+       "use": "hervor",
+       "time": 10
+      },
+      {
+       "uid": "hist-h-m",
+       "ingredientId": "mosaic",
+       "name": "Mosaic",
+       "alpha": 13.6,
+       "source": "registro",
+       "sourceNote": "Cantidad y momento registrados. % AA registrado (13.6 %)",
+       "form": "pellet",
+       "amountG": 50,
+       "use": "whirlpool",
+       "time": 20,
+       "tempC": 80
+      },
+      {
+       "uid": "hist-h-n",
+       "ingredientId": "mosaic",
+       "name": "Mosaic",
+       "alpha": 13.6,
+       "source": "registro",
+       "sourceNote": "Cantidad y momento registrados. % AA registrado (13.6 %). Contacto aproximado 48 horas",
+       "form": "pellet",
+       "amountG": 85,
+       "use": "dry-hop",
+       "time": 2
+      }
+     ],
+     "yeasts": [
+      {
+       "uid": "hist-y-o",
+       "ingredientId": "voss",
+       "name": "LalBrew Voss Kveik",
+       "lab": "Lallemand",
+       "code": "Voss",
+       "type": "kveik",
+       "form": "seca",
+       "attenuation": 79,
+       "tempRange": [
+        25,
+        40
+       ],
+       "family": "kveik",
+       "amount": 2,
+       "source": "registro",
+       "sourceNote": "Levadura y cantidad registradas"
+      }
+     ],
+     "miscs": [],
+     "mashSteps": [],
+     "fermentation": [
+      {
+       "uid": "hist-t-p",
+       "name": "Inicio",
+       "tempC": 35,
+       "days": 0
+      },
+      {
+       "uid": "hist-t-q",
+       "name": "Continuación",
+       "tempC": 32,
+       "days": 0
+      },
+      {
+       "uid": "hist-t-r",
+       "name": "Cold crash",
+       "tempC": 2,
+       "days": 0
+      }
+     ],
+     "water": {
+      "sourceProfileId": "custom-hist-armenia",
+      "dilution": 0,
+      "mashSalts": {},
+      "spargeSalts": {},
+      "lacticMl": 0,
+      "phosphoricMl": 0,
+      "lacticPct": 88,
+      "phosphoricPct": 10
+     },
+     "carbonation": {
+      "volumes": 2.2,
+      "method": "priming",
+      "primingSugar": "sacarosa"
+     },
+     "versionCount": 1,
+     "origin": {
+      "kind": "importacion",
+      "detail": "Historial inicial de La H"
+     },
+     "createdAt": 1792767600000,
+     "updatedAt": 1792767600000,
+     "styleId": "american-barleywine",
+     "author": "La H Cerveza Artesanal",
+     "intent": {
+      "mode": "moderna",
+      "text": "American Barleywine moderno: muy maltoso, alcohol alto, complejo y lupulado; Mosaic como único lúpulo; alcohol perceptible pero no áspero; buena integración; bebible para su graduación.",
+      "target": {}
+     },
+     "historical": {
+      "status": "elaborada",
+      "origin": "Historial inicial de La H Cerveza Artesanal (importado el 23 de octubre de 2026)",
+      "importedAt": 1792767600000,
+      "values": [
+       {
+        "label": "OG del mosto",
+        "value": "≈ 1.100",
+        "kind": "medicion",
+        "note": "Antes de considerar la glucosa diferida"
+       },
+       {
+        "label": "OG equivalente total",
+        "value": "≈ 1.107–1.108",
+        "kind": "estimacion",
+        "note": "Incluyendo la glucosa diferida"
+       },
+       {
+        "label": "ABV",
+        "value": "≈ 10,8 %",
+        "kind": "estimacion",
+        "note": "Posible 11,0–11,2 % si la densidad siguió bajando"
+       },
+       {
+        "label": "Carbonatación objetivo",
+        "value": "2,1–2,3 vol",
+        "kind": "planificado"
+       },
+       {
+        "label": "Maduración",
+        "value": "Mejora de integración esperada a las 4–12 semanas",
+        "kind": "planificado"
+       },
+       {
+        "label": "Eficiencia de sala",
+        "value": "55,6 %",
+        "kind": "calculo",
+        "note": "Calculada para reproducir la OG del mosto registrada (≈ 1.100, sin la glucosa diferida, que se calcula aparte) con el grano registrado. No fue medida."
+       }
+      ],
+      "missing": [
+       "Temperatura y tiempo de macerado",
+       "Tiempo de hervor",
+       "Duración de cada etapa de fermentación",
+       "Agua y sales",
+       "Eficiencia medida"
+      ],
+      "warnings": [
+       "No registrar como ganador mientras no exista resultado de competencia confirmado.",
+       "Agua de origen no registrada en la ficha: para calcular se usa el perfil histórico de Armenia de La H."
+      ],
+      "notes": [
+       "Parte de las botellas se destinó a experimentación con Brettanomyces bruxellensis: no mezclar esas botellas con el perfil de la cerveza base."
+      ]
+     }
+    },
+    "status": "historico",
+    "brewDate": 1792767600000,
+    "brewDay": {
+     "done": {},
+     "ogMeasured": 1.1,
+     "fermenterVolumeL": 30
+    },
+    "readings": [
+     {
+      "uid": "hist-r-s",
+      "at": 1792854000000,
+      "sg": 1.03,
+      "source": "medicion",
+      "note": "≈ 24 h"
+     },
+     {
+      "uid": "hist-r-t",
+      "at": 1793026800000,
+      "sg": 1.026,
+      "source": "medicion",
+      "note": "≈ 72 h; lectura histórica alrededor de 1.026"
+     }
+    ],
+    "createdAt": 1792767600000,
+    "updatedAt": 1792767600000,
+    "code": "H-02",
+    "brewDateUnknown": true,
+    "brewDateText": "agosto/septiembre de 2026",
+    "historical": {
+     "status": "elaborada",
+     "origin": "Historial inicial de La H Cerveza Artesanal (importado el 23 de octubre de 2026)",
+     "importedAt": 1792767600000,
+     "values": [
+      {
+       "label": "Fecha",
+       "value": "agosto/septiembre de 2026",
+       "kind": "ejecucion"
+      },
+      {
+       "label": "Volumen final",
+       "value": "≈ 30 L",
+       "kind": "ejecucion"
+      },
+      {
+       "label": "FG medida",
+       "value": "≈ 1.026",
+       "kind": "medicion"
+      },
+      {
+       "label": "FG corregida",
+       "value": "≈ 1.028",
+       "kind": "calculo"
+      }
+     ],
+     "missing": [
+      "Fecha exacta",
+      "Estado actual del lote"
+     ],
+     "warnings": [],
+     "notes": []
+    }
+   },
+   {
+    "id": "hist-lote-h-03",
+    "number": 9003,
+    "name": "Vienna Lager con café",
+    "recipeId": "hist-vienna-lager-cafe",
+    "recipeVersionId": "hist-vienna-lager-cafe-v1",
+    "recipeVersionNumber": 1,
+    "events": [
+     {
+      "uid": "hist-e-1a",
+      "at": 1792767600000,
+      "kind": "nota",
+      "text": "Fermentación presurizada a ≈ 15,5 °C con W-34/70 (3 sobres).",
+      "source": "registro",
+      "tempC": 15.5
+     },
+     {
+      "uid": "hist-e-1b",
+      "at": 1792940400000,
+      "kind": "correccion",
+      "text": "Reinoculación con BRY-97 durante la evolución del lote (evento de bitácora, no parte de la formulación original).",
+      "source": "registro"
+     },
+     {
+      "uid": "hist-e-1c",
+      "at": 1793487600000,
+      "kind": "adicion",
+      "text": "División: ≈ 18 L destinados a café. Café Sidra Natural 200 g en grano entero en Cornelius (16–18 h planeado, límite 24 h). Ajuste: CaCl₂ 0,8 g + NaCl 0,4 g.",
+      "source": "registro",
+      "volumeL": 18
+     }
+    ],
+    "recipe": {
+     "id": "hist-vienna-lager-cafe",
+     "name": "Vienna Lager con café",
+     "equipment": {
+      "batchSizeL": 40,
+      "boilTimeMin": 60,
+      "kettleVolumeL": 40,
+      "boilOffLph": 3.5,
+      "kettleLossL": 2,
+      "fermenterLossL": 1,
+      "mashTunDeadspaceL": 0,
+      "grainAbsorptionLpkg": 0.6,
+      "hopAbsorptionLp100g": 0.7,
+      "coolingShrinkPct": 4,
+      "efficiencyPct": 70,
+      "mashRatioLpkg": 3,
+      "spargeL": 0,
+      "id": "eq-biab",
+      "name": "BIAB 40 L",
+      "type": "biab"
+     },
+     "equipmentId": "eq-biab",
+     "batchSizeL": 40,
+     "boilTimeMin": 60,
+     "efficiencyPct": 68.1,
+     "fermentables": [
+      {
+       "uid": "hist-f-z",
+       "ingredientId": "vienna-wey",
+       "name": "Vienna",
+       "type": "base",
+       "colorEBC": 8,
+       "ppg": 37,
+       "amountKg": 7.9,
+       "use": "macerado",
+       "source": "referencia",
+       "sourceNote": "Cantidad registrada; marca no registrada. Color y rendimiento: Valor típico de la ficha técnica de Weyermann; cada lote varía."
+      },
+      {
+       "uid": "hist-f-10",
+       "ingredientId": "munich-1-wey",
+       "name": "Munich Tipo I",
+       "type": "base",
+       "colorEBC": 15,
+       "ppg": 37,
+       "amountKg": 1,
+       "use": "macerado",
+       "source": "referencia",
+       "sourceNote": "Cantidad registrada. Color y rendimiento: Valor típico de la ficha técnica de Weyermann; cada lote varía."
+      },
+      {
+       "uid": "hist-f-11",
+       "ingredientId": "pilsner-wey",
+       "name": "Pilsner",
+       "type": "base",
+       "colorEBC": 3.5,
+       "ppg": 37,
+       "amountKg": 0.9,
+       "use": "macerado",
+       "source": "referencia",
+       "sourceNote": "Cantidad registrada; marca no registrada. Color y rendimiento: Valor típico de la ficha técnica de Weyermann; cada lote varía."
+      },
+      {
+       "uid": "hist-f-12",
+       "ingredientId": "caramunich-2",
+       "name": "Caramunich Tipo II",
+       "type": "caramelo",
+       "colorEBC": 120,
+       "ppg": 34,
+       "amountKg": 0.1,
+       "use": "macerado",
+       "source": "referencia",
+       "sourceNote": "Cantidad registrada. Color y rendimiento: Valor típico de la ficha técnica de Weyermann; cada lote varía."
+      }
+     ],
+     "hops": [
+      {
+       "uid": "hist-h-13",
+       "ingredientId": "magnum",
+       "name": "Hallertau Magnum",
+       "alpha": 13,
+       "source": "referencia",
+       "sourceNote": "Cantidad y momento registrados. % AA no registrado: se usa el típico (13 %) solo para calcular IBU",
+       "form": "pellet",
+       "amountG": 38,
+       "use": "hervor",
+       "time": 60
+      },
+      {
+       "uid": "hist-h-14",
+       "ingredientId": "hallertau-mittelfruh",
+       "name": "Hallertau (variedad no especificada)",
+       "alpha": 4,
+       "source": "referencia",
+       "sourceNote": "Cantidad y momento registrados. Variedad exacta de Hallertau no registrada; % AA típico solo para calcular.",
+       "form": "pellet",
+       "amountG": 35,
+       "use": "hervor",
+       "time": 15
+      }
+     ],
+     "yeasts": [
+      {
+       "uid": "hist-y-15",
+       "ingredientId": "w-34-70",
+       "name": "SafLager W-34/70",
+       "lab": "Fermentis",
+       "code": "W-34/70",
+       "type": "lager",
+       "form": "seca",
+       "attenuation": 82,
+       "tempRange": [
+        10,
+        15
+       ],
+       "family": "lager-alemana",
+       "amount": 3,
+       "source": "registro",
+       "sourceNote": "Levadura y cantidad registradas"
+      }
+     ],
+     "miscs": [
+      {
+       "uid": "hist-m-17",
+       "name": "Café especial Sidra Natural (grano entero)",
+       "use": "fermentador",
+       "amount": 200,
+       "unit": "g",
+       "notes": "Solo en la porción de ≈ 18 L, directo en barril Cornelius. Planeado 16–18 h; límite considerado 24 h."
+      },
+      {
+       "uid": "hist-m-18",
+       "name": "Cloruro de calcio (porción con café)",
+       "use": "fermentador",
+       "amount": 0.8,
+       "unit": "g",
+       "notes": "Ajuste mineral solo para ≈ 18 L con café"
+      },
+      {
+       "uid": "hist-m-19",
+       "name": "Sal (NaCl) (porción con café)",
+       "use": "fermentador",
+       "amount": 0.4,
+       "unit": "g",
+       "notes": "Ajuste mineral solo para ≈ 18 L con café; sin sulfato ni bicarbonato adicional"
+      }
+     ],
+     "mashSteps": [],
+     "fermentation": [
+      {
+       "uid": "hist-t-16",
+       "name": "Primaria presurizada",
+       "tempC": 15.5,
+       "days": 0
+      }
+     ],
+     "water": {
+      "sourceProfileId": "custom-hist-armenia",
+      "dilution": 0,
+      "mashSalts": {},
+      "spargeSalts": {},
+      "lacticMl": 0,
+      "phosphoricMl": 0,
+      "lacticPct": 88,
+      "phosphoricPct": 10
+     },
+     "carbonation": {
+      "volumes": 2.4,
+      "method": "priming",
+      "primingSugar": "sacarosa"
+     },
+     "versionCount": 1,
+     "origin": {
+      "kind": "importacion",
+      "detail": "Historial inicial de La H"
+     },
+     "createdAt": 1792767600000,
+     "updatedAt": 1792767600000,
+     "styleId": "vienna-lager",
+     "author": "La H Cerveza Artesanal",
+     "historical": {
+      "status": "elaborada",
+      "origin": "Historial inicial de La H Cerveza Artesanal (importado el 23 de octubre de 2026)",
+      "importedAt": 1792767600000,
+      "values": [
+       {
+        "label": "OG objetivo",
+        "value": "1.052",
+        "kind": "planificado"
+       },
+       {
+        "label": "FG objetivo",
+        "value": "1.011–1.012",
+        "kind": "planificado"
+       },
+       {
+        "label": "ABV",
+        "value": "≈ 5,3 %",
+        "kind": "estimacion"
+       },
+       {
+        "label": "Grano total",
+        "value": "≈ 9,9 kg",
+        "kind": "ejecucion"
+       },
+       {
+        "label": "Fermentación",
+        "value": "≈ 15,5 °C, presurizada",
+        "kind": "ejecucion"
+       },
+       {
+        "label": "Eficiencia de sala",
+        "value": "68,1 %",
+        "kind": "calculo",
+        "note": "Calculada para reproducir la OG objetivo (1.052) con el grano registrado. No fue medida."
+       }
+      ],
+      "missing": [
+       "Macerado",
+       "Tiempo de hervor",
+       "Duración de la fermentación",
+       "Agua y sales de la base",
+       "Carbonatación"
+      ],
+      "warnings": [
+       "Agua de origen no registrada en la ficha: para calcular se usa el perfil histórico de Armenia de La H."
+      ],
+      "notes": [
+       "Decisión histórica: se evaluó que para competencia podía ser más defendible declarar una base tipo Märzen que Vienna Lager por la percepción final. No se cambia retrospectivamente el estilo original del lote."
+      ]
+     }
+    },
+    "status": "historico",
+    "brewDate": 1792767600000,
+    "brewDay": {
+     "done": {},
+     "fermenterVolumeL": 40
+    },
+    "readings": [],
+    "createdAt": 1792767600000,
+    "updatedAt": 1792767600000,
+    "code": "H-03",
+    "brewDateUnknown": true,
+    "tastingNotes": "Porción con café: dulce y seca a la vez en la percepción; café muy aromático e integrado; sin carácter quemado dominante. (Descripción del historial; sin escala numérica.)",
+    "historical": {
+     "status": "elaborada",
+     "origin": "Historial inicial de La H Cerveza Artesanal (importado el 23 de octubre de 2026)",
+     "importedAt": 1792767600000,
+     "values": [
+      {
+       "label": "Volumen base",
+       "value": "≈ 40 L",
+       "kind": "ejecucion"
+      },
+      {
+       "label": "Porción con café",
+       "value": "≈ 18 L",
+       "kind": "ejecucion"
+      }
+     ],
+     "missing": [
+      "Fecha",
+      "OG y FG reales"
+     ],
+     "warnings": [],
+     "notes": []
+    }
+   },
+   {
+    "id": "hist-lote-h-04",
+    "number": 9004,
+    "name": "Scottish con café",
+    "recipeId": "hist-scottish-cafe",
+    "recipeVersionId": "hist-scottish-cafe-v1",
+    "recipeVersionNumber": 1,
+    "events": [
+     {
+      "uid": "hist-e-1f",
+      "at": 1792767600000,
+      "kind": "medicion",
+      "text": "Macerado: evolucionó de ≈ 72 °C a 68 °C; pH ≈ 5,3.",
+      "source": "registro",
+      "ph": 5.3,
+      "tempC": 72
+     }
+    ],
+    "recipe": {
+     "id": "hist-scottish-cafe",
+     "name": "Scottish con café",
+     "equipment": {
+      "batchSizeL": 20,
+      "boilTimeMin": 60,
+      "kettleVolumeL": 40,
+      "boilOffLph": 3.5,
+      "kettleLossL": 2,
+      "fermenterLossL": 1,
+      "mashTunDeadspaceL": 0,
+      "grainAbsorptionLpkg": 0.6,
+      "hopAbsorptionLp100g": 0.7,
+      "coolingShrinkPct": 4,
+      "efficiencyPct": 70,
+      "mashRatioLpkg": 3,
+      "spargeL": 0,
+      "id": "eq-biab",
+      "name": "BIAB 40 L",
+      "type": "biab"
+     },
+     "equipmentId": "eq-biab",
+     "batchSizeL": 20,
+     "boilTimeMin": 60,
+     "efficiencyPct": 70,
+     "fermentables": [],
+     "hops": [],
+     "yeasts": [],
+     "miscs": [
+      {
+       "uid": "hist-m-1d",
+       "name": "Café especial Wush Wush Natural",
+       "use": "fermentador",
+       "amount": 0,
+       "unit": "g",
+       "notes": "Cantidad, método y tiempo: dato_no_recuperado"
+      }
+     ],
+     "mashSteps": [],
+     "fermentation": [],
+     "water": {
+      "sourceProfileId": "custom-hist-armenia",
+      "dilution": 0,
+      "mashSalts": {},
+      "spargeSalts": {},
+      "lacticMl": 0,
+      "phosphoricMl": 0,
+      "lacticPct": 88,
+      "phosphoricPct": 10
+     },
+     "carbonation": {
+      "volumes": 2.15,
+      "method": "priming",
+      "primingSugar": "sacarosa"
+     },
+     "versionCount": 1,
+     "origin": {
+      "kind": "importacion",
+      "detail": "Historial inicial de La H"
+     },
+     "createdAt": 1792767600000,
+     "updatedAt": 1792767600000,
+     "styleId": "scottish-export",
+     "author": "La H Cerveza Artesanal",
+     "historical": {
+      "status": "elaborada",
+      "origin": "Historial inicial de La H Cerveza Artesanal (importado el 23 de octubre de 2026)",
+      "importedAt": 1792767600000,
+      "values": [
+       {
+        "label": "Estilo",
+        "value": "Scottish; manejada después como Scottish Export / Scottish con café",
+        "kind": "ejecucion"
+       },
+       {
+        "label": "Maltas conocidas",
+        "value": "BestMalz Pilsen, Munich y Caramunich II, entre otras",
+        "kind": "ejecucion",
+        "note": "Cantidades exactas: dato_no_recuperado"
+       },
+       {
+        "label": "Macerado",
+        "value": "≈ 72 °C → 68 °C",
+        "kind": "medicion"
+       },
+       {
+        "label": "pH de macerado",
+        "value": "≈ 5,3",
+        "kind": "medicion"
+       },
+       {
+        "label": "FG",
+        "value": "≈ 1.018",
+        "kind": "medicion"
+       },
+       {
+        "label": "Carbonatación objetivo",
+        "value": "2,1–2,2 vol",
+        "kind": "planificado"
+       },
+       {
+        "label": "Carbonatación en barril",
+        "value": "0,95 bar a 4 °C",
+        "kind": "ejecucion"
+       },
+       {
+        "label": "Café",
+        "value": "Wush Wush Natural, elegido buscando integración (evitar cafés quemados)",
+        "kind": "ejecucion"
+       }
+      ],
+      "missing": [
+       "OG",
+       "ABV",
+       "Cantidades de malta",
+       "Lúpulos",
+       "Levadura",
+       "Agua y sales",
+       "Volumen",
+       "Dosis y método del café"
+      ],
+      "warnings": [],
+      "notes": [
+       "RECETA_PREMIADA = TRUE · PREMIO_CONFIRMADO = BRONCE",
+       "Aprendizaje: en café especial, evitar perfiles excesivamente tostados, evitar que el café se perciba separado, priorizar la integración y evaluar variedad, proceso y perfil sensorial del café.",
+       "El café se percibió integrado y no como una adición artificial separada (atributo positivo)."
+      ],
+      "incomplete": true
+     }
+    },
+    "status": "historico",
+    "brewDate": 1792767600000,
+    "brewDay": {
+     "done": {},
+     "mashPH": 5.3
+    },
+    "readings": [
+     {
+      "uid": "hist-r-1e",
+      "at": 1793631600000,
+      "sg": 1.018,
+      "source": "medicion",
+      "note": "FG ≈ 1.018"
+     }
+    ],
+    "createdAt": 1792767600000,
+    "updatedAt": 1792767600000,
+    "code": "H-04",
+    "brewDateUnknown": true,
+    "packaging": {
+     "method": "barril",
+     "beerTempC": 4,
+     "psi": 13.8,
+     "notes": "0,95 bar a 4 °C durante acondicionamiento/carbonatación (registro histórico)."
+    },
+    "tastingNotes": "Café integrado, no percibido como adición artificial separada. (Descripción del historial.)",
+    "historical": {
+     "status": "elaborada",
+     "origin": "Historial inicial de La H Cerveza Artesanal (importado el 23 de octubre de 2026)",
+     "importedAt": 1792767600000,
+     "values": [],
+     "missing": [
+      "Fecha",
+      "OG",
+      "Volumen"
+     ],
+     "warnings": [],
+     "notes": []
+    }
+   },
+   {
+    "id": "hist-lote-h-05",
+    "number": 9005,
+    "name": "Belgian Dubbel",
+    "recipeId": "hist-dubbel",
+    "recipeVersionId": "hist-dubbel-v1",
+    "recipeVersionNumber": 1,
+    "events": [],
+    "recipe": {
+     "id": "hist-dubbel",
+     "name": "Belgian Dubbel",
+     "equipment": {
+      "batchSizeL": 20,
+      "boilTimeMin": 60,
+      "kettleVolumeL": 40,
+      "boilOffLph": 3.5,
+      "kettleLossL": 2,
+      "fermenterLossL": 1,
+      "mashTunDeadspaceL": 0,
+      "grainAbsorptionLpkg": 0.6,
+      "hopAbsorptionLp100g": 0.7,
+      "coolingShrinkPct": 4,
+      "efficiencyPct": 70,
+      "mashRatioLpkg": 3,
+      "spargeL": 0,
+      "id": "eq-biab",
+      "name": "BIAB 40 L",
+      "type": "biab"
+     },
+     "equipmentId": "eq-biab",
+     "batchSizeL": 20,
+     "boilTimeMin": 60,
+     "efficiencyPct": 70,
+     "fermentables": [],
+     "hops": [],
+     "yeasts": [],
+     "miscs": [],
+     "mashSteps": [],
+     "fermentation": [],
+     "water": {
+      "sourceProfileId": "custom-hist-armenia",
+      "dilution": 0,
+      "mashSalts": {},
+      "spargeSalts": {},
+      "lacticMl": 0,
+      "phosphoricMl": 0,
+      "lacticPct": 88,
+      "phosphoricPct": 10
+     },
+     "carbonation": {
+      "volumes": 2.4,
+      "method": "priming",
+      "primingSugar": "sacarosa"
+     },
+     "versionCount": 1,
+     "origin": {
+      "kind": "importacion",
+      "detail": "Historial inicial de La H"
+     },
+     "createdAt": 1792767600000,
+     "updatedAt": 1792767600000,
+     "styleId": "dubbel",
+     "author": "La H Cerveza Artesanal",
+     "historical": {
+      "status": "elaborada",
+      "origin": "Historial inicial de La H Cerveza Artesanal (importado el 23 de octubre de 2026)",
+      "importedAt": 1792767600000,
+      "values": [
+       {
+        "label": "Resultado general",
+        "value": "Considerado muy bueno; inscrito en competencia",
+        "kind": "ejecucion"
+       }
+      ],
+      "missing": [
+       "Maltas",
+       "Azúcar",
+       "Lúpulos",
+       "Levadura",
+       "Perfil de agua",
+       "Volumen",
+       "Macerado",
+       "Fermentación"
+      ],
+      "warnings": [],
+      "notes": [
+       "Sin premio confirmado en el historial recuperado."
+      ],
+      "incomplete": true
+     }
+    },
+    "status": "historico",
+    "brewDate": 1792767600000,
+    "brewDay": {
+     "done": {}
+    },
+    "readings": [
+     {
+      "uid": "hist-r-2c",
+      "at": 1793977200000,
+      "sg": 1.022,
+      "source": "medicion",
+      "note": "FG REAL 1.022: terminó más densa de lo inicialmente esperado"
+     }
+    ],
+    "createdAt": 1792767600000,
+    "updatedAt": 1792767600000,
+    "code": "H-05",
+    "brewDateUnknown": true,
+    "tastingNotes": "Maltosa, compleja; caramelo oscuro, frutas maduras, carácter licoroso leve; cuerpo sedoso; carbonatación viva; dulzor residual; ésteres belgas; final cálido y redondeado. (Descripción del historial; sin escala numérica.)",
+    "historical": {
+     "status": "elaborada",
+     "origin": "Historial inicial de La H Cerveza Artesanal (importado el 23 de octubre de 2026)",
+     "importedAt": 1792767600000,
+     "values": [
+      {
+       "label": "OG",
+       "value": "≈ 1.076–1.077",
+       "kind": "medicion",
+       "note": "Registrada como aproximada"
+      },
+      {
+       "label": "FG real",
+       "value": "1.022",
+       "kind": "medicion"
+      },
+      {
+       "label": "ABV",
+       "value": "≈ 7,1 % (rango 7,0–7,3 %)",
+       "kind": "calculo"
+      }
+     ],
+     "missing": [
+      "Fecha",
+      "Volumen"
+     ],
+     "warnings": [],
+     "notes": [
+      "Relación clave para calibrar el motor sensorial: OG ≈ 1.076–1.077, FG real 1.022, ABV ≈ 7,1 %, con dulzor residual y cuerpo sedoso percibidos."
+     ]
+    }
+   }
+  ],
+  "awards": [
+   {
+    "id": "hist-premio-hazy-oro",
+    "source": "registro",
+    "createdAt": 1792767600000,
+    "beerName": "Hazy IPA — Colab IPA Day",
+    "competition": "Copa Raíces",
+    "result": "oro",
+    "recipeId": "hist-hazy-ipa-colab",
+    "versionId": "hist-hazy-ipa-colab-v1",
+    "batchId": "hist-lote-h-01",
+    "link": "confirmado",
+    "notes": "Premio confirmado en el historial. Levadura y dry hop finales del lote por reconciliar."
+   },
+   {
+    "id": "hist-premio-scottish-bronce",
+    "source": "registro",
+    "createdAt": 1792767600000,
+    "beerName": "Scottish con café",
+    "result": "bronce",
+    "recipeId": "hist-scottish-cafe",
+    "versionId": "hist-scottish-cafe-v1",
+    "batchId": "hist-lote-h-04",
+    "link": "confirmado",
+    "notes": "Bronce confirmado. Competencia: dato_no_recuperado. Existen también registros de plata/bronce para otras cervezas con café de La H."
+   },
+   {
+    "id": "hist-premio-imperial-plata-cusco",
+    "source": "registro",
+    "createdAt": 1792767600000,
+    "beerName": "Imperial Stout de La H",
+    "competition": "Encuentro Latinoamericano / Copa de los Andes",
+    "location": "Cusco, Perú",
+    "result": "plata",
+    "recipeId": "hist-imperial-stout-cafe",
+    "link": "por-confirmar",
+    "candidates": [
+     "hist-imperial-stout-cafe-v1",
+     "hist-imperial-stout-cafe-v2"
+    ],
+    "notes": "Versión exacta (histórica 1 o 2) por confirmar. Base sin Brett."
+   },
+   {
+    "id": "hist-premio-imperial-plata-tropical",
+    "source": "registro",
+    "createdAt": 1792767600000,
+    "beerName": "Imperial Stout de La H",
+    "enteredAs": "Tropical Stout",
+    "result": "plata",
+    "recipeId": "hist-imperial-stout-cafe",
+    "link": "por-confirmar",
+    "candidates": [
+     "hist-imperial-stout-cafe-v1",
+     "hist-imperial-stout-cafe-v2"
+    ],
+    "notes": "Competencia: dato_no_recuperado. Inscrita como Tropical Stout. Versión exacta por confirmar."
+   },
+   {
+    "id": "hist-premio-weizenbock-bronce",
+    "source": "registro",
+    "createdAt": 1792767600000,
+    "beerName": "Tres Tristes Tigres toman Cerveza en un Trigal",
+    "result": "bronce",
+    "recipeId": "hist-weizenbock-tres-tristes-tigres",
+    "link": "por-confirmar",
+    "candidates": [
+     "hist-weizenbock-tres-tristes-tigres-v1"
+    ],
+    "notes": "Bronce confirmado en una competencia anterior (competencia: dato_no_recuperado). Falta confirmar que la receta asociada corresponde al lote premiado."
+   },
+   {
+    "id": "hist-premio-weizenbock-maestros-trigo",
+    "source": "registro",
+    "createdAt": 1792767600000,
+    "beerName": "Weizenbock colaborativa",
+    "competition": "Maestros del Trigo",
+    "year": 2026,
+    "result": "primer-puesto",
+    "prize": "FermZilla 55 L",
+    "link": "por-confirmar",
+    "candidates": [
+     "hist-weizenbock-tres-tristes-tigres"
+    ],
+    "notes": "Versión colaborativa: distinguir si es el mismo lote/versión de \"Tres Tristes Tigres\" o una versión posterior."
+   },
+   {
+    "id": "hist-premio-dubbel-inscrita",
+    "source": "registro",
+    "createdAt": 1792767600000,
+    "beerName": "Belgian Dubbel",
+    "result": "inscrita",
+    "recipeId": "hist-dubbel",
+    "link": "confirmado",
+    "notes": "Inscrita en competencia; sin premio confirmado. Competencia: dato_no_recuperado."
+   },
+   {
+    "id": "hist-premio-catharina-bronce",
+    "source": "registro",
+    "createdAt": 1792767600000,
+    "beerName": "Catharina Sour (histórica)",
+    "result": "bronce",
+    "link": "sin-receta",
+    "notes": "Bronce confirmado. Receta exacta del lote premiado: dato_no_recuperado. No vincular a la formulación de 50 L por similitud de estilo."
+   }
+  ],
+  "waters": [
+   {
+    "id": "custom-hist-armenia",
+    "name": "Armenia · registro histórico de La H",
+    "ca": 9,
+    "mg": 2,
+    "na": 5,
+    "so4": 7,
+    "cl": 8,
+    "hco3": 30,
+    "description": "Perfil base usado históricamente por La H. pH aproximado 7,1.",
+    "custom": true,
+    "source": "registro",
+    "sourceNote": "Valores aproximados del historial de La H. Difieren del promedio EPA de septiembre 2026 (sobre todo magnesio 2 frente a 10,9 y bicarbonato 30 frente a 63): conviene confirmarlo con un análisis de laboratorio.",
+    "report": {
+     "ph": 7.1
+    }
+   },
+   {
+    "id": "custom-hist-hazy-oro",
+    "name": "Hazy IPA Copa Raíces · perfil usado",
+    "ca": 127,
+    "mg": 9,
+    "na": 0,
+    "so4": 91,
+    "cl": 175,
+    "hco3": 0,
+    "description": "Perfil aproximado de la Hazy IPA ganadora: Cl 172–178, SO₄ 90–92 (puntos medios para calcular). Bicarbonato no registrado.",
+    "custom": true,
+    "source": "registro",
+    "sourceNote": "Perfil aproximado registrado para la Hazy IPA (Oro, Copa Raíces). Rangos de Cl y SO₄ con punto medio; bicarbonato no recuperado."
+   },
+   {
+    "id": "custom-hist-wcipa",
+    "name": "West Coast IPA · perfil objetivo de La H",
+    "ca": 110,
+    "mg": 6,
+    "na": 8,
+    "so4": 190,
+    "cl": 65,
+    "hco3": 30,
+    "description": "Perfil objetivo aproximado de la West Coast IPA (pH de macerado objetivo ≈ 5,35).",
+    "custom": true,
+    "source": "registro",
+    "sourceNote": "Perfil objetivo registrado por La H para la West Coast IPA."
+   }
+  ]
+ }
+}
