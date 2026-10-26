@@ -21,6 +21,9 @@ export interface Profile {
   lastLoginAt?: number;
   /** Espacio de uso sin registro: sin nombre ni clave. */
   guest?: boolean;
+  /** Cuenta con correo (Firebase) a la que se sincroniza este perfil. */
+  uid?: string;
+  email?: string;
 }
 
 class RegistryDb extends Dexie {
@@ -135,6 +138,33 @@ export async function createProfile(opts: { username: string; displayName: strin
   };
   await registry.profiles.add(profile);
   return profile;
+}
+
+/** Perfil de una cuenta con correo: se reutiliza si ya existe en este navegador, o se crea (sus datos bajan de la nube). */
+export async function accountProfile(account: { uid: string; email: string | null }, displayName?: string): Promise<{ profile: Profile; created: boolean }> {
+  const existing = (await registry.profiles.toArray()).find((p) => p.uid === account.uid);
+  if (existing) return { profile: existing, created: false };
+  const email = (account.email ?? '').toLowerCase();
+  let username = email || `cuenta-${account.uid.slice(0, 8)}`;
+  while (await registry.profiles.where('username').equals(username).count()) username = `${username}-2`;
+  const profile: Profile = {
+    id: `${Date.now().toString(36)}${Math.random().toString(36).slice(2, 7)}`,
+    username,
+    displayName: displayName?.trim() || email.split('@')[0] || 'Cuenta',
+    dbName: `la-h-cuenta-${account.uid}`,
+    createdAt: Date.now(),
+    uid: account.uid,
+    email,
+  };
+  await registry.profiles.add(profile);
+  return { profile, created: true };
+}
+
+/** Vincula un perfil local a una cuenta: sus datos se suben y desde ahí se sincronizan. */
+export async function linkProfile(profileId: string, account: { uid: string; email: string | null }) {
+  const other = (await registry.profiles.toArray()).find((p) => p.uid === account.uid && p.id !== profileId);
+  if (other) throw new Error(`Esa cuenta ya está en este navegador como el perfil «${other.displayName}». Entra con ese perfil.`);
+  await registry.profiles.update(profileId, { uid: account.uid, email: (account.email ?? '').toLowerCase(), guest: false, passHash: undefined, salt: undefined });
 }
 
 export const GUEST_USERNAME = 'sin-registro';

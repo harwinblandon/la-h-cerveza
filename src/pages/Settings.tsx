@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { Icon } from '../components/Icons';
 import { Info } from '../components/Info';
 import { ProfileCard } from '../components/ProfileCard';
+import { AccountCard } from '../components/AccountCard';
 import { Field, NumberInput, download } from '../components/ui';
 import { exportBackup, importBackup, updateSettings } from '../db';
 import { SALTS } from '../domain/calc/water';
@@ -43,6 +44,7 @@ export default function SettingsPage() {
         </div>
       </div>
       <ProfileCard />
+      <AccountCard />
       <div className="card more-links">
         <h2>Más secciones</h2>
         <div className="grid grid-4">

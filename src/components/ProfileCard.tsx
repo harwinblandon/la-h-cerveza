@@ -45,7 +45,11 @@ export function ProfileCard() {
           Cambiar de perfil
         </button>
       </div>
-      {profile.guest ? (
+      {profile.uid ? (
+        <p style={{ margin: 0 }}>
+          <strong>{profile.displayName}</strong> <span className="faint mono">{profile.email}</span>
+        </p>
+      ) : profile.guest ? (
         <p style={{ margin: 0 }}>
           Estás usando La H <strong>sin registro</strong>. Tus datos quedan solo en este navegador; para no perderlos descarga una copia de seguridad, o crea un perfil y
           restáurala allí.
@@ -57,7 +61,7 @@ export function ProfileCard() {
       </p>
       )}
       {msg && <p className="muted" style={{ fontSize: '0.88rem', margin: '0.5rem 0 0' }}>{msg}</p>}
-      {mode === 'ver' && (
+      {mode === 'ver' && !profile.uid && (
         <div className="row" style={{ marginTop: '0.8rem' }}>
           {profile.guest ? (
             <button

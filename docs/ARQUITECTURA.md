@@ -117,3 +117,13 @@ Principio: **los motores técnicos calculan, los datos mandan, la IA interpreta,
 3. Adjuntos: frutas, café, cacao, vainilla, lactosa, madera; riesgos de dry hop; estilos modernos.
 4. Evaluación sensorial, defectos, competencias y aprendizaje del historial (siempre con número de lotes y confianza).
 5. Nube e IA (pendiente de decisión: hoy sin servidor ni servicios pagos).
+
+
+## Cuentas y sincronización
+
+- Una cuenta (Firebase Auth, correo y clave) es un perfil del registro local con `uid`. Su base IndexedDB (`la-h-cuenta-<uid>`) es la copia de trabajo: la app funciona igual sin internet.
+- `src/sync/middleware.ts` (middleware de Dexie) sella cada escritura con `_v` (ms) y `_dirty = 1`; los borrados dejan marcas en `tombstones`. Lo que llega de la nube se escribe con la marca `__remote` y no queda pendiente.
+- `src/sync/engine.ts` sube lo pendiente en lotes a `users/{uid}/records/{tabla}__{id}` (registro en JSON) y escucha la colección con `onSnapshot`. Conflictos: gana la versión más reciente (`decideRemote`).
+- Firebase se carga con `import()` solo para perfiles con cuenta, así que la app no pesa más para quien no la usa.
+- Reglas (`firestore.rules`): cada cuenta solo lee y escribe `users/{uid}/**`.
+- Cerrar sesión borra la copia local (los datos siguen en la nube); eliminar la cuenta borra también sus documentos.

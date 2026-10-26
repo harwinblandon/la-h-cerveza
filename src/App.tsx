@@ -3,6 +3,7 @@ import { Link, NavLink, Route, Routes } from 'react-router-dom';
 import { LogoLaH, Signature } from './components/Brand';
 import { Icon } from './components/Icons';
 import { useProfile } from './hooks';
+import { SYNC_LABEL, useSyncStatus } from './components/AccountForm';
 import BatchView from './pages/BatchView';
 import Batches from './pages/Batches';
 import EquipmentPage from './pages/Equipment';
@@ -33,6 +34,7 @@ const NAV_MORE: [string, string, string][] = [
 
 export default function App() {
   const profile = useProfile();
+  const sync = useSyncStatus(!!profile?.uid);
   // Alto de la barra superior del celular: las barras fijas de cada página se pegan debajo.
   const top = useRef<HTMLElement>(null);
   useEffect(() => {
@@ -66,7 +68,8 @@ export default function App() {
         <div className="sidebar-foot">
           {profile && (
             <Link to="/ajustes" className="profile-chip" title="Perfil y sesión">
-              {profile.guest ? 'Sin registro' : `@${profile.username}`}
+              {sync && <span className={`sync-dot sync-${sync.state}`} title={SYNC_LABEL[sync.state]} />}
+              {profile.guest ? 'Sin registro' : profile.uid ? profile.email : `@${profile.username}`}
             </Link>
           )}
           <Signature />

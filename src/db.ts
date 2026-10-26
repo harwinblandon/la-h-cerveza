@@ -1,6 +1,7 @@
 import Dexie, { type EntityTable } from 'dexie';
 import { DEFAULT_EQUIPMENT } from './data/equipment';
 import type { PriceList } from './data/precios';
+import { DIRTY, REMOTE, SYNCED_TABLES, VERSION, stripSyncFields, syncMiddleware, type SyncedTable } from './sync/middleware';
 import type { AcidChoice, Award, Batch, Equipment, Fermentable, Hop, InventoryItem, Recipe, RecipeVersion, SaltId, WaterProfile, Yeast } from './domain/types';
 import { hasUnversionedChanges, makeVersion } from './domain/versioning';
 import { SESSION } from './profiles';
@@ -41,6 +42,14 @@ export const DEFAULT_SETTINGS: Settings = {
   acid: { type: 'lactico', pct: 88 },
 };
 
+/** Marca de borrado local pendiente de subir a la nube. */
+export interface Tombstone {
+  key: string;
+  table: SyncedTable;
+  id: string;
+  _v: number;
+}
+
 export class LaHDb extends Dexie {
   recipes!: EntityTable<Recipe, 'id'>;
   recipeVersions!: EntityTable<RecipeVersion, 'id'>;
@@ -53,9 +62,18 @@ export class LaHDb extends Dexie {
   inventory!: EntityTable<InventoryItem, 'id'>;
   settings!: EntityTable<Settings, 'id'>;
   awards!: EntityTable<Award, 'id'>;
+  tombstones!: EntityTable<Tombstone, 'key'>;
 
   constructor(name: string) {
     super(name);
+    // Sella versión y «pendiente de subir» en cada escritura; los borrados dejan una marca.
+    this.use(
+      syncMiddleware((table, ids) => {
+        const now = Date.now();
+        // Fuera de la transacción del borrado (que no incluye la tabla de marcas).
+        setTimeout(() => void this.tombstones.bulkPut(ids.map((id) => ({ key: `${table}/${id}`, table, id, _v: now }))), 0);
+      }),
+    );
     this.version(1).stores({
       recipes: 'id, name, styleId, updatedAt',
       batches: 'id, number, recipeId, status, brewDate',
@@ -91,9 +109,40 @@ export class LaHDb extends Dexie {
     });
     // v4: premios y resultados de competencia.
     this.version(4).stores({ awards: 'id, recipeId, batchId, result, year' });
+    // v5: sincronización con la cuenta. Lo existente queda pendiente de subir con versión mínima,
+    // para que, si la nube ya tiene ese registro, gane la versión de la nube.
+    this.version(5)
+      .stores({
+        recipes: 'id, name, styleId, updatedAt, _dirty',
+        recipeVersions: 'id, recipeId, [recipeId+number], createdAt, _dirty',
+        batches: 'id, number, recipeId, status, brewDate, _dirty',
+        awards: 'id, recipeId, batchId, result, year, _dirty',
+        equipment: 'id, name, _dirty',
+        waters: 'id, name, _dirty',
+        fermentables: 'id, name, _dirty',
+        hops: 'id, name, _dirty',
+        yeasts: 'id, name, _dirty',
+        inventory: 'id, kind, ingredientId, _dirty',
+        settings: 'id, _dirty',
+        tombstones: 'key',
+      })
+      .upgrade(async (tx) => {
+        for (const t of SYNCED_TABLES) {
+          await tx
+            .table(t)
+            .toCollection()
+            .modify((v: Record<string, unknown>) => {
+              v[VERSION] = 1;
+              v[DIRTY] = 1;
+              v[REMOTE] = true;
+            });
+        }
+      });
+    // Valores iniciales: versión mínima y sin pendiente, para no pisar lo que ya haya en la cuenta.
+    const seed = <T extends object>(x: T) => ({ ...x, [VERSION]: 1, [DIRTY]: 0, [REMOTE]: true });
     this.on('populate', (tx) => {
-      tx.table('equipment').bulkAdd(DEFAULT_EQUIPMENT);
-      tx.table('settings').add(DEFAULT_SETTINGS);
+      tx.table('equipment').bulkAdd(DEFAULT_EQUIPMENT.map(seed));
+      tx.table('settings').add(seed(DEFAULT_SETTINGS));
     });
   }
 }
@@ -147,7 +196,7 @@ const TABLES = ['recipes', 'recipeVersions', 'batches', 'awards', 'equipment', '
 
 export async function exportBackup(): Promise<string> {
   const data: Record<string, unknown[]> = {};
-  for (const t of TABLES) data[t] = await db.table(t).toArray();
+  for (const t of TABLES) data[t] = (await db.table(t).toArray()).map((x: Record<string, unknown>) => stripSyncFields(x));
   return JSON.stringify({ app: 'la-h', version: 1, exportedAt: new Date().toISOString(), data }, null, 2);
 }
 

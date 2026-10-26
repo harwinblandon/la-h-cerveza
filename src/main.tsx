@@ -12,6 +12,8 @@ function Root() {
   useEffect(() => {
     if (!SESSION) return;
     registry.profiles.get(SESSION.profileId).then((p) => {
+      // Perfil con cuenta: se sincroniza con la nube (Firebase se carga solo en este caso).
+      if (p?.uid) void import('./sync/engine').then((m) => m.startSync(p.uid!));
       if (p) setState('app');
       else {
         endSession();
