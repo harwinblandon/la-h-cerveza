@@ -536,3 +536,36 @@ a:hover { text-decoration-color: var(--text); }
 }
 
 .gate-guest { width: min(440px, 100%); justify-content: center; }
+
+/* Fondo: la H personal como marca de agua, fija, muy tenue y detrás de todo (como la app de entreno).
+   Se dibuja con máscara para tomar el color del tema: marfil en oscuro, negro en claro. */
+body {
+  background:
+    radial-gradient(ellipse 80% 60% at 70% 0%, color-mix(in srgb, var(--text) 4.5%, transparent), transparent 60%),
+    var(--bg);
+  background-attachment: fixed;
+}
+body::before {
+  content: '';
+  position: fixed;
+  right: 5vw;
+  top: 50%;
+  transform: translateY(-46%);
+  width: min(48vw, 640px);
+  height: 82vh;
+  background-color: var(--text);
+  -webkit-mask: url('./assets/h-personal.svg') no-repeat center / contain;
+  mask: url('./assets/h-personal.svg') no-repeat center / contain;
+  opacity: 0.075;
+  pointer-events: none;
+  z-index: 0;
+}
+#root { position: relative; z-index: 1; }
+@media (max-width: 860px) {
+  body::before { right: 50%; transform: translate(50%, -46%); width: 78vw; height: 70vh; }
+}
+/* Superficies apenas translúcidas para que la H se intuya detrás. */
+.card, .hero { background: color-mix(in srgb, var(--surface) 92%, transparent); }
+.hero { background: color-mix(in srgb, var(--bg-2) 88%, transparent); }
+.gate { background: transparent; }
+.sidebar { background: color-mix(in srgb, var(--bg-2) 94%, transparent); }

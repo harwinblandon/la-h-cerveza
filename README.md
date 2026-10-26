@@ -2,7 +2,7 @@
 
 Aplicación web en español para planificar recetas de cerveza y acompañar cada lote: diseño por estilo, sustitución de ingredientes, química del agua, día de cocción, fermentación y envasado.
 
-**Usarla en línea:** https://harwinblandon.github.io/la-h-cerveza/
+**Usarla en línea:** https://cerveza.redhb.com
 
 ## Cómo usarla
 
