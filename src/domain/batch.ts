@@ -1,3 +1,4 @@
+import { isMashed } from './calc/gravity';
 import { apparentAttenuation, abv } from './calc/gravity';
 import { computeRecipeStats, type RecipeStats } from './calc/recipeStats';
 import { dilutionVolume, dmeForGravity, refractometerFg } from './calc/tools';
@@ -65,7 +66,7 @@ export function brewDaySteps(recipe: Recipe, stats: RecipeStats): BrewStep[] {
 
   // Preparación
   add({ phase: 'preparacion', title: 'Limpia y sanitiza', detail: 'Fermentador, tapa, airlock, enfriador, mangueras, cucharas y densímetro.' });
-  const grains = recipe.fermentables.filter((f) => f.use === 'macerado');
+  const grains = recipe.fermentables.filter(isMashed);
   if (grains.length) {
     add({
       phase: 'preparacion',
@@ -185,7 +186,7 @@ export function checkPreBoil(recipe: Recipe, measuredSg: number, measuredL: numb
   const deltaPoints = (predictedOg - targetOg) * 1000;
   const options: string[] = [];
   const potential = recipe.fermentables
-    .filter((f) => f.use === 'macerado')
+    .filter(isMashed)
     .reduce((s, f) => s + f.amountKg * LB_PER_KG * f.ppg * L_PER_GAL, 0);
   const mashEfficiencyPct = potential > 0 ? (pts / potential) * 100 : undefined;
 
@@ -211,7 +212,7 @@ export function checkPreBoil(recipe: Recipe, measuredSg: number, measuredL: numb
 
 /** Eficiencia de sala real con la OG y el volumen que llegaron al fermentador. */
 export function brewhouseEfficiency(recipe: Recipe, og: number, fermenterL: number): number | undefined {
-  const potential = recipe.fermentables.filter((f) => f.use === 'macerado').reduce((s, f) => s + f.amountKg * LB_PER_KG * f.ppg, 0);
+  const potential = recipe.fermentables.filter(isMashed).reduce((s, f) => s + f.amountKg * LB_PER_KG * f.ppg, 0);
   const nonMashed = recipe.fermentables.filter((f) => f.use !== 'macerado').reduce((s, f) => s + f.amountKg * LB_PER_KG * f.ppg, 0);
   if (potential <= 0) return undefined;
   const pts = (og - 1) * 1000 * (fermenterL / L_PER_GAL) - nonMashed;
@@ -314,7 +315,7 @@ export function fermentationStatus(batch: Batch): FermentationStatus {
     if (progressPct > 70 && yeast?.type !== 'lager') advice.push('En la recta final: subir 1–2 °C ayuda a limpiar diacetilo y terminar la atenuación.');
     if (progressPct > 60 && yeast?.type === 'lager') advice.push('Momento del descanso de diacetilo: sube a 16–18 °C por 2–3 días.');
   }
-  return { og, expectedFg, currentSg: last.sg, attenuation, abvNow: abv(og + extra, last.sg), progressPct, stable, verdict, advice: [...advice] };
+  return { og, expectedFg, currentSg: last.sg, attenuation, abvNow: abv(og + extra - stats.unfermentedWortPts / 1000, last.sg - stats.unfermentedWortPts / 1000), progressPct, stable, verdict, advice: [...advice] };
 }
 
 // ---------- Planeado vs real ----------

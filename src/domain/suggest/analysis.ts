@@ -294,6 +294,28 @@ export function analyzeRecipe({ recipe, stats, style, catalog, sourceWater, targ
     }
   }
 
+  // ---------- Usos de los fermentables ----------
+  for (const f of recipe.fermentables) {
+    if (f.use === 'macerado' && ['azucar', 'no-fermentable', 'extracto'].includes(f.type)) {
+      add({
+        severity: 'idea',
+        area: 'proceso',
+        title: `${f.name} no se macera`,
+        detail: 'Los azúcares, extractos y no fermentables no pasan por la sacarificación: se cuentan enteros, sin la eficiencia del macerado. Van en el hervor (o en el fermentador).',
+        actions: [{ label: 'Pasar al hervor', apply: (r) => ({ ...r, fermentables: r.fermentables.map((x) => (x.uid === f.uid ? { ...x, use: 'hervor', timeMin: x.timeMin ?? 10 } : x)) }) }],
+      });
+    }
+  }
+  const aging = recipe.fermentables.filter((f) => f.use === 'maduracion');
+  if (aging.length) {
+    add({
+      severity: 'idea',
+      area: 'proceso',
+      title: 'Adiciones en maduración (sin fermentar)',
+      detail: `${aging.map((f) => f.name).join(', ')}: se calculan como dulzor y densidad final, sin alcohol. Solo es así si la levadura ya no trabaja: en barril frío funciona; en botella, el azúcar puede refermentar y sobrecarbonatar. Mantén en frío o estabiliza antes de envasar.`,
+    });
+  }
+
   // ---------- Agua ----------
   if (!sourceWater) {
     add({ severity: 'idea', area: 'agua', title: 'Configura tu agua', detail: 'Elige tu perfil de agua (o crea uno con el análisis de tu acueducto) para estimar el pH y ajustar sales.' });

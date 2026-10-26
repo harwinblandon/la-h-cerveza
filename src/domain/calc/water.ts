@@ -1,3 +1,4 @@
+import { isMashed } from './gravity';
 import type { AcidChoice, WaterAdjustments, RecipeFermentable, SaltId, WaterIons } from '../types';
 
 export interface SaltInfo {
@@ -151,7 +152,7 @@ export interface MashPhInput {
  * residual) y los ácidos lo desplazan. Precisión típica ±0,1.
  */
 export function estimateMashPh(i: MashPhInput): number | undefined {
-  const mashed = i.fermentables.filter((f) => f.use === 'macerado' && f.amountKg > 0);
+  const mashed = i.fermentables.filter((f) => isMashed(f) && f.amountKg > 0);
   let bufSum = 0;
   let weighted = 0;
   let acid = 0;
@@ -176,7 +177,7 @@ export function acidForTargetPh(i: MashPhInput, targetPh: number, acid: AcidChoi
   const current = estimateMashPh({ ...i, lacticMl: 0, phosphoricMl: 0 });
   if (current === undefined) return 0;
   const bufSum = i.fermentables
-    .filter((f) => f.use === 'macerado' && f.type !== 'acida')
+    .filter((f) => isMashed(f) && f.type !== 'acida')
     .reduce((s, f) => s + bufferCapacity(f) * f.amountKg, 0);
   const meq = (current - targetPh) * bufSum;
   return meq > 0 ? meq / acidMeqPerMl(acid) : 0;
@@ -189,7 +190,7 @@ export function bicarbonateForTargetPh(i: MashPhInput, targetPh: number): number
   const current = estimateMashPh(i);
   if (current === undefined) return 0;
   const bufSum = i.fermentables
-    .filter((f) => f.use === 'macerado' && f.type !== 'acida')
+    .filter((f) => isMashed(f) && f.type !== 'acida')
     .reduce((s, f) => s + bufferCapacity(f) * f.amountKg, 0);
   const meq = (targetPh - current) * bufSum;
   // 1 g de NaHCO₃ = 11,9 mEq de alcalinidad.

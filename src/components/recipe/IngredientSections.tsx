@@ -76,9 +76,11 @@ export function FermentablesSection({ recipe, stats, update, catalog, style }: S
                 </td>
                 <td>
                   <select className="input input-sm" value={f.use} onChange={(e) => set(f.uid, { use: e.target.value as FermentableUse })}>
-                    <option value="macerado">Macerado</option>
+                    {/* Solo los granos se maceran; azúcares y extractos van al hervor o después. */}
+                    {!['azucar', 'no-fermentable', 'extracto'].includes(f.type) && <option value="macerado">Macerado</option>}
                     <option value="hervor">Hervor</option>
-                    <option value="fermentador">Fermentador</option>
+                    <option value="fermentador">Fermentación</option>
+                    <option value="maduracion">Maduración (sin fermentar)</option>
                   </select>
                 </td>
                 <td className="r" style={{ whiteSpace: 'nowrap' }}>

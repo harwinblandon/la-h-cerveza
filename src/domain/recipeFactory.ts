@@ -65,6 +65,7 @@ export function newRecipe(equipment: Equipment, sourceWaterId?: string): Recipe 
 
 export function fermentableFromCatalog(f: Fermentable, amountKg: number): RecipeFermentable {
   const kettle = f.type === 'azucar' || f.type === 'no-fermentable' || f.type === 'extracto';
+  const fruit = f.maker === 'Fruta';
   return {
     uid: uid(),
     ingredientId: f.id,
@@ -74,7 +75,7 @@ export function fermentableFromCatalog(f: Fermentable, amountKg: number): Recipe
     ppg: f.ppg,
     diPH: f.diPH,
     amountKg,
-    use: kettle ? 'hervor' : 'macerado',
+    use: fruit ? 'fermentador' : kettle ? 'hervor' : 'macerado',
     source: f.source,
     sourceNote: f.sourceNote,
   };

@@ -3,6 +3,10 @@ import { L_PER_GAL, LB_PER_KG, clamp } from './units';
 
 const pointsOf = (f: RecipeFermentable) => f.amountKg * LB_PER_KG * f.ppg;
 
+/** Solo los granos se maceran: azúcares, extractos y no fermentables no pasan por la sacarificación. */
+const NOT_MASHABLE = new Set(['azucar', 'no-fermentable', 'extracto']);
+export const isMashed = (f: Pick<RecipeFermentable, 'use' | 'type'>) => f.use === 'macerado' && !NOT_MASHABLE.has(f.type);
+
 /** Fracción de los puntos que la levadura puede consumir. */
 function fermentability(f: RecipeFermentable): 'normal' | 'total' | 'nula' {
   if (f.type === 'no-fermentable') return 'nula';
@@ -39,17 +43,17 @@ export function computeGravity(
 
   for (const f of fermentables) {
     let pts = 0;
-    if (f.use === 'macerado') {
+    if (isMashed(f)) {
       pts = (pointsOf(f) * eff) / batchGal;
       mashedPts += pts;
-    } else if (f.use === 'hervor') {
+    } else if (f.use === 'hervor' || f.use === 'macerado') {
       pts = pointsOf(f) / postGal;
     } else {
       pts = pointsOf(f) / batchGal;
     }
     pointsByUid[f.uid] = pts;
     total += pts;
-    if (f.use !== 'fermentador') wort += pts;
+    if (f.use !== 'fermentador' && f.use !== 'maduracion') wort += pts;
   }
 
   // En la olla antes de hervir solo está lo macerado, en un volumen mayor.
@@ -91,11 +95,20 @@ export function computeFg(
   let remaining = 0;
   for (const f of fermentables) {
     const pts = pointsByUid[f.uid] ?? 0;
-    const kind = fermentability(f);
+    // Lo que se agrega en maduración no fermenta (la levadura ya terminó).
+    const kind = f.use === 'maduracion' ? 'nula' : fermentability(f);
     if (kind === 'nula') remaining += pts;
     else if (kind === 'normal') remaining += pts * (1 - att);
   }
   return 1 + remaining / 1000;
+}
+
+/**
+ * Puntos de densidad que no se convierten en alcohol: no fermentables (lactosa, maltodextrina)
+ * y lo agregado en maduración. Suben la OG y la FG por igual; se quitan de ambas para el ABV.
+ */
+export function unfermentedPoints(fermentables: RecipeFermentable[], pointsByUid: Record<string, number>): number {
+  return fermentables.reduce((s, f) => s + (f.use === 'maduracion' || fermentability(f) === 'nula' ? (pointsByUid[f.uid] ?? 0) : 0), 0);
 }
 
 /** ABV con la fórmula de alta precisión (válida también para cervezas fuertes). */

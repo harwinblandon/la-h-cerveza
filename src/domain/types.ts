@@ -48,7 +48,8 @@ export type FermentableType =
   | 'no-fermentable'
   | 'acida';
 
-export type FermentableUse = 'macerado' | 'hervor' | 'fermentador';
+/** maduracion: se agrega con la fermentación terminada (fruta, azúcar): sube la densidad y el dulzor, no el alcohol. */
+export type FermentableUse = 'macerado' | 'hervor' | 'fermentador' | 'maduracion';
 
 export interface Fermentable extends Sourced, Available {
   id: string;

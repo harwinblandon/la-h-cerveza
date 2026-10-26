@@ -1,7 +1,7 @@
 import type { Recipe, WaterIons } from '../types';
 import { totalIbu } from './bitterness';
 import { recipeSrm, srmToHex } from './color';
-import { abv, calories355, computeFg, computeGravity, expectedAttenuation, mainMashTemp } from './gravity';
+import { abv, calories355, computeFg, computeGravity, expectedAttenuation, mainMashTemp, unfermentedPoints } from './gravity';
 import { srmToEbc } from './units';
 import { planWater, strikeTemp, type WaterPlan } from './volumes';
 import { addSalts, dilute, estimateMashPh, mixWaters, residualAlkalinity, sulfateChlorideRatio } from './water';
@@ -11,6 +11,8 @@ export interface RecipeStats {
   og: number;
   /** OG equivalente con fruta y azúcares del fermentador (para ABV). */
   ogTotal: number;
+  /** Puntos de densidad del mosto que no fermentan (lactosa, maltodextrina). */
+  unfermentedWortPts: number;
   fg: number;
   abv: number;
   ibu: number;
@@ -90,12 +92,15 @@ export function computeRecipeStats(recipe: Recipe, sourceWater?: WaterIons, grai
   }
 
   const og = grav.og;
+  // Lactosa, maltodextrina y lo de maduración suben la densidad pero no dan alcohol.
+  const nf = unfermentedPoints(recipe.fermentables, grav.pointsByUid);
   const ogTotal = grav.ogTotal;
   return {
     og,
     ogTotal,
+    unfermentedWortPts: unfermentedPoints(recipe.fermentables.filter((f) => f.use !== 'maduracion' && f.use !== 'fermentador'), grav.pointsByUid),
     fg,
-    abv: abv(ogTotal, fg),
+    abv: abv(ogTotal - nf / 1000, fg - nf / 1000),
     ibu,
     srm,
     ebc: srmToEbc(srm),

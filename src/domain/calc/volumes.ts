@@ -1,3 +1,4 @@
+import { isMashed } from './gravity';
 import type { Equipment, RecipeFermentable, RecipeHop } from '../types';
 
 /** Desplazamiento del grano en el macerado (L/kg). */
@@ -31,7 +32,7 @@ export function planWater(
 ): WaterPlan {
   const warnings: string[] = [];
   const grainKg = fermentables
-    .filter((f) => f.use === 'macerado')
+    .filter(isMashed)
     .reduce((s, f) => s + f.amountKg, 0);
   const kettleHopsG = hops
     .filter((h) => h.use !== 'dry-hop' && h.use !== 'macerado')

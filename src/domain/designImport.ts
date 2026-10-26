@@ -2,6 +2,7 @@
 // macerado, hervor, fermentación por etapas, frutas, cacao, maduración y perfil sensorial, y arma la
 // receta con su plan. Informa qué entendió y qué no, para que el cervecero lo revise antes de crearla.
 
+import { isMashed } from './calc/gravity';
 import { computeRecipeStats } from './calc/recipeStats';
 import { uid } from './calc/units';
 import { brandEquivalent, byId, type Catalog } from './catalog';
@@ -507,7 +508,8 @@ export function readDesign(text: string, o: DesignOptions): DesignReading {
   if (fruit && fruitAdds.length) {
     r.fermentables = r.fermentables.filter((f) => f !== fruit);
     for (const a of fruitAdds) {
-      const nf: RecipeFermentable = { ...fruit, uid: a.uid, amountKg: a.kg, role: `${a.ordinal === 1 ? 'Primera' : a.ordinal === 2 ? 'Segunda' : `${a.ordinal}.ª`} adición: ${a.when}` };
+      const aging = /madur|despues de (la )?fermentacion|al final|fermentacion terminada|en frio/.test(norm(a.when));
+      const nf: RecipeFermentable = { ...fruit, uid: a.uid, amountKg: a.kg, use: aging ? 'maduracion' : 'fermentador', role: `${a.ordinal === 1 ? 'Primera' : a.ordinal === 2 ? 'Segunda' : `${a.ordinal}.ª`} adición: ${a.when}` };
       r.fermentables.push(nf);
     }
     const total = fruitAdds.reduce((s, a) => s + a.kg, 0);
@@ -522,8 +524,9 @@ export function readDesign(text: string, o: DesignOptions): DesignReading {
       title: `${k === 0 ? 'Primera' : k === 1 ? 'Segunda' : `${k + 1}.ª`} adición de ${fruit?.name.toLowerCase() ?? 'fruta'}: ${a.kg} kg`,
       detail: [a.when, ...(k === 0 ? prose.fruta : [])].join('\n'),
       items: [a.uid],
-      conditions:
-        k === 0
+      conditions: /madur|despues de (la )?fermentacion|al final|fermentacion terminada|en frio/.test(norm(a.when))
+        ? [{ kind: 'sg-stable', days: 2 }]
+        : k === 0
           ? [{ kind: 'ph-max', value: Math.round((phHi + 0.2) * 10) / 10 }, { kind: 'sg-drop', points: 10 }]
           : [{ kind: 'days-after', step: `fruta-${k}`, days: 2 }, { kind: 'sg-dropping' }],
     });
@@ -664,7 +667,7 @@ export function readDesign(text: string, o: DesignOptions): DesignReading {
 /** Escala solo el grano del macerado (mismos porcentajes) para llegar a la OG del mosto indicada. */
 export function scaleMashToOg(r: Recipe, og: number): Recipe {
   const at = (k: number) => {
-    const next = { ...r, fermentables: r.fermentables.map((f) => (f.use === 'macerado' ? { ...f, amountKg: f.amountKg * k } : f)) };
+    const next = { ...r, fermentables: r.fermentables.map((f) => (isMashed(f) ? { ...f, amountKg: f.amountKg * k } : f)) };
     return { next, og: computeRecipeStats(next).og };
   };
   let lo = 0.2;
@@ -675,5 +678,5 @@ export function scaleMashToOg(r: Recipe, og: number): Recipe {
     else hi = m;
   }
   const { next } = at((lo + hi) / 2);
-  return { ...next, fermentables: next.fermentables.map((f) => (f.use === 'macerado' ? { ...f, amountKg: Math.round(f.amountKg * 100) / 100 } : f)) };
+  return { ...next, fermentables: next.fermentables.map((f) => (isMashed(f) ? { ...f, amountKg: Math.round(f.amountKg * 100) / 100 } : f)) };
 }

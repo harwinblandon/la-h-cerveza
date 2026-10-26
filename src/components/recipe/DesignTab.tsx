@@ -28,7 +28,7 @@ export function DesignTab({ recipe, stats, catalog, propose }: SectionProps & { 
   const malt = recipe.fermentables.filter((f) => f.use === 'macerado');
   const maltKg = malt.reduce((s, f) => s + f.amountKg, 0);
   const boilAdds = recipe.fermentables.filter((f) => f.use === 'hervor');
-  const fermAdds = recipe.fermentables.filter((f) => f.use === 'fermentador');
+  const fermAdds = recipe.fermentables.filter((f) => f.use === 'fermentador' || f.use === 'maduracion');
   const effNeeded = d.og ? efficiencyForOg(recipe, mid(d.og)) : undefined;
 
   const rows: { label: string; want: string; got: string; ok: boolean; fix?: { label: string; apply: () => void }[]; note?: string }[] = [];
@@ -158,7 +158,7 @@ export function DesignTab({ recipe, stats, catalog, propose }: SectionProps & { 
             <div key={f.uid} className="design-line">
               <span className="num">{fmtKg(f.amountKg)}</span>
               <span>
-                <strong>{f.name}</strong> <span className="faint">fermentador</span>
+                <strong>{f.name}</strong> <span className="faint">{f.use === 'maduracion' ? 'maduración (sin fermentar)' : 'fermentación'}</span>
                 {f.role && <div className="faint">{f.role}</div>}
               </span>
             </div>

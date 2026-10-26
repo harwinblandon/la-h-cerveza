@@ -386,7 +386,7 @@ export function exportBeerXml(recipes: Recipe[], catalog: Catalog): string {
       const ferms = r.fermentables
         .map(
           (f) =>
-            `<FERMENTABLE>${el('NAME', f.name)}${el('VERSION', 1)}${el('TYPE', FERM_TYPE_XML[f.type])}${el('AMOUNT', f.amountKg)}${el('YIELD', f.ppg / 0.46214)}${el('COLOR', ebcToLovibond(f.colorEBC))}${el('ADD_AFTER_BOIL', f.use === 'fermentador')}</FERMENTABLE>`,
+            `<FERMENTABLE>${el('NAME', f.name)}${el('VERSION', 1)}${el('TYPE', FERM_TYPE_XML[f.type])}${el('AMOUNT', f.amountKg)}${el('YIELD', f.ppg / 0.46214)}${el('COLOR', ebcToLovibond(f.colorEBC))}${el('ADD_AFTER_BOIL', f.use === 'fermentador' || f.use === 'maduracion')}</FERMENTABLE>`,
         )
         .join('');
       const hops = r.hops

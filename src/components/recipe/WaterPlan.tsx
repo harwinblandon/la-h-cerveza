@@ -38,7 +38,7 @@ export function WaterFlow({ recipe, stats }: { recipe: Recipe; stats: RecipeStat
   const w = stats.water;
   const eq = recipe.equipment;
   const sparge = spargeLabel(eq.type);
-  const fermAdds = recipe.fermentables.filter((f) => f.use === 'fermentador').reduce((s, f) => s + f.amountKg, 0);
+  const fermAdds = recipe.fermentables.filter((f) => f.use === 'fermentador' || f.use === 'maduracion').reduce((s, f) => s + f.amountKg, 0);
   const rows: { n: string; label: string; liters: number; detail?: string; strong?: boolean }[] = [
     { n: '1', label: 'Agua total a preparar', liters: w.totalWaterL, detail: 'Con las sales de la pestaña Agua.', strong: true },
     {
