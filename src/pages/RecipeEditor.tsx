@@ -244,7 +244,7 @@ export default function RecipeEditor() {
                 ...(recipe.design || recipe.plan ? [['diseno', 'Diseño'] as [Tab, string]] : []),
                 ['intencion', 'Intención'],
                 ['ingredientes', 'Ingredientes'],
-                ['macerado', 'Macerado y volúmenes'],
+                ['macerado', 'Agua y macerado'],
                 ['agua', 'Agua'],
                 ['fermentacion', 'Fermentación'],
                 ['costo', 'Costo'],

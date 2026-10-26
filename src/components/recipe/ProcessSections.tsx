@@ -10,11 +10,11 @@ import { Info } from '../Info';
 import { SourceTag } from '../Provenance';
 import { NumberInput, fmt } from '../ui';
 import type { SectionProps } from './IngredientSections';
+import { WaterFlow } from './WaterPlan';
 
 // ---------- Macerado y volúmenes ----------
 
 export function MashSection({ recipe, stats, update }: SectionProps) {
-  const w = stats.water;
   const eq = recipe.equipment;
   const setStep = (id: string, patch: Partial<MashStep>) =>
     update((r) => ({ ...r, mashSteps: r.mashSteps.map((s) => (s.uid === id ? { ...s, ...patch } : s)) }));
@@ -24,47 +24,10 @@ export function MashSection({ recipe, stats, update }: SectionProps) {
     <>
       <div className="card">
         <div className="card-head">
-          <h2>Volúmenes · {EQUIPMENT_TYPE_LABEL[eq.type]}</h2>
+          <h2>Agua y volúmenes · {EQUIPMENT_TYPE_LABEL[eq.type]}</h2>
         </div>
         <Info>{EQUIPMENT_TYPE_HELP[eq.type]}</Info>
-        <div className="stats">
-          <div className="stat">
-            <div className="stat-label">Agua total</div>
-            <div className="stat-value">{fmt(w.totalWaterL)} L</div>
-          </div>
-          <div className="stat">
-            <div className="stat-label">Agua de macerado</div>
-            <div className="stat-value">{fmt(w.mashWaterL)} L</div>
-            <div className="stat-sub">{fmt(w.mashRatioLpkg)} L/kg</div>
-          </div>
-          {w.spargeWaterL > 0.05 && (
-            <div className="stat">
-              <div className="stat-label">Agua de lavado</div>
-              <div className="stat-value">{fmt(w.spargeWaterL)} L</div>
-              <div className="stat-sub">a 76–78 °C</div>
-            </div>
-          )}
-          <div className="stat">
-            <div className="stat-label">Volumen del macerado</div>
-            <div className="stat-value">{fmt(w.mashVolumeL)} L</div>
-            <div className="stat-sub">olla de {eq.kettleVolumeL} L</div>
-          </div>
-          <div className="stat">
-            <div className="stat-label">Pre-hervor</div>
-            <div className="stat-value">{fmt(w.preBoilL)} L</div>
-            <div className="stat-sub">a {stats.preBoilSg.toFixed(3)}</div>
-          </div>
-          <div className="stat">
-            <div className="stat-label">Post-hervor</div>
-            <div className="stat-value">{fmt(w.postBoilHotL)} L</div>
-            <div className="stat-sub">caliente · evapora {fmt(w.boilOffL)} L</div>
-          </div>
-          <div className="stat">
-            <div className="stat-label">Al fermentador</div>
-            <div className="stat-value">{fmt(recipe.batchSizeL)} L</div>
-            <div className="stat-sub">absorción grano {fmt(w.grainAbsorptionL)} L</div>
-          </div>
-        </div>
+        <WaterFlow recipe={recipe} stats={stats} />
         <hr className="hr" />
         <h3>Ajustes del equipo para esta receta</h3>
         <div className="grid grid-4">

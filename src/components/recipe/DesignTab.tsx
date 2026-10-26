@@ -9,6 +9,7 @@ import { pitchAdvice } from '../../domain/yeastAdvice';
 import { Info } from '../Info';
 import { fmt, fmtKg } from '../ui';
 import type { SectionProps } from './IngredientSections';
+import { WaterSummary } from './WaterPlan';
 
 type Range = [number, number];
 const mid = (r: Range) => (r[0] + r[1]) / 2;
@@ -209,6 +210,7 @@ export function DesignTab({ recipe, stats, catalog, propose }: SectionProps & { 
         </div>
         <div className="card">
           <h2>Proceso</h2>
+          <WaterSummary recipe={recipe} stats={stats} />
           {recipe.mashSteps.map((s) => (
             <div key={s.uid} className="design-line">
               <span className="num">{s.tempC} °C</span>

@@ -1,3 +1,4 @@
+import { WaterSummary } from './WaterPlan';
 import type { RecipeStats } from '../../domain/calc/recipeStats';
 import { fmtSg, srmToEbc } from '../../domain/calc/units';
 import type { Suggestion } from '../../domain/suggest/analysis';
@@ -5,7 +6,7 @@ import type { Recipe, Style } from '../../domain/types';
 import { SourceTag } from '../Provenance';
 import { RangeBar, SeverityBadge, Stat, Swatch, fmt } from '../ui';
 
-export function SummaryPanel({ stats, style, colorUnit, indices }: { recipe: Recipe; stats: RecipeStats; style?: Style; colorUnit: 'EBC' | 'SRM'; indices?: { style?: number; sensory?: number } }) {
+export function SummaryPanel({ recipe, stats, style, colorUnit, indices }: { recipe: Recipe; stats: RecipeStats; style?: Style; colorUnit: 'EBC' | 'SRM'; indices?: { style?: number; sensory?: number } }) {
   const color = colorUnit === 'EBC' ? stats.ebc : stats.srm;
   return (
     <div className="card">
@@ -32,6 +33,7 @@ export function SummaryPanel({ stats, style, colorUnit, indices }: { recipe: Rec
         <Stat label="Color" value={`${fmt(color, 0)}`} sub={colorUnit} />
         <Stat label="pH macerado" value={stats.mashPh ? fmt(stats.mashPh, 2) : '—'} sub={<SourceTag source="estimacion" note="Balance de cargas por tipo y color de malta; precisión ±0,1" compact />} />
       </div>
+      <WaterSummary recipe={recipe} stats={stats} />
       <div className="faint" style={{ fontSize: '0.75rem', marginTop: '0.5rem' }}>
         <SourceTag source="calculo" compact /> OG por extracto y eficiencia · IBU Tinseth · color Morey · ABV de alta precisión
       </div>
