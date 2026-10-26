@@ -220,12 +220,12 @@ export function SubstituteModal({ target, catalog, style, onReplace, onClose }: 
             score: s.score,
           }));
   return (
-    <Modal title={`No tengo ${target.item.name}`} onClose={onClose}>
+    <Modal title={`Sustitutos de ${target.item.name}`} onClose={onClose}>
       <p className="muted">
         Estas son las alternativas más cercanas. La cantidad ya viene ajustada para conservar densidad, color o amargor.
       </p>
       <label className="row" style={{ fontSize: '0.88rem', marginBottom: '0.5rem' }}>
-        <input type="checkbox" checked={onlyStock} onChange={(e) => (setOnlyStock(e.target.checked), setOnlyStore(false))} /> Solo lo que tengo en inventario
+        <input type="checkbox" checked={onlyStock} onChange={(e) => (setOnlyStock(e.target.checked), setOnlyStore(false))} /> Solo lo que hay en el inventario
         {store && (
           <>
             <input type="checkbox" style={{ marginLeft: 12 }} checked={onlyStore} onChange={(e) => (setOnlyStore(e.target.checked), setOnlyStock(false))} /> Solo lo que vende {store}

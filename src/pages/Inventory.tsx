@@ -61,7 +61,7 @@ export default function Inventory() {
                       {kind === 'lupulo' && <th className="r">% AA real</th>}
                       <th>Vence</th>
                       <th>Tienda</th>
-                      <th className="r">{kind === 'fermentable' ? 'Pagué ($/kg)' : kind === 'lupulo' ? 'Pagué ($/100 g)' : 'Pagué ($/unidad)'}</th>
+                      <th className="r">{kind === 'fermentable' ? 'Precio pagado ($/kg)' : kind === 'lupulo' ? 'Precio pagado ($/100 g)' : 'Precio pagado ($/unidad)'}</th>
                       <th />
                     </tr>
                   </thead>

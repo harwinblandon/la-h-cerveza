@@ -165,7 +165,7 @@ export function WaterSection({ recipe, stats, update, catalog }: SectionProps) {
         </div>
         <div className="grid grid-3">
           <label className="field">
-            <span>Mi agua (origen)</span>
+            <span>Agua de origen</span>
             <select className="input" value={wa.sourceProfileId} onChange={(e) => setW({ sourceProfileId: e.target.value })}>
               {catalog.waters.map((w) => (
                 <option key={w.id} value={w.id}>
@@ -290,7 +290,7 @@ export function WaterSection({ recipe, stats, update, catalog }: SectionProps) {
               <tbody>
                 {source && (
                   <tr>
-                    <td className="muted">Mi agua</td>
+                    <td className="muted">Agua de origen</td>
                     {ION_KEYS.map((k) => (
                       <td key={k} className="r num">
                         {fmt(source[k], 0)}

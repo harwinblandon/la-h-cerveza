@@ -10,7 +10,7 @@ const WATER_CHOICES: [string, string, string][] = [
   ['armenia-epa', 'Agua de la llave de Armenia (EPA)', 'Perfil promedio de los reportes de Empresas Públicas de Armenia.'],
   ['osmosis', 'Ósmosis inversa', 'Casi sin minerales: construyes el perfil con sales.'],
   ['destilada', 'Destilada', 'Sin minerales.'],
-  ['propia', 'Otra (mi ciudad, embotellada o de laboratorio)', 'La cargas después en Agua con los datos del informe o la etiqueta.'],
+  ['propia', 'Otra (de la ciudad, embotellada o de laboratorio)', 'La cargas después en Agua con los datos del informe o la etiqueta.'],
 ];
 
 async function enterAsGuest() {
@@ -164,7 +164,7 @@ function CreateProfile({ legacy, canCancel, onCancel }: { legacy: boolean; canCa
   if (step === 2)
     return (
       <div className="stack">
-        <h2>Tu forma de cocinar</h2>
+        <h2>Forma de cocinar</h2>
         <p className="muted" style={{ fontSize: '0.88rem', margin: 0 }}>
           Nada de esto es definitivo: todo se cambia después en Ajustes, Agua y Equipos.
         </p>
@@ -191,7 +191,7 @@ function CreateProfile({ legacy, canCancel, onCancel }: { legacy: boolean; canCa
               <option value="fosforico">Fosfórico</option>
             </select>
           </Field>
-          <Field label="Tu equipo principal">
+          <Field label="Equipo principal">
             <select className="input" value={equipmentId} onChange={(e) => setEquipmentId(e.target.value)}>
               {DEFAULT_EQUIPMENT.map((e) => (
                 <option key={e.id} value={e.id}>
@@ -200,7 +200,7 @@ function CreateProfile({ legacy, canCancel, onCancel }: { legacy: boolean; canCa
               ))}
             </select>
           </Field>
-          <Field label="Nombre de tu cervecería (opcional)">
+          <Field label="Nombre de la cervecería (opcional)">
             <input className="input" value={brewery} onChange={(e) => setBrewery(e.target.value)} />
           </Field>
         </div>
@@ -218,7 +218,7 @@ function CreateProfile({ legacy, canCancel, onCancel }: { legacy: boolean; canCa
 
   return (
     <form onSubmit={next} className="stack">
-      <h2>{useLegacy ? 'Crea tu perfil' : 'Perfil nuevo'}</h2>
+      <h2>Perfil nuevo</h2>
       {legacy && (
         <div className="callout" style={{ fontSize: '0.88rem' }}>
           Encontré recetas y lotes guardados en este navegador antes de que existieran los perfiles.
@@ -227,7 +227,7 @@ function CreateProfile({ legacy, canCancel, onCancel }: { legacy: boolean; canCa
           </label>
         </div>
       )}
-      <Field label="Tu nombre">
+      <Field label="Nombre">
         <input className="input" autoFocus value={displayName} onChange={(e) => setDisplayName(e.target.value)} placeholder="Nombre" />
       </Field>
       <Field label="Usuario (para entrar)" hint={user ? `Se guardará como @${user}` : 'Letras, números, punto o guion; sin espacios'}>

@@ -184,7 +184,7 @@ export function StyleWizard({ initialStyle }: { initialStyle?: string }) {
         <div className="grid grid-2">
           <Field label="Marca de malta">
             <select className="input" value={brand} onChange={(e) => setBrand(e.target.value)}>
-              <option value="">{prefs.maltsters.length ? `Mis marcas (${prefs.maltsters.join(', ')})` : 'La recomendada para el estilo'}</option>
+              <option value="">{prefs.maltsters.length ? `Marcas seleccionadas (${prefs.maltsters.join(', ')})` : 'La recomendada para el estilo'}</option>
               {brands.map((b) => (
                 <option key={b} value={b}>
                   {b}
@@ -193,7 +193,7 @@ export function StyleWizard({ initialStyle }: { initialStyle?: string }) {
             </select>
           </Field>
           <Field label="Nombre (opcional)">
-            <input className="input" value={name} placeholder={style ? `${style.name} de La H` : 'Mi receta'} onChange={(e) => setName(e.target.value)} />
+            <input className="input" value={name} placeholder={style ? `${style.name} de La H` : 'Nombre de la receta'} onChange={(e) => setName(e.target.value)} />
           </Field>
         </div>
         <div className="row">

@@ -93,7 +93,7 @@ export function CostTab({ recipe, update }: SectionProps) {
                             {o.outOfStock ? ' (agotado)' : ''}
                           </option>
                         ))}
-                        <option value="__manual">Lo anoto yo</option>
+                        <option value="__manual">Precio manual</option>
                       </select>
                     ) : l.missingPrice ? (
                       <span className="faint">sin precio</span>

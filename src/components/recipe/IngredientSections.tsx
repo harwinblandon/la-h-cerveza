@@ -82,7 +82,7 @@ export function FermentablesSection({ recipe, stats, update, catalog, style }: S
                   </select>
                 </td>
                 <td className="r" style={{ whiteSpace: 'nowrap' }}>
-                  <button className="btn btn-sm btn-ghost" title="No lo tengo: buscar sustituto" onClick={() => setSub(f)}>
+                  <button className="btn btn-sm btn-ghost" title="Buscar sustituto" onClick={() => setSub(f)}>
                     ⇄
                   </button>
                   <button
@@ -254,7 +254,7 @@ export function HopsSection({ recipe, stats, update, catalog, style }: SectionPr
                 </td>
                 <td className="r num">{fmt(stats.ibuByUid[h.uid], 1)}</td>
                 <td className="r" style={{ whiteSpace: 'nowrap' }}>
-                  <button className="btn btn-sm btn-ghost" title="No lo tengo: buscar sustituto" onClick={() => setSub(h)}>
+                  <button className="btn btn-sm btn-ghost" title="Buscar sustituto" onClick={() => setSub(h)}>
                     ⇄
                   </button>
                   <button className="btn btn-sm btn-ghost btn-danger" title="Quitar" onClick={() => update((r) => ({ ...r, hops: r.hops.filter((x) => x.uid !== h.uid) }))}>

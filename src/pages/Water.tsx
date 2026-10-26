@@ -24,7 +24,7 @@ export default function WaterPage() {
   const [editing, setEditing] = useState<WaterProfile | null>(null);
   const [blending, setBlending] = useState(false);
   const mine = byId(catalog.waters, settings.sourceWaterId);
-  const newWater = (): WaterProfile => ({ id: `custom-${uid()}`, name: 'Mi agua', ca: 0, mg: 0, na: 0, so4: 0, cl: 0, hco3: 0, custom: true });
+  const newWater = (): WaterProfile => ({ id: `custom-${uid()}`, name: 'Agua de origen', ca: 0, mg: 0, na: 0, so4: 0, cl: 0, hco3: 0, custom: true });
 
   return (
     <>
@@ -38,7 +38,7 @@ export default function WaterPage() {
             Mezclar dos aguas
           </button>
           <button className="btn btn-primary" onClick={() => setEditing(newWater())}>
-            + Cargar mi agua
+            + Cargar agua de origen
           </button>
         </div>
       </div>
@@ -46,7 +46,7 @@ export default function WaterPage() {
       {mine && (
         <div className="card">
           <div className="card-head">
-            <h2>Mi agua</h2>
+            <h2>Agua de origen</h2>
             <div className="row">
               <select className="input input-sm" style={{ width: 'auto' }} value={mine.id} onChange={(e) => updateSettings({ sourceWaterId: e.target.value })}>
                 {catalog.waters
@@ -103,7 +103,7 @@ export default function WaterPage() {
                   <tr key={w.id}>
                     <td>
                       <div style={{ fontWeight: 600 }}>
-                        {w.name} <SourceTag source={w.source} note={w.sourceNote} compact /> {isSource && <span className="chip chip-accent">mi agua</span>}
+                        {w.name} <SourceTag source={w.source} note={w.sourceNote} compact /> {isSource && <span className="chip chip-accent">origen</span>}
                       </div>
                       {w.description && <div className="faint" style={{ fontSize: '0.78rem' }}>{w.description}</div>}
                     </td>
@@ -120,7 +120,7 @@ export default function WaterPage() {
                     <td className="r" style={{ whiteSpace: 'nowrap' }}>
                       {!isSource && !w.id.startsWith('obj-') && (
                         <button className="btn btn-sm" onClick={() => updateSettings({ sourceWaterId: w.id })}>
-                          Usar como mi agua
+                          Usar como agua de origen
                         </button>
                       )}
                       {w.custom && (
@@ -209,7 +209,7 @@ function WaterForm({ water, onClose }: { water: WaterProfile; onClose: () => voi
     const round = (x: number) => Math.round(x * 10) / 10;
     const profile: WaterProfile = {
       ...water,
-      name: f.name.trim() || 'Mi agua',
+      name: f.name.trim() || 'Agua de origen',
       description: [kind?.[1], f.note.trim()].filter(Boolean).join(' · '),
       ca: round(ions.ca),
       mg: round(ions.mg),
@@ -314,7 +314,7 @@ function WaterForm({ water, onClose }: { water: WaterProfile; onClose: () => voi
       )}
       <div className="row" style={{ marginTop: '1rem' }}>
         <button className="btn btn-primary" onClick={save}>
-          Guardar y usar como mi agua
+          Guardar y usar como agua de origen
         </button>
         {water.custom && exists && (
           <button

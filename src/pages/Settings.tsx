@@ -69,7 +69,7 @@ export default function SettingsPage() {
           <Field label="Nombre de la cervecería">
             <input className="input" value={s.breweryName} onChange={(e) => updateSettings({ breweryName: e.target.value })} />
           </Field>
-          <Field label="Tu nombre (autor de las recetas)">
+          <Field label="Cervecero (autor de las recetas)">
             <input className="input" value={s.brewerName} onChange={(e) => updateSettings({ brewerName: e.target.value })} />
           </Field>
           <Field label="Unidad de color">
@@ -93,7 +93,7 @@ export default function SettingsPage() {
       <div className="card">
         <h2>Insumos y agua</h2>
         <div className="grid grid-2">
-          <Field label="Mi agua">
+          <Field label="Agua de origen">
             <select className="input" value={s.sourceWaterId} onChange={(e) => updateSettings({ sourceWaterId: e.target.value })}>
               {catalog.waters.map((w) => (
                 <option key={w.id} value={w.id}>
@@ -115,7 +115,7 @@ export default function SettingsPage() {
             <NumberInput value={acid.pct} decimals={0} onChange={(n) => updateSettings({ acid: { ...acid, pct: n } })} unit="%" />
           </Field>
         </div>
-        <h3 style={{ marginTop: '1rem' }}>Marcas de malta que consigo</h3>
+        <h3 style={{ marginTop: '1rem' }}>Marcas de malta</h3>
         <div className="row" style={{ gap: '0.4rem' }}>
           {brands.map((b) => {
             const i = myBrands.indexOf(b);
@@ -132,9 +132,9 @@ export default function SettingsPage() {
           })}
         </div>
         <p className="faint" style={{ fontSize: '0.8rem', marginTop: '0.4rem' }}>
-          En el orden en que las marques: si la primera no tiene una malta equivalente, se usa la siguiente.
+          Las marcas seleccionadas se usan al generar recetas, en el orden en que se marcan: si la primera no tiene una malta equivalente, se usa la siguiente.
         </p>
-        <h3 style={{ marginTop: '1rem' }}>Sales que tengo a mano</h3>
+        <h3 style={{ marginTop: '1rem' }}>Sales disponibles</h3>
         <div className="grid grid-2">
           {SALTS.filter((x) => OPTIMIZABLE.includes(x.id)).map((x) => (
             <label key={x.id} className="row" style={{ alignItems: 'flex-start', flexWrap: 'nowrap' }}>

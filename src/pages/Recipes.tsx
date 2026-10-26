@@ -48,7 +48,7 @@ export default function Recipes() {
           <Empty icon="recetas" title="Aún no tienes recetas">
             <p>Elige un estilo y La H te arma una receta base para tu equipo, con maltas, lúpulos, levadura y agua.</p>
             <button className="btn btn-primary" onClick={() => setWizard(true)}>
-              Crear mi primera receta
+              Crear la primera receta
             </button>
           </Empty>
         </div>
