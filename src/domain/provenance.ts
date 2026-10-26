@@ -6,7 +6,7 @@ export const PROVENANCE: Record<Provenance, { label: string; short: string; help
   referencia: { label: 'Referencia', short: 'Ref.', help: 'Valor típico de literatura o fichas técnicas; cada lote comercial varía.' },
   calculo: { label: 'Cálculo', short: 'Calc.', help: 'Resultado de una fórmula a partir de los datos de la receta.' },
   estimacion: { label: 'Estimación', short: 'Est.', help: 'Modelo aproximado con incertidumbre; confírmalo midiendo.' },
-  regla: { label: 'Regla técnica', short: 'Regla', help: 'Relación cervecera conocida aplicada por La H (no es un cálculo exacto).' },
+  regla: { label: 'Regla técnica', short: 'Regla', help: 'Relación cervecera conocida (no es un cálculo exacto).' },
   medicion: { label: 'Medición', short: 'Med.', help: 'Medido por ti durante el proceso.' },
   usuario: { label: 'Tu dato', short: 'Tuyo', help: 'Valor que ingresaste o ajustaste manualmente.' },
   inventario: { label: 'Tu compra', short: 'Inv.', help: 'Tomado del inventario (dato de tu bolsa o lote comprado).' },

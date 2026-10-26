@@ -763,7 +763,7 @@ function PlanVsActual({ batch }: { batch: Batch }) {
         </table>
       </div>
       <p className="faint" style={{ fontSize: '0.8rem', marginTop: '0.5rem' }}>
-        Un desvío no es un error: es información. Con varios lotes, La H podrá usar estas diferencias para calibrar tu equipo.
+        Un desvío no es un error: es información. Con varios lotes, estas diferencias sirven para calibrar el equipo.
       </p>
     </div>
   );
@@ -916,7 +916,7 @@ function TastingProfile({ batch, mutate }: TabProps) {
           <SourceTag source="medicion" note="Tu evaluación al probar la cerveza terminada" />
         </div>
         <p className="faint" style={{ fontSize: '0.82rem', margin: '0.25rem 0 0.5rem' }}>
-          Evalúa la cerveza terminada con la misma escala del objetivo (activa las variables que puedas juzgar). La línea azul es lo que predijo La H.
+          Evalúa la cerveza terminada con la misma escala del objetivo (activa las variables que puedas juzgar). La línea azul es lo que predijo la app.
         </p>
         <SensoryEditor values={values} predicted={prediction.values} onChange={change} />
       </div>

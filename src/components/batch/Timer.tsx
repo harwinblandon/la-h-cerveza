@@ -47,7 +47,7 @@ function chime(times = 1) {
 
 function notify(text: string) {
   try {
-    if ('Notification' in window && Notification.permission === 'granted') new Notification('La H', { body: text });
+    if ('Notification' in window && Notification.permission === 'granted') new Notification('Recetas', { body: text });
   } catch {
     /* sin notificaciones */
   }

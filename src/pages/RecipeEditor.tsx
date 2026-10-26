@@ -345,7 +345,7 @@ export default function RecipeEditor() {
                   Exportar BeerXML
                 </button>
                 <button className="btn" onClick={() => download(`${recipe.name}.json`, JSON.stringify({ app: 'la-h', recipe, versions }, null, 2))}>
-                  Exportar La H (con versiones)
+                  Exportar receta (con versiones)
                 </button>
                 <button className="btn" onClick={() => window.print()}>
                   Imprimir
@@ -625,8 +625,8 @@ function StyleGuideCard({ styleId, recipe, onRegenerate }: { styleId: string; re
         </span>
       </div>
       <div className="row-between">
-        <h3 style={{ margin: 0 }}>Recomendaciones de La H</h3>
-        <SourceTag source="regla" note="Receta guía y selección de ingredientes propias de La H, no forman parte de la guía BJCP" />
+        <h3 style={{ margin: 0 }}>Recomendaciones</h3>
+        <SourceTag source="regla" note="Receta guía y selección de ingredientes propias de la app, no forman parte de la guía BJCP" />
       </div>
       <div className="grid grid-2" style={{ marginTop: '0.5rem' }}>
         <div>

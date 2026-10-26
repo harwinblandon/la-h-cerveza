@@ -7,7 +7,7 @@ export const KIND_LABEL: Record<HistoricalKind, { label: string; help: string }>
   ejecucion: { label: 'Ejecución', help: 'Registrado al ejecutar el lote.' },
   planificado: { label: 'Planificado', help: 'Lo que la receta planeaba; puede diferir de lo ejecutado.' },
   estimacion: { label: 'Estimación', help: 'Valor aproximado del registro histórico.' },
-  calculo: { label: 'Cálculo', help: 'Calculado por La H a partir de otros datos registrados; no fue medido.' },
+  calculo: { label: 'Cálculo', help: 'Calculado a partir de otros datos registrados; no fue medido.' },
   'no-recuperado': { label: 'No recuperado', help: 'dato_no_recuperado: no se completa con estimaciones.' },
 };
 
@@ -39,7 +39,7 @@ export function HistoricalCard({ record, title = 'Registro histórico' }: { reco
       </div>
       {record.incomplete && (
         <p className="hist-banner">
-          Receta incompleta: los cálculos de La H no representan este lote. Solo se muestran los datos que se conocen; lo demás queda como <code>dato_no_recuperado</code>.
+          Receta incompleta: los cálculos no representan este lote. Solo se muestran los datos que se conocen; lo demás queda como <code>dato_no_recuperado</code>.
         </p>
       )}
       {record.warnings.map((w) => (

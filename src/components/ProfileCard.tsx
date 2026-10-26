@@ -51,7 +51,7 @@ export function ProfileCard() {
         </p>
       ) : profile.guest ? (
         <p style={{ margin: 0 }}>
-          Estás usando La H <strong>sin registro</strong>. Tus datos quedan solo en este navegador; para no perderlos descarga una copia de seguridad, o crea un perfil y
+          Uso <strong>sin registro</strong>. Tus datos quedan solo en este navegador; para no perderlos descarga una copia de seguridad, o crea un perfil y
           restáurala allí.
         </p>
       ) : (

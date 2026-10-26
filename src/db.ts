@@ -203,7 +203,7 @@ export async function exportBackup(): Promise<string> {
 /** Restaura una copia o un historial (fusiona por id). Devuelve cuántos registros trajo cada tabla. */
 export async function importBackup(json: string): Promise<{ title?: string; counts: Partial<Record<(typeof TABLES)[number], number>> }> {
   const parsed = JSON.parse(json);
-  if (parsed?.app !== 'la-h' || !parsed.data) throw new Error('El archivo no es una copia de seguridad de La H.');
+  if (parsed?.app !== 'la-h' || !parsed.data) throw new Error('El archivo no es una copia de seguridad de esta app.');
   const counts: Partial<Record<(typeof TABLES)[number], number>> = {};
   await db.transaction('rw', TABLES.map((t) => db.table(t)), async () => {
     for (const t of TABLES) {

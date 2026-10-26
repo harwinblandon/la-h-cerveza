@@ -37,7 +37,7 @@ export const WATER_PROFILES: WaterProfile[] = rows.map(([id, name, ca, mg, na, s
   hco3,
   description,
   source: id.startsWith('obj-') ? ('regla' as const) : ('referencia' as const),
-  sourceNote: id.startsWith('obj-') ? 'Perfil objetivo de diseño de La H' : id === 'destilada' ? undefined : 'Perfil histórico aproximado de literatura cervecera',
+  sourceNote: id.startsWith('obj-') ? 'Perfil objetivo de diseño' : id === 'destilada' ? undefined : 'Perfil histórico aproximado de literatura cervecera',
 }));
 
 /**

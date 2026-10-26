@@ -112,7 +112,7 @@ export function brewDaySteps(recipe: Recipe, stats: RecipeStats): BrewStep[] {
   add({
     phase: 'macerado',
     title: `Mide pre-hervor: ${n1(w.preBoilL)} L a ${stats.preBoilSg.toFixed(3)}`,
-    detail: 'Anota volumen y densidad en "Mediciones" y La H te dice si hay que corregir.',
+    detail: 'Anota volumen y densidad en "Mediciones" y la app indica si hay que corregir.',
   });
 
   // Hervor

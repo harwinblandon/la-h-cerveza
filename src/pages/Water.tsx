@@ -75,7 +75,7 @@ export default function WaterPage() {
 
       <div className="callout callout-idea" style={{ margin: '1rem 0', fontSize: '0.9rem' }}>
         <strong>Cualquier agua sirve como punto de partida.</strong> Llave de tu ciudad, botellón, ósmosis, pozo o una mezcla: carga el informe tal como venga (iones o "como CaCO₃",
-        con o sin sodio) y La H hace las conversiones y revisa que los números cuadren. Sin datos, parte de ósmosis o destilada y construye el perfil con sales.
+        con o sin sodio) y la app hace las conversiones y revisa que los números cuadren. Sin datos, parte de ósmosis o destilada y construye el perfil con sales.
       </div>
 
       <div className="card">

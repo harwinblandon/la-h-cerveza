@@ -153,7 +153,7 @@ export function StyleWizard({ initialStyle }: { initialStyle?: string }) {
         )}
         <Info>
           La eficiencia de sala es la parte del azúcar del grano que llega al fermentador. La vas conociendo lote a lote: al registrar la OG y el volumen de cada cocción,
-          La H calcula la real y puedes guardarla en tu equipo.
+          se calcula la real y se puede guardar en el equipo.
         </Info>
         {w && eq && (
           <div className="water-plan">
@@ -193,7 +193,7 @@ export function StyleWizard({ initialStyle }: { initialStyle?: string }) {
             </select>
           </Field>
           <Field label="Nombre (opcional)">
-            <input className="input" value={name} placeholder={style ? `${style.name} de La H` : 'Nombre de la receta'} onChange={(e) => setName(e.target.value)} />
+            <input className="input" value={name} placeholder={style ? style.name : 'Nombre de la receta'} onChange={(e) => setName(e.target.value)} />
           </Field>
         </div>
         <div className="row">

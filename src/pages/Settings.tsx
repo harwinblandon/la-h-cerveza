@@ -193,7 +193,7 @@ export default function SettingsPage() {
               if (!f) return;
               try {
                 const d = JSON.parse(await f.text());
-                if (d?.app !== 'la-h' || d.kind !== 'precios' || !d.store || !Array.isArray(d.prices)) throw new Error('El archivo no es una lista de precios de La H.');
+                if (d?.app !== 'la-h' || d.kind !== 'precios' || !d.store || !Array.isArray(d.prices)) throw new Error('El archivo no es una lista de precios de esta app.');
                 updateSettings({ priceLists: { ...s.priceLists, [d.store]: { store: d.store, asOf: d.asOf, source: d.source, url: d.url, prices: d.prices } } });
                 alert(`${d.store}: ${d.prices.length} precios cargados en tu perfil.`);
               } catch (err) {

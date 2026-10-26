@@ -51,7 +51,7 @@ export default function Recipes() {
       {recipes && recipes.length === 0 ? (
         <div className="card">
           <Empty icon="recetas" title="Aún no tienes recetas">
-            <p>Elige un estilo y La H te arma una receta base para tu equipo, con maltas, lúpulos, levadura y agua.</p>
+            <p>Con un estilo se arma una receta base para el equipo, con maltas, lúpulos, levadura y agua.</p>
             <button className="btn btn-primary" onClick={() => setWizard(true)}>
               Crear la primera receta
             </button>
@@ -159,7 +159,7 @@ function ImportButton() {
   };
 
   return (
-    <label className="btn" title="BeerXML (Brewfather, BeerSmith…) o archivo de La H">
+    <label className="btn" title="BeerXML (Brewfather, BeerSmith…) o receta exportada desde esta app">
       Importar
       <input
         type="file"
@@ -172,7 +172,7 @@ function ImportButton() {
           try {
             await importFile(file);
           } catch (err) {
-            alert(err instanceof Error && err.message !== 'formato' ? err.message : 'No pude leer ese archivo. Usa un BeerXML (.xml) o una receta exportada desde La H (.json).');
+            alert(err instanceof Error && err.message !== 'formato' ? err.message : 'No pude leer ese archivo. Usa un BeerXML (.xml) o una receta exportada desde esta app (.json).');
           }
         }}
       />

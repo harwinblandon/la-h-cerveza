@@ -351,9 +351,9 @@ export function generateFromStyle(o: GenerateOptions): Recipe {
   const { style, equipment, catalog } = o;
   const t = o.tuning ?? {};
   let r = newRecipe(equipment, o.sourceWater?.id);
-  r.name = o.name ?? `${style.name} de La H`;
+  r.name = o.name ?? style.name;
   r.styleId = style.id;
-  r.origin = { kind: 'estilo', detail: `${style.code} ${style.name} · receta guía de La H` };
+  r.origin = { kind: 'estilo', detail: `${style.code} ${style.name} · receta guía` };
   if (o.batchSizeL) r.batchSizeL = o.batchSizeL;
   if (style.ranges.og[1] >= 1.075 || style.id === 'czech-premium-pale-lager' || style.id === 'german-pils' || style.id === 'munich-helles') {
     // Cervezas con mucha Pilsner o muy densas: hervor largo para eliminar DMS y concentrar.
