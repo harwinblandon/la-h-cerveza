@@ -8,7 +8,8 @@ import { exportBackup, importBackup, updateSettings } from '../db';
 import { SALTS } from '../domain/calc/water';
 import { maltsters as catalogMaltsters } from '../domain/catalog';
 import type { SaltId } from '../domain/types';
-import { useCatalog, useSettings } from '../hooks';
+import { useCatalog, useProfile, useSettings } from '../hooks';
+import { useSyncStatus } from '../components/AccountForm';
 
 type Tema = 'oscuro' | 'claro' | 'sistema';
 const readTheme = (): Tema => {
@@ -31,6 +32,8 @@ const OPTIMIZABLE: SaltId[] = ['yeso', 'cloruroCalcio', 'epsom', 'sal', 'bicarbo
 
 export default function SettingsPage() {
   const s = useSettings();
+  const profile = useProfile();
+  const sync = useSyncStatus(!!profile?.uid);
   const catalog = useCatalog();
   const salts = s.availableSalts ?? OPTIMIZABLE;
   const brands = catalogMaltsters(catalog);
@@ -63,6 +66,11 @@ export default function SettingsPage() {
           <Link className="btn" to="/herramientas">
             <Icon name="herramientas" /> Herramientas
           </Link>
+          {sync?.isAdmin && (
+            <Link className="btn" to="/admin">
+              <Icon name="ajustes" /> Administración
+            </Link>
+          )}
         </div>
       </div>
       <div className="card">
