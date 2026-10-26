@@ -1,10 +1,10 @@
 // Service worker de La H: la app funciona sin internet una vez abierta.
 // Navegación: red primero (para recibir actualizaciones), caché si no hay conexión.
 // Recursos estáticos: caché primero.
-const CACHE = 'la-h-v1';
+const CACHE = 'la-h-v2';
 
 self.addEventListener('install', (event) => {
-  event.waitUntil(caches.open(CACHE).then((c) => c.addAll(['./', './index.html', './icono.svg', './manifest.webmanifest'])));
+  event.waitUntil(caches.open(CACHE).then((c) => c.addAll(['./', './index.html', './icono.svg', './manifest.webmanifest', './marca/icono-192.png', './marca/icono-512.png', './marca/apple-touch-icon.png'])));
   self.skipWaiting();
 });
 
