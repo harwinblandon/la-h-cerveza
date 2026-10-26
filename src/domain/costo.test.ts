@@ -23,8 +23,8 @@ const lista: PriceList = {
 const precios = allPrices([lista]);
 
 describe('precios de las tiendas', () => {
-  it('los precios públicos no incluyen listas privadas', () => {
-    expect(PRICES.some((p) => p.store === 'Distrines')).toBe(false);
+  it('trae precios de las tres tiendas y suma las listas que importe el cervecero', () => {
+    expect(new Set(PRICES.map((p) => p.store))).toEqual(new Set(['Distrines', 'The Craft Drinks Lab', 'Pronalce']));
     expect(precios.filter((p) => p.store === 'Tienda privada')).toHaveLength(4);
   });
 
@@ -81,10 +81,10 @@ describe('costo de una receta', () => {
 
 describe('Agrária (Pronalce)', () => {
   it('se puede elegir como marca y tiene precio por saco', () => {
-    expect(brandEquivalent(byId(C.fermentables, 'pilsner-wey')!, C, ['Agrária']).id).toBe('agraria-pilsen');
+    expect(brandEquivalent(byId(C.fermentables, 'pilsner-wey')!, C, ['Agrária']).id).toBe('agraria-pilsen-extra-claro');
     expect(brandEquivalent(byId(C.fermentables, 'munich-1-wey')!, C, ['Agrária']).id).toBe('agraria-munique');
     const r = base();
-    r.fermentables = [fermentableFromCatalog(byId(C.fermentables, 'agraria-pilsen')!, 4)];
+    r.fermentables = [fermentableFromCatalog(byId(C.fermentables, 'agraria-pilsen-extra-claro')!, 4)];
     const l = recipeCost(r).lines[0];
     expect(l.chosen?.store).toBe('Pronalce');
     expect(l.buyTotal).toBe(125000);

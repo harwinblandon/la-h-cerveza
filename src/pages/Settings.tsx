@@ -194,8 +194,8 @@ export default function SettingsPage() {
           />
         </label>
         <Info>
-          Las listas que una tienda te comparte se guardan solo en tu perfil, en este navegador (y en tus copias de seguridad); no se publican. Los precios de The Craft Drinks
-          Lab ya vienen en la app porque la tienda los publica.
+          La app ya trae precios informativos 2026 de Distrines, The Craft Drinks Lab y Pronalce. Si una tienda te comparte una lista más reciente, cárgala aquí: se guarda solo
+          en tu perfil (y en tus copias de seguridad) y se suma a las demás.
         </Info>
       </div>
       <div className="card">

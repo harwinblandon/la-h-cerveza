@@ -157,6 +157,10 @@ export function CostTab({ recipe, update }: SectionProps) {
           </button>
         </div>
       </div>
+      <p className="disclaimer">
+        Precios de referencia 2026, solo informativos. Pueden cambiar sin aviso y no incluyen envío: confírmalos con cada tienda antes de comprar. La H no vende ni representa a
+        ninguna tienda.
+      </p>
     </>
   );
 }
