@@ -6,3 +6,7 @@ dist
 .vscode/
 .firebase/
 firebase-debug.log
+
+# Listas de precios privadas que comparten las tiendas
+*precios*.pdf
+precios-*.json

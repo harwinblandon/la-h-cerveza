@@ -1,5 +1,6 @@
 import Dexie, { type EntityTable } from 'dexie';
 import { DEFAULT_EQUIPMENT } from './data/equipment';
+import type { PriceList } from './data/precios';
 import type { AcidChoice, Award, Batch, Equipment, Fermentable, Hop, InventoryItem, Recipe, RecipeVersion, SaltId, WaterProfile, Yeast } from './domain/types';
 import { hasUnversionedChanges, makeVersion } from './domain/versioning';
 import { SESSION } from './profiles';
@@ -21,6 +22,8 @@ export interface Settings {
   maltsters?: string[];
   /** Ácido para ajustar el pH. */
   acid?: AcidChoice;
+  /** Listas de precios privadas que una tienda le compartió al cervecero (solo en su perfil). */
+  priceLists?: Record<string, PriceList>;
 }
 
 export const DEFAULT_SETTINGS: Settings = {

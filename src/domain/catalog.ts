@@ -7,6 +7,7 @@ import {
   DISTRINES_YEAST_OFFERS,
 } from '../data/distrines';
 import { FERMENTABLES } from '../data/fermentables';
+import { STORE_FERMENTABLES } from '../data/precios';
 import { HOPS } from '../data/hops';
 import { STYLES } from '../data/styles';
 import { WATER_PROFILES } from '../data/water';
@@ -27,7 +28,7 @@ function withOffers<T extends { id: string } & Available>(list: T[], offers: Rec
 }
 
 export const BUILTIN_CATALOG: Catalog = {
-  fermentables: [...withOffers(FERMENTABLES, DISTRINES_FERMENTABLE_OFFERS), ...DISTRINES_FERMENTABLES],
+  fermentables: [...withOffers(FERMENTABLES, DISTRINES_FERMENTABLE_OFFERS), ...DISTRINES_FERMENTABLES, ...STORE_FERMENTABLES],
   hops: [...withOffers(HOPS, DISTRINES_HOP_OFFERS), ...DISTRINES_HOPS],
   yeasts: [...withOffers(YEASTS, DISTRINES_YEAST_OFFERS), ...DISTRINES_YEASTS],
   styles: STYLES,

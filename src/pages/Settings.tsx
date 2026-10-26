@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Icon } from '../components/Icons';
+import { Info } from '../components/Info';
 import { ProfileCard } from '../components/ProfileCard';
 import { Field, NumberInput, download } from '../components/ui';
 import { exportBackup, importBackup, updateSettings } from '../db';
@@ -150,6 +151,52 @@ export default function SettingsPage() {
             </label>
           ))}
         </div>
+      </div>
+      <div className="card">
+        <h2>Listas de precios</h2>
+        {Object.values(s.priceLists ?? {}).map((l) => (
+          <div key={l.store} className="list-item" style={{ cursor: 'default' }}>
+            <div style={{ flex: 1 }}>
+              <strong>{l.store}</strong> <span className="faint">· {l.prices.length} precios · {l.asOf}</span>
+              <div className="faint" style={{ fontSize: '0.8rem' }}>{l.source}</div>
+            </div>
+            <button
+              className="btn btn-sm btn-ghost btn-danger"
+              onClick={() => {
+                const next = { ...s.priceLists };
+                delete next[l.store];
+                updateSettings({ priceLists: next });
+              }}
+            >
+              Quitar
+            </button>
+          </div>
+        ))}
+        <label className="btn" style={{ marginTop: '0.6rem' }}>
+          Cargar lista de precios
+          <input
+            type="file"
+            accept="application/json,.json"
+            hidden
+            onChange={async (e) => {
+              const f = e.target.files?.[0];
+              if (!f) return;
+              try {
+                const d = JSON.parse(await f.text());
+                if (d?.app !== 'la-h' || d.kind !== 'precios' || !d.store || !Array.isArray(d.prices)) throw new Error('El archivo no es una lista de precios de La H.');
+                updateSettings({ priceLists: { ...s.priceLists, [d.store]: { store: d.store, asOf: d.asOf, source: d.source, url: d.url, prices: d.prices } } });
+                alert(`${d.store}: ${d.prices.length} precios cargados en tu perfil.`);
+              } catch (err) {
+                alert(err instanceof Error ? err.message : 'No se pudo cargar.');
+              }
+              e.target.value = '';
+            }}
+          />
+        </label>
+        <Info>
+          Las listas que una tienda te comparte se guardan solo en tu perfil, en este navegador (y en tus copias de seguridad); no se publican. Los precios de The Craft Drinks
+          Lab ya vienen en la app porque la tienda los publica.
+        </Info>
       </div>
       <div className="card">
         <h2>Copia de seguridad</h2>

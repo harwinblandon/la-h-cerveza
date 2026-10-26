@@ -281,6 +281,8 @@ export interface Recipe {
   deviations?: Record<string, string>;
   /** Registro histórico importado (lo que se sabe, con su procedencia, y lo que no). */
   historical?: HistoricalRecord;
+  /** Presupuesto: tienda elegida por insumo (uid → tienda) y costos adicionales del lote. */
+  costPrefs?: { lines?: Record<string, string>; manual?: Record<string, number>; extras?: { uid: string; name: string; amount: number }[] };
   createdAt: number;
   updatedAt: number;
 }

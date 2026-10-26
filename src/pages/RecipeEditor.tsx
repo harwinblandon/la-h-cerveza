@@ -3,6 +3,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { ChangeReportView, SourceTag } from '../components/Provenance';
 import { FermentablesSection, HopsSection, YeastSection } from '../components/recipe/IngredientSections';
+import { CostTab } from '../components/recipe/CostTab';
 import { IntentTab } from '../components/recipe/IntentTab';
 import { FermentationSection, MashSection, WaterSection } from '../components/recipe/ProcessSections';
 import { SuggestionsPanel, SummaryPanel } from '../components/recipe/SummaryPanel';
@@ -26,7 +27,7 @@ import type { Recipe, RecipeVersion } from '../domain/types';
 import { VERSION_REASON_LABEL, changeReport, hasUnversionedChanges } from '../domain/versioning';
 import { useBrewPrefs, useCatalog, useEquipment, useSettings } from '../hooks';
 
-type Tab = 'intencion' | 'ingredientes' | 'macerado' | 'agua' | 'fermentacion' | 'asistente' | 'historial' | 'notas';
+type Tab = 'intencion' | 'ingredientes' | 'macerado' | 'agua' | 'fermentacion' | 'costo' | 'asistente' | 'historial' | 'notas';
 
 /** Un cambio propuesto que se muestra con sus consecuencias antes de aplicarlo. */
 interface PendingChange {
@@ -243,6 +244,7 @@ export default function RecipeEditor() {
                 ['macerado', 'Macerado y volúmenes'],
                 ['agua', 'Agua'],
                 ['fermentacion', 'Fermentación'],
+                ['costo', 'Costo'],
                 ['asistente', `Asistente${suggestions.length ? ` (${suggestions.length})` : ''}`],
                 ['historial', `Versiones (${versions.length})`],
                 ['notas', 'Notas'],
@@ -320,6 +322,7 @@ export default function RecipeEditor() {
               onBranch={(v) => duplicate(v.snapshot, v.label)}
             />
           )}
+          {tab === 'costo' && <CostTab {...props} />}
           {tab === 'notas' && (
             <div className="card">
               <h2>Notas</h2>

@@ -279,7 +279,7 @@ export function WaterSection({ recipe, stats, update, catalog }: SectionProps) {
             <table className="table">
               <thead>
                 <tr>
-                  <th>ppm</th>
+                  <th>ppm (mg/L)</th>
                   {ION_KEYS.map((k) => (
                     <th key={k} className="r">
                       {ION_LABELS[k]}
@@ -437,7 +437,7 @@ function SaltRecipe({ recipe, mashL, spargeL, available }: { recipe: SectionProp
             <li key={salt.id}>
               <span className="salt-g num">{fmt(g, 1)} g</span>
               <span>
-                {salt.name} <span className="faint">({fmt((g / liters) * 1000, 0)} mg/L)</span>
+                {salt.name} <span className="faint">({fmt((g / liters) * 1000, 0)} mg/L de sal)</span>
               </span>
             </li>
           ))}

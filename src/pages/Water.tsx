@@ -12,7 +12,7 @@ import { useCatalog, useSettings } from '../hooks';
 
 const KINDS: [string, string, string][] = [
   ['grifo', 'Agua de la llave', 'Informe de tu acueducto. En Colombia suelen publicar los reportes del IRCA con alcalinidad, dureza y calcio "como CaCO₃".'],
-  ['embotellada', 'Embotellada / botellón', 'La etiqueta trae los minerales en mg/L (iones).'],
+  ['embotellada', 'Embotellada / botellón', 'La etiqueta trae los minerales en mg/L (iones), que es lo mismo que ppm.'],
   ['osmosis', 'Ósmosis inversa propia', 'Si tienes análisis o medidor, carga los valores; si no, usa el perfil típico de ósmosis.'],
   ['pozo', 'Pozo o nacimiento', 'Lo ideal es un análisis de laboratorio: puede variar mucho.'],
   ['laboratorio', 'Análisis de laboratorio', 'Carga los valores tal como vienen en el informe.'],
@@ -199,7 +199,7 @@ function WaterForm({ water, onClose }: { water: WaterProfile; onClose: () => voi
   const kind = KINDS.find((k) => k[0] === f.kind);
   const UnitSel = ({ value, onChange }: { value?: AsUnit; onChange: (u: AsUnit) => void }) => (
     <select className="input input-sm" style={{ width: 'auto' }} value={value ?? 'ion'} onChange={(e) => onChange(e.target.value as AsUnit)}>
-      <option value="ion">mg/L</option>
+      <option value="ion">mg/L o ppm (iones)</option>
       <option value="caco3">como CaCO₃</option>
     </select>
   );
@@ -263,13 +263,13 @@ function WaterForm({ water, onClose }: { water: WaterProfile; onClose: () => voi
         <Field label="Dureza total (como CaCO₃)" hint="Opcional: deduce el magnesio">
           <NumberInput value={f.hardness} decimals={1} onChange={(n) => set({ hardness: n })} />
         </Field>
-        <Field label="Sodio (mg/L)">
+        <Field label="Sodio (mg/L = ppm)">
           <NumberInput value={f.na} decimals={1} onChange={(n) => set({ na: n })} />
         </Field>
-        <Field label="Sulfato (mg/L)">
+        <Field label="Sulfato (mg/L = ppm)">
           <NumberInput value={f.so4} decimals={1} onChange={(n) => set({ so4: n })} />
         </Field>
-        <Field label="Cloruro (mg/L)">
+        <Field label="Cloruro (mg/L = ppm)">
           <NumberInput value={f.cl} decimals={1} onChange={(n) => set({ cl: n })} />
         </Field>
         <Field label="Alcalinidad">
