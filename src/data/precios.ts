@@ -1,5 +1,5 @@
 // Generado por gen_precios.py — no editar a mano.
-// Precios públicos de The Craft Drinks Lab (thecraftdrinkslab.com). Las listas privadas que
+// Precios públicos de The Craft Drinks Lab (thecraftdrinkslab.com) y Pronalce (pronalce.com.co). Las listas privadas que
 // una tienda le comparte al cervecero se importan en su perfil (Ajustes) y no van aquí.
 import type { Fermentable } from '../domain/types';
 
@@ -32,6 +32,7 @@ export interface PricePoint {
 
 export const PRICE_SOURCES: Record<string, { asOf: string; source: string; url?: string }> = {
   'The Craft Drinks Lab': { asOf: '2026-10-26', source: 'Precios publicados en la tienda en línea', url: 'https://thecraftdrinkslab.com/' },
+  Pronalce: { asOf: '2026-10-26', source: 'Precios publicados en pronalce.com.co (malta Agrária y avena)', url: 'https://www.pronalce.com.co/Cerveza' },
 };
 
 /** Maltas de marcas que se consiguen en Colombia y no estaban en el catálogo. */
@@ -87,6 +88,9 @@ export const STORE_FERMENTABLES: Fermentable[] = [
   {"id": "uma-pale-ale", "name": "Pale Ale", "maker": "Uma", "type": "base", "colorEBC": 7, "ppg": 37, "maxPct": 100, "description": "La Malta Pale Ale de Uma malta es utilizada como la segunda opción mas requerida en el mercado luego de Pilsen, se produce a partir de diversas variedades de cebada de 2 hileras. S", "needsMash": true, "source": "referencia", "sourceNote": "EBC típico para este tipo de malta: la tienda no lo publica. Confírmalo en el saco.", "stores": [{ "store": "The Craft Drinks Lab", "url": "https://thecraftdrinkslab.com/product/malta-pale-ale-uma-x-5-kg/" }] },
   {"id": "uma-pilsen", "name": "Pilsen", "maker": "Uma", "type": "base", "colorEBC": 3.5, "ppg": 37, "maxPct": 100, "description": "La Malta Pilsen de Uma Malta se produce a partir de diversas variedades de cebada de 2 hileras. Produce mostos claros con alto rendimiento. Es de color muy claro con un índice EBC ", "needsMash": true, "source": "referencia", "sourceNote": "EBC típico para este tipo de malta: la tienda no lo publica. Confírmalo en el saco.", "stores": [{ "store": "The Craft Drinks Lab", "url": "https://thecraftdrinkslab.com/product/malta-pilsen-uma-x-5-kg/" }] },
   {"id": "rahr-premium-pilsner", "name": "Premium Pilsner", "maker": "Rahr", "type": "base", "colorEBC": 3.5, "ppg": 37, "maxPct": 100, "description": "Malta base americana de dos hileras, muy clara.", "needsMash": true, "source": "referencia", "sourceNote": "EBC típico de la ficha de Rahr (1,8 °L)."},
+  {"id": "agraria-pilsen", "name": "Pilsen Extra Claro", "maker": "Agrária", "type": "base", "colorEBC": 3.0, "ppg": 37, "maxPct": 100, "description": "Malta base brasileña, muy clara.", "needsMash": true, "source": "referencia", "sourceNote": "EBC típico para este tipo de malta: Agrária y Pronalce no publican la ficha. Confírmalo en el saco.", "stores": [{ "store": "Pronalce", "url": "https://www.pronalce.com.co/Cerveza" }] },
+  {"id": "agraria-pale-ale", "name": "Pale Ale", "maker": "Agrária", "type": "base", "colorEBC": 6.5, "ppg": 37, "maxPct": 100, "description": "Malta base brasileña tipo Pale Ale.", "needsMash": true, "source": "referencia", "sourceNote": "EBC típico para este tipo de malta: Agrária y Pronalce no publican la ficha. Confírmalo en el saco.", "stores": [{ "store": "Pronalce", "url": "https://www.pronalce.com.co/Cerveza" }] },
+  {"id": "agraria-munique", "name": "Munique (Munich)", "maker": "Agrária", "type": "base", "colorEBC": 16, "ppg": 35, "maxPct": 100, "description": "Malta Munich brasileña: más color y sabor a malta tostada suave.", "needsMash": true, "source": "referencia", "sourceNote": "EBC típico para este tipo de malta: Agrária y Pronalce no publican la ficha. Confírmalo en el saco.", "stores": [{ "store": "Pronalce", "url": "https://www.pronalce.com.co/Cerveza" }] },
 ];
 
 export const PRICES: PricePoint[] = [
@@ -381,4 +385,10 @@ export const PRICES: PricePoint[] = [
   {"store": "The Craft Drinks Lab", "kind": "otro", "name": "Whirlfloc", "qty": 100.0, "unit": "g", "price": 27600, "url": "https://thecraftdrinkslab.com/product/whirfloc-t-pastillas-x-100-grs/", "inStock": true},
   {"store": "The Craft Drinks Lab", "kind": "otro", "name": "Whirlfloc", "qty": 1000.0, "unit": "g", "price": 250900, "url": "https://thecraftdrinkslab.com/product/whirfloc-t-pastillas-x-1-kg/", "inStock": true},
   {"store": "The Craft Drinks Lab", "kind": "otro", "name": "Whirlfloc (pastillas Compac)", "qty": 10, "unit": "unidad", "price": 7350, "url": "https://thecraftdrinkslab.com/product/whirfloc-t-pastillas-x-10-unidades/", "inStock": true, "note": "paquete de 10 pastillas"},
+  {"store": "Pronalce", "kind": "malta", "name": "Malta Pilsen Extra Claro Agrária saco 25 kg", "ingredientId": "agraria-pilsen", "qty": 25, "unit": "kg", "price": 125000, "url": "https://www.pronalce.com.co/Cerveza"},
+  {"store": "Pronalce", "kind": "malta", "name": "Malta Pale Ale Agrária saco 25 kg", "ingredientId": "agraria-pale-ale", "qty": 25, "unit": "kg", "price": 146000, "url": "https://www.pronalce.com.co/Cerveza"},
+  {"store": "Pronalce", "kind": "malta", "name": "Malta Munique (Munich) Agrária saco 25 kg", "ingredientId": "agraria-munique", "qty": 25, "unit": "kg", "price": 166000, "url": "https://www.pronalce.com.co/Cerveza"},
+  {"store": "Pronalce", "kind": "malta", "name": "Avena en Hojuela Natural 200 g", "ingredientId": "oats-flaked", "qty": 0.2, "unit": "kg", "price": 2500, "url": "https://www.pronalce.com.co/Cerveza", "note": "avena de mesa en hojuela"},
+  {"store": "Pronalce", "kind": "malta", "name": "Avena en Hojuela Natural 500 g", "ingredientId": "oats-flaked", "qty": 0.5, "unit": "kg", "price": 4500, "url": "https://www.pronalce.com.co/Cerveza", "note": "avena de mesa en hojuela"},
+  {"store": "Pronalce", "kind": "malta", "name": "Avena en Hojuela de Sur saco 25 kg", "ingredientId": "oats-flaked", "qty": 25, "unit": "kg", "price": 165950, "url": "https://www.pronalce.com.co/Cerveza", "note": "avena de mesa en hojuela"},
 ];
