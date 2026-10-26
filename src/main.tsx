@@ -14,6 +14,7 @@ function Root() {
     registry.profiles.get(SESSION.profileId).then((p) => {
       // Perfil con cuenta: se sincroniza con la nube (Firebase se carga solo en este caso).
       if (p?.uid) void import('./sync/engine').then((m) => m.startSync(p.uid!));
+      if (p) void import('./sync/usage').then((m) => m.recordUsage(p.uid ? 'cuenta' : p.guest ? 'sinRegistro' : 'local'));
       if (p) setState('app');
       else {
         endSession();

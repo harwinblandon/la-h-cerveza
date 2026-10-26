@@ -1,5 +1,8 @@
 import { useState, type ReactNode } from 'react';
+import { TimerPlan } from '../components/batch/Timer';
 import { Field, NumberInput, Swatch, fmt } from '../components/ui';
+import { newTimer } from '../domain/timers';
+import type { BrewTimer } from '../domain/types';
 import { abv, apparentAttenuation } from '../domain/calc/gravity';
 import {
   PRIMING_SUGARS,
@@ -40,6 +43,7 @@ export default function Tools() {
           <h1>Herramientas</h1>
         </div>
       </div>
+      <FreeTimers />
       <div className="grid grid-2">
         <AbvTool />
         <RefractometerTool />
@@ -52,6 +56,35 @@ export default function Tools() {
         <ConverterTool />
       </div>
     </>
+  );
+}
+
+const FREE_KEY = 'la-h-temporizadores';
+
+/** Temporizadores libres (sin lote): quedan en este dispositivo. */
+function FreeTimers() {
+  const [timers, setTimers] = useState<BrewTimer[]>(() => {
+    try {
+      const raw = localStorage.getItem(FREE_KEY);
+      if (raw) return JSON.parse(raw) as BrewTimer[];
+    } catch {
+      /* sin almacenamiento */
+    }
+    return [{ ...newTimer(), label: 'Temporizador', minutes: 60 }];
+  });
+  const save = (t: BrewTimer[]) => {
+    setTimers(t);
+    try {
+      localStorage.setItem(FREE_KEY, JSON.stringify(t));
+    } catch {
+      /* sin almacenamiento */
+    }
+  };
+  return (
+    <div className="card">
+      <h2>Temporizadores</h2>
+      <TimerPlan timers={timers} onChange={save} storagePrefix="timer-libre" />
+    </div>
   );
 }
 

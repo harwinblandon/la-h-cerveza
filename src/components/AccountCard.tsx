@@ -83,6 +83,28 @@ export function AccountCard() {
       {status?.error && <p className="plan-desvio" style={{ margin: '0.4rem 0 0', fontSize: '0.88rem' }}>{status.error}</p>}
       {msg && <p className="muted" style={{ margin: '0.4rem 0 0', fontSize: '0.88rem' }}>{msg}</p>}
 
+      {status && !signedOut && status.emailVerified === false && (
+        <p className="faint" style={{ fontSize: '0.85rem', margin: '0.5rem 0 0' }}>
+          Correo sin verificar.{' '}
+          <button
+            className="link-btn"
+            onClick={async () => {
+              try {
+                await (await engine()).sendVerification();
+                setMsg(`Se envió un enlace de verificación a ${profile.email}. Ábrelo y luego toca «Ya lo verifiqué».`);
+              } catch (e) {
+                setMsg(e instanceof Error ? e.message : 'No se pudo enviar.');
+              }
+            }}
+          >
+            Enviar enlace de verificación
+          </button>{' '}
+          ·{' '}
+          <button className="link-btn" onClick={async () => setMsg((await (await engine()).refreshVerification()) ? 'Correo verificado.' : 'Todavía no aparece verificado.')}>
+            Ya lo verifiqué
+          </button>
+        </p>
+      )}
       {signedOut && mode !== 'entrar' && (
         <p className="callout callout-warn" style={{ fontSize: '0.86rem', marginTop: '0.6rem' }}>
           La sesión de la cuenta está cerrada en este navegador: los cambios se guardan aquí y se suben al volver a entrar.{' '}

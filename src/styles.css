@@ -600,3 +600,24 @@ body::before {
 .sync-sin-conexion, .sync-sin-sesion { background: var(--text-3); }
 .sync-error { background: var(--bad); }
 .profile-chip { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* Temporizadores */
+.timer-card { border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface-2); padding: 0.8rem 0.9rem; }
+.timer-marks { list-style: none; margin: 0.6rem 0 0; padding: 0; font-size: 0.86rem; }
+.timer-marks li { display: grid; grid-template-columns: 7.5rem minmax(0, 1fr) auto; gap: 0.6rem; padding: 0.25rem 0; border-top: 1px solid var(--border); }
+.timer-marks li.passed { opacity: 0.55; }
+.timer-marks li.next { font-weight: 600; }
+.timer-mark-at { color: var(--text-2); font-size: 0.8rem; }
+.timer-alert-row { display: grid; grid-template-columns: 6.5rem 6.5rem minmax(0, 1.2fr) minmax(0, 1fr) auto; gap: 0.4rem; margin-bottom: 0.35rem; align-items: center; }
+@media (max-width: 700px) {
+  .timer-alert-row { grid-template-columns: 6rem 6rem minmax(0, 1fr) auto; }
+  .timer-alert-row input[aria-label='Nota'] { grid-column: 1 / -2; }
+  .timer-marks li { grid-template-columns: 6.5rem minmax(0, 1fr); }
+  .timer-marks li > :last-child { display: none; }
+}
+
+/* Panel de administración */
+.usage-bar { fill: var(--text-2); }
+.usage-bar.on { fill: var(--text); }
+.usage-axis { stroke: var(--border); stroke-width: 1; }
+.usage-tick { fill: var(--text-3); font-size: 11px; font-family: var(--font-mono); }

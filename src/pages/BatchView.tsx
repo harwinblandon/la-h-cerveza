@@ -1,8 +1,9 @@
 import { useLiveQuery } from 'dexie-react-hooks';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { FermentationChart } from '../components/batch/FermentationChart';
-import { Timer, type TimerAlert } from '../components/batch/Timer';
+import { TimerPlan } from '../components/batch/Timer';
+import { defaultTimers } from '../domain/timers';
 import { Field, NumberInput, Stat, Tabs, fmt, fmtDate, fmtDateTime, fmtKg } from '../components/ui';
 import { db } from '../db';
 import { SourceTag } from '../components/Provenance';
@@ -241,11 +242,13 @@ function BrewDay({ batch, mutate }: TabProps) {
   const pre = bd.preBoilSg && bd.preBoilVolumeL ? checkPreBoil(r, bd.preBoilSg, bd.preBoilVolumeL) : undefined;
   const eff = bd.ogMeasured && bd.fermenterVolumeL ? brewhouseEfficiency(r, bd.ogMeasured, bd.fermenterVolumeL) : undefined;
 
-  const boilAlerts: TimerAlert[] = [
-    ...r.hops.filter((h) => h.use === 'hervor' && h.time < r.boilTimeMin).map((h) => ({ atMin: h.time, text: `${fmt(h.amountG, 0)} g de ${h.name}` })),
-    ...r.miscs.filter((m) => m.use === 'hervor' && m.time !== undefined).map((m) => ({ atMin: m.time!, text: `${m.amount} ${m.unit} de ${m.name}` })),
-  ];
-  const mainMash = r.mashSteps.reduce((a, b) => (b.timeMin > a.timeMin ? b : a), r.mashSteps[0]);
+  // Temporizadores del lote: se guardan la primera vez para que sobrevivan a recargas y se sincronicen.
+  useEffect(() => {
+    if (!batch.timers) mutate((b) => void (b.timers ??= defaultTimers(b.recipe)));
+  }, [batch.timers, mutate]);
+  const timers = batch.timers ?? [];
+  const setTimers = (t: typeof timers) => mutate((b) => void (b.timers = t));
+  const resetTimers = () => mutate((b) => void (b.timers = defaultTimers(b.recipe)));
 
   return (
     <div className="editor-layout">
@@ -256,8 +259,10 @@ function BrewDay({ batch, mutate }: TabProps) {
           return (
             <div className="card" key={phase}>
               <h2>{PHASE_LABEL[phase]}</h2>
-              {phase === 'macerado' && mainMash && <Timer storageKey={`timer-${batch.id}-mash`} minutes={mainMash.timeMin} label={`Macerado · ${mainMash.tempC} °C`} />}
-              {phase === 'hervor' && <Timer storageKey={`timer-${batch.id}-boil`} minutes={r.boilTimeMin} label="Hervor" alerts={boilAlerts} />}
+              {phase === 'macerado' && <TimerPlan timers={timers} onChange={setTimers} storagePrefix={`timer-${batch.id}`} phase={['macerado']} />}
+              {phase === 'hervor' && (
+                <TimerPlan timers={timers} onChange={setTimers} storagePrefix={`timer-${batch.id}`} phase={['hervor', 'whirlpool', 'otro']} onReset={resetTimers} />
+              )}
               {items.map((s) => (
                 <label key={s.id} className={`check ${bd.done[s.id] ? 'done' : ''}`}>
                   <input

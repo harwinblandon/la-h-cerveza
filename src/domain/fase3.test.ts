@@ -105,3 +105,20 @@ describe('levadura', () => {
     expect(yeastStyleFit(us05, style('american-ipa')).fits).toBe(true);
   });
 });
+
+describe('temporizadores del día de cocción', () => {
+  it('propone macerado por paso, hervor con cada lúpulo y whirlpool', async () => {
+    const { defaultTimers, alertRemainingMin } = await import('./timers');
+    const r = generateFromStyle({ style: style('american-ipa'), equipment: eq, batchSizeL: 20, catalog: C });
+    const t = defaultTimers(r);
+    expect(t.filter((x) => x.phase === 'macerado')).toHaveLength(r.mashSteps.length);
+    const boil = t.find((x) => x.phase === 'hervor')!;
+    expect(boil.minutes).toBe(r.boilTimeMin);
+    for (const h of r.hops.filter((h) => h.use === 'hervor')) expect(boil.alerts.some((a) => a.text.includes(h.name))).toBe(true);
+    expect(boil.alerts.some((a) => /enfriador/i.test(a.text))).toBe(true);
+    if (r.hops.some((h) => h.use === 'whirlpool')) expect(t.some((x) => x.phase === 'whirlpool')).toBe(true);
+    // "a los 15 min" de un macerado de 60 suena cuando faltan 45.
+    expect(alertRemainingMin({ minutes: 60 }, { uid: 'x', atMin: 15, from: 'inicio', text: 'pH' })).toBe(45);
+    expect(alertRemainingMin({ minutes: 60 }, { uid: 'x', atMin: 10, from: 'faltan', text: 'lúpulo' })).toBe(10);
+  });
+});

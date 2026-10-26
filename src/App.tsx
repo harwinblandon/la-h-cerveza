@@ -10,6 +10,7 @@ import EquipmentPage from './pages/Equipment';
 import Home from './pages/Home';
 import Ingredients from './pages/Ingredients';
 import Inventory from './pages/Inventory';
+import Admin from './pages/Admin';
 import RecipeEditor from './pages/RecipeEditor';
 import Recipes from './pages/Recipes';
 import SettingsPage from './pages/Settings';
@@ -64,6 +65,7 @@ export default function App() {
           {NAV.map(link)}
           <div className="nav-sep" />
           {NAV_MORE.map(link)}
+          {sync?.isAdmin && link(['/admin', 'ajustes', 'Administración'])}
         </nav>
         <div className="sidebar-foot">
           {profile && (
@@ -95,6 +97,7 @@ export default function App() {
           <Route path="/agua" element={<WaterPage />} />
           <Route path="/equipos" element={<EquipmentPage />} />
           <Route path="/ajustes" element={<SettingsPage />} />
+          <Route path="/admin" element={<Admin />} />
         </Routes>
         <footer className="main-foot">
           <Signature size="lg" />

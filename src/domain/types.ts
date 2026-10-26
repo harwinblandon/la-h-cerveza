@@ -380,6 +380,25 @@ export interface AcidChoice {
   pct: number;
 }
 
+/** Aviso de un temporizador: "faltan X min" (hervor) o "a los X min" de iniciado (macerado). */
+export interface TimerAlertDef {
+  uid: string;
+  atMin: number;
+  from: 'faltan' | 'inicio';
+  text: string;
+  /** Qué se espera o qué revisar en ese momento. */
+  note?: string;
+}
+
+export interface BrewTimer {
+  uid: string;
+  phase: 'macerado' | 'hervor' | 'whirlpool' | 'otro';
+  label: string;
+  minutes: number;
+  note?: string;
+  alerts: TimerAlertDef[];
+}
+
 export type HistoricalKind = 'confirmado' | 'medicion' | 'ejecucion' | 'planificado' | 'estimacion' | 'calculo' | 'no-recuperado';
 
 export interface HistoricalValue {
@@ -524,6 +543,8 @@ export interface Batch {
   /** Evaluación sensorial del producto terminado (el "resultado"). */
   evaluation?: { sensory: SensoryValues; at: number; notes?: string };
   historical?: HistoricalRecord;
+  /** Temporizadores del día de cocción (si no hay, se proponen según la receta). */
+  timers?: BrewTimer[];
   rating?: number;
   tastingNotes?: string;
   createdAt: number;

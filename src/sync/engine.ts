@@ -11,13 +11,32 @@ import {
   deleteUser,
   getAuth,
   onAuthStateChanged,
+  sendEmailVerification,
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signOut,
   type Auth,
   type User,
 } from 'firebase/auth';
-import { collection, doc, getDocs, getFirestore, onSnapshot, serverTimestamp, writeBatch, type Firestore, type QueryDocumentSnapshot } from 'firebase/firestore';
+import {
+  Timestamp,
+  collection,
+  deleteDoc,
+  doc,
+  getCountFromServer,
+  getDocs,
+  getFirestore,
+  increment,
+  limit,
+  onSnapshot,
+  query,
+  serverTimestamp,
+  setDoc,
+  updateDoc,
+  writeBatch,
+  type Firestore,
+  type QueryDocumentSnapshot,
+} from 'firebase/firestore';
 import { liveQuery, type Subscription } from 'dexie';
 import { db } from '../db';
 import { firebaseConfig } from '../firebaseConfig';
@@ -32,6 +51,11 @@ export interface SyncStatus {
   pending: number;
   lastSyncedAt?: number;
   error?: string;
+  emailVerified?: boolean;
+  /** Las reglas permiten a esta cuenta ver el panel de administración. */
+  isAdmin?: boolean;
+  /** El administrador suspendió la cuenta: no se pueden subir cambios. */
+  blocked?: boolean;
 }
 
 interface RemoteRecord {
@@ -49,6 +73,7 @@ let auth: Auth;
 let fs: Firestore;
 let user: User | null = null;
 let unsubSnapshot: (() => void) | undefined;
+let unsubMember: (() => void) | undefined;
 let dirtyWatch: Subscription | undefined;
 let pushTimer: ReturnType<typeof setTimeout> | undefined;
 let pushing = false;
@@ -57,7 +82,7 @@ const listeners = new Set<(s: SyncStatus) => void>();
 
 function setStatus(patch: Partial<Omit<SyncStatus, 'state'>>) {
   status = { ...status, ...patch };
-  status.state = !user ? 'sin-sesion' : status.error ? 'error' : !navigator.onLine ? 'sin-conexion' : status.pending > 0 || pushing ? 'sincronizando' : 'sincronizado';
+  status.state = !user ? 'sin-sesion' : status.error || status.blocked ? 'error' : !navigator.onLine ? 'sin-conexion' : status.pending > 0 || pushing ? 'sincronizando' : 'sincronizado';
   for (const l of listeners) l(status);
 }
 
@@ -142,6 +167,7 @@ async function push() {
       for (const it of chunk) await it.done();
     }
     setStatus({ lastSyncedAt: Date.now(), error: undefined });
+    if (items.length) scheduleMember();
   } catch (e) {
     setStatus({ error: friendly(e).message });
   } finally {
@@ -183,12 +209,27 @@ export function startSync(uid: string) {
       return;
     }
     user = u;
-    setStatus({ email: u.email ?? undefined, error: undefined });
+    setStatus({ email: u.email ?? undefined, emailVerified: u.emailVerified, error: undefined });
+    let first = true;
+    unsubMember = onSnapshot(
+      doc(fs, 'members', u.uid),
+      (snap) => {
+        const blocked = snap.data()?.blocked === true;
+        setStatus({ blocked, error: blocked ? 'El administrador suspendió esta cuenta: los cambios no se suben.' : status.blocked ? undefined : status.error });
+      },
+      () => undefined,
+    );
     unsubSnapshot = onSnapshot(
       records(),
       async (snapshot) => {
         for (const change of snapshot.docChanges()) if (change.type !== 'removed') await applyRemote(change.doc);
-        setStatus({ lastSyncedAt: Date.now(), pending: await countPending(), error: undefined });
+        setStatus({ lastSyncedAt: Date.now(), pending: await countPending(), error: status.blocked ? status.error : undefined });
+        // Tras la primera descarga: resumen de la cuenta (cuenta una apertura) y permiso de administrador.
+        if (first) {
+          first = false;
+          void writeMember(true);
+          void checkAdmin();
+        }
       },
       (e) => setStatus({ error: friendly(e).message }),
     );
@@ -205,6 +246,8 @@ export function startSync(uid: string) {
 function stopSync() {
   unsubSnapshot?.();
   unsubSnapshot = undefined;
+  unsubMember?.();
+  unsubMember = undefined;
   dirtyWatch?.unsubscribe();
   dirtyWatch = undefined;
   if (pushTimer) clearTimeout(pushTimer);
@@ -285,9 +328,152 @@ export async function deleteAccountAndData() {
       for (const d of snapshot.docs.slice(i, i + BATCH_SIZE)) batch.delete(d.ref);
       await batch.commit();
     }
+    await deleteDoc(doc(fs, 'members', current.uid)).catch(() => undefined);
     stopSync();
     await deleteUser(current);
   } catch (e) {
     throw friendly(e);
   }
+}
+
+// ---------- Resumen de la cuenta y administración ----------
+
+const MEMBER_THROTTLE_MS = 5 * 60_000;
+let lastMember = 0;
+let memberTimer: ReturnType<typeof setTimeout> | undefined;
+
+function scheduleMember() {
+  if (memberTimer) clearTimeout(memberTimer);
+  memberTimer = setTimeout(() => void writeMember(false), Math.max(0, lastMember + MEMBER_THROTTLE_MS - Date.now()));
+}
+
+/** Cuántas recetas, lotes, etc. tiene la cuenta (sin su contenido) y cuándo entró por última vez. */
+async function writeMember(opening: boolean) {
+  if (!user) return;
+  lastMember = Date.now();
+  try {
+    await setDoc(
+      doc(fs, 'members', user.uid),
+      {
+        email: user.email ?? '',
+        createdAt: user.metadata.creationTime ? new Date(user.metadata.creationTime).toISOString() : null,
+        lastSeenAt: serverTimestamp(),
+        recipes: await db.recipes.filter((r) => !r.archived).count(),
+        versions: await db.recipeVersions.count(),
+        batches: await db.batches.count(),
+        inventory: await db.inventory.count(),
+        ...(opening ? { opens: increment(1) } : {}),
+      },
+      { merge: true },
+    );
+  } catch {
+    // Sin permiso o sin conexión: no afecta la sincronización de los datos.
+  }
+}
+
+/** Solo las reglas de Firestore saben quién administra: se intenta leer la lista de cuentas. */
+async function checkAdmin() {
+  if (!user?.emailVerified) return setStatus({ isAdmin: false });
+  try {
+    await getDocs(query(collection(fs, 'members'), limit(1)));
+    setStatus({ isAdmin: true });
+  } catch {
+    setStatus({ isAdmin: false });
+  }
+}
+
+export interface Member {
+  uid: string;
+  email: string;
+  createdAt?: string;
+  lastSeenAt?: number;
+  opens: number;
+  recipes: number;
+  versions: number;
+  batches: number;
+  inventory: number;
+  blocked: boolean;
+}
+
+export async function listMembers(): Promise<Member[]> {
+  initFirebase();
+  try {
+    const snap = await getDocs(collection(fs, 'members'));
+    return snap.docs.map((d) => {
+      const m = d.data();
+      return {
+        uid: d.id,
+        email: String(m.email ?? ''),
+        createdAt: m.createdAt ?? undefined,
+        lastSeenAt: m.lastSeenAt instanceof Timestamp ? m.lastSeenAt.toMillis() : undefined,
+        opens: Number(m.opens ?? 0),
+        recipes: Number(m.recipes ?? 0),
+        versions: Number(m.versions ?? 0),
+        batches: Number(m.batches ?? 0),
+        inventory: Number(m.inventory ?? 0),
+        blocked: m.blocked === true,
+      };
+    });
+  } catch (e) {
+    throw new Error((e as { code?: string })?.code === 'permission-denied' ? 'Sin permiso para ver las cuentas.' : 'No se pudo cargar la lista de cuentas.');
+  }
+}
+
+/** Suspende o reactiva una cuenta (solo el administrador, según las reglas). */
+export async function setBlocked(uid: string, blocked: boolean) {
+  initFirebase();
+  try {
+    await updateDoc(doc(fs, 'members', uid), { blocked, blockedAt: blocked ? serverTimestamp() : null });
+  } catch (e) {
+    throw friendly(e);
+  }
+}
+
+export interface UsageDay {
+  day: string;
+  opens: number;
+  cuenta: number;
+  local: number;
+  sinRegistro: number;
+  devices?: number;
+}
+
+/** Aperturas por día y equipos distintos (estos solo en los últimos `deviceDays` días, para leer poco). */
+export async function usageStats(deviceDays = 14): Promise<UsageDay[]> {
+  initFirebase();
+  const snap = await getDocs(collection(fs, 'usage'));
+  const days: UsageDay[] = snap.docs
+    .map((d) => ({ day: d.id, opens: Number(d.data().opens ?? 0), cuenta: Number(d.data().cuenta ?? 0), local: Number(d.data().local ?? 0), sinRegistro: Number(d.data().sinRegistro ?? 0) }))
+    .sort((a, b) => a.day.localeCompare(b.day));
+  for (const d of days.slice(-deviceDays)) {
+    try {
+      d.devices = (await getCountFromServer(collection(fs, 'usage', d.day, 'devices'))).data().count;
+    } catch {
+      /* sin permiso o sin conexión */
+    }
+  }
+  return days;
+}
+
+/** Envía el correo para verificar la cuenta (necesario para administrar). */
+export async function sendVerification() {
+  initFirebase();
+  if (!auth.currentUser) throw new Error('No hay una sesión iniciada.');
+  try {
+    await sendEmailVerification(auth.currentUser);
+  } catch (e) {
+    throw friendly(e);
+  }
+}
+
+/** Vuelve a consultar si el correo ya se verificó (tras abrir el enlace del correo). */
+export async function refreshVerification(): Promise<boolean> {
+  initFirebase();
+  const current = auth.currentUser;
+  if (!current) return false;
+  await current.reload();
+  await current.getIdToken(true);
+  setStatus({ emailVerified: current.emailVerified });
+  await checkAdmin();
+  return current.emailVerified;
 }
