@@ -2,7 +2,7 @@ import type { Catalog } from '../catalog';
 import { byId } from '../catalog';
 import { hopIbu } from '../calc/bitterness';
 import type { RecipeStats } from '../calc/recipeStats';
-import { pitchRate } from '../calc/tools';
+import { pitchAdvice } from '../yeastAdvice';
 import { L_PER_GAL, LB_PER_KG, ebcToLovibond } from '../calc/units';
 import { ACID_LABEL, acidForTargetPh, recipeAcid, withAcid } from '../calc/water';
 import { applyWaterTarget, fitColor, fermentableFromCatalog, nearEdge, scaleToOg, yeastFromCatalog } from '../recipeFactory';
@@ -267,15 +267,17 @@ export function analyzeRecipe({ recipe, stats, style, catalog, sourceWater, targ
 
   // ---------- Levadura: cantidad y temperatura ----------
   for (const y of recipe.yeasts) {
-    const pr = pitchRate(stats.og, recipe.batchSizeL, y.type === 'lager' ? 'lager' : 'ale', y.form);
+    const pr = pitchAdvice(stats.og, recipe.batchSizeL, y, y.amount);
     if (y.amount < pr.packs) {
       add({
         severity: 'aviso',
         area: 'levadura',
         title: `Poca levadura: ${y.name}`,
-        detail: `Para ${recipe.batchSizeL} L a OG ${f3(stats.og)} necesitas unos ${f0(pr.cellsNeededB)} mil millones de células: ${pr.packs} ${
-          y.form === 'seca' ? 'sobres de 11,5 g' : 'paquetes (o un starter)'
-        }.`,
+        detail: pr.steps[0]?.startsWith('Según')
+          ? pr.steps[0]
+          : `Para ${recipe.batchSizeL} L a OG ${f3(stats.og)} necesitas unos ${f0(pr.cellsNeededB)} mil millones de células: ${pr.packs} ${
+              y.form === 'seca' ? 'sobres de 11,5 g' : 'paquetes (o un starter)'
+            }.`,
         actions: [{ label: `Usar ${pr.packs}`, apply: (r) => ({ ...r, yeasts: r.yeasts.map((x) => (x.uid === y.uid ? { ...x, amount: pr.packs } : x)) }) }],
       });
     }

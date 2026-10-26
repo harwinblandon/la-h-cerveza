@@ -31,7 +31,10 @@ export function defaultTimers(r: Recipe): BrewTimer[] {
       if (h.use === 'hervor') alerts.push(alert(Math.min(h.time, boil), 'faltan', `${n0(h.amountG)} g de ${h.name}`, hopNote(Math.min(h.time, boil), boil)));
     }
     for (const m of r.miscs) {
-      if (m.use === 'hervor' && m.time !== undefined) alerts.push(alert(m.time, 'faltan', `${m.amount} ${m.unit} de ${m.name}`, m.notes));
+      if (m.use === 'hervor' && m.time !== undefined) alerts.push(alert(m.time, 'faltan', m.amount > 0 ? `${m.amount} ${m.unit} de ${m.name}` : m.name, m.notes));
+    }
+    for (const f of r.fermentables) {
+      if (f.use === 'hervor' && f.timeMin !== undefined) alerts.push(alert(Math.min(f.timeMin, boil), 'faltan', `${n0(f.amountKg * 1000)} g de ${f.name}`, 'Disolver bien para que no se pegue al fondo.'));
     }
     if (boil >= 20) alerts.push(alert(15, 'faltan', 'Sanitizar el enfriador', 'Sumérgelo en el mosto hirviendo para que quede sanitizado.'));
     alerts.sort((a, b) => b.atMin - a.atMin);

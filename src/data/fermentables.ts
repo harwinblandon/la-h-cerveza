@@ -65,6 +65,16 @@ const rows: Row[] = [
   ['honey', 'Miel', 'Genérica', 'azucar', 3, 35, 30, 'Añádela al final del hervor o en fermentador para conservar aroma.'],
   ['candi-clear', 'Azúcar candi clara', 'Belga', 'azucar', 1, 46, 20, 'Tripel, Golden Strong.'],
   ['candi-dark', 'Jarabe candi oscuro', 'Belga', 'azucar', 350, 32, 20, 'Pasas, toffee, ciruela. Dubbel, Quad.'],
+  // Frutas (en el fermentador): PPG según su azúcar fermentable típico (azúcar % × 46). Varía con la madurez.
+  ['fruta-banano', 'Banano maduro (puré)', 'Fruta', 'azucar', 2, 6, 35, 'Banano muy maduro: ≈13 % de azúcares fermentables. Puede quedar almidón residual que tarda en fermentar.'],
+  ['fruta-mango', 'Mango (pulpa)', 'Fruta', 'azucar', 3, 6.5, 35, '≈14 % de azúcares.'],
+  ['fruta-guanabana', 'Guanábana (pulpa)', 'Fruta', 'azucar', 2, 6, 35, '≈13 % de azúcares.'],
+  ['fruta-maracuya', 'Maracuyá (pulpa)', 'Fruta', 'azucar', 3, 5, 25, '≈11 % de azúcares; muy ácida y aromática.'],
+  ['fruta-pina', 'Piña (pulpa)', 'Fruta', 'azucar', 2, 4.5, 35, '≈10 % de azúcares.'],
+  ['fruta-uchuva', 'Uchuva', 'Fruta', 'azucar', 4, 4, 30, '≈9 % de azúcares.'],
+  ['fruta-mora', 'Mora (pulpa)', 'Fruta', 'azucar', 40, 2.3, 35, '≈5 % de azúcares; aporta color rojizo.'],
+  ['fruta-fresa', 'Fresa (pulpa)', 'Fruta', 'azucar', 10, 2.3, 35, '≈5 % de azúcares.'],
+  ['fruta-lulo', 'Lulo (pulpa)', 'Fruta', 'azucar', 3, 1.5, 30, '≈3 % de azúcares; muy ácido.'],
   ['lactose', 'Lactosa', 'Genérica', 'no-fermentable', 0, 43, 15, 'No fermentable: dulzor y cuerpo. Milk Stout.'],
   ['maltodextrin', 'Maltodextrina', 'Genérica', 'no-fermentable', 0, 40, 10, 'Cuerpo sin dulzor.'],
   // Extractos

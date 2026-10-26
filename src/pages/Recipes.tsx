@@ -2,6 +2,7 @@ import { useLiveQuery } from 'dexie-react-hooks';
 import { useMemo, useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { IntentDesigner } from '../components/IntentDesigner';
+import { DesignImportModal } from '../components/DesignImport';
 import { StyleWizard } from '../components/StyleWizard';
 import { STATUS_HIST } from '../components/Historical';
 import { Empty, Field, Modal, NumberInput, Swatch, Tabs, fmt, fmtDate } from '../components/ui';
@@ -21,6 +22,7 @@ export default function Recipes() {
   const [wizard, setWizard] = useState(params.get('nueva') !== null);
   const [q, setQ] = useState('');
   const [showArchived, setShowArchived] = useState(false);
+  const [pasting, setPasting] = useState(false);
   const archivedCount = (recipes ?? []).filter((r) => r.archived).length;
 
   const filtered = (recipes ?? []).filter((r) => {
@@ -37,6 +39,9 @@ export default function Recipes() {
         </div>
         <div className="row">
           <ImportButton />
+          <button className="btn" onClick={() => setPasting(true)}>
+            Pegar un diseño
+          </button>
           <button className="btn btn-primary" onClick={() => setWizard(true)}>
             + Nueva receta
           </button>
@@ -67,6 +72,7 @@ export default function Recipes() {
           ))}
         </div>
       )}
+      {pasting && <DesignImportModal onClose={() => setPasting(false)} />}
       {wizard && <NewRecipeWizard onClose={() => setWizard(false)} initialStyle={params.get('estilo') ?? undefined} />}
     </>
   );

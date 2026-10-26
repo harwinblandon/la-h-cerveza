@@ -1,10 +1,10 @@
 import type { Catalog } from './catalog';
+import { pitchAdvice } from './yeastAdvice';
 import { STORE_EQUIVALENTS } from '../data/distrines';
 import { brandEquivalent, byId, soldAt } from './catalog';
 import { gramsForIbu, hopIbu } from './calc/bitterness';
 import { recipeSrm } from './calc/color';
 import { computeRecipeStats } from './calc/recipeStats';
-import { pitchRate } from './calc/tools';
 import { L_PER_GAL, LB_PER_KG, ebcToLovibond, uid } from './calc/units';
 import { acidForTargetPh, bicarbonateForTargetPh, recipeAcid, withAcid } from './calc/water';
 import { optimizeSalts, splitSalts } from './waterOptimizer';
@@ -402,7 +402,7 @@ export function generateFromStyle(o: GenerateOptions): Recipe {
   // 5. Levadura con la cantidad recomendada y macerado para llegar a la FG del estilo.
   if (yeast) {
     const og = computeRecipeStats(r).og;
-    const pr = pitchRate(og, r.batchSizeL, isLagerish(yeast) ? 'lager' : 'ale', yeast.form);
+    const pr = pitchAdvice(og, r.batchSizeL, { ...yeast, ingredientId: yeast.id, type: isLagerish(yeast) ? 'lager' : yeast.type }, 0);
     r.yeasts = [yeastFromCatalog(yeast, pr.packs)];
     if (t.fgPos !== undefined) {
       const fgT = atPos(style.ranges.fg, t.fgPos);

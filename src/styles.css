@@ -621,3 +621,27 @@ body::before {
 .usage-bar.on { fill: var(--text); }
 .usage-axis { stroke: var(--border); stroke-width: 1; }
 .usage-tick { fill: var(--text-3); font-size: 11px; font-family: var(--font-mono); }
+
+/* Lectura de un diseño pegado */
+.design-read { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 0.8rem; }
+.design-read-section ul { margin: 0.3rem 0 0; padding-left: 1rem; font-size: 0.85rem; }
+.design-read-section li { margin-bottom: 0.15rem; }
+
+/* Ficha del diseño */
+.design-line { display: grid; grid-template-columns: 5.5rem minmax(0, 1fr); gap: 0.6rem; padding: 0.35rem 0; border-top: 1px solid var(--border); font-size: 0.9rem; }
+.design-line:first-of-type { border-top: none; }
+.design-line > .num { color: var(--text-2); text-align: right; }
+.design-line .faint { font-size: 0.8rem; }
+.plan-list { margin: 0; padding-left: 1.2rem; }
+.plan-list li { padding: 0.5rem 0; border-top: 1px solid var(--border); }
+.plan-list li:first-child { border-top: none; }
+.plan-detail { white-space: pre-line; font-size: 0.84rem; color: var(--text-2); margin-top: 0.25rem; }
+.design-original { white-space: pre-wrap; font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-2); margin: 0.6rem 0 0; max-height: 480px; overflow: auto; }
+
+.plan-run { margin: 0; padding-left: 1.2rem; }
+.plan-run > li { padding: 0.55rem 0; border-top: 1px solid var(--border); }
+.plan-run > li:first-child { border-top: none; }
+.plan-run > li.done { opacity: 0.6; }
+.plan-run > li.next { opacity: 1; }
+.plan-checks { list-style: none; margin: 0.3rem 0 0; padding: 0; font-size: 0.84rem; color: var(--text-2); }
+.plan-checks li.ok { color: var(--ok); }

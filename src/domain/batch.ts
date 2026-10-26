@@ -240,7 +240,8 @@ export function fermentationSchedule(batch: Batch): ScheduleItem[] {
     const day = Math.max(1, daysBeforeCold - h.time);
     out.push({ title: `Dry hop: ${n1(h.amountG)} g de ${h.name}`, at: batch.brewDate + day * DAY, detail: `${h.time} días de contacto` });
   }
-  for (const m of r.miscs.filter((x) => x.use === 'fermentador')) {
+  const inPlan = new Set((r.plan ?? []).flatMap((p) => p.items ?? []));
+  for (const m of r.miscs.filter((x) => x.use === 'fermentador' && !inPlan.has(x.uid))) {
     out.push({ title: `Agregar ${n1(m.amount)} ${m.unit} de ${m.name}`, at: batch.brewDate + Math.max(3, daysBeforeCold - (m.time ?? 4)) * DAY, detail: m.notes });
   }
   out.push({ title: 'Listo para envasar', at: t });
@@ -272,7 +273,9 @@ export interface FermentationStatus {
 export function fermentationStatus(batch: Batch): FermentationStatus {
   const stats = computeRecipeStats(batch.recipe);
   const og = batch.brewDay.ogMeasured ?? stats.og;
-  const expectedFg = og - (og - 1) * (stats.attenuation / 100);
+  // Lo que se agrega en el fermentador (fruta, azúcares) suma densidad equivalente.
+  const extra = stats.ogTotal - stats.og;
+  const expectedFg = og === stats.og ? stats.fg : stats.fg + (og - stats.og) * (1 - stats.attenuation / 100);
   const pts = batch.readings
     .map((r) => ({ at: r.at, sg: readingSg(r, og), temp: r.tempC }))
     .filter((r): r is { at: number; sg: number; temp: number | undefined } => r.sg !== undefined)
@@ -311,7 +314,7 @@ export function fermentationStatus(batch: Batch): FermentationStatus {
     if (progressPct > 70 && yeast?.type !== 'lager') advice.push('En la recta final: subir 1–2 °C ayuda a limpiar diacetilo y terminar la atenuación.');
     if (progressPct > 60 && yeast?.type === 'lager') advice.push('Momento del descanso de diacetilo: sube a 16–18 °C por 2–3 días.');
   }
-  return { og, expectedFg, currentSg: last.sg, attenuation, abvNow: abv(og, last.sg), progressPct, stable, verdict, advice: [...advice] };
+  return { og, expectedFg, currentSg: last.sg, attenuation, abvNow: abv(og + extra, last.sg), progressPct, stable, verdict, advice: [...advice] };
 }
 
 // ---------- Planeado vs real ----------

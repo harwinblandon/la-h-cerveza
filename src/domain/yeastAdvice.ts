@@ -19,6 +19,11 @@ export interface PitchAdvice {
   starter?: { liters: number; dmeG: number; hours: number };
 }
 
+/** Dosis del fabricante cuando la ficha la da en g/hL (en lugar de la fórmula general de células). */
+const MAKER_RATE: Record<string, { sachetG: number; normal: [number, number]; strong: [number, number]; strongPlato: number; source: string }> = {
+  'philly-sour': { sachetG: 11, normal: [50, 100], strong: [100, 150], strongPlato: 14, source: 'ficha técnica de Lallemand (WildBrew Philly Sour)' },
+};
+
 const isLager = (y: Pick<RecipeYeast, 'type' | 'family'>) => y.type === 'lager' || y.family?.startsWith('lager');
 const isKveik = (y: Pick<RecipeYeast, 'family'>) => y.family === 'kveik';
 
@@ -27,7 +32,15 @@ const isKveik = (y: Pick<RecipeYeast, 'family'>) => y.family === 'kveik';
  * Starter: ~1,4 mil millones de células nuevas por gramo de extracto con agitación (Braukaiser),
  * mosto a 1.036 (100 g de extracto seco por litro).
  */
-export function pitchAdvice(og: number, volumeL: number, y: Pick<RecipeYeast, 'type' | 'form' | 'family' | 'name'>, packsAvailable: number, ageDays = 0): PitchAdvice {
+export function pitchAdvice(
+  og: number,
+  volumeL: number,
+  y: Pick<RecipeYeast, 'type' | 'form' | 'family' | 'name'> & { ingredientId?: string },
+  packsAvailable: number,
+  ageDays = 0,
+): PitchAdvice {
+  const maker = y.ingredientId ? MAKER_RATE[y.ingredientId] : undefined;
+  if (maker) return makerPitch(og, volumeL, y, packsAvailable, maker);
   const pr = pitchRate(og, volumeL, isLager(y) ? 'lager' : 'ale', y.form, ageDays);
   // La kveik tolera muy bien la inoculación baja: un cuarto de la tasa ale es suficiente.
   const needed = isKveik(y) ? pr.cellsNeededB / 3 : pr.cellsNeededB;
@@ -73,6 +86,43 @@ export function pitchAdvice(og: number, volumeL: number, y: Pick<RecipeYeast, 't
       ? `Con ${packsAvailable} ${dry ? 'sobre(s)' : 'paquete(s)'} tienes suficiente levadura.`
       : `Tienes ~${Math.round(ratio * 100)} % de las células que pide el mosto (${Math.round(available)} de ${Math.round(needed)} mil millones).`;
   return { cellsNeededB: needed, cellsAvailableB: available, ratio, packs, level, summary, steps, starter };
+}
+
+/** Dosis por g/hL del fabricante (p. ej. Philly Sour: más levadura en mostos de más de 14 °P). */
+function makerPitch(
+  og: number,
+  volumeL: number,
+  _y: Pick<RecipeYeast, 'name' | 'form'>,
+  packs: number,
+  m: (typeof MAKER_RATE)[string],
+): PitchAdvice {
+  const plato = 259 - 259 / og;
+  const strong = plato > m.strongPlato;
+  const [lo, hi] = strong ? m.strong : m.normal;
+  const hl = volumeL / 100;
+  const needG = lo * hl;
+  const haveG = packs * m.sachetG;
+  const recommended = Math.max(1, Math.ceil(needG / m.sachetG - 0.05));
+  const ratio = needG > 0 ? haveG / needG : 1;
+  const level: PitchAdvice['level'] = ratio >= 0.95 ? 'ok' : ratio >= 0.75 ? 'justo' : ratio >= 0.5 ? 'bajo' : 'muy-bajo';
+  const dose = (haveG / hl).toFixed(0);
+  const steps: string[] = [
+    `Según la ${m.source}: ${lo}–${hi} g/hL ${strong ? `para mostos de más de ${m.strongPlato} °P` : ''} → ${Math.round(lo * hl)}–${Math.round(hi * hl)} g para ${volumeL} L (${recommended} sobres de ${m.sachetG} g como mínimo).`,
+  ];
+  if (level !== 'ok') {
+    steps.push(`Con ${packs} sobre(s) quedarías en ${dose} g/hL: puede fermentar, pero por debajo de lo que pide el fabricante; trátalo como una prueba, no como un resultado garantizado.`);
+    steps.push(`Si no consigues más sobres, reduce el volumen: con ${packs} alcanzan unos ${Math.floor((haveG / lo) * 100)} L a esta densidad.`);
+    steps.push('Hidrata los sobres, agrega nutriente a 10 min del final del hervor e inocula a la temperatura baja del rango.');
+  }
+  return {
+    cellsNeededB: needG * 10,
+    cellsAvailableB: haveG * 10,
+    ratio,
+    packs: recommended,
+    level,
+    summary: level === 'ok' ? `${packs} sobres (${dose} g/hL): dentro de la dosis del fabricante.` : `${packs} sobre(s) = ${dose} g/hL; el fabricante pide ${lo}–${hi} g/hL.`,
+    steps,
+  };
 }
 
 /** Lo que aporta cada familia de levadura (para explicar diferencias con el estilo). */

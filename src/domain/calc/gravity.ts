@@ -11,7 +11,10 @@ function fermentability(f: RecipeFermentable): 'normal' | 'total' | 'nula' {
 }
 
 export interface GravityResult {
+  /** OG del mosto (macerado y hervor): la que se mide al llenar el fermentador. */
   og: number;
+  /** OG equivalente con lo que se agrega en el fermentador (fruta, azúcares): base del ABV. */
+  ogTotal: number;
   preBoilSg: number;
   /** Puntos aportados por cada fermentable (para porcentajes por extracto). */
   pointsByUid: Record<string, number>;
@@ -32,6 +35,7 @@ export function computeGravity(
   const pointsByUid: Record<string, number> = {};
   let mashedPts = 0;
   let total = 0;
+  let wort = 0;
 
   for (const f of fermentables) {
     let pts = 0;
@@ -45,6 +49,7 @@ export function computeGravity(
     }
     pointsByUid[f.uid] = pts;
     total += pts;
+    if (f.use !== 'fermentador') wort += pts;
   }
 
   // En la olla antes de hervir solo está lo macerado, en un volumen mayor.
@@ -52,7 +57,8 @@ export function computeGravity(
   const preBoilPts = preBoilColdL > 0 ? (mashedPts * postBoilColdL) / preBoilColdL : 0;
 
   return {
-    og: 1 + total / 1000,
+    og: 1 + wort / 1000,
+    ogTotal: 1 + total / 1000,
     preBoilSg: 1 + preBoilPts / 1000,
     pointsByUid,
     mashEfficiencyPct: batchSizeL > 0 ? (efficiencyPct * postBoilColdL) / batchSizeL : 0,

@@ -77,6 +77,10 @@ export interface RecipeFermentable extends Sourced {
   diPH?: number;
   amountKg: number;
   use: FermentableUse;
+  /** En el hervor: minutos antes del final (lactosa a 10, dextrosa a 5…). */
+  timeMin?: number;
+  /** Para qué está en la receta (ej. "avena: textura sedosa"). */
+  role?: string;
 }
 
 export type HopUse = 'macerado' | 'primer-mosto' | 'hervor' | 'whirlpool' | 'dry-hop';
@@ -281,6 +285,9 @@ export interface Recipe {
   deviations?: Record<string, string>;
   /** Registro histórico importado (lo que se sabe, con su procedencia, y lo que no). */
   historical?: HistoricalRecord;
+  /** Objetivos del diseño y plan por condiciones (recetas propias o experimentales). */
+  design?: DesignTargets;
+  plan?: PlanStep[];
   /** Presupuesto: tienda elegida por insumo (uid → tienda) y costos adicionales del lote. */
   costPrefs?: { lines?: Record<string, string>; manual?: Record<string, number>; extras?: { uid: string; name: string; amount: number }[] };
   createdAt: number;
@@ -397,6 +404,49 @@ export interface BrewTimer {
   minutes: number;
   note?: string;
   alerts: TimerAlertDef[];
+}
+
+type Range = [number, number];
+
+/** Objetivos propios del diseño (cuando no hay un estilo BJCP o se busca otra cosa). */
+export interface DesignTargets {
+  styleName?: string;
+  og?: Range;
+  fg?: Range;
+  abv?: Range;
+  ibu?: Range;
+  srm?: Range;
+  phFinal?: Range;
+  carbonation?: Range;
+  fermentTempC?: Range;
+  finalVolumeL?: Range;
+  /** Perfil buscado en palabras ("batido de banano con chocolate…"). */
+  profile?: string;
+  /** Advertencias del diseño (ej. "la OG antes de la fruta no es toda la carga fermentable"). */
+  notes?: string[];
+}
+
+/** Condición para avanzar en el plan; se evalúa con las lecturas del lote. */
+export type PlanCondition =
+  | { kind: 'ph-max'; value: number }
+  | { kind: 'sg-drop'; points: number }
+  | { kind: 'sg-dropping' }
+  | { kind: 'sg-stable'; days: number }
+  | { kind: 'days-after'; step: string; days: number };
+
+/** Paso del plan de fermentación, adiciones y maduración (por condiciones, no por días fijos). */
+export interface PlanStep {
+  uid: string;
+  phase: 'fermentacion' | 'adicion' | 'maduracion' | 'envasado';
+  title: string;
+  tempC?: Range;
+  detail?: string;
+  /** Ingredientes que se agregan en este paso (uid de fermentables o misceláneos). */
+  items?: string[];
+  conditions?: PlanCondition[];
+  /** Tiempo de contacto (días) y cada cuánto evaluar (horas), p. ej. nibs de cacao. */
+  contactDays?: Range;
+  checkEveryH?: number;
 }
 
 export type HistoricalKind = 'confirmado' | 'medicion' | 'ejecucion' | 'planificado' | 'estimacion' | 'calculo' | 'no-recuperado';
@@ -545,6 +595,8 @@ export interface Batch {
   historical?: HistoricalRecord;
   /** Temporizadores del día de cocción (si no hay, se proponen según la receta). */
   timers?: BrewTimer[];
+  /** Pasos del plan ya hechos (uid del paso → hora). */
+  planDone?: Record<string, number>;
   rating?: number;
   tastingNotes?: string;
   createdAt: number;

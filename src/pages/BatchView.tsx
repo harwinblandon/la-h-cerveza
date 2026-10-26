@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { FermentationChart } from '../components/batch/FermentationChart';
 import { TimerPlan } from '../components/batch/Timer';
+import { PlanCard } from '../components/batch/PlanCard';
 import { defaultTimers } from '../domain/timers';
 import { Field, NumberInput, Stat, Tabs, fmt, fmtDate, fmtDateTime, fmtKg } from '../components/ui';
 import { db } from '../db';
@@ -464,6 +465,7 @@ function Fermentation({ batch, mutate }: TabProps) {
   return (
     <div className="editor-layout">
       <div>
+        <PlanCard batch={batch} mutate={mutate} />
         <div className="card">
           <div className="card-head">
             <h2>Seguimiento</h2>

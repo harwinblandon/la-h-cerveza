@@ -7,7 +7,10 @@ import { planWater, strikeTemp, type WaterPlan } from './volumes';
 import { addSalts, dilute, estimateMashPh, mixWaters, residualAlkalinity, sulfateChlorideRatio } from './water';
 
 export interface RecipeStats {
+  /** OG del mosto, antes de lo que se agrega en el fermentador. */
   og: number;
+  /** OG equivalente con fruta y azúcares del fermentador (para ABV). */
+  ogTotal: number;
   fg: number;
   abv: number;
   ibu: number;
@@ -87,10 +90,12 @@ export function computeRecipeStats(recipe: Recipe, sourceWater?: WaterIons, grai
   }
 
   const og = grav.og;
+  const ogTotal = grav.ogTotal;
   return {
     og,
+    ogTotal,
     fg,
-    abv: abv(og, fg),
+    abv: abv(ogTotal, fg),
     ibu,
     srm,
     ebc: srmToEbc(srm),
@@ -100,7 +105,7 @@ export function computeRecipeStats(recipe: Recipe, sourceWater?: WaterIons, grai
     preBoilSg: grav.preBoilSg,
     boilGravity,
     mashEfficiencyPct: grav.mashEfficiencyPct,
-    calories: calories355(og, fg),
+    calories: calories355(ogTotal, fg),
     water,
     strikeTempC: strike,
     mashTempC,

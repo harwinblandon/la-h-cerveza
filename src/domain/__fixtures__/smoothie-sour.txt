@@ -1,0 +1,176 @@
+IMPERIAL BANANA & CACAO SMOOTHIE SOUR
+Receta experimental — Lote 001
+1. Parámetros de diseño
+Parámetro	Objetivo
+Estilo	Imperial Smoothie Sour
+Volumen al fermentador	40 L
+Volumen final estimado	30–35 L
+Alcohol	7.0–8.0% ABV
+OG del mosto	1.070–1.075
+FG	Por determinar según fermentación y adjuntos
+Amargor	8–10 IBU
+pH final deseado	3.4–3.7
+Carbonatación	1.9–2.2 vol. CO₂
+Levadura	WildBrew Philly Sour
+Fermentación	22–24 °C
+Fruta principal	Banano muy maduro
+Complemento	Nibs de cacao
+Perfil	Batido de banano con chocolate, ácido, cremoso y alcohólico
+
+
+Importante: el alcohol final dependerá también de los azúcares fermentados del banano. La OG medida antes de agregar la fruta no representa toda la carga fermentable de la receta.
+2. Grist de maltas
+Ingrediente	Cantidad	Porcentaje
+Malta Pilsen	9.00 kg	50%
+Malta de trigo	4.50 kg	25%
+Avena en hojuelas	2.70 kg	15%
+Carapils	0.90 kg	5%
+Munich I	0.90 kg	5%
+TOTAL	18.00 kg	100%
+
+
+Función de cada ingrediente
+Pilsen: base fermentable relativamente neutra que permite destacar la fruta.
+Trigo: contribuye a la estructura proteica, espuma y sensación de cuerpo.
+Avena: aporta beta-glucanos y otros componentes que favorecen una textura sedosa y viscosa.
+Carapils: complementa el cuerpo, aunque su efecto será relativamente pequeño frente a la avena y la fruta.
+Munich I: introduce una nota maltosa y ligeramente panificada que puede acompañar el cacao sin convertir la cerveza en una stout.
+El grist es deliberadamente alto en trigo y avena. Para tu sistema BIAB conviene utilizar una molienda apropiada y prever un escurrido lento.
+3. Ingredientes adicionales
+Ingrediente	Cantidad inicial
+Dextrosa	700 g
+Lactosa	600 g
+Maltodextrina	300 g, opcional
+Banano maduro, peso pelado	9.0 kg
+Nibs de cacao	200 g
+Vainilla natural	Opcional, ajustar mediante prueba
+Nutriente de levadura	Según dosis del fabricante
+
+
+La dextrosa busca favorecer la acidificación de Philly Sour. No obstante, más dextrosa no garantiza un pH determinado.
+La lactosa aporta dulzor residual, mientras que la maltodextrina aporta principalmente cuerpo. No incorporaría automáticamente los 300 g de maltodextrina: primero evaluaría si realmente hace falta, porque ya tenemos bastante avena, trigo, lactosa y fruta.
+4. Lúpulo
+Usaría Magnum, buscando un amargor muy discreto.
+Ingrediente	Cantidad	Momento
+Magnum, 12% AA	10–12 g, estimados	60 min de hervor
+
+
+Objetivo: 8–10 IBU.
+La cantidad exacta debe recalcularse con la densidad real, el volumen de hervor y la utilización de tu equipo. Para Philly Sour prefiero mantener el amargor bajo, especialmente durante su fase de acidificación.
+5. Agua y perfil mineral
+Para una cerveza cremosa, frutal y ácida, buscaría un perfil moderadamente orientado a cloruros.
+Parámetro	Objetivo aproximado
+Calcio	60–80 ppm
+Magnesio	5–15 ppm
+Sodio	10–25 ppm
+Cloruro	100–130 ppm
+Sulfato	40–60 ppm
+Relación Cl/SO₄	Aproximadamente 2:1
+pH del macerado	5.3–5.4
+
+
+Las cantidades de CaCl₂, CaSO₄, MgSO₄ y ácido fosfórico deben calcularse a partir del análisis de agua y del volumen real utilizado.
+No acidificaría el mosto hasta pH 3.5 antes de inocular: Philly Sour debe encargarse de producir la acidez durante la fermentación.
+6. Proceso de elaboración
+Etapa A. Maceración
+Parámetro	Valor
+Temperatura	67.5–68 °C
+Duración	70 minutos
+Mash-out	75–76 °C
+Duración mash-out	10 minutos
+
+
+Elegiría 68 °C y no 70 °C para favorecer una fermentación saludable.
+La lactosa, la avena y el banano ya proporcionarán suficiente cuerpo. No necesitamos generar una cantidad excesiva de dextrinas.
+Etapa B. Hervor
+Duración: 60 minutos.
+- Minuto 0: Magnum.
+- Últimos 10 minutos: lactosa.
+- Últimos 10 minutos: nutriente según indicaciones del fabricante.
+- Dextrosa: últimos 5–10 minutos.
+La maltodextrina, si finalmente se utiliza, también puede incorporarse durante el hervor.
+Enfriar hasta 22 °C y transferir al fermentador previamente sanitizado.
+7. Fermentación con Philly Sour
+Aquí debemos prestar especial atención.
+La ficha técnica de Lallemand Brewing — WildBrew Philly Sour establece una dosificación de 100–150 g/hL para mostos superiores a 14 °P, especialmente cuando existen condiciones exigentes de fermentación.
+Para 40 L eso equivale a 40–60 g.
+Sobres de 11 g	Cantidad	Dosificación
+2	22 g	55 g/hL
+3	33 g	82.5 g/hL
+4	44 g	110 g/hL
+
+
+Mi recomendación técnica es utilizar 4 sobres.
+Sé que el costo te preocupa. Dos sobres podrían fermentar el mosto, pero estaríamos considerablemente por debajo de la recomendación del fabricante para esta densidad.
+Si decides utilizar solamente dos, lo trataría como una prueba experimental, no como una fermentación con resultados garantizados. Preferiría reducir el volumen antes que comprometer la salud fermentativa de un lote tan costoso.
+Temperatura y seguimiento
+Etapa	Temperatura	Observaciones
+Inoculación	22 °C	Mosto enfriado
+Primeras 48–72 h	22–23 °C	Producción de ácido láctico
+Fermentación alcohólica	23–24 °C	Seguimiento de densidad
+Fermentación de fruta	23–24 °C	Mantener actividad fermentativa
+Finalización	23–24 °C	Confirmar estabilidad
+
+
+No establecería los días de cada etapa como tiempos obligatorios.
+La levadura puede comportarse de forma distinta según densidad, temperatura, nutrientes y cantidad de fruta.
+8. Adición de banano
+Cantidad total: 9 kg de banano pelado y muy maduro.
+Adición	Cantidad	Momento
+Primera	6 kg	Durante fermentación activa
+Segunda	3 kg	Durante fermentación avanzada, antes de que termine
+Total	9 kg	
+
+
+Preparación
+Seleccionar bananos muy maduros, aromáticos y sin signos de deterioro.
+Pelar, retirar partes dañadas y preparar un puré homogéneo.
+Recomiendo utilizar puré comercial aséptico o aplicar un tratamiento térmico validado para reducir la carga microbiana. La congelación por sí sola no sanitiza la fruta.
+Evitar hervir el banano prolongadamente porque puede modificar considerablemente su perfil aromático.
+Primera adición
+Cuando Philly Sour haya superado la fase inicial de acidificación y esté fermentando activamente, agregar los primeros 6 kg.
+No fijaría el momento exclusivamente por días: conviene seguir la evolución de la densidad y el pH.
+Segunda adición
+Agregar los 3 kg restantes mientras todavía exista actividad fermentativa.
+La finalidad es conseguir una expresión aromática más intensa sin dejar una carga de azúcares fermentables sin consumir.
+No enfriar ni envasar hasta confirmar que la fermentación de ambas adiciones ha terminado.
+La pulpa también puede contener almidón residual. Por eso, una densidad estable durante pocos días no garantiza por sí sola estabilidad indefinida, especialmente si posteriormente intervienen microorganismos capaces de degradarlo.
+9. Adición de nibs de cacao
+Cantidad: 200 g.
+Los incorporaría cuando la fermentación del banano esté prácticamente terminada.
+Parámetro	Valor
+Cantidad	200 g
+Temperatura	18–22 °C
+Contacto inicial	4 días
+Contacto máximo orientativo	7 días
+Evaluación	Sensorial cada 24 h
+
+
+Utilizar nibs de calidad alimentaria, con tostión moderada y manejo higiénico.
+Los nibs pueden aportar astringencia y amargor si la extracción resulta excesiva.
+Buscamos chocolate aromático, no una cerveza dominada por cacao amargo.
+La vainilla quedaría como ajuste opcional, después de probar el resultado del banano y el cacao.
+10. Maduración y carbonatación
+Una vez confirmada la finalización de la fermentación:
+1. Retirar los nibs.
+2. Separar la cerveza de la mayor cantidad posible de sólidos de fruta.
+3. Realizar cold crash a 2–4 °C.
+4. Trasvasar mediante circuito cerrado a un barril sanitizado y purgado con CO₂.
+5. Carbonatar a 1.9–2.2 volúmenes de CO₂.
+6. Mantener refrigerada.
+Para una cerveza de esta naturaleza, el barril refrigerado es mi presentación preferida.
+Si queda pulpa y azúcar fermentable, el frío solamente ralentiza la actividad microbiana; no la elimina. Tampoco consideraría seguro embotellarla con fruta sin fermentar únicamente porque haya pasado varias semanas refrigerada.
+11. Perfil sensorial esperado
+Atributo	Resultado buscado
+Apariencia	Amarillo dorado, opaco y muy turbio
+Aroma principal	Banano maduro
+Aroma secundario	Chocolate y notas lácticas
+Acidez	Láctica, limpia y refrescante
+Dulzor	Medio, equilibrando la acidez
+Cuerpo	Muy alto, sedoso
+Alcohol	Integrado, sin sensación caliente
+Final	Frutal, cremoso y agradable
+Carbonatación	Moderada-baja
+
+
+La referencia sensorial sería un batido de banano con chocolate y una acidez similar a la del yogur, pero conservando una identidad cervecera.
