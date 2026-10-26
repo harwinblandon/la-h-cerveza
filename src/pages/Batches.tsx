@@ -41,7 +41,6 @@ export default function Batches() {
       <div className="page-head">
         <div>
           <h1>Lotes</h1>
-          <p className="muted">Cada cocción con su día de olla, fermentación y envasado.</p>
         </div>
       </div>
       <div className="card">

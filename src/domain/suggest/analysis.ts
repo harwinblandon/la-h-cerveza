@@ -4,9 +4,9 @@ import { hopIbu } from '../calc/bitterness';
 import type { RecipeStats } from '../calc/recipeStats';
 import { pitchRate } from '../calc/tools';
 import { L_PER_GAL, LB_PER_KG, ebcToLovibond } from '../calc/units';
-import { lacticForTargetPh } from '../calc/water';
+import { ACID_LABEL, acidForTargetPh, recipeAcid, withAcid } from '../calc/water';
 import { applyWaterTarget, fitColor, fermentableFromCatalog, nearEdge, scaleToOg, yeastFromCatalog } from '../recipeFactory';
-import type { Recipe, SaltId, Style, WaterIons } from '../types';
+import type { AcidChoice, Recipe, SaltId, Style, WaterIons } from '../types';
 import { hopsForStyle, yeastsForStyle } from './substitutes';
 
 export type Severity = 'problema' | 'aviso' | 'idea';
@@ -47,9 +47,12 @@ export interface AnalysisInput {
   sourceWater?: WaterIons;
   targetWater?: WaterIons;
   availableSalts?: SaltId[];
+  /** Ácido que usa el cervecero. */
+  acid?: AcidChoice;
 }
 
-export function analyzeRecipe({ recipe, stats, style, catalog, sourceWater, targetWater, availableSalts }: AnalysisInput): Suggestion[] {
+export function analyzeRecipe({ recipe, stats, style, catalog, sourceWater, targetWater, availableSalts, acid: prefAcid }: AnalysisInput): Suggestion[] {
+  const acid = recipeAcid(recipe.water, prefAcid);
   const out: Suggestion[] = [];
   const add = (s: Omit<Suggestion, 'id' | 'key'>) => out.push({ ...s, id: `${s.area}-${out.length}`, key: `${s.area}:${s.title}` });
 
@@ -297,7 +300,7 @@ export function analyzeRecipe({ recipe, stats, style, catalog, sourceWater, targ
     if (ph > 5.6 || ph < 5.2) {
       const actions: Suggestion['actions'] = [];
       if (ph > 5.6) {
-        const ml = lacticForTargetPh(
+        const ml = acidForTargetPh(
           {
             fermentables: recipe.fermentables,
             water: stats.mashWater,
@@ -308,8 +311,9 @@ export function analyzeRecipe({ recipe, stats, style, catalog, sourceWater, targ
             phosphoricPct: recipe.water.phosphoricPct,
           },
           5.4,
+          acid,
         );
-        actions.push({ label: `Ácido láctico ${ml.toFixed(1)} mL`, apply: (r) => ({ ...r, water: { ...r.water, lacticMl: Math.round(ml * 10) / 10 } }) });
+        actions.push({ label: `${ACID_LABEL[acid.type]} ${ml.toFixed(1)} mL`, apply: (r) => ({ ...r, water: withAcid(r.water, acid, ml) }) });
       }
       add({
         severity: 'aviso',
@@ -336,7 +340,7 @@ export function analyzeRecipe({ recipe, stats, style, catalog, sourceWater, targ
           area: 'agua',
           title: 'El balance sulfato/cloruro no se parece al objetivo',
           detail: `Tienes ${current.toFixed(1)} y el perfil objetivo tiene ${want.toFixed(1)}.`,
-          actions: [{ label: 'Calcular sales automáticamente', apply: (r) => applyWaterTarget(r, sourceWater, targetWater, 5.4, availableSalts) }],
+          actions: [{ label: 'Calcular sales automáticamente', apply: (r) => applyWaterTarget(r, sourceWater, targetWater, 5.4, availableSalts, acid) }],
         });
       }
     }

@@ -372,6 +372,12 @@ export type BatchStatus = 'planificado' | 'coccion' | 'fermentando' | 'maduracio
  * Procedencia de un dato histórico. Orden de confianza:
  * confirmado > medición > registro de ejecución > planificado > estimación.
  */
+/** Ácido que usa el cervecero para bajar el pH (y su concentración en %). */
+export interface AcidChoice {
+  type: 'lactico' | 'fosforico';
+  pct: number;
+}
+
 export type HistoricalKind = 'confirmado' | 'medicion' | 'ejecucion' | 'planificado' | 'estimacion' | 'calculo' | 'no-recuperado';
 
 export interface HistoricalValue {

@@ -3,8 +3,8 @@ import { Icon } from '../components/Icons';
 import { ProfileCard } from '../components/ProfileCard';
 import { Field, NumberInput, download } from '../components/ui';
 import { exportBackup, importBackup, updateSettings } from '../db';
-import { DISTRINES, DISTRINES_SALTS, DISTRINES_URL } from '../data/distrines';
 import { SALTS } from '../domain/calc/water';
+import { maltsters as catalogMaltsters } from '../domain/catalog';
 import type { SaltId } from '../domain/types';
 import { useCatalog, useSettings } from '../hooks';
 
@@ -31,6 +31,9 @@ export default function SettingsPage() {
   const s = useSettings();
   const catalog = useCatalog();
   const salts = s.availableSalts ?? OPTIMIZABLE;
+  const brands = catalogMaltsters(catalog);
+  const myBrands = s.maltsters ?? [];
+  const acid = s.acid ?? { type: 'lactico' as const, pct: 88 };
   return (
     <>
       <div className="page-head">
@@ -89,12 +92,6 @@ export default function SettingsPage() {
       <div className="card">
         <h2>Insumos y agua</h2>
         <div className="grid grid-2">
-          <Field label="Tienda donde compro" hint="Las recetas generadas usan sus maltas, lúpulos y levaduras cuando hay un equivalente real">
-            <select className="input" value={s.preferredStore ?? ''} onChange={(e) => updateSettings({ preferredStore: e.target.value || undefined })}>
-              <option value={DISTRINES}>Distrines</option>
-              <option value="">Ninguna en particular</option>
-            </select>
-          </Field>
           <Field label="Mi agua">
             <select className="input" value={s.sourceWaterId} onChange={(e) => updateSettings({ sourceWaterId: e.target.value })}>
               {catalog.waters.map((w) => (
@@ -105,10 +102,38 @@ export default function SettingsPage() {
             </select>
           </Field>
         </div>
-        <h3 style={{ marginTop: '1rem' }}>Sales que tengo a mano</h3>
-        <p className="muted" style={{ fontSize: '0.88rem' }}>
-          El cálculo automático de sales solo usa las que marques y entrega los gramos exactos para tu volumen de agua.
+        <h3 style={{ marginTop: '1rem' }}>Ácido para el pH</h3>
+        <div className="grid grid-2">
+          <Field label="Ácido">
+            <select className="input" value={acid.type} onChange={(e) => updateSettings({ acid: { type: e.target.value as 'lactico', pct: e.target.value === 'fosforico' ? 85 : 88 } })}>
+              <option value="lactico">Láctico</option>
+              <option value="fosforico">Fosfórico</option>
+            </select>
+          </Field>
+          <Field label="Concentración">
+            <NumberInput value={acid.pct} decimals={0} onChange={(n) => updateSettings({ acid: { ...acid, pct: n } })} unit="%" />
+          </Field>
+        </div>
+        <h3 style={{ marginTop: '1rem' }}>Marcas de malta que consigo</h3>
+        <div className="row" style={{ gap: '0.4rem' }}>
+          {brands.map((b) => {
+            const i = myBrands.indexOf(b);
+            return (
+              <button
+                key={b}
+                className={`chip chip-toggle${i >= 0 ? ' chip-on' : ''}`}
+                onClick={() => updateSettings({ maltsters: i >= 0 ? myBrands.filter((x) => x !== b) : [...myBrands, b] })}
+              >
+                {i >= 0 ? `${i + 1}. ` : ''}
+                {b}
+              </button>
+            );
+          })}
+        </div>
+        <p className="faint" style={{ fontSize: '0.8rem', marginTop: '0.4rem' }}>
+          En el orden en que las marques: si la primera no tiene una malta equivalente, se usa la siguiente.
         </p>
+        <h3 style={{ marginTop: '1rem' }}>Sales que tengo a mano</h3>
         <div className="grid grid-2">
           {SALTS.filter((x) => OPTIMIZABLE.includes(x.id)).map((x) => (
             <label key={x.id} className="row" style={{ alignItems: 'flex-start', flexWrap: 'nowrap' }}>
@@ -120,24 +145,14 @@ export default function SettingsPage() {
               />
               <span>
                 <strong>{x.name}</strong> <span className="faint">{x.formula}</span>
-                {(DISTRINES_SALTS as readonly string[]).includes(x.id) && <span className="chip" style={{ marginLeft: 6 }}>en Distrines</span>}
                 <div className="faint" style={{ fontSize: '0.8rem' }}>{x.note}</div>
               </span>
             </label>
           ))}
         </div>
-        <p className="faint" style={{ fontSize: '0.8rem', marginTop: '0.6rem' }}>
-          <a href={DISTRINES_URL} target="_blank" rel="noreferrer">
-            Distrines
-          </a>{' '}
-          vende yeso, sulfato de magnesio y carbonato de calcio. El cloruro de calcio se consigue en otras tiendas cerveceras o en proveedores de químicos (grado alimenticio).
-        </p>
       </div>
       <div className="card">
         <h2>Copia de seguridad</h2>
-        <p className="muted">
-          Tus recetas y lotes se guardan en este navegador. Descarga una copia de vez en cuando y úsala para pasar tus datos a otro equipo o al celular.
-        </p>
         <div className="row">
           <button className="btn btn-primary" onClick={async () => download(`la-h-respaldo-${new Date().toISOString().slice(0, 10)}.json`, await exportBackup())}>
             Descargar copia
@@ -157,7 +172,6 @@ export default function SettingsPage() {
                     c.recipes && `${c.recipes} recetas`,
                     c.recipeVersions && `${c.recipeVersions} versiones`,
                     c.batches && `${c.batches} lotes`,
-                    c.awards && `${c.awards} resultados de competencia`,
                     c.waters && `${c.waters} perfiles de agua`,
                   ].filter(Boolean);
                   alert(`${title ?? 'Copia restaurada'}.

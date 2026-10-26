@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import { Link, NavLink, Route, Routes } from 'react-router-dom';
 import { LogoLaH, Signature } from './components/Brand';
 import { Icon } from './components/Icons';
@@ -8,7 +9,6 @@ import EquipmentPage from './pages/Equipment';
 import Home from './pages/Home';
 import Ingredients from './pages/Ingredients';
 import Inventory from './pages/Inventory';
-import Palmares from './pages/Palmares';
 import RecipeEditor from './pages/RecipeEditor';
 import Recipes from './pages/Recipes';
 import SettingsPage from './pages/Settings';
@@ -20,7 +20,6 @@ const NAV: [string, string, string][] = [
   ['/', 'inicio', 'Inicio'],
   ['/recetas', 'recetas', 'Recetas'],
   ['/lotes', 'lotes', 'Lotes'],
-  ['/palmares', 'palmares', 'Palmarés'],
   ['/estilos', 'estilos', 'Estilos'],
   ['/herramientas', 'herramientas', 'Herramientas'],
 ];
@@ -34,6 +33,17 @@ const NAV_MORE: [string, string, string][] = [
 
 export default function App() {
   const profile = useProfile();
+  // Alto de la barra superior del celular: las barras fijas de cada página se pegan debajo.
+  const top = useRef<HTMLElement>(null);
+  useEffect(() => {
+    const el = top.current;
+    if (!el) return;
+    const set = () => document.documentElement.style.setProperty('--mobile-top-h', `${el.offsetHeight}px`);
+    const ro = new ResizeObserver(set);
+    ro.observe(el);
+    set();
+    return () => ro.disconnect();
+  }, []);
   const link = ([to, icon, label]: [string, string, string]) => (
     <NavLink key={to} to={to} end={to === '/'}>
       <span className="nav-icon" aria-hidden>
@@ -62,7 +72,7 @@ export default function App() {
           <Signature />
         </div>
       </aside>
-      <header className="mobile-top">
+      <header className="mobile-top" ref={top}>
         <Link to="/" aria-label="Inicio">
           <LogoLaH />
         </Link>
@@ -75,7 +85,6 @@ export default function App() {
           <Route path="/recetas/:id" element={<RecipeEditor />} />
           <Route path="/lotes" element={<Batches />} />
           <Route path="/lotes/:id" element={<BatchView />} />
-          <Route path="/palmares" element={<Palmares />} />
           <Route path="/estilos" element={<Styles />} />
           <Route path="/herramientas" element={<Tools />} />
           <Route path="/ingredientes" element={<Ingredients />} />
@@ -89,7 +98,7 @@ export default function App() {
         </footer>
       </main>
       <nav className="bottom-nav">
-        {[NAV[0], NAV[1], NAV[2], NAV[4]].map(link)}
+        {NAV.slice(0, 4).map(link)}
         {link(['/ajustes', 'ajustes', 'Más'])}
       </nav>
     </div>

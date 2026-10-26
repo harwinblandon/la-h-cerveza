@@ -1,6 +1,5 @@
 import { useLiveQuery } from 'dexie-react-hooks';
 import { useEffect, useState } from 'react';
-import { DISTRINES } from '../data/distrines';
 import { DEFAULT_EQUIPMENT, EQUIPMENT_TYPE_LABEL } from '../data/equipment';
 import { initProfileDb } from '../db';
 import { checkPassword, createProfile, guestProfile, legacyDataExists, normalizeUsername, registry, reloadApp, startSession, touchLogin, type Profile } from '../profiles';
@@ -122,7 +121,7 @@ function CreateProfile({ legacy, canCancel, onCancel }: { legacy: boolean; canCa
   const [password2, setPassword2] = useState('');
   const [keepLegacy, setKeepLegacy] = useState(true);
   const [water, setWater] = useState('destilada');
-  const [store, setStore] = useState<string>('');
+  const [acid, setAcid] = useState<'lactico' | 'fosforico'>('lactico');
   const [equipmentId, setEquipmentId] = useState(DEFAULT_EQUIPMENT[0].id);
   const [brewery, setBrewery] = useState('');
   const [error, setError] = useState('');
@@ -151,7 +150,7 @@ function CreateProfile({ legacy, canCancel, onCancel }: { legacy: boolean; canCa
           brewerName: displayName.trim(),
           breweryName: brewery.trim(),
           sourceWaterId: water === 'propia' ? 'destilada' : water,
-          preferredStore: store || undefined,
+          acid: { type: acid, pct: acid === 'fosforico' ? 85 : 88 },
           defaultEquipmentId: equipmentId,
         });
       }
@@ -186,10 +185,10 @@ function CreateProfile({ legacy, canCancel, onCancel }: { legacy: boolean; canCa
           ))}
         </div>
         <div className="grid grid-2">
-          <Field label="¿Dónde compras insumos?" hint="Con una tienda elegida, las recetas usan sus maltas y lúpulos cuando hay un equivalente real">
-            <select className="input" value={store} onChange={(e) => setStore(e.target.value)}>
-              <option value="">En varias / ninguna en particular</option>
-              <option value={DISTRINES}>Distrines</option>
+          <Field label="¿Qué ácido usas para el pH?">
+            <select className="input" value={acid} onChange={(e) => setAcid(e.target.value as 'lactico')}>
+              <option value="lactico">Láctico</option>
+              <option value="fosforico">Fosfórico</option>
             </select>
           </Field>
           <Field label="Tu equipo principal">
@@ -229,10 +228,10 @@ function CreateProfile({ legacy, canCancel, onCancel }: { legacy: boolean; canCa
         </div>
       )}
       <Field label="Tu nombre">
-        <input className="input" autoFocus value={displayName} onChange={(e) => setDisplayName(e.target.value)} placeholder="Ej. Harwin" />
+        <input className="input" autoFocus value={displayName} onChange={(e) => setDisplayName(e.target.value)} placeholder="Nombre" />
       </Field>
       <Field label="Usuario (para entrar)" hint={user ? `Se guardará como @${user}` : 'Letras, números, punto o guion; sin espacios'}>
-        <input className="input" value={username} onChange={(e) => setUsername(e.target.value)} placeholder={normalizeUsername(displayName) || 'harwin'} autoComplete="username" />
+        <input className="input" value={username} onChange={(e) => setUsername(e.target.value)} placeholder={normalizeUsername(displayName) || 'usuario'} autoComplete="username" />
       </Field>
       <div className="grid grid-2">
         <Field label="Clave (opcional)">

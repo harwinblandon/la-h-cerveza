@@ -2,7 +2,8 @@ import { useLiveQuery } from 'dexie-react-hooks';
 import { useMemo, useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { IntentDesigner } from '../components/IntentDesigner';
-import { AwardChip, STATUS_HIST } from '../components/Historical';
+import { StyleWizard } from '../components/StyleWizard';
+import { STATUS_HIST } from '../components/Historical';
 import { Empty, Field, Modal, NumberInput, Swatch, Tabs, fmt, fmtDate } from '../components/ui';
 import { EQUIPMENT_TYPE_LABEL } from '../data/equipment';
 import { db, saveVersion } from '../db';
@@ -10,9 +11,8 @@ import { importBeerXml } from '../domain/beerxml';
 import { byId } from '../domain/catalog';
 import { computeRecipeStats } from '../domain/calc/recipeStats';
 import { fmtSg, uid } from '../domain/calc/units';
-import { generateFromStyle, newRecipe } from '../domain/recipeFactory';
 import type { Recipe, RecipeVersion } from '../domain/types';
-import { useBrewPrefs, useCatalog, useEquipment, useSettings } from '../hooks';
+import { useCatalog, useEquipment, useSettings } from '../hooks';
 
 export default function Recipes() {
   const recipes = useLiveQuery(() => db.recipes.orderBy('updatedAt').reverse().toArray(), []);
@@ -34,7 +34,6 @@ export default function Recipes() {
       <div className="page-head">
         <div>
           <h1>Recetas</h1>
-          <p className="muted">Planifica, ajusta al estilo y lleva cada receta a la olla.</p>
         </div>
         <div className="row">
           <ImportButton />
@@ -75,7 +74,6 @@ export default function Recipes() {
 
 function RecipeRow({ recipe }: { recipe: Recipe }) {
   const catalog = useCatalog();
-  const awards = useLiveQuery(() => db.awards.where('recipeId').equals(recipe.id).filter((a) => a.result !== 'inscrita').toArray(), [recipe.id]) ?? [];
   const stats = useMemo(() => computeRecipeStats(recipe), [recipe]);
   const style = byId(catalog.styles, recipe.styleId);
   return (
@@ -84,9 +82,6 @@ function RecipeRow({ recipe }: { recipe: Recipe }) {
       <div style={{ flex: 1, minWidth: 0 }}>
         <div style={{ fontWeight: 650, display: 'flex', gap: '0.4rem', flexWrap: 'wrap', alignItems: 'center' }}>
           {recipe.name}
-          {awards.map((a) => (
-            <AwardChip key={a.id} award={a} />
-          ))}
           {recipe.historical && <span className="chip">{STATUS_HIST[recipe.historical.status]}</span>}
         </div>
         <div className="muted" style={{ fontSize: '0.85rem' }}>
@@ -181,46 +176,14 @@ function ImportButton() {
 
 export function NewRecipeWizard({ onClose, initialStyle }: { onClose: () => void; initialStyle?: string }) {
   const [how, setHow] = useState<'estilo' | 'intencion'>(initialStyle ? 'estilo' : 'intencion');
-  const prefs = useBrewPrefs();
-  const catalog = useCatalog();
   const equipment = useEquipment();
   const settings = useSettings();
   const navigate = useNavigate();
-  const [styleId, setStyleId] = useState(initialStyle ?? '');
   const [eqId, setEqId] = useState(settings.defaultEquipmentId);
   const [batch, setBatch] = useState<number | undefined>();
   const [name, setName] = useState('');
-  const [q, setQ] = useState('');
 
   const eq = equipment.find((e) => e.id === eqId) ?? equipment[0];
-  const style = byId(catalog.styles, styleId);
-  const source = byId(catalog.waters, settings.sourceWaterId);
-
-  const styles = catalog.styles.filter((s) => `${s.code} ${s.name} ${s.nameEn}`.toLowerCase().includes(q.toLowerCase()));
-
-  const create = async (blank: boolean) => {
-    if (!eq) return;
-    let r: Recipe;
-    if (blank || !style) {
-      r = newRecipe(eq, settings.sourceWaterId);
-      if (style) r.styleId = style.id;
-      if (batch) r.batchSizeL = batch;
-    } else {
-      r = generateFromStyle({
-        style,
-        equipment: eq,
-        batchSizeL: batch,
-        catalog,
-        sourceWater: source ? { id: source.id, ions: source } : undefined,
-        ...prefs,
-      });
-    }
-    if (name.trim()) r.name = name.trim();
-    if (settings.brewerName) r.author = settings.brewerName;
-    await db.recipes.add(r);
-    navigate(`/recetas/${r.id}`);
-  };
-
   const equipmentPicker = (
     <div className="grid grid-3">
       <Field label="Equipo">
@@ -232,8 +195,8 @@ export function NewRecipeWizard({ onClose, initialStyle }: { onClose: () => void
           ))}
         </select>
       </Field>
-      <Field label="Litros al fermentador">
-        <NumberInput value={batch ?? eq?.batchSizeL} onChange={setBatch} unit="L" decimals={1} />
+      <Field label="¿Cuántos litros finales quieres?">
+        <NumberInput value={batch} onChange={setBatch} unit="L" decimals={1} placeholder="Litros al fermentador" />
       </Field>
       <Field label="Nombre (opcional)">
         <input className="input" value={name} placeholder="Se propone según la ruta" onChange={(e) => setName(e.target.value)} />
@@ -254,7 +217,8 @@ export function NewRecipeWizard({ onClose, initialStyle }: { onClose: () => void
       {how === 'intencion' && eq && (
         <div className="stack">
           {equipmentPicker}
-          <IntentDesigner
+          {!batch && <p className="faint" style={{ fontSize: '0.85rem', margin: 0 }}>Indica los litros finales para diseñar la receta.</p>}
+          {!!batch && <IntentDesigner
             equipment={eq}
             batchSizeL={batch}
             onChoose={async (route, intent) => {
@@ -268,72 +232,10 @@ export function NewRecipeWizard({ onClose, initialStyle }: { onClose: () => void
               await db.recipes.add(r);
               navigate(`/recetas/${r.id}`);
             }}
-          />
+          />}
         </div>
       )}
-      {how === 'estilo' && (
-      <div className="grid grid-2">
-        <div>
-          <h3>1. Estilo</h3>
-          <input className="input" placeholder="Buscar estilo (ej. IPA, Stout, 21A)…" value={q} onChange={(e) => setQ(e.target.value)} />
-          <div style={{ maxHeight: 330, overflowY: 'auto', marginTop: '0.5rem' }}>
-            {styles.map((s) => (
-              <div
-                key={s.id}
-                className="pick-item"
-                style={s.id === styleId ? { background: 'var(--accent-soft)' } : undefined}
-                onClick={() => setStyleId(s.id)}
-              >
-                <Swatch srm={(s.ranges.srm[0] + s.ranges.srm[1]) / 2} size={0.7} />
-                <div className="pick-main">
-                  <div className="pick-title">
-                    {s.code} · {s.name}
-                  </div>
-                  <div className="pick-sub">
-                    {fmtSg(s.ranges.og[0])}–{fmtSg(s.ranges.og[1])} · {s.ranges.ibu[0]}–{s.ranges.ibu[1]} IBU · {s.ranges.abv[0]}–{s.ranges.abv[1]} %
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="stack">
-          <h3>2. Equipo y volumen</h3>
-          <Field label="Equipo">
-            <select className="input" value={eqId} onChange={(e) => setEqId(e.target.value)}>
-              {equipment.map((e) => (
-                <option key={e.id} value={e.id}>
-                  {e.name} — {EQUIPMENT_TYPE_LABEL[e.type]}
-                </option>
-              ))}
-            </select>
-          </Field>
-          <Field label="Litros al fermentador">
-            <NumberInput value={batch ?? eq?.batchSizeL} onChange={setBatch} unit="L" decimals={1} />
-          </Field>
-          <Field label="Nombre (opcional)">
-            <input className="input" value={name} placeholder={style ? `${style.name} de La H` : 'Mi receta'} onChange={(e) => setName(e.target.value)} />
-          </Field>
-          {style && (
-            <div className="callout">
-              <strong>{style.name}</strong>
-              <div style={{ fontSize: '0.88rem', marginTop: '0.25rem' }}>{style.description}</div>
-            </div>
-          )}
-          <div className="callout callout-idea" style={{ fontSize: '0.85rem' }}>
-            Agua de origen: <strong>{source?.name ?? 'sin definir'}</strong>. Puedes cambiarla en <Link to="/agua">Agua</Link>.
-          </div>
-          <div className="row">
-            <button className="btn btn-primary" disabled={!style || !eq} onClick={() => create(false)}>
-              Generar receta del estilo
-            </button>
-            <button className="btn" disabled={!eq} onClick={() => create(true)}>
-              Empezar en blanco
-            </button>
-          </div>
-        </div>
-      </div>
-      )}
+      {how === 'estilo' && <StyleWizard initialStyle={initialStyle} />}
     </Modal>
   );
 }

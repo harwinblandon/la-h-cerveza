@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Info } from '../components/Info';
 import { Field, Modal, NumberInput, Tabs, fmt } from '../components/ui';
 import { FERMENTABLE_TYPE_LABEL } from '../data/fermentables';
 import { AROMA_LABEL } from '../data/hops';
@@ -25,7 +26,7 @@ export default function Ingredients() {
       <div className="page-head">
         <div>
           <h1>Ingredientes</h1>
-          <p className="muted">Catálogo de maltas, lúpulos y levaduras. Agrega los tuyos o corrige valores con la ficha técnica de tu compra.</p>
+          <Info>Los valores de color, rendimiento y % AA son los típicos de ficha técnica. Corrígelos con los de tu bolsa para que los cálculos sean exactos.</Info>
         </div>
         <button className="btn btn-primary" onClick={() => setEditing({ kind: tab })}>
           + Agregar propio

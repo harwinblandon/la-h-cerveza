@@ -38,7 +38,6 @@ export default function Tools() {
       <div className="page-head">
         <div>
           <h1>Herramientas</h1>
-          <p className="muted">Calculadoras para el día de cocción, la fermentación y el envasado.</p>
         </div>
       </div>
       <div className="grid grid-2">

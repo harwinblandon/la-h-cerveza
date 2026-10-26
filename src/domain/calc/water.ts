@@ -1,4 +1,4 @@
-import type { RecipeFermentable, SaltId, WaterIons } from '../types';
+import type { AcidChoice, WaterAdjustments, RecipeFermentable, SaltId, WaterIons } from '../types';
 
 export interface SaltInfo {
   id: SaltId;
@@ -127,6 +127,11 @@ export const phosphoricMeqPerMl = (pct: number) => {
   const density = 1.0 + (pct / 100) * 0.806;
   return ((density * pct) / 100 / 98.0) * 1000;
 };
+/** mEq por mL del ácido elegido por el cervecero. */
+export const acidMeqPerMl = (acid: AcidChoice) => (acid.type === 'fosforico' ? phosphoricMeqPerMl(acid.pct) : lacticMeqPerMl(acid.pct));
+
+export const ACID_LABEL: Record<AcidChoice['type'], string> = { lactico: 'Ácido láctico', fosforico: 'Ácido fosfórico' };
+
 /** Malta acidulada: ~2,5 % de ácido láctico. */
 const ACID_MALT_MEQ_PER_KG = 278;
 
@@ -166,15 +171,18 @@ export function estimateMashPh(i: MashPhInput): number | undefined {
 }
 
 /** mL de ácido láctico para llevar el macerado a un pH objetivo. */
-export function lacticForTargetPh(i: MashPhInput, targetPh: number): number {
+/** mL del ácido elegido para llevar el macerado al pH objetivo. */
+export function acidForTargetPh(i: MashPhInput, targetPh: number, acid: AcidChoice): number {
   const current = estimateMashPh({ ...i, lacticMl: 0, phosphoricMl: 0 });
   if (current === undefined) return 0;
   const bufSum = i.fermentables
     .filter((f) => f.use === 'macerado' && f.type !== 'acida')
     .reduce((s, f) => s + bufferCapacity(f) * f.amountKg, 0);
   const meq = (current - targetPh) * bufSum;
-  return meq > 0 ? meq / lacticMeqPerMl(i.lacticPct) : 0;
+  return meq > 0 ? meq / acidMeqPerMl(acid) : 0;
 }
+
+export const lacticForTargetPh = (i: MashPhInput, targetPh: number) => acidForTargetPh(i, targetPh, { type: 'lactico', pct: i.lacticPct });
 
 /** Gramos de bicarbonato de sodio en el macerado para subir el pH a un objetivo. */
 export function bicarbonateForTargetPh(i: MashPhInput, targetPh: number): number {
@@ -188,8 +196,27 @@ export function bicarbonateForTargetPh(i: MashPhInput, targetPh: number): number
   return meq > 0 ? meq / 11.9 : 0;
 }
 
-/** mL de ácido láctico para neutralizar ~90 % de la alcalinidad del agua de lavado. */
-export function spargeAcidMl(water: WaterIons, volumeL: number, lacticPct: number): number {
+/** mL de ácido para neutralizar ~90 % de la alcalinidad del agua de lavado. */
+export function spargeAcidMl(water: WaterIons, volumeL: number, acid: AcidChoice): number {
   const meq = (water.hco3 / 61.02) * volumeL * 0.9;
-  return meq / lacticMeqPerMl(lacticPct);
+  return meq / acidMeqPerMl(acid);
+}
+
+/** Ácido de la receta: el que ya tiene cargado, o el preferido del cervecero. */
+export function recipeAcid(w: WaterAdjustments, pref?: AcidChoice): AcidChoice {
+  if (w.phosphoricMl > 0) return { type: 'fosforico', pct: w.phosphoricPct };
+  if (w.lacticMl > 0) return { type: 'lactico', pct: w.lacticPct };
+  if (pref) return pref;
+  return { type: 'lactico', pct: w.lacticPct };
+}
+
+/** mL de ácido de la receta (del tipo que use). */
+export const acidMl = (w: WaterAdjustments) => (w.phosphoricMl > 0 ? w.phosphoricMl : w.lacticMl);
+
+/** Carga una dosis de ácido en el agua de la receta; el otro ácido queda en cero. */
+export function withAcid(w: WaterAdjustments, acid: AcidChoice, ml: number): WaterAdjustments {
+  const v = Math.round(ml * 10) / 10;
+  return acid.type === 'fosforico'
+    ? { ...w, phosphoricMl: v, phosphoricPct: acid.pct, lacticMl: 0 }
+    : { ...w, lacticMl: v, lacticPct: acid.pct, phosphoricMl: 0 };
 }

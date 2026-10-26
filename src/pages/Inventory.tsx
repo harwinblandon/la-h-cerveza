@@ -23,7 +23,6 @@ export default function Inventory() {
       <div className="page-head">
         <div>
           <h1>Inventario</h1>
-          <p className="muted">Lo que tienes en la bodega. Las sugerencias de sustitutos priorizan estos ingredientes.</p>
         </div>
         <div className="row">
           <button className="btn" onClick={() => setPicker('fermentable')}>

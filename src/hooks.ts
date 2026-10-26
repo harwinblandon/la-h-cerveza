@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 import { db, DEFAULT_SETTINGS, type Settings } from './db';
 import { byId, mergeCatalog, type Catalog } from './domain/catalog';
 import { SESSION, registry, type Profile } from './profiles';
-import type { SaltId, WaterProfile } from './domain/types';
+import type { AcidChoice, SaltId, WaterProfile } from './domain/types';
 
 export function useSettings(): Settings {
   return useLiveQuery(() => db.settings.get('prefs'), []) ?? DEFAULT_SETTINGS;
@@ -26,6 +26,8 @@ export interface BrewPrefs {
   store?: string;
   availableSalts?: SaltId[];
   alphaOverrides: Record<string, number>;
+  maltsters: string[];
+  acid: AcidChoice;
 }
 
 export function useBrewPrefs(): BrewPrefs {
@@ -34,8 +36,14 @@ export function useBrewPrefs(): BrewPrefs {
   return useMemo(() => {
     const alphaOverrides: Record<string, number> = {};
     for (const i of inventory ?? []) if (i.ingredientId && i.alpha && i.amount > 0) alphaOverrides[i.ingredientId] = i.alpha;
-    return { store: settings.preferredStore || undefined, availableSalts: settings.availableSalts, alphaOverrides };
-  }, [inventory, settings.preferredStore, settings.availableSalts]);
+    return {
+      store: settings.preferredStore || undefined,
+      availableSalts: settings.availableSalts,
+      alphaOverrides,
+      maltsters: settings.maltsters ?? [],
+      acid: settings.acid ?? { type: 'lactico', pct: 88 },
+    };
+  }, [inventory, settings.preferredStore, settings.availableSalts, settings.maltsters, settings.acid]);
 }
 
 /** Perfil con la sesión abierta. */

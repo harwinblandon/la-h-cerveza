@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { FERMENTABLE_TYPE_LABEL } from '../../data/fermentables';
 import { YEAST_FAMILY_LABEL } from '../../data/yeasts';
+import { pitchAdvice, yeastStyleFit } from '../../domain/yeastAdvice';
+import { Info } from '../Info';
 import { byId, type Catalog } from '../../domain/catalog';
 import type { RecipeStats } from '../../domain/calc/recipeStats';
 import { hopIbu } from '../../domain/calc/bitterness';
@@ -323,8 +325,9 @@ export function YeastSection({ recipe, stats, update, catalog, style }: SectionP
         </div>
         {recipe.yeasts.length === 0 && <p className="faint">Sin levadura todavía.</p>}
         {recipe.yeasts.map((y) => {
-          const pr = pitchRate(stats.og, recipe.batchSizeL, y.type === 'lager' ? 'lager' : 'ale', y.form);
-          const fits = !style || !y.family || style.guide.yeastFamilies.includes(y.family);
+          const advice = pitchAdvice(stats.og, recipe.batchSizeL, y, y.amount);
+          const fit = yeastStyleFit(y, style);
+          const fits = fit.fits;
           return (
             <div key={y.uid} className="stack" style={{ paddingBottom: '0.5rem' }}>
               <div className="row-between">
@@ -356,10 +359,38 @@ export function YeastSection({ recipe, stats, update, catalog, style }: SectionP
                   <NumberInput value={y.amount} decimals={0} onChange={(n) => set(y.uid, { amount: n })} />
                 </label>
                 <div className="callout" style={{ flex: 1, minWidth: 220, fontSize: '0.85rem' }}>
-                  Necesitas ~{fmt(pr.cellsNeededB, 0)} mil millones de células → <strong>{pr.packs}</strong> {y.form === 'seca' ? 'sobre(s) de 11,5 g' : 'paquete(s) frescos o un starter'}.
+                  Necesitas ~{fmt(advice.cellsNeededB, 0)} mil millones de células → <strong>{advice.packs}</strong> {y.form === 'seca' ? 'sobre(s) de 11,5 g' : 'paquete(s) frescos o un starter'}.
                   Atenuación esperada con tu macerado: <strong>{fmt(stats.attenuation, 0)} %</strong>.
+                  <Info>
+                    La atenuación parte de la de la levadura ({fmt(y.attenuation, 0)} %) y se corrige 1,2 puntos por cada °C que el macerado se aleja de 66,5 °C (entre −7 y +5
+                    puntos): un macerado más frío deja un mosto más fermentable y una cerveza más seca; uno más caliente deja más cuerpo.
+                    {stats.mashTempC !== undefined && ` Con tu macerado a ${fmt(stats.mashTempC, 1)} °C queda en ${fmt(stats.attenuation, 0)} %.`} Las células se calculan a 0,75 millones por mL y
+                    °Plato en ales y 1,5 en lagers (×1,3 sobre 1.060); un sobre seco de 11,5 g trae ~115 mil millones.
+                  </Info>
                 </div>
               </div>
+              {advice.level !== 'ok' && (
+                <div className="callout callout-warn" style={{ fontSize: '0.86rem' }}>
+                  <strong>{advice.summary}</strong>
+                  <ul style={{ margin: '0.4rem 0 0', paddingLeft: '1.1rem' }}>
+                    {advice.steps.map((t) => (
+                      <li key={t}>{t}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              {!fit.fits && fit.message && (
+                <div className="callout callout-idea" style={{ fontSize: '0.86rem' }}>
+                  {fit.message}
+                  {fit.tips.length > 0 && (
+                    <ul style={{ margin: '0.4rem 0 0', paddingLeft: '1.1rem' }}>
+                      {fit.tips.map((t) => (
+                        <li key={t}>{t}</li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              )}
             </div>
           );
         })}

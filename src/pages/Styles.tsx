@@ -23,7 +23,6 @@ export default function Styles() {
       <div className="page-head">
         <div>
           <h1>Estilos</h1>
-          <p className="muted">Basados en la guía BJCP 2021, con una receta guía para cada uno.</p>
         </div>
       </div>
       <div className="card" style={{ marginBottom: '1rem' }}>

@@ -1,6 +1,6 @@
 import Dexie, { type EntityTable } from 'dexie';
 import { DEFAULT_EQUIPMENT } from './data/equipment';
-import type { Award, Batch, Equipment, Fermentable, Hop, InventoryItem, Recipe, RecipeVersion, SaltId, WaterProfile, Yeast } from './domain/types';
+import type { AcidChoice, Award, Batch, Equipment, Fermentable, Hop, InventoryItem, Recipe, RecipeVersion, SaltId, WaterProfile, Yeast } from './domain/types';
 import { hasUnversionedChanges, makeVersion } from './domain/versioning';
 import { SESSION } from './profiles';
 
@@ -17,6 +17,10 @@ export interface Settings {
   availableSalts?: SaltId[];
   /** Tienda donde suele comprar: las recetas generadas prefieren sus insumos. */
   preferredStore?: string;
+  /** Marcas de malta que consigue, en orden de preferencia. */
+  maltsters?: string[];
+  /** Ácido para ajustar el pH. */
+  acid?: AcidChoice;
 }
 
 export const DEFAULT_SETTINGS: Settings = {
@@ -30,6 +34,8 @@ export const DEFAULT_SETTINGS: Settings = {
   nextBatchNumber: 1,
   availableSalts: ['yeso', 'cloruroCalcio', 'epsom', 'sal', 'bicarbonato'],
   preferredStore: undefined,
+  maltsters: [],
+  acid: { type: 'lactico', pct: 88 },
 };
 
 export class LaHDb extends Dexie {

@@ -1,14 +1,15 @@
 import type { Catalog } from './catalog';
 import { STORE_EQUIVALENTS } from '../data/distrines';
-import { byId, soldAt } from './catalog';
+import { brandEquivalent, byId, soldAt } from './catalog';
 import { gramsForIbu, hopIbu } from './calc/bitterness';
 import { recipeSrm } from './calc/color';
 import { computeRecipeStats } from './calc/recipeStats';
 import { pitchRate } from './calc/tools';
 import { L_PER_GAL, LB_PER_KG, ebcToLovibond, uid } from './calc/units';
-import { bicarbonateForTargetPh, lacticForTargetPh } from './calc/water';
+import { acidForTargetPh, bicarbonateForTargetPh, recipeAcid, withAcid } from './calc/water';
 import { optimizeSalts, splitSalts } from './waterOptimizer';
 import type {
+  AcidChoice,
   Available,
   Equipment,
   Fermentable,
@@ -303,6 +304,8 @@ export interface Tuning {
   yeastId?: string;
   /** Reemplazos de lúpulo por id (p. ej. noble → moderno). */
   hopSwap?: Record<string, string>;
+  /** Reemplazos de malta por id (lo que tiene el cervecero): la OG se conserva. */
+  grainSwap?: Record<string, string>;
   waterProfileId?: string;
   carbonation?: number;
 }
@@ -321,6 +324,10 @@ export interface GenerateOptions {
   alphaOverrides?: Record<string, number>;
   /** Sales que tiene el cervecero. */
   availableSalts?: SaltId[];
+  /** Marcas de malta que consigue, en orden de preferencia. */
+  maltsters?: string[];
+  /** Ácido que usa para el pH. */
+  acid?: AcidChoice;
 }
 
 /**
@@ -356,8 +363,10 @@ export function generateFromStyle(o: GenerateOptions): Recipe {
   // 1. Fermentables con 1 kg total, luego se escala a la OG objetivo.
   const charFactor = t.specialtyFactor ?? 1;
   r.fermentables = style.guide.grains.flatMap((gh) => {
-    const raw = byId(catalog.fermentables, gh.ingredientId);
-    const f = raw && storeFermentable(raw, catalog, o.store);
+    const chosen = t.grainSwap?.[gh.ingredientId];
+    const raw = byId(catalog.fermentables, chosen ?? gh.ingredientId);
+    const inStore = raw && (chosen ? raw : storeFermentable(raw, catalog, o.store));
+    const f = inStore && (!chosen && o.maltsters?.length ? brandEquivalent(raw, catalog, o.maltsters) : inStore);
     const k = f && (f.type === 'caramelo' || f.type === 'especial') ? charFactor : 1;
     return f ? [fermentableFromCatalog(f, (gh.pct / 100) * k)] : [];
   });
@@ -416,7 +425,7 @@ export function generateFromStyle(o: GenerateOptions): Recipe {
   const target = byId(catalog.waters, t.waterProfileId ?? style.guide.waterProfileId);
   r.water.targetProfileId = target?.id;
   if (o.sourceWater && target) {
-    r = applyWaterTarget(r, o.sourceWater.ions, target, 5.4, o.availableSalts);
+    r = applyWaterTarget(r, o.sourceWater.ions, target, 5.4, o.availableSalts, o.acid);
   }
 
   r.carbonation = { ...r.carbonation, volumes: t.carbonation ?? style.guide.carbonation };
@@ -425,7 +434,8 @@ export function generateFromStyle(o: GenerateOptions): Recipe {
 }
 
 /** Calcula sales y ácido para acercarse a un perfil objetivo. */
-export function applyWaterTarget(recipe: Recipe, source: WaterIons, target: WaterIons, targetPh = 5.4, allowed?: SaltId[]): Recipe {
+export function applyWaterTarget(recipe: Recipe, source: WaterIons, target: WaterIons, targetPh = 5.4, allowed?: SaltId[], prefAcid?: AcidChoice): Recipe {
+  const acid = recipeAcid(recipe.water, prefAcid);
   const stats = computeRecipeStats(recipe, source);
   const total = stats.water.mashWaterL + stats.water.spargeWaterL;
   const base = {
@@ -438,7 +448,7 @@ export function applyWaterTarget(recipe: Recipe, source: WaterIons, target: Wate
   };
   const salts = optimizeSalts(base, target, total, allowed);
   const split = splitSalts(salts, stats.water.mashWaterL, stats.water.spargeWaterL);
-  let r: Recipe = { ...recipe, water: { ...recipe.water, mashSalts: split.mash, spargeSalts: split.sparge, lacticMl: 0 } };
+  let r: Recipe = { ...recipe, water: { ...withAcid(recipe.water, acid, 0), mashSalts: split.mash, spargeSalts: split.sparge } };
   const s2 = computeRecipeStats(r, source);
   if (!s2.mashWater || s2.mashPh === undefined) return r;
   const phInput = {
@@ -451,8 +461,7 @@ export function applyWaterTarget(recipe: Recipe, source: WaterIons, target: Wate
     phosphoricPct: r.water.phosphoricPct,
   };
   if (s2.mashPh > targetPh + 0.05) {
-    const ml = lacticForTargetPh(phInput, targetPh);
-    r = { ...r, water: { ...r.water, lacticMl: Math.round(ml * 10) / 10 } };
+    r = { ...r, water: withAcid(r.water, acid, acidForTargetPh(phInput, targetPh, acid)) };
   } else if (s2.mashPh < targetPh - 0.1) {
     // Cervezas oscuras con agua blanda: subir el pH con bicarbonato en el macerado.
     const g = !allowed || allowed.includes('bicarbonato') ? bicarbonateForTargetPh(phInput, targetPh - 0.05) : 0;

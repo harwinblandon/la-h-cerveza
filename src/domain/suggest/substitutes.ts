@@ -30,6 +30,9 @@ const GROUPS: Record<string, string> = {
   acida: 'acida',
 };
 
+/** Grupo de un fermentable: grano base/adjunto, malta de color, azúcar… (para listar reemplazos posibles). */
+export const fermentableGroup = (type: string) => GROUPS[type] ?? type;
+
 /** Maltas equivalentes por tipo y color; la cantidad conserva los puntos de densidad. */
 export function fermentableSubstitutes(
   f: RecipeFermentable,

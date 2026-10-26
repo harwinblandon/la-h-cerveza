@@ -1,5 +1,4 @@
-import { Link } from 'react-router-dom';
-import type { Award, AwardResult, Batch, HistoricalKind, HistoricalRecord } from '../domain/types';
+import type { Batch, HistoricalKind, HistoricalRecord } from '../domain/types';
 import { fmt, fmtDate, fmtDateTime } from './ui';
 
 export const KIND_LABEL: Record<HistoricalKind, { label: string; help: string }> = {
@@ -19,23 +18,6 @@ export const STATUS_HIST: Record<HistoricalRecord['status'], string> = {
   asociada: 'Receta histórica asociada',
 };
 
-export const AWARD_LABEL: Record<AwardResult, string> = {
-  oro: 'Oro',
-  plata: 'Plata',
-  bronce: 'Bronce',
-  'primer-puesto': 'Primer puesto',
-  'segundo-puesto': 'Segundo puesto',
-  'tercer-puesto': 'Tercer puesto',
-  mencion: 'Mención',
-  inscrita: 'Inscrita',
-};
-
-export const LINK_LABEL: Record<Award['link'], string> = {
-  confirmado: 'Vínculo confirmado',
-  'por-confirmar': 'Vínculo por confirmar',
-  'sin-receta': 'Receta no recuperada',
-};
-
 /** Código visible de un lote: "H-01" para históricos, "#12" para el resto. */
 export const batchLabel = (b: Batch) => b.code ?? `#${b.number}`;
 
@@ -47,16 +29,6 @@ export const relDay = (b: Batch, t: number) => `Día ${fmt((t - b.brewDate) / 86
 
 /** Fecha y hora de un registro del lote; si la fecha real no se conoce, solo el día relativo. */
 export const batchWhen = (b: Batch, t: number) => (b.brewDateUnknown ? `${relDay(b, t)} (relativo)` : fmtDateTime(t));
-
-export function AwardChip({ award }: { award: Award }) {
-  const pending = award.link !== 'confirmado';
-  return (
-    <span className={`chip chip-award chip-award-${award.result}`} title={`${AWARD_LABEL[award.result]}${award.competition ? ` · ${award.competition}` : ''} · ${LINK_LABEL[award.link]}`}>
-      {AWARD_LABEL[award.result]}
-      {pending ? ' ?' : ''}
-    </span>
-  );
-}
 
 export function HistoricalCard({ record, title = 'Registro histórico' }: { record: HistoricalRecord; title?: string }) {
   return (
@@ -121,32 +93,6 @@ export function HistoricalCard({ record, title = 'Registro histórico' }: { reco
       <p className="faint" style={{ fontSize: '0.78rem', marginBottom: 0 }}>
         {record.origin}. Orden de confianza: confirmado › medición › ejecución › planificado › estimación.
       </p>
-    </div>
-  );
-}
-
-/** Premios vinculados (o candidatos) a una receta. */
-export function AwardList({ awards }: { awards: Award[] }) {
-  if (awards.length === 0) return null;
-  return (
-    <div className="card">
-      <div className="card-head">
-        <h2>Competencias</h2>
-        <Link to="/palmares">Palmarés</Link>
-      </div>
-      {awards.map((a) => (
-        <div key={a.id} className="list-item" style={{ cursor: 'default' }}>
-          <AwardChip award={a} />
-          <div style={{ flex: 1, minWidth: 0 }}>
-            <div style={{ fontWeight: 600 }}>{[a.competition ?? 'Competencia no recuperada', a.location, a.year].filter(Boolean).join(' · ')}</div>
-            <div className="faint" style={{ fontSize: '0.8rem' }}>
-              {LINK_LABEL[a.link]}
-              {a.enteredAs ? ` · inscrita como ${a.enteredAs}` : ''}
-              {a.prize ? ` · premio: ${a.prize}` : ''}
-            </div>
-          </div>
-        </div>
-      ))}
     </div>
   );
 }

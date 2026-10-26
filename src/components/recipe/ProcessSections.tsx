@@ -3,9 +3,10 @@ import { byId } from '../../domain/catalog';
 import { useBrewPrefs } from '../../hooks';
 import { PRIMING_SUGARS, kegPsi, primingSugarGrams } from '../../domain/calc/tools';
 import { psiToBar, uid } from '../../domain/calc/units';
-import { ION_KEYS, ION_LABELS, SALTS, balanceLabel, spargeAcidMl } from '../../domain/calc/water';
+import { ACID_LABEL, ION_KEYS, ION_LABELS, SALTS, acidMl, balanceLabel, recipeAcid, spargeAcidMl, withAcid } from '../../domain/calc/water';
 import { applyWaterTarget } from '../../domain/recipeFactory';
 import type { FermentationStep, MashStep, PrimingSugarId, SaltId } from '../../domain/types';
+import { Info } from '../Info';
 import { SourceTag } from '../Provenance';
 import { NumberInput, fmt } from '../ui';
 import type { SectionProps } from './IngredientSections';
@@ -25,9 +26,7 @@ export function MashSection({ recipe, stats, update }: SectionProps) {
         <div className="card-head">
           <h2>Volúmenes · {EQUIPMENT_TYPE_LABEL[eq.type]}</h2>
         </div>
-        <p className="muted" style={{ fontSize: '0.88rem' }}>
-          {EQUIPMENT_TYPE_HELP[eq.type]}
-        </p>
+        <Info>{EQUIPMENT_TYPE_HELP[eq.type]}</Info>
         <div className="stats">
           <div className="stat">
             <div className="stat-label">Agua total</div>
@@ -151,6 +150,7 @@ export function WaterSection({ recipe, stats, update, catalog }: SectionProps) {
   const result = stats.kettleWater;
   const ratio = stats.so4ClRatio ?? 0;
   const phClass = stats.mashPh === undefined ? '' : stats.mashPh < 5.2 || stats.mashPh > 5.6 ? 'badge-warn' : 'badge-ok';
+  const acid = recipeAcid(wa, prefs.acid);
 
   return (
     <>
@@ -158,7 +158,7 @@ export function WaterSection({ recipe, stats, update, catalog }: SectionProps) {
         <div className="card-head">
           <h2>Perfil de agua</h2>
           {source && target && (
-            <button className="btn btn-sm btn-primary" onClick={() => update((r) => applyWaterTarget(r, source, target, 5.4, prefs.availableSalts))}>
+            <button className="btn btn-sm btn-primary" onClick={() => update((r) => applyWaterTarget(r, source, target, 5.4, prefs.availableSalts, prefs.acid))}>
               Calcular sales y ácido
             </button>
           )}
@@ -230,28 +230,35 @@ export function WaterSection({ recipe, stats, update, catalog }: SectionProps) {
           </table>
         </div>
         <hr className="hr" />
-        <div className="grid grid-4">
+        <div className="grid grid-3">
           <label className="field">
-            <span>Ácido láctico (macerado)</span>
-            <NumberInput value={wa.lacticMl} decimals={1} onChange={(n) => setW({ lacticMl: n })} unit="mL" />
+            <span>Ácido (macerado)</span>
+            <select
+              className="input"
+              value={acid.type}
+              onChange={(e) => {
+                const type = e.target.value as typeof acid.type;
+                const pct = type === prefs.acid.type ? prefs.acid.pct : type === 'fosforico' ? 85 : 88;
+                update((r) => ({ ...r, water: withAcid(r.water, { type, pct }, 0) }));
+              }}
+            >
+              <option value="lactico">Láctico</option>
+              <option value="fosforico">Fosfórico</option>
+            </select>
           </label>
           <label className="field">
-            <span>Concentración láctico</span>
-            <NumberInput value={wa.lacticPct} decimals={0} onChange={(n) => setW({ lacticPct: n })} unit="%" />
+            <span>Cantidad</span>
+            <NumberInput value={acidMl(wa)} decimals={1} onChange={(n) => setW(withAcid(wa, acid, n))} unit="mL" />
           </label>
           <label className="field">
-            <span>Ácido fosfórico</span>
-            <NumberInput value={wa.phosphoricMl} decimals={1} onChange={(n) => setW({ phosphoricMl: n })} unit="mL" />
-          </label>
-          <label className="field">
-            <span>Concentración fosfórico</span>
-            <NumberInput value={wa.phosphoricPct} decimals={0} onChange={(n) => setW({ phosphoricPct: n })} unit="%" />
+            <span>Concentración</span>
+            <NumberInput value={acid.pct} decimals={0} onChange={(n) => setW(withAcid(wa, { ...acid, pct: n }, acidMl(wa)))} unit="%" />
           </label>
         </div>
         {hasSparge && source && source.hco3 > 30 && (
           <p className="callout" style={{ marginTop: '0.75rem', fontSize: '0.88rem' }}>
-            Tu agua tiene alcalinidad: acidifica el agua de lavado con ~{fmt(spargeAcidMl(source, stats.water.spargeWaterL * (1 - wa.dilution), wa.lacticPct), 1)} mL de
-            láctico para evitar extraer taninos.
+            Tu agua tiene alcalinidad: acidifica el agua de lavado con ~{fmt(spargeAcidMl(source, stats.water.spargeWaterL * (1 - wa.dilution), acid), 1)} mL de{' '}
+            {ACID_LABEL[acid.type].toLowerCase().replace('ácido ', '')} para evitar extraer taninos.
           </p>
         )}
       </div>
@@ -437,7 +444,9 @@ function SaltRecipe({ recipe, mashL, spargeL, available }: { recipe: SectionProp
           {acid ? (
             <li>
               <span className="salt-g num">{fmt(acid, 1)} mL</span>
-              <span>Ácido láctico al {w.lacticPct} %</span>
+              <span>
+                {ACID_LABEL[recipeAcid(w).type]} al {recipeAcid(w).pct} %
+              </span>
             </li>
           ) : null}
         </ul>
@@ -451,7 +460,7 @@ function SaltRecipe({ recipe, mashL, spargeL, available }: { recipe: SectionProp
         <SourceTag source="calculo" note="Gramos calculados para el volumen de agua de esta receta y tu equipo" />
       </div>
       <div className="grid grid-2">
-        <Row title="Agua de macerado" liters={mashL} items={mash} acid={w.lacticMl} />
+        <Row title="Agua de macerado" liters={mashL} items={mash} acid={acidMl(w)} />
         {spargeL > 0.05 && <Row title="Agua de lavado" liters={spargeL} items={sparge} />}
       </div>
       {missing.length > 0 && (
@@ -459,9 +468,7 @@ function SaltRecipe({ recipe, mashL, spargeL, available }: { recipe: SectionProp
           ⚠︎ Usa {[...new Set(missing)].join(', ')}, que no marcaste como disponible en Ajustes. Vuelve a "Calcular sales y ácido" para recalcular solo con las que tienes.
         </p>
       )}
-      <p className="faint" style={{ fontSize: '0.8rem', marginTop: '0.6rem' }}>
-        Pesa con balanza de 0,1 g. Disuelve las sales en el agua antes de calentar (o en el macerado al empastar) y mide el pH a los 15 minutos.
-      </p>
+      <Info>Pesa con balanza de 0,1 g. Disuelve las sales en el agua antes de calentar (o en el macerado al empastar) y mide el pH a los 15 minutos.</Info>
     </div>
   );
 }

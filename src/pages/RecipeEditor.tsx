@@ -6,7 +6,7 @@ import { FermentablesSection, HopsSection, YeastSection } from '../components/re
 import { IntentTab } from '../components/recipe/IntentTab';
 import { FermentationSection, MashSection, WaterSection } from '../components/recipe/ProcessSections';
 import { SuggestionsPanel, SummaryPanel } from '../components/recipe/SummaryPanel';
-import { AwardList, HistoricalCard } from '../components/Historical';
+import { HistoricalCard } from '../components/Historical';
 import { Field, Modal, NumberInput, Tabs, download, fmt, fmtDateTime } from '../components/ui';
 import { EQUIPMENT_TYPE_LABEL } from '../data/equipment';
 import { AROMA_LABEL } from '../data/hops';
@@ -52,7 +52,6 @@ export default function RecipeEditor() {
   const history = useRef<Recipe[]>([]);
   const [canUndo, setCanUndo] = useState(false);
   const versions = useLiveQuery(() => db.recipeVersions.where('recipeId').equals(id!).sortBy('number'), [id]) ?? [];
-  const awards = useLiveQuery(() => db.awards.filter((a) => a.recipeId === id || !!a.candidates?.includes(id!)).toArray(), [id]) ?? [];
   const last = versions[versions.length - 1];
 
   useEffect(() => {
@@ -87,7 +86,7 @@ export default function RecipeEditor() {
   const style = byId(catalog.styles, recipe?.styleId);
   const stats = useMemo(() => (recipe ? computeRecipeStats(recipe, source, settings.grainTempC) : undefined), [recipe, source, settings.grainTempC]);
   const suggestions = useMemo(
-    () => (recipe && stats ? analyzeRecipe({ recipe, stats, style, catalog, sourceWater: source, targetWater: target, availableSalts: prefs.availableSalts }) : []),
+    () => (recipe && stats ? analyzeRecipe({ recipe, stats, style, catalog, sourceWater: source, targetWater: target, availableSalts: prefs.availableSalts, acid: prefs.acid }) : []),
     [recipe, stats, style, catalog, source, target, prefs.availableSalts],
   );
 
@@ -191,14 +190,13 @@ export default function RecipeEditor() {
         </div>
       </div>
 
-      {(recipe.historical || awards.length > 0) && (
-        <div className="grid grid-2 no-print" style={{ marginBottom: '1rem', alignItems: 'start' }}>
-          {recipe.historical && <HistoricalCard record={recipe.historical} />}
-          <AwardList awards={awards} />
+      {recipe.historical && (
+        <div className="no-print" style={{ marginBottom: '1rem' }}>
+          <HistoricalCard record={recipe.historical} />
         </div>
       )}
       <div className="card" style={{ marginBottom: '1rem' }}>
-        <div className="grid grid-4">
+        <div className="grid grid-3">
           <Field label="Estilo">
             <select className="input" value={recipe.styleId ?? ''} onChange={(e) => update((r) => ({ ...r, styleId: e.target.value || undefined }))}>
               <option value="">— Sin estilo —</option>
@@ -226,17 +224,6 @@ export default function RecipeEditor() {
               ))}
             </select>
           </Field>
-          <Field label="Volumen al fermentador">
-            <div className="row" style={{ flexWrap: 'nowrap' }}>
-              <NumberInput value={recipe.batchSizeL} decimals={1} onChange={(n) => update((r) => ({ ...r, batchSizeL: n }))} unit="L" />
-              <button className="btn btn-sm" title="Escalar conservando OG e IBU" onClick={() => setScaling(true)}>
-                ⇲
-              </button>
-            </div>
-          </Field>
-          <Field label="Eficiencia de sala">
-            <NumberInput value={recipe.efficiencyPct} decimals={0} onChange={(n) => update((r) => ({ ...r, efficiencyPct: n }))} unit="%" />
-          </Field>
           <Field label="Hervor">
             <NumberInput value={recipe.boilTimeMin} decimals={0} onChange={(n) => update((r) => ({ ...r, boilTimeMin: n }))} unit="min" />
           </Field>
@@ -245,20 +232,39 @@ export default function RecipeEditor() {
 
       <div className="editor-layout">
         <div className="editor-main">
-          <Tabs<Tab>
-            value={tab}
-            onChange={setTab}
-            tabs={[
-              ['intencion', 'Intención'],
-              ['ingredientes', 'Ingredientes'],
-              ['macerado', 'Macerado y volúmenes'],
-              ['agua', 'Agua'],
-              ['fermentacion', 'Fermentación'],
-              ['asistente', `Asistente${suggestions.length ? ` (${suggestions.length})` : ''}`],
-              ['historial', `Versiones (${versions.length})`],
-              ['notas', 'Notas'],
-            ]}
-          />
+          {/* Barra fija: pestañas y lo que más se ajusta (litros y eficiencia) siempre a mano. */}
+          <div className="sticky-bar no-print">
+            <Tabs<Tab>
+              value={tab}
+              onChange={setTab}
+              tabs={[
+                ['intencion', 'Intención'],
+                ['ingredientes', 'Ingredientes'],
+                ['macerado', 'Macerado y volúmenes'],
+                ['agua', 'Agua'],
+                ['fermentacion', 'Fermentación'],
+                ['asistente', `Asistente${suggestions.length ? ` (${suggestions.length})` : ''}`],
+                ['historial', `Versiones (${versions.length})`],
+                ['notas', 'Notas'],
+              ]}
+            />
+            <div className="quick-row">
+              <label className="quick-field">
+                <span>Litros</span>
+                <NumberInput value={recipe.batchSizeL} decimals={1} onChange={(n) => update((r) => ({ ...r, batchSizeL: n }))} unit="L" ariaLabel="Litros al fermentador" />
+                <button className="btn btn-sm" title="Escalar a otros litros conservando OG, IBU y color" onClick={() => setScaling(true)}>
+                  Escalar
+                </button>
+              </label>
+              <label className="quick-field">
+                <span>Eficiencia</span>
+                <NumberInput value={recipe.efficiencyPct} decimals={0} onChange={(n) => update((r) => ({ ...r, efficiencyPct: n }))} unit="%" ariaLabel="Eficiencia de sala" />
+              </label>
+              <span className="quick-stats num">
+                {fmtSg(stats.og)} · {fmt(stats.ibu, 0)} IBU · {fmt(stats.abv)} % · agua {fmt(stats.water.mashWaterL + stats.water.spargeWaterL)} L
+              </span>
+            </div>
+          </div>
           {tab === 'ingredientes' && (
             <>
               <FermentablesSection {...props} />
@@ -344,6 +350,21 @@ export default function RecipeEditor() {
               </div>
             </div>
           )}
+          {/* Acciones también al final, para no volver arriba. */}
+          <div className="action-bar no-print">
+            {canUndo && (
+              <button className="btn" onClick={undo}>
+                ↶ Deshacer
+              </button>
+            )}
+            <button className="btn" onClick={() => setSavingVersion(true)}>
+              Guardar versión
+            </button>
+            <span className="spacer" />
+            <button className="btn btn-primary" onClick={brew}>
+              Cocinar este lote
+            </button>
+          </div>
         </div>
         <aside className="editor-side">
           <SummaryPanel recipe={recipe} stats={stats} style={style} colorUnit={settings.colorUnit} indices={indices} />

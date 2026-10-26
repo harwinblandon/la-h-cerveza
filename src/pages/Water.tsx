@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { Info } from '../components/Info';
 import { SourceTag } from '../components/Provenance';
 import { Field, Modal, NumberInput, fmt } from '../components/ui';
 import { db, updateSettings } from '../db';
@@ -30,7 +31,7 @@ export default function WaterPage() {
       <div className="page-head">
         <div>
           <h1>Agua</h1>
-          <p className="muted">Tu agua de origen y los perfiles objetivo. Cada receta calcula sales y ácido para llevar una a la otra.</p>
+          <Info>Tu agua de origen y los perfiles objetivo. Cada receta calcula las sales y el ácido para llevar una a la otra, y estima el pH del macerado.</Info>
         </div>
         <div className="row">
           <button className="btn" onClick={() => setBlending(true)}>

@@ -56,6 +56,14 @@ export default function BatchView() {
       b.status = status;
       b.events = [...(b.events ?? []), { uid: uid(), at: Date.now(), kind: 'estado', text: `Estado: ${STATUS_LABEL[status]}`, source: 'usuario' }];
     });
+  const NEXT: Partial<Record<BatchStatus, [BatchStatus, string, Tab]>> = {
+    planificado: ['coccion', 'Empezar la cocción', 'coccion'],
+    coccion: ['fermentando', 'Pasar a fermentación', 'fermentacion'],
+    fermentando: ['maduracion', 'Pasar a maduración', 'fermentacion'],
+    maduracion: ['envasado', 'Envasar', 'envasado'],
+    envasado: ['terminado', 'Marcar como terminado', 'cata'],
+  };
+  const next = NEXT[batch.status];
   const current: Tab = tab ?? (batch.historical ? 'registro' : batch.status === 'fermentando' || batch.status === 'maduracion' ? 'fermentacion' : batch.status === 'envasado' || batch.status === 'terminado' ? 'envasado' : 'coccion');
 
   return (
@@ -117,6 +125,7 @@ export default function BatchView() {
           </Field>
         </div>
       </div>
+      <div className="sticky-bar no-print">
       <Tabs<Tab>
         value={current}
         onChange={setTab}
@@ -130,6 +139,7 @@ export default function BatchView() {
           ['cata', 'Cata'],
         ]}
       />
+      </div>
       {current === 'registro' && batch.historical && (
         <>
           <HistoricalCard record={batch.historical} title="Registro histórico del lote" />
@@ -176,6 +186,31 @@ export default function BatchView() {
           </div>
         </div>
       )}
+      <div className="action-bar no-print">
+        <Link className="btn" to={`/recetas/${batch.recipeId}`}>
+          Ver receta
+        </Link>
+        <select className="input" style={{ width: 'auto' }} value={batch.status} onChange={(e) => changeStatus(e.target.value as BatchStatus)} aria-label="Estado del lote">
+          {Object.entries(STATUS_LABEL).map(([k, v]) => (
+            <option key={k} value={k}>
+              {v}
+            </option>
+          ))}
+        </select>
+        <span className="spacer" />
+        {next && (
+          <button
+            className="btn btn-primary"
+            onClick={() => {
+              changeStatus(next[0]);
+              setTab(next[2]);
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+          >
+            {next[1]}
+          </button>
+        )}
+      </div>
     </>
   );
 }

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Info } from '../components/Info';
 import { Field, NumberInput } from '../components/ui';
 import { EQUIPMENT_TYPE_HELP, EQUIPMENT_TYPE_LABEL } from '../data/equipment';
 import { db, updateSettings } from '../db';
@@ -34,7 +35,7 @@ export default function EquipmentPage() {
       <div className="page-head">
         <div>
           <h1>Equipos</h1>
-          <p className="muted">Los volúmenes y la eficiencia de cada receta salen de aquí. Mide tu equipo una vez y las recetas serán exactas.</p>
+          <Info>Los volúmenes de agua y la eficiencia de cada receta salen del equipo. Mide una vez la olla (pérdidas, evaporación por hora, absorción del grano) y las recetas cuadrarán con lo que pasa en tu cocción.</Info>
         </div>
         <button
           className="btn btn-primary"
