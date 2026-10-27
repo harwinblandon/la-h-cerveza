@@ -10,6 +10,7 @@ import { useBrewPrefs, useCatalog, useSettings } from '../hooks';
 import { SourceTag } from './Provenance';
 import { IndexCards, SensoryEditor } from './Sensory';
 import { Field, NumberInput, fmt } from './ui';
+import { StyleOptions } from './StyleOptions';
 
 const COLOR_OPTIONS: [string, [number, number] | undefined][] = [
   ['Cualquiera', undefined],
@@ -173,11 +174,7 @@ export function IntentDesigner({ equipment, batchSizeL, initial, onChoose, choos
           <Field label="Estilo base">
             <select className="input" value={styleId} onChange={(e) => setStyleId(e.target.value)}>
               <option value="">— Sin estilo (diseño libre) —</option>
-              {catalog.styles.map((s) => (
-                <option key={s.id} value={s.id}>
-                  {s.code} · {s.name}
-                </option>
-              ))}
+              <StyleOptions styles={catalog.styles} />
             </select>
           </Field>
           <Field label="Modo" hint={MODE_INFO[styleId ? mode : 'libre'].help}>

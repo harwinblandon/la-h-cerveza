@@ -16,7 +16,7 @@ import { YEAST_FAMILY_LABEL } from '../data/yeasts';
 import { db, saveVersion } from '../db';
 import { createBatch } from '../domain/batch';
 import { exportBeerXml } from '../domain/beerxml';
-import { byId } from '../domain/catalog';
+import { GUIDELINE_LABEL, byId, guidelineOf } from '../domain/catalog';
 import { computeRecipeStats } from '../domain/calc/recipeStats';
 import { fmtSg, uid } from '../domain/calc/units';
 import { generateFromStyle, scaleRecipe } from '../domain/recipeFactory';
@@ -27,6 +27,7 @@ import { hopsForStyle, yeastsForStyle } from '../domain/suggest/substitutes';
 import type { Recipe, RecipeVersion } from '../domain/types';
 import { VERSION_REASON_LABEL, changeReport, hasUnversionedChanges } from '../domain/versioning';
 import { useBrewPrefs, useCatalog, useEquipment, useSettings } from '../hooks';
+import { OpenRangesNote, StyleOptions, StyleRangeChips } from '../components/StyleOptions';
 
 type Tab = 'diseno' | 'intencion' | 'ingredientes' | 'macerado' | 'agua' | 'fermentacion' | 'costo' | 'asistente' | 'historial' | 'notas';
 
@@ -203,11 +204,7 @@ export default function RecipeEditor() {
           <Field label="Estilo">
             <select className="input" value={recipe.styleId ?? ''} onChange={(e) => update((r) => ({ ...r, styleId: e.target.value || undefined }))}>
               <option value="">— Sin estilo —</option>
-              {catalog.styles.map((s) => (
-                <option key={s.id} value={s.id}>
-                  {s.code} · {s.name}
-                </option>
-              ))}
+              <StyleOptions styles={catalog.styles} />
             </select>
           </Field>
           <Field label="Equipo" hint={EQUIPMENT_TYPE_LABEL[recipe.equipment.type]}>
@@ -580,7 +577,6 @@ function StyleGuideCard({ styleId, recipe, onRegenerate }: { styleId: string; re
   const yeasts = yeastsForStyle(style, catalog, 6);
   const hops = hopsForStyle(style, catalog, 8);
   const water = byId(catalog.waters, style.guide.waterProfileId);
-  const R = style.ranges;
   return (
     <div className="card">
       <div className="card-head">
@@ -607,26 +603,13 @@ function StyleGuideCard({ styleId, recipe, onRegenerate }: { styleId: string; re
       </div>
       <p>{style.description}</p>
       <div className="row" style={{ marginBottom: '0.75rem' }}>
-        <SourceTag source="bjcp" />
-        <span className="chip">
-          OG {fmtSg(R.og[0])}–{fmtSg(R.og[1])}
-        </span>
-        <span className="chip">
-          FG {fmtSg(R.fg[0])}–{fmtSg(R.fg[1])}
-        </span>
-        <span className="chip">
-          {R.ibu[0]}–{R.ibu[1]} IBU
-        </span>
-        <span className="chip">
-          {R.srm[0]}–{R.srm[1]} SRM
-        </span>
-        <span className="chip">
-          {R.abv[0]}–{R.abv[1]} % ABV
-        </span>
+        <SourceTag source={guidelineOf(style)} />
+        <StyleRangeChips style={style} fg />
       </div>
+      <OpenRangesNote style={style} base={byId(catalog.styles, style.baseStyleId)} />
       <div className="row-between">
         <h3 style={{ margin: 0 }}>Recomendaciones</h3>
-        <SourceTag source="regla" note="Receta guía y selección de ingredientes propias de la app, no forman parte de la guía BJCP" />
+        <SourceTag source="regla" note={`Receta guía y selección de ingredientes propias de la app, no forman parte de la guía ${GUIDELINE_LABEL[guidelineOf(style)]}`} />
       </div>
       <div className="grid grid-2" style={{ marginTop: '0.5rem' }}>
         <div>

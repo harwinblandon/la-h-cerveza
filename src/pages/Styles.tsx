@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import { Swatch } from '../components/ui';
 import { AROMA_LABEL } from '../data/hops';
 import { YEAST_FAMILY_LABEL } from '../data/yeasts';
-import { byId } from '../domain/catalog';
-import { fmtSg } from '../domain/calc/units';
+import { GuidelineSelect, OpenRangesNote, StyleRangeChips, useGuideline } from '../components/StyleOptions';
+import { byId, guidelineOf } from '../domain/catalog';
 import { hopsForStyle, yeastsForStyle } from '../domain/suggest/substitutes';
 import { useCatalog } from '../hooks';
 
@@ -13,8 +13,10 @@ export default function Styles() {
   const [q, setQ] = useState('');
   const [open, setOpen] = useState<string | null>(null);
   const [cat, setCat] = useState('');
-  const categories = [...new Set(catalog.styles.map((s) => s.category))];
-  const list = catalog.styles.filter(
+  const [guide, setGuide] = useGuideline();
+  const inGuide = catalog.styles.filter((s) => guidelineOf(s) === guide);
+  const categories = [...new Set(inGuide.map((s) => s.category))];
+  const list = inGuide.filter(
     (s) => (!cat || s.category === cat) && `${s.code} ${s.name} ${s.nameEn} ${s.description}`.toLowerCase().includes(q.toLowerCase()),
   );
 
@@ -28,6 +30,13 @@ export default function Styles() {
       <div className="card" style={{ marginBottom: '1rem' }}>
         <div className="row">
           <input className="input" style={{ flex: 1, minWidth: 200 }} placeholder="Buscar estilo…" value={q} onChange={(e) => setQ(e.target.value)} />
+          <GuidelineSelect
+            value={guide}
+            onChange={(g) => {
+              setGuide(g);
+              setCat('');
+            }}
+          />
           <select className="input" style={{ width: 'auto' }} value={cat} onChange={(e) => setCat(e.target.value)}>
             <option value="">Todas las categorías</option>
             {categories.map((c) => (
@@ -54,19 +63,9 @@ export default function Styles() {
               </div>
               <p style={{ fontSize: '0.9rem', marginTop: '0.5rem' }}>{s.description}</p>
               <div className="row" style={{ fontSize: '0.8rem' }}>
-                <span className="chip">
-                  OG {fmtSg(R.og[0])}–{fmtSg(R.og[1])}
-                </span>
-                <span className="chip">
-                  {R.ibu[0]}–{R.ibu[1]} IBU
-                </span>
-                <span className="chip">
-                  {R.srm[0]}–{R.srm[1]} SRM
-                </span>
-                <span className="chip">
-                  {R.abv[0]}–{R.abv[1]} %
-                </span>
+                <StyleRangeChips style={s} />
               </div>
+              <OpenRangesNote style={s} base={byId(catalog.styles, s.baseStyleId)} />
               {expanded && <StyleDetail id={s.id} />}
               <div className="row" style={{ marginTop: '0.75rem' }}>
                 <Link className="btn btn-sm btn-primary" to={`/recetas?nueva&estilo=${s.id}`}>

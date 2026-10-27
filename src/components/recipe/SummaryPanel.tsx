@@ -3,11 +3,13 @@ import type { RecipeStats } from '../../domain/calc/recipeStats';
 import { fmtSg, srmToEbc } from '../../domain/calc/units';
 import type { Suggestion } from '../../domain/suggest/analysis';
 import type { Recipe, Style } from '../../domain/types';
+import { guidelineOf } from '../../domain/catalog';
 import { SourceTag } from '../Provenance';
 import { RangeBar, SeverityBadge, Stat, Swatch, fmt } from '../ui';
 
 export function SummaryPanel({ recipe, stats, style, colorUnit, indices }: { recipe: Recipe; stats: RecipeStats; style?: Style; colorUnit: 'EBC' | 'SRM'; indices?: { style?: number; sensory?: number } }) {
   const color = colorUnit === 'EBC' ? stats.ebc : stats.srm;
+  const ref = (k: keyof Style['ranges']) => (style?.openRanges?.includes(k) ? ' (ref.)' : '');
   return (
     <div className="card">
       <div className="row" style={{ marginBottom: '0.75rem' }}>
@@ -26,10 +28,10 @@ export function SummaryPanel({ recipe, stats, style, colorUnit, indices }: { rec
         </div>
       </div>
       <div className="stats">
-        <Stat label="OG" value={fmtSg(stats.og)} sub={`pre-hervor ${fmtSg(stats.preBoilSg)}`} />
-        <Stat label="FG" value={fmtSg(stats.fg)} sub={<>atenuación {fmt(stats.attenuation, 0)} % <SourceTag source="estimacion" note="Atenuación de la levadura corregida por la temperatura de macerado" compact /></>} />
-        <Stat label="ABV" value={`${fmt(stats.abv)} %`} />
-        <Stat label="IBU" value={fmt(stats.ibu, 0)} />
+        <Stat label={`OG${ref('og')}`} value={fmtSg(stats.og)} sub={`pre-hervor ${fmtSg(stats.preBoilSg)}`} />
+        <Stat label={`FG${ref('fg')}`} value={fmtSg(stats.fg)} sub={<>atenuación {fmt(stats.attenuation, 0)} % <SourceTag source="estimacion" note="Atenuación de la levadura corregida por la temperatura de macerado" compact /></>} />
+        <Stat label={`ABV${ref('abv')}`} value={`${fmt(stats.abv)} %`} />
+        <Stat label={`IBU${ref('ibu')}`} value={fmt(stats.ibu, 0)} />
         <Stat label="Color" value={`${fmt(color, 0)}`} sub={colorUnit} />
         <Stat label="pH macerado" value={stats.mashPh ? fmt(stats.mashPh, 2) : '—'} sub={<SourceTag source="estimacion" note="Balance de cargas por tipo y color de malta; precisión ±0,1" compact />} />
       </div>
@@ -40,7 +42,7 @@ export function SummaryPanel({ recipe, stats, style, colorUnit, indices }: { rec
       {style && (
         <div style={{ marginTop: '1rem' }}>
           <div className="faint" style={{ fontSize: '0.75rem', marginBottom: '0.4rem' }}>
-            Zonas verdes: <SourceTag source="bjcp" compact /> rangos del estilo
+            Zonas verdes: <SourceTag source={guidelineOf(style)} compact /> rangos del estilo{style.openRanges?.length ? ' · (ref.): la guía no lo fija' : ''}
           </div>
           <RangeBar label="OG" value={stats.og} range={style.ranges.og} scale={[1.02, 1.12]} tolerance={0.004} format={fmtSg} />
           <RangeBar label="FG" value={stats.fg} range={style.ranges.fg} scale={[0.996, 1.04]} tolerance={0.002} format={fmtSg} />
@@ -48,7 +50,7 @@ export function SummaryPanel({ recipe, stats, style, colorUnit, indices }: { rec
           <RangeBar label="IBU" value={stats.ibu} range={style.ranges.ibu} scale={[0, 100]} tolerance={5} format={(n) => fmt(n, 0)} />
           {colorUnit === 'EBC' ? (
             <RangeBar
-              label="EBC"
+              label={`EBC${ref('srm')}`}
               value={stats.ebc}
               range={[srmToEbc(style.ranges.srm[0]), srmToEbc(style.ranges.srm[1])]}
               scale={[0, 80]}
@@ -56,7 +58,7 @@ export function SummaryPanel({ recipe, stats, style, colorUnit, indices }: { rec
               format={(n) => fmt(n, 0)}
             />
           ) : (
-            <RangeBar label="SRM" value={stats.srm} range={style.ranges.srm} scale={[0, 40]} tolerance={2} format={(n) => fmt(n, 1)} />
+            <RangeBar label={`SRM${ref('srm')}`} value={stats.srm} range={style.ranges.srm} scale={[0, 40]} tolerance={2} format={(n) => fmt(n, 1)} />
           )}
         </div>
       )}

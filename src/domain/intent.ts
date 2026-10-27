@@ -3,13 +3,13 @@
 // muestra siempre qué frase entendió y cómo la tradujo, y el cervecero ajusta.
 
 import type { Catalog } from './catalog';
-import { byId } from './catalog';
+import { byId, guidelineOf } from './catalog';
 import type { RecipeStats } from './calc/recipeStats';
 import { computeRecipeStats } from './calc/recipeStats';
 import { generateFromStyle, type Tuning } from './recipeFactory';
 import { SENSORY_KEYS, predictSensory, sensoryFit, type SensoryFit, type SensoryKey, type SensoryPrediction, type SensoryProfile } from './sensory';
 import { yeastsForStyle } from './suggest/substitutes';
-import type { DesignMode, Equipment, Recipe, SaltId, Style, WaterIons } from './types';
+import type { DesignMode, Equipment, Recipe, SaltId, Style, StyleGuideline, WaterIons } from './types';
 
 export type { DesignMode };
 
@@ -495,8 +495,9 @@ function describeLevers(r: Recipe, s: RecipeStats, t: Tuning, style: Style, cata
 }
 
 /** Estilos cuyo perfil típico más se parece al objetivo (para diseño libre). */
-export function closestStyles(input: Omit<DesignInput, 'style' | 'mode'>, n = 3): Style[] {
-  const scored = input.catalog.styles.map((style) => {
+export function closestStyles(input: Omit<DesignInput, 'style' | 'mode'>, n = 3, guide: StyleGuideline = 'bjcp'): Style[] {
+  // Solo estilos de una guía: BJCP por omisión, o la del estilo elegido.
+  const scored = input.catalog.styles.filter((s) => guidelineOf(s) === guide).map((style) => {
     const r = generateFromStyle({ style, equipment: input.equipment, catalog: input.catalog });
     const s = computeRecipeStats(r);
     const p = predictSensory(r, s, input.catalog);
@@ -519,7 +520,7 @@ export function designRoutes(input: DesignInput): Route[] {
   if (input.style && input.mode !== 'libre') {
     return (['A', 'B', 'C'] as RouteId[]).map((id) => designRoute(id, input, input.style!));
   }
-  const bases = input.style ? [input.style, ...closestStyles(input, 3).filter((s) => s.id !== input.style!.id)].slice(0, 3) : closestStyles(input, 3);
+  const bases = input.style ? [input.style, ...closestStyles(input, 3, guidelineOf(input.style)).filter((s) => s.id !== input.style!.id)].slice(0, 3) : closestStyles(input, 3);
   return bases.map((style, i) => {
     const r = designRoute((['A', 'B', 'C'] as RouteId[])[i], { ...input, mode: 'libre' }, style);
     return { ...r, name: `Ruta ${r.id} · Base ${style.name}`, summary: `Parte de la receta guía de ${style.name} y la ajusta a tu perfil.` };
@@ -533,5 +534,5 @@ export function designRoutes(input: DesignInput): Route[] {
 export function alternativeStyles(input: DesignInput, routes: Route[], n = 2): Style[] {
   const best = Math.max(...routes.map((r) => r.fit?.score ?? 100));
   if (best >= 92 || !input.style) return [];
-  return closestStyles(input, n + 1).filter((s) => s.id !== input.style!.id).slice(0, n);
+  return closestStyles(input, n + 1, guidelineOf(input.style)).filter((s) => s.id !== input.style!.id).slice(0, n);
 }

@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { EQUIPMENT_TYPE_LABEL } from '../data/equipment';
 import { YEAST_FAMILY_LABEL } from '../data/yeasts';
 import { db } from '../db';
-import { byId, maltsters as catalogMaltsters } from '../domain/catalog';
+import { byId, guidelineOf, maltsters as catalogMaltsters } from '../domain/catalog';
+import { GuidelineSelect, useGuideline } from './StyleOptions';
 import { computeRecipeStats } from '../domain/calc/recipeStats';
 import { fmtSg } from '../domain/calc/units';
 import { generateFromStyle, newRecipe, type Tuning } from '../domain/recipeFactory';
@@ -23,6 +24,7 @@ export function StyleWizard({ initialStyle }: { initialStyle?: string }) {
   const navigate = useNavigate();
   const [styleId, setStyleId] = useState(initialStyle ?? '');
   const [q, setQ] = useState('');
+  const [guide, setGuide] = useGuideline();
   const [eqId, setEqId] = useState(settings.defaultEquipmentId);
   const [liters, setLiters] = useState<number>();
   const [eff, setEff] = useState<number>();
@@ -56,7 +58,7 @@ export function StyleWizard({ initialStyle }: { initialStyle?: string }) {
   }, [ready, style, eq, efficiency, liters, catalog, source, tuning, prefs, maltsterPref]);
   const stats = useMemo(() => (recipe ? computeRecipeStats(recipe, source) : undefined), [recipe, source]);
 
-  const styles = catalog.styles.filter((s) => `${s.code} ${s.name} ${s.nameEn}`.toLowerCase().includes(q.toLowerCase()));
+  const styles = catalog.styles.filter((s) => (s.id === styleId || guidelineOf(s) === guide) && `${s.code} ${s.name} ${s.nameEn}`.toLowerCase().includes(q.toLowerCase()));
 
   const create = async (blank: boolean) => {
     if (!eq || !liters) return;
@@ -109,7 +111,10 @@ export function StyleWizard({ initialStyle }: { initialStyle?: string }) {
     <div className="grid grid-2">
       <div>
         <h3>1. Estilo</h3>
-        <input className="input" placeholder="Buscar estilo (IPA, Stout, 21A…)" value={q} onChange={(e) => setQ(e.target.value)} />
+        <div className="row" style={{ flexWrap: 'nowrap' }}>
+          <input className="input" style={{ flex: 1 }} placeholder="Buscar estilo (IPA, Stout, 21A…)" value={q} onChange={(e) => setQ(e.target.value)} />
+          <GuidelineSelect value={guide} onChange={setGuide} />
+        </div>
         <div style={{ maxHeight: 360, overflowY: 'auto', marginTop: '0.5rem' }}>
           {styles.map((s) => (
             <div key={s.id} className="pick-item" style={s.id === styleId ? { background: 'var(--accent-soft)' } : undefined} onClick={() => setStyleId(s.id)}>

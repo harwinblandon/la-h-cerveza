@@ -222,8 +222,11 @@ export function importBeerXml(xml: string, catalog: Catalog, equipment: Equipmen
     const st = child(rn, 'STYLE');
     if (st) {
       const code = `${txt(st, 'CATEGORY_NUMBER')}${txt(st, 'STYLE_LETTER')}`.toUpperCase();
-      const byCode = catalog.styles.find((s) => s.code === code);
-      const byName = bestMatch(txt(st, 'NAME'), catalog.styles, (s) => s.nameEn);
+      // Se busca en la guía que declare el archivo (BJCP por omisión).
+      const guide = /brewers|ba/i.test(txt(st, 'STYLE_GUIDE') ?? '') ? 'ba' : 'bjcp';
+      const pool = catalog.styles.filter((s) => (s.guideline ?? 'bjcp') === guide);
+      const byCode = guide === 'bjcp' ? pool.find((s) => s.code === code) : undefined;
+      const byName = bestMatch(txt(st, 'NAME'), pool, (s) => s.nameEn);
       r.styleId = (byName && byName.score >= 0.8 ? byName.item : byCode ?? byName?.item)?.id;
       if (!r.styleId && txt(st, 'NAME')) unmatched.push(`estilo "${txt(st, 'NAME')}"`);
     }
@@ -379,9 +382,10 @@ export function exportBeerXml(recipes: Recipe[], catalog: Catalog): string {
     .map((r) => {
       const s = computeRecipeStats(r);
       const style = catalog.styles.find((x) => x.id === r.styleId);
-      const m = style?.code.match(/^(\d+|X)(\w*)$/);
+      const ba = style?.guideline === 'ba';
+      const m = ba ? null : style?.code.match(/^(\d+|X)(\w*)$/);
       const styleXml = style
-        ? `<STYLE>${el('NAME', style.nameEn)}${el('VERSION', 1)}${el('CATEGORY', style.category)}${el('CATEGORY_NUMBER', m?.[1])}${el('STYLE_LETTER', m?.[2])}${el('STYLE_GUIDE', 'BJCP 2021')}${el('TYPE', 'Ale')}${el('OG_MIN', style.ranges.og[0])}${el('OG_MAX', style.ranges.og[1])}${el('FG_MIN', style.ranges.fg[0])}${el('FG_MAX', style.ranges.fg[1])}${el('IBU_MIN', style.ranges.ibu[0])}${el('IBU_MAX', style.ranges.ibu[1])}${el('COLOR_MIN', style.ranges.srm[0])}${el('COLOR_MAX', style.ranges.srm[1])}${el('ABV_MIN', style.ranges.abv[0])}${el('ABV_MAX', style.ranges.abv[1])}</STYLE>`
+        ? `<STYLE>${el('NAME', style.nameEn)}${el('VERSION', 1)}${el('CATEGORY', style.category)}${el('CATEGORY_NUMBER', m?.[1])}${el('STYLE_LETTER', m?.[2])}${el('STYLE_GUIDE', ba ? 'Brewers Association 2026' : 'BJCP 2021')}${el('TYPE', 'Ale')}${el('OG_MIN', style.ranges.og[0])}${el('OG_MAX', style.ranges.og[1])}${el('FG_MIN', style.ranges.fg[0])}${el('FG_MAX', style.ranges.fg[1])}${el('IBU_MIN', style.ranges.ibu[0])}${el('IBU_MAX', style.ranges.ibu[1])}${el('COLOR_MIN', style.ranges.srm[0])}${el('COLOR_MAX', style.ranges.srm[1])}${el('ABV_MIN', style.ranges.abv[0])}${el('ABV_MAX', style.ranges.abv[1])}</STYLE>`
         : '';
       const ferms = r.fermentables
         .map(

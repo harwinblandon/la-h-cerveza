@@ -67,7 +67,9 @@ export function analyzeRecipe({ recipe, stats, style, catalog, sourceWater, targ
   // ---------- Estilo ----------
   const styleStart = out.length;
   if (style) {
-    const R = style.ranges;
+    // Lo que la guía no fija (rango abierto) no se revisa contra el estilo.
+    const R = { ...style.ranges };
+    for (const k of style.openRanges ?? []) R[k] = [-Infinity, Infinity];
 
     // Densidad original
     if (stats.og < R.og[0] || stats.og > R.og[1]) {

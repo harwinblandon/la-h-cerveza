@@ -10,9 +10,10 @@ import { FERMENTABLES } from '../data/fermentables';
 import { STORE_FERMENTABLES } from '../data/precios';
 import { HOPS } from '../data/hops';
 import { STYLES } from '../data/styles';
+import { BA_STYLES } from '../data/stylesBa';
 import { WATER_PROFILES } from '../data/water';
 import { YEASTS } from '../data/yeasts';
-import type { Available, Fermentable, Hop, StoreOffer, Style, WaterProfile, Yeast } from './types';
+import type { Available, Fermentable, Hop, StoreOffer, Style, StyleGuideline, StyleRanges, WaterProfile, Yeast } from './types';
 
 export interface Catalog {
   fermentables: Fermentable[];
@@ -31,7 +32,7 @@ export const BUILTIN_CATALOG: Catalog = {
   fermentables: [...withOffers(FERMENTABLES, DISTRINES_FERMENTABLE_OFFERS), ...DISTRINES_FERMENTABLES, ...STORE_FERMENTABLES],
   hops: [...withOffers(HOPS, DISTRINES_HOP_OFFERS), ...DISTRINES_HOPS],
   yeasts: [...withOffers(YEASTS, DISTRINES_YEAST_OFFERS), ...DISTRINES_YEASTS],
-  styles: STYLES,
+  styles: [...STYLES, ...BA_STYLES],
   waters: WATER_PROFILES,
 };
 
@@ -45,7 +46,7 @@ export function mergeCatalog(custom: Partial<Catalog>): Catalog {
     fermentables: merge(BUILTIN_CATALOG.fermentables, custom.fermentables),
     hops: merge(BUILTIN_CATALOG.hops, custom.hops),
     yeasts: merge(BUILTIN_CATALOG.yeasts, custom.yeasts),
-    styles: STYLES,
+    styles: [...STYLES, ...BA_STYLES],
     waters: merge(WATER_PROFILES, custom.waters),
   };
 }
@@ -138,3 +139,10 @@ export function brandEquivalent(f: Fermentable, catalog: Catalog, makers: string
   }
   return f;
 }
+
+// ---------- Guías de estilos ----------
+export const GUIDELINES: StyleGuideline[] = ['bjcp', 'ba'];
+export const GUIDELINE_LABEL: Record<StyleGuideline, string> = { bjcp: 'BJCP 2021', ba: 'Brewers Association 2026' };
+export const guidelineOf = (s: Pick<Style, 'guideline'>): StyleGuideline => s.guideline ?? 'bjcp';
+/** Rango que la guía no fija y se muestra con el del estilo base como referencia. */
+export const isOpenRange = (s: Pick<Style, 'openRanges'>, k: keyof StyleRanges) => !!s.openRanges?.includes(k);

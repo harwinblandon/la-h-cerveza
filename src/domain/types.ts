@@ -7,6 +7,7 @@
  */
 export type Provenance =
   | 'bjcp'
+  | 'ba'
   | 'fabricante'
   | 'referencia'
   | 'calculo'
@@ -352,12 +353,20 @@ export interface StyleHopHint {
   gPerL?: number;
 }
 
+export type StyleGuideline = 'bjcp' | 'ba';
+
 export interface Style {
   id: string;
   code: string;
   name: string;
   nameEn: string;
   category: string;
+  /** Guía de estilos de origen (por omisión, BJCP 2021). */
+  guideline?: StyleGuideline;
+  /** Estilo BJCP del que sale la receta guía (estilos de otras guías). */
+  baseStyleId?: string;
+  /** Rangos que la guía no fija ("varía con el estilo"): se toman del estilo base como referencia. */
+  openRanges?: (keyof StyleRanges)[];
   ranges: StyleRanges;
   description: string;
   /** Guía para generar una receta base. */

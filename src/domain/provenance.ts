@@ -2,6 +2,7 @@ import type { Provenance } from './types';
 
 export const PROVENANCE: Record<Provenance, { label: string; short: string; help: string }> = {
   bjcp: { label: 'BJCP 2021', short: 'BJCP', help: 'Rango oficial de la guía de estilos BJCP 2021.' },
+  ba: { label: 'BA 2026', short: 'BA', help: 'Rango de la guía de estilos de la Brewers Association 2026 (GABF, World Beer Cup y otras competencias).' },
   fabricante: { label: 'Fabricante', short: 'Fab.', help: 'Dato publicado por el fabricante o laboratorio (valor típico).' },
   referencia: { label: 'Referencia', short: 'Ref.', help: 'Valor típico de literatura o fichas técnicas; cada lote comercial varía.' },
   calculo: { label: 'Cálculo', short: 'Calc.', help: 'Resultado de una fórmula a partir de los datos de la receta.' },
