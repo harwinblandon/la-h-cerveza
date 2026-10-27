@@ -55,7 +55,7 @@ export function FermentablesSection({ recipe, stats, update, catalog, style }: S
               <th className="r">%</th>
               <th className="r">EBC</th>
               <th>Uso</th>
-              <th />
+              <th className="ing-actions-col" />
             </tr>
           </thead>
           <tbody>
@@ -65,6 +65,18 @@ export function FermentablesSection({ recipe, stats, update, catalog, style }: S
                   <div style={{ fontWeight: 600 }}>{f.name}</div>
                   <div className="faint" style={{ fontSize: '0.78rem' }}>
                     {FERMENTABLE_TYPE_LABEL[f.type]} · {f.ppg} PPG <SourceTag source={f.source} note={f.sourceNote} compact />
+                  </div>
+                  <div className="ing-actions-inline">
+                    <button className="btn btn-sm btn-ghost" title="Sustituir por otra malta o fermentable" onClick={() => setSub(f)}>
+                      ⇄ Sustituir
+                    </button>
+                    <button
+                      className="btn btn-sm btn-ghost btn-danger"
+                      title="Quitar"
+                      onClick={() => update((r) => ({ ...r, fermentables: r.fermentables.filter((x) => x.uid !== f.uid) }))}
+                    >
+                      ✕
+                    </button>
                   </div>
                 </td>
                 <td className="r">
@@ -83,9 +95,9 @@ export function FermentablesSection({ recipe, stats, update, catalog, style }: S
                     <option value="maduracion">Maduración (sin fermentar)</option>
                   </select>
                 </td>
-                <td className="r" style={{ whiteSpace: 'nowrap' }}>
-                  <button className="btn btn-sm btn-ghost" title="Buscar sustituto" onClick={() => setSub(f)}>
-                    ⇄
+                <td className="r ing-actions-col" style={{ whiteSpace: 'nowrap' }}>
+                  <button className="btn btn-sm btn-ghost" title="Sustituir por otra malta o fermentable" onClick={() => setSub(f)}>
+                    ⇄ Sustituir
                   </button>
                   <button
                     className="btn btn-sm btn-ghost btn-danger"
@@ -204,7 +216,7 @@ export function HopsSection({ recipe, stats, update, catalog, style }: SectionPr
               <th>Uso</th>
               <th className="r">Tiempo</th>
               <th className="r">IBU</th>
-              <th />
+              <th className="ing-actions-col" />
             </tr>
           </thead>
           <tbody>
@@ -219,6 +231,14 @@ export function HopsSection({ recipe, stats, update, catalog, style }: SectionPr
                     <option value="flor">Flor</option>
                     <option value="cryo">Cryo / lupulina</option>
                   </select>
+                  <div className="ing-actions-inline">
+                    <button className="btn btn-sm btn-ghost" title="Sustituir por otro lúpulo" onClick={() => setSub(h)}>
+                      ⇄ Sustituir
+                    </button>
+                    <button className="btn btn-sm btn-ghost btn-danger" title="Quitar" onClick={() => update((r) => ({ ...r, hops: r.hops.filter((x) => x.uid !== h.uid) }))}>
+                      ✕
+                    </button>
+                  </div>
                 </td>
                 <td className="r">
                   <NumberInput value={h.amountG} decimals={1} onChange={(n) => set(h.uid, { amountG: n })} className="input-sm" />
@@ -255,9 +275,9 @@ export function HopsSection({ recipe, stats, update, catalog, style }: SectionPr
                   )}
                 </td>
                 <td className="r num">{fmt(stats.ibuByUid[h.uid], 1)}</td>
-                <td className="r" style={{ whiteSpace: 'nowrap' }}>
-                  <button className="btn btn-sm btn-ghost" title="Buscar sustituto" onClick={() => setSub(h)}>
-                    ⇄
+                <td className="r ing-actions-col" style={{ whiteSpace: 'nowrap' }}>
+                  <button className="btn btn-sm btn-ghost" title="Sustituir por otro lúpulo" onClick={() => setSub(h)}>
+                    ⇄ Sustituir
                   </button>
                   <button className="btn btn-sm btn-ghost btn-danger" title="Quitar" onClick={() => update((r) => ({ ...r, hops: r.hops.filter((x) => x.uid !== h.uid) }))}>
                     ✕

@@ -7,7 +7,7 @@ import { StyleWizard } from '../components/StyleWizard';
 import { STATUS_HIST } from '../components/Historical';
 import { Empty, Field, Modal, NumberInput, Swatch, Tabs, fmt, fmtDate } from '../components/ui';
 import { EQUIPMENT_TYPE_LABEL } from '../data/equipment';
-import { db, saveVersion } from '../db';
+import { confirmDeleteRecipe, db, saveVersion } from '../db';
 import { importBeerXml } from '../domain/beerxml';
 import { byId } from '../domain/catalog';
 import { computeRecipeStats } from '../domain/calc/recipeStats';
@@ -102,6 +102,16 @@ function RecipeRow({ recipe }: { recipe: Recipe }) {
           {recipe.versionCount ? `V${recipe.versionCount} · ` : ''}
           {fmtDate(recipe.updatedAt)}
         </div>
+        <button
+          className="btn btn-sm btn-ghost btn-danger"
+          title="Eliminar la receta"
+          onClick={(e) => {
+            e.preventDefault();
+            confirmDeleteRecipe(recipe);
+          }}
+        >
+          Eliminar
+        </button>
         {recipe.archived && (
           <button
             className="btn btn-sm"

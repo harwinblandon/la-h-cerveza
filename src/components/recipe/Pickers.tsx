@@ -190,11 +190,14 @@ export function SubstituteModal({ target, catalog, style, onReplace, onClose }: 
   const { store } = useBrewPrefs();
   const [onlyStock, setOnlyStock] = useState(false);
   const [onlyStore, setOnlyStore] = useState(false);
+  const [q, setQ] = useState('');
+  const query = q.trim() || undefined;
+  const limit = query ? 40 : 6;
   const storeSet = useMemo(() => (store ? storeIds(catalog, store) : new Set<string>()), [catalog, store]);
   const avail = onlyStock ? stock : onlyStore ? storeSet : undefined;
   const rows =
     target.kind === 'fermentable'
-      ? fermentableSubstitutes(target.item, catalog, avail).map((s) => ({
+      ? fermentableSubstitutes(target.item, catalog, avail, limit, query).map((s) => ({
           id: s.item.id,
           title: `${s.item.name} · ${s.item.maker}`,
           sub: s.reason,
@@ -203,7 +206,7 @@ export function SubstituteModal({ target, catalog, style, onReplace, onClose }: 
           score: s.score,
         }))
       : target.kind === 'hop'
-        ? hopSubstitutes(target.item, catalog, avail).map((s) => ({
+        ? hopSubstitutes(target.item, catalog, avail, limit, query).map((s) => ({
             id: s.item.id,
             title: `${s.item.name} · ${s.item.origin} · ${fmt(s.item.alpha)} % AA`,
             sub: s.reason,
@@ -211,7 +214,7 @@ export function SubstituteModal({ target, catalog, style, onReplace, onClose }: 
             amountLabel: `${s.amount} g`,
             score: s.score,
           }))
-        : yeastSubstitutes(target.item, catalog, style, avail).map((s) => ({
+        : yeastSubstitutes(target.item, catalog, style, avail, limit, query).map((s) => ({
             id: s.item.id,
             title: `${s.item.name} · ${s.item.lab}`,
             sub: s.reason,
@@ -222,8 +225,9 @@ export function SubstituteModal({ target, catalog, style, onReplace, onClose }: 
   return (
     <Modal title={`Sustitutos de ${target.item.name}`} onClose={onClose}>
       <p className="muted">
-        Estas son las alternativas más cercanas. La cantidad ya viene ajustada para conservar densidad, color o amargor.
+        Alternativas más cercanas, con la cantidad ajustada para conservar densidad, color o amargor. Con el buscador se puede elegir cualquier otra.
       </p>
+      <input className="input" autoFocus placeholder="Buscar por nombre o marca…" value={q} onChange={(e) => setQ(e.target.value)} style={{ marginBottom: '0.5rem' }} />
       <label className="row" style={{ fontSize: '0.88rem', marginBottom: '0.5rem' }}>
         <input type="checkbox" checked={onlyStock} onChange={(e) => (setOnlyStock(e.target.checked), setOnlyStore(false))} /> Solo lo que hay en el inventario
         {store && (
@@ -232,7 +236,7 @@ export function SubstituteModal({ target, catalog, style, onReplace, onClose }: 
           </>
         )}
       </label>
-      {rows.length === 0 && <p className="faint">No encontré sustitutos{onlyStock ? ' en tu inventario' : ''}.</p>}
+      {rows.length === 0 && <p className="faint">Sin resultados{onlyStock ? ' en el inventario' : ''}.</p>}
       {rows.map((r) => (
         <div key={r.id} className="pick-item" onClick={() => onReplace({ id: r.id, amount: r.amount })}>
           <div className="pick-main">

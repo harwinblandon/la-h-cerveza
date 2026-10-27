@@ -13,7 +13,7 @@ import { Field, Modal, NumberInput, Tabs, download, fmt, fmtDateTime } from '../
 import { EQUIPMENT_TYPE_LABEL } from '../data/equipment';
 import { AROMA_LABEL } from '../data/hops';
 import { YEAST_FAMILY_LABEL } from '../data/yeasts';
-import { db, saveVersion } from '../db';
+import { confirmDeleteRecipe, db, saveVersion } from '../db';
 import { createBatch } from '../domain/batch';
 import { exportBeerXml } from '../domain/beerxml';
 import { GUIDELINE_LABEL, byId, guidelineOf } from '../domain/catalog';
@@ -149,6 +149,9 @@ export default function RecipeEditor() {
     if (!confirm(`¿Archivar "${recipe.name}"? Se oculta de la lista, pero sus versiones y lotes se conservan. Puedes recuperarla cuando quieras.`)) return;
     await db.recipes.put({ ...recipe, archived: true });
     navigate('/recetas');
+  };
+  const remove = async () => {
+    if (await confirmDeleteRecipe(recipe)) navigate('/recetas', { replace: true });
   };
 
   return (
@@ -347,10 +350,6 @@ export default function RecipeEditor() {
                 <button className="btn" onClick={() => window.print()}>
                   Imprimir
                 </button>
-                <span className="spacer" />
-                <button className="btn btn-danger" onClick={archive}>
-                  Archivar receta
-                </button>
               </div>
             </div>
           )}
@@ -363,6 +362,12 @@ export default function RecipeEditor() {
             )}
             <button className="btn" onClick={() => setSavingVersion(true)}>
               Guardar versión
+            </button>
+            <button className="btn btn-ghost" onClick={archive} title="Se oculta de la lista; se puede recuperar">
+              Archivar
+            </button>
+            <button className="btn btn-ghost btn-danger" onClick={remove}>
+              Eliminar
             </button>
             <span className="spacer" />
             <button className="btn btn-primary" onClick={brew}>

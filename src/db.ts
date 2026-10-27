@@ -192,6 +192,35 @@ export async function saveVersion(recipe: Recipe, reason: RecipeVersion['reason'
   });
 }
 
+/**
+ * Elimina una receta y sus versiones. Los lotes ya cocinados se conservan:
+ * guardan su propia copia de la receta.
+ */
+export async function deleteRecipe(recipeId: string): Promise<void> {
+  await db.transaction('rw', db.recipes, db.recipeVersions, async () => {
+    const versionIds = await db.recipeVersions.where('recipeId').equals(recipeId).primaryKeys();
+    await db.recipeVersions.bulkDelete(versionIds);
+    await db.recipes.delete(recipeId);
+  });
+}
+
+/** Pide confirmación y elimina la receta. Devuelve true si se eliminó. */
+export async function confirmDeleteRecipe(recipe: Pick<Recipe, 'id' | 'name'>): Promise<boolean> {
+  const [versions, batches] = await Promise.all([
+    db.recipeVersions.where('recipeId').equals(recipe.id).count(),
+    db.batches.where('recipeId').equals(recipe.id).count(),
+  ]);
+  const parts = [
+    `¿Eliminar «${recipe.name}» para siempre?`,
+    versions ? `Se borran también sus ${versions} versiones.` : '',
+    batches ? `Los ${batches} lotes cocinados con ella se conservan con su copia de la receta.` : '',
+    'No se puede deshacer. Para solo ocultarla, usa Archivar.',
+  ];
+  if (!confirm(parts.filter(Boolean).join('\n\n'))) return false;
+  await deleteRecipe(recipe.id);
+  return true;
+}
+
 const TABLES = ['recipes', 'recipeVersions', 'batches', 'awards', 'equipment', 'waters', 'fermentables', 'hops', 'yeasts', 'inventory', 'settings'] as const;
 
 export async function exportBackup(): Promise<string> {

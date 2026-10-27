@@ -657,3 +657,10 @@ body::before {
 .water-flow li.strong { font-weight: 600; }
 .water-flow-n { font-family: var(--font-mono); color: var(--text-3); font-size: 0.8rem; padding-top: 0.1rem; }
 .water-flow-l { font-size: 1.05rem; white-space: nowrap; }
+
+/* Acciones de cada ingrediente: en pantallas angostas van bajo el nombre (la tabla se desplaza y la última columna queda oculta). */
+.ing-actions-inline { display: none; gap: 0.25rem; margin-top: 0.3rem; }
+@media (max-width: 860px) {
+  .ing-actions-inline { display: flex; }
+  .ing-actions-col { display: none; }
+}
