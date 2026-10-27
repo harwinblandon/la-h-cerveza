@@ -21,6 +21,12 @@ const rows: Row[] = [
   ['wheat-dark-wey', 'Trigo malteado oscuro', 'Weyermann', 'base', 17, 38, 70, 'Trigo con notas de pan tostado. Dunkelweizen.'],
   ['rye-wey', 'Centeno malteado', 'Weyermann', 'base', 6, 34, 50, 'Especiado y seco. Rye IPA, Roggenbier.'],
   ['rauch-wey', 'Malta ahumada (Rauch)', 'Weyermann', 'base', 6, 37, 100, 'Ahumada con madera de haya. Rauchbier.'],
+  // Patagonia Malt (Chile): color de la ficha de Maltexco / Patagonia Malt
+  ['patagonia-pilsen', 'Pilsen', 'Patagonia', 'base', 4, 37, 100, 'Pilsen de modificación media (3–5,5 EBC): grano dulce y cereal. Lagers y ales claras; infusión simple o escalonada.'],
+  ['patagonia-extra-pale', 'Extra Pale', 'Patagonia', 'base', 3.5, 37, 100, 'Base muy clara y más modificada que la Pilsen (3–4 EBC): cuerpo y cremosidad. Versátil para ales y lagers.'],
+  ['patagonia-pale-ale', 'Pale Ale', 'Patagonia', 'base', 6.5, 37, 100, 'Pale Ale (5,5–7,5 EBC): algo más de color y malta que la Pilsen. APA, IPA, ales británicas.'],
+  ['patagonia-vienna', 'Vienna', 'Patagonia', 'base', 6.5, 36, 100, 'Vienna (5,5–7,5 EBC): dorada, tostado suave. Vienna Lager, Märzen, ámbar.'],
+  ['patagonia-trigo', 'Trigo', 'Patagonia', 'base', 4, 38, 70, 'Trigo malteado claro: cuerpo y espuma. Trigo, Witbier, NEIPA.'],
   ['abbey-castle', 'Château Abbey', 'Castle Malting', 'especial', 45, 34, 50, 'Pan tostado, frutos secos. Dubbel, belgas oscuras.'],
   // Caramelo / cristal
   ['carafoam', 'Carafoam / Carapils', 'Weyermann', 'caramelo', 4, 33, 40, 'Mejora espuma y cuerpo sin aportar color.'],

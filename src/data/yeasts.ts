@@ -72,6 +72,15 @@ const rows: Row[] = [
   ['m41', 'M41 Belgian Ale', "Mangrove Jack's", 'M41', 'belga', 'seca', 85, [82, 88], [18, 28], 'media', 'belga-abadia', 12, false, 'Belga especiada, alta tolerancia.'],
   ['m31', 'M31 Belgian Tripel', "Mangrove Jack's", 'M31', 'belga', 'seca', 84, [82, 86], [18, 28], 'media', 'belga-golden', 12, false, 'Tripel y Golden Strong.'],
   ['m42', 'M42 New World Strong Ale', "Mangrove Jack's", 'M42', 'ale', 'seca', 79, [77, 82], [16, 22], 'alta', 'inglesa-limpia', 12, false, 'Para cervezas fuertes y barleywines.'],
+  // Angel Yeast (China, seca): valores de la ficha de Angel
+  ['angel-a01', 'Angel A01 American Ale', 'Angel', 'A01', 'ale', 'seca', 79, [75, 83], [16, 25], 'media', 'americana-limpia', 10, false, 'Americana limpia y neutra, pocos ésteres; ideal a 18–22 °C.'],
+  ['angel-cn36', 'Angel CN36 British Ale', 'Angel', 'CN36', 'ale', 'seca', 81, [77, 86], [10, 24], 'alta', 'inglesa-limpia', 13, false, 'Seca y limpia, ésteres frutales ligeros; aclara rápido.'],
+  ['angel-cy115', 'Angel CY115 English Ale', 'Angel', 'CY115', 'ale', 'seca', 79, [75, 83], [14, 25], 'alta', 'inglesa', 10, false, 'Inglesa, muy floculante y de sedimento compacto.'],
+  ['angel-w008', 'Angel W008 Wheat Ale', 'Angel', 'W008', 'trigo', 'seca', 79, [73, 85], [18, 24], 'baja', 'weizen', 10, false, 'Trigo alemán y belga: banano y clavo.'],
+  ['angel-wa18', 'Angel WA18 German Wheat', 'Angel', 'WA18', 'trigo', 'seca', 79, [73, 85], [18, 22], 'baja', 'weizen', 10, false, 'Hefeweizen alemana.'],
+  ['angel-cs31', 'Angel CS31 Saison', 'Angel', 'CS31', 'saison', 'seca', 88, [83, 94], [15, 25], 'baja', 'saison', 12, true, 'Saison muy seca (STA1+): pimienta por debajo de 20 °C, frutal con más calor. Confirmar FG estable antes de envasar.'],
+  ['angel-bf16', 'Angel BF16 Swiss Lager', 'Angel', 'BF16', 'lager', 'seca', 82, [80, 84], [10, 20], 'alta', 'lager-alemana', 10, false, 'Lager suiza limpia, poco diacetilo; ideal a 10–15 °C.'],
+  ['angel-bf27', 'Angel BF27 German Lager', 'Angel', 'BF27', 'lager', 'seca', 83, [80, 85], [10, 20], 'alta', 'lager-alemana', 10, false, 'Lager alemana tipo Weihenstephan, ésteres florales suaves; ideal a 10–15 °C.'],
   // Líquidas
   ['wlp001', 'California Ale', 'White Labs', 'WLP001', 'ale', 'liquida', 77, [73, 80], [18, 23], 'media', 'americana-limpia', 12, false, 'La cepa Chico líquida.'],
   ['wy1056', 'American Ale', 'Wyeast', '1056', 'ale', 'liquida', 75, [73, 77], [16, 22], 'media', 'americana-limpia', 11, false, 'Chico, limpia.'],
