@@ -1,7 +1,7 @@
 // Service worker de La H: la app funciona sin internet una vez abierta.
 // Navegación: red primero (para recibir actualizaciones), caché si no hay conexión.
 // Recursos estáticos: caché primero.
-const CACHE = 'la-h-v3';
+const CACHE = 'la-h-v4';
 
 self.addEventListener('install', (event) => {
   event.waitUntil(caches.open(CACHE).then((c) => c.addAll(['./', './index.html', './icono.svg', './manifest.webmanifest', './marca/icono-192.png', './marca/icono-512.png', './marca/apple-touch-icon.png'])));
@@ -58,5 +58,16 @@ self.addEventListener('fetch', (event) => {
           return res;
         }),
     ),
+  );
+});
+
+// Tocar la notificación de un temporizador abre (o trae al frente) la app.
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close();
+  event.waitUntil(
+    self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then((list) => {
+      const open = list.find((c) => 'focus' in c);
+      return open ? open.focus() : self.clients.openWindow('./');
+    }),
   );
 });

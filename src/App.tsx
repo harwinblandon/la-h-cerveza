@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { Link, NavLink, Route, Routes } from 'react-router-dom';
+import { TimerWatcher } from './components/batch/Timer';
 import { LogoLaH, Signature } from './components/Brand';
 import { Icon } from './components/Icons';
 import { useProfile } from './hooks';
@@ -103,6 +104,7 @@ export default function App() {
           <Signature size="lg" />
         </footer>
       </main>
+      <TimerWatcher />
       <nav className="bottom-nav">
         {NAV.slice(0, 4).map(link)}
         {link(['/ajustes', 'ajustes', 'Más'])}

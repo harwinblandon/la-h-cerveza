@@ -664,3 +664,12 @@ body::before {
   .ing-actions-inline { display: flex; }
   .ing-actions-col { display: none; }
 }
+
+/* Alarma de temporizadores */
+.timer-stop { width: 100%; margin-top: 0.6rem; font-size: 1.05rem; padding: 0.8rem; }
+.timer-audio { display: block; width: 100%; margin-top: 0.6rem; text-align: left; cursor: pointer; font: inherit; }
+.alarm-stop-floating {
+  position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(76px + env(safe-area-inset-bottom));
+  z-index: 60; font-size: 1.1rem; padding: 0.9rem 1.6rem; box-shadow: 0 6px 24px rgba(0, 0, 0, 0.5);
+}
+@media (min-width: 861px) { .alarm-stop-floating { bottom: 24px; } }

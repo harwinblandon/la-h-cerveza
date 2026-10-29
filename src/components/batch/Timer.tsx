@@ -1,56 +1,89 @@
 import { useEffect, useRef, useState } from 'react';
 import { alertRemainingMin, newAlert, newTimer } from '../../domain/timers';
 import type { BrewTimer, TimerAlertDef } from '../../domain/types';
+import { Info } from '../Info';
 import { NumberInput } from '../ui';
+import {
+  ALARM_SOUND_LABEL,
+  askNotifications,
+  audioReady,
+  isRinging,
+  loadAlarmPrefs,
+  notify,
+  onRinging,
+  ring,
+  saveAlarmPrefs,
+  stopAlarm,
+  unlockAudio,
+  type AlarmPrefs,
+  type AlarmSound,
+} from './alarm';
 
-// Un solo contexto de audio, habilitado al tocar «Iniciar» (los navegadores bloquean el sonido sin un toque).
-let audio: AudioContext | undefined;
-function unlockAudio() {
-  try {
-    audio ??= new AudioContext();
-    if (audio.state === 'suspended') void audio.resume();
-  } catch {
-    /* sin audio */
-  }
+const DONE = 'fin';
+const PREFIX = 'timer-';
+/** Pasados 10 minutos del final, ya no se hace sonar (era de otra sesión). */
+const STALE = 10 * 60_000;
+
+interface SavedTimer extends RunState {
+  label?: string;
+  marks?: { uid: string; at: number; text: string }[];
 }
 
-/** Timbre suave y neutro: dos notas senoidales con entrada y salida graduales. */
-function chime(times = 1) {
-  try {
-    unlockAudio();
-    const ctx = audio!;
-    for (let i = 0; i < times; i++) {
-      [523.25, 659.25].forEach((freq, k) => {
-        const o = ctx.createOscillator();
-        const g = ctx.createGain();
-        o.type = 'sine';
-        o.frequency.value = freq;
-        o.connect(g);
-        g.connect(ctx.destination);
-        const t = ctx.currentTime + i * 1.1 + k * 0.28;
-        g.gain.setValueAtTime(0.0001, t);
-        g.gain.exponentialRampToValueAtTime(0.16, t + 0.06);
-        g.gain.exponentialRampToValueAtTime(0.0001, t + 0.9);
-        o.start(t);
-        o.stop(t + 0.95);
-      });
-    }
-  } catch {
-    /* sin audio */
-  }
-  try {
-    navigator.vibrate?.([200, 120, 200]);
-  } catch {
-    /* sin vibración */
-  }
+/** Temporizadores con tarjeta en pantalla (esos avisan solos). */
+const mounted = new Set<string>();
+
+/**
+ * Vigila los temporizadores en marcha desde cualquier pantalla de la app: si su tarjeta no está
+ * a la vista (otra página u otra fase de la cocción), hace sonar los avisos igual.
+ * Muestra además un botón para detener la alarma donde sea que esté sonando.
+ */
+export function TimerWatcher() {
+  const ringingNow = useRinging();
+  useEffect(() => {
+    const tick = () => {
+      let keys: string[] = [];
+      try {
+        keys = Object.keys(localStorage).filter((k) => k.startsWith(PREFIX));
+      } catch {
+        return;
+      }
+      const now = Date.now();
+      for (const key of keys) {
+        if (mounted.has(key)) continue;
+        try {
+          const t = JSON.parse(localStorage.getItem(key) ?? '{}') as SavedTimer;
+          if (!t.endsAt || !Array.isArray(t.fired)) continue;
+          const remaining = t.endsAt - now;
+          const due = (t.marks ?? []).filter((m) => remaining <= m.at && !t.fired.includes(m.uid));
+          const done = remaining <= 0 && !t.fired.includes(DONE);
+          if (!due.length && !done) continue;
+          t.fired = [...t.fired, ...due.map((m) => m.uid), ...(done ? [DONE] : [])];
+          localStorage.setItem(key, JSON.stringify(t));
+          if (remaining < -STALE) continue;
+          ring();
+          const text = [...due.map((m) => m.text), ...(done ? ['¡Tiempo cumplido!'] : [])].join(' · ');
+          void notify(t.label ?? 'Temporizador', text, key);
+        } catch {
+          /* registro dañado: se ignora */
+        }
+      }
+    };
+    const id = setInterval(tick, 1000);
+    tick();
+    return () => clearInterval(id);
+  }, []);
+  if (!ringingNow) return null;
+  return (
+    <button className="btn btn-primary alarm-stop-floating" onClick={stopAlarm}>
+      Detener alarma
+    </button>
+  );
 }
 
-function notify(text: string) {
-  try {
-    if ('Notification' in window && Notification.permission === 'granted') new Notification('Recetas', { body: text });
-  } catch {
-    /* sin notificaciones */
-  }
+function useRinging() {
+  const [r, setR] = useState(isRinging());
+  useEffect(() => onRinging(setR), []);
+  return r;
 }
 
 const mmss = (ms: number) => {
@@ -114,15 +147,31 @@ export function TimerCard({ storageKey, timer, onEdit }: { storageKey: string; t
   };
   const [state, setState] = useState<RunState>(load);
   const [now, setNow] = useState(Date.now());
-  const doneFired = useRef(false);
+  const alarmOn = useRinging();
+  const [, force] = useState(0);
 
+  const marks = timer.alerts.map((a) => ({ a, at: alertRemainingMin(timer, a) * 60_000 })).sort((x, y) => y.at - x.at);
+
+  // Se guarda también el nombre y los avisos: así el vigilante global avisa aunque esta tarjeta no esté en pantalla.
   useEffect(() => {
     try {
-      localStorage.setItem(storageKey, JSON.stringify({ ...state, total }));
+      const saved: SavedTimer = {
+        ...state,
+        total,
+        label: timer.label,
+        marks: marks.map((m) => ({ uid: m.a.uid, at: m.at, text: `${m.a.text}${m.a.note ? ` — ${m.a.note}` : ''}` })),
+      };
+      localStorage.setItem(storageKey, JSON.stringify(saved));
     } catch {
       /* almacenamiento no disponible */
     }
-  }, [state, storageKey]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state, storageKey, timer]);
+
+  useEffect(() => {
+    mounted.add(storageKey);
+    return () => void mounted.delete(storageKey);
+  }, [storageKey]);
 
   // Si se editan los minutos y el temporizador no ha arrancado, se ajusta.
   const prevTotal = useRef(total);
@@ -143,32 +192,31 @@ export function TimerCard({ storageKey, timer, onEdit }: { storageKey: string; t
   const running = !!state.endsAt && remaining > 0;
   useWakeLock(running);
 
-  const marks = timer.alerts.map((a) => ({ a, at: alertRemainingMin(timer, a) * 60_000 })).sort((x, y) => y.at - x.at);
-
   useEffect(() => {
     if (!state.endsAt) return;
     const due = marks.filter((m) => remaining <= m.at && !state.fired.includes(m.a.uid));
+    // Lo que ya sonó queda guardado (también el final): no se repite al recargar.
+    // Un temporizador vencido hace rato (cocción anterior) se da por avisado sin sonar.
+    const stale = remaining < -STALE;
     if (due.length) {
       setState((s) => ({ ...s, fired: [...s.fired, ...due.map((m) => m.a.uid)] }));
-      chime(1);
-      notify(due.map((m) => `${m.a.text}${m.a.note ? ` — ${m.a.note}` : ''}`).join(' · '));
+      if (!stale) {
+        ring();
+        void notify(timer.label, due.map((m) => `${m.a.text}${m.a.note ? ` — ${m.a.note}` : ''}`).join(' · '), storageKey);
+      }
     }
-    if (remaining <= 0 && !doneFired.current) {
-      doneFired.current = true;
-      chime(2);
-      notify(`${timer.label}: ¡tiempo cumplido!`);
+    if (remaining <= 0 && !state.fired.includes(DONE)) {
+      setState((s) => ({ ...s, fired: [...s.fired, DONE] }));
+      if (stale) return;
+      ring();
+      void notify(timer.label, '¡Tiempo cumplido!', storageKey);
     }
-  }, [remaining, marks, state.endsAt, state.fired, timer.label]);
+  }, [remaining, marks, state.endsAt, state.fired, timer.label, storageKey]);
 
   const next = marks.find((m) => m.at < remaining && !state.fired.includes(m.a.uid));
   const start = () => {
     unlockAudio();
-    try {
-      if ('Notification' in window && Notification.permission === 'default') void Notification.requestPermission();
-    } catch {
-      /* sin notificaciones */
-    }
-    doneFired.current = remaining <= 0;
+    void askNotifications();
     setNow(Date.now());
     setState((s) => ({ ...s, endsAt: Date.now() + remaining }));
   };
@@ -210,7 +258,6 @@ export function TimerCard({ storageKey, timer, onEdit }: { storageKey: string; t
             title="Reiniciar"
             onClick={() => {
               if (running && !confirm(`¿Reiniciar «${timer.label}»?`)) return;
-              doneFired.current = false;
               setState({ remainingMs: total, fired: [], total });
             }}
           >
@@ -223,6 +270,16 @@ export function TimerCard({ storageKey, timer, onEdit }: { storageKey: string; t
           )}
         </div>
       </div>
+      {alarmOn && state.fired.length > 0 && (
+        <button className="btn btn-primary timer-stop" onClick={stopAlarm}>
+          Detener alarma
+        </button>
+      )}
+      {running && !audioReady() && (
+        <button className="callout callout-warn timer-audio" onClick={() => (unlockAudio(), setTimeout(() => force((n) => n + 1), 300))}>
+          El navegador bloqueó el sonido. Toca aquí para activarlo.
+        </button>
+      )}
       {marks.length > 0 && (
         <ul className="timer-marks">
           {marks.map(({ a, at }) => {
@@ -345,6 +402,103 @@ export function TimerPlan({
           </button>
         )}
       </div>
+      <AlarmSettings />
+    </div>
+  );
+}
+
+/** Sonido de la alarma en este dispositivo: tipo, volumen, duración, prueba y notificaciones. */
+export function AlarmSettings() {
+  const [open, setOpen] = useState(false);
+  const [p, setP] = useState<AlarmPrefs>(loadAlarmPrefs);
+  const [perm, setPerm] = useState<NotificationPermission>(() => (typeof Notification !== 'undefined' ? Notification.permission : 'denied'));
+  const ringingNow = useRinging();
+  const set = (patch: Partial<AlarmPrefs>) => {
+    const n = { ...p, ...patch };
+    setP(n);
+    saveAlarmPrefs(n);
+  };
+  if (!open) {
+    return (
+      <div>
+        <button className="btn btn-sm btn-ghost" onClick={() => setOpen(true)}>
+          Sonido de la alarma: {ALARM_SOUND_LABEL[p.sound]} · {Math.round(p.volume * 100)} %
+        </button>
+      </div>
+    );
+  }
+  return (
+    <div className="timer-card">
+      <div className="row-between">
+        <div className="stat-label">Sonido de la alarma en este dispositivo</div>
+        <button className="btn btn-sm btn-ghost" onClick={() => setOpen(false)}>
+          Cerrar
+        </button>
+      </div>
+      <div className="grid grid-3" style={{ marginTop: '0.5rem' }}>
+        <label className="field">
+          <span>Sonido</span>
+          <select className="input" value={p.sound} onChange={(e) => set({ sound: e.target.value as AlarmSound })}>
+            {(Object.keys(ALARM_SOUND_LABEL) as AlarmSound[]).map((k) => (
+              <option key={k} value={k}>
+                {ALARM_SOUND_LABEL[k]}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label className="field">
+          <span>Volumen {Math.round(p.volume * 100)} %</span>
+          <input type="range" min={10} max={100} step={5} value={Math.round(p.volume * 100)} onChange={(e) => set({ volume: Number(e.target.value) / 100 })} />
+        </label>
+        <label className="field">
+          <span>Suena durante</span>
+          <select className="input" value={p.seconds} onChange={(e) => set({ seconds: Number(e.target.value) })}>
+            {[10, 30, 60, 120].map((n) => (
+              <option key={n} value={n}>
+                {n < 60 ? `${n} s` : `${n / 60} min`} o hasta detenerla
+              </option>
+            ))}
+          </select>
+        </label>
+      </div>
+      <div className="row" style={{ marginTop: '0.6rem' }}>
+        {ringingNow ? (
+          <button className="btn btn-primary" onClick={stopAlarm}>
+            Detener
+          </button>
+        ) : (
+          <button className="btn" onClick={() => ring(p, 4)}>
+            Probar sonido
+          </button>
+        )}
+        <label className="row" style={{ fontSize: '0.88rem' }}>
+          <input type="checkbox" checked={p.notify} onChange={(e) => set({ notify: e.target.checked })} /> Notificación del sistema
+        </label>
+        {p.notify && perm === 'default' && (
+          <button className="btn btn-sm" onClick={() => void askNotifications().then((r) => setPerm(r))}>
+            Permitir notificaciones
+          </button>
+        )}
+        {p.notify && perm === 'denied' && <span className="faint" style={{ fontSize: '0.82rem' }}>Notificaciones bloqueadas en el navegador.</span>}
+        {p.notify && perm === 'granted' && (
+          <button className="btn btn-sm btn-ghost" onClick={() => void notify('Recetas', 'Aviso de prueba del temporizador.', 'prueba')}>
+            Probar notificación
+          </button>
+        )}
+      </div>
+      <Info>
+        <ul style={{ margin: 0, paddingLeft: '1.1rem' }}>
+          <li>
+            El sonido de la app sale con el <strong>volumen multimedia</strong> del celular (el de música y videos), no con el del timbre. En iPhone, el modo silencio lo apaga.
+          </li>
+          <li>Con la app abierta en pantalla suena siempre; mientras corre un temporizador la pantalla se mantiene encendida.</li>
+          <li>
+            Con el celular bloqueado o en otra app, el navegador pausa la página: el aviso llega por la <strong>notificación del sistema</strong> y puede demorar hasta un
+            minuto. El sonido de esa notificación se elige en el celular: Ajustes → Apps → Chrome (o Recetas, si está instalada) → Notificaciones.
+          </li>
+          <li>Después de recargar la página, el navegador pide un toque en la pantalla antes de volver a sonar.</li>
+        </ul>
+      </Info>
     </div>
   );
 }
